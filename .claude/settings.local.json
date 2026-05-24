@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cat ~/.claude/CLAUDE.md)",
+      "Read(//c/Users/Yasmi/.claude/**)"
+    ]
+  }
+}

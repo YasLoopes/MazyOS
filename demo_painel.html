@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Estevão & Pinheiro — Painel Financeiro de Causas</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
     --bordeaux: #6B1C2E;
@@ -37,56 +38,64 @@
 
   /* HEADER */
   header {
-    background: var(--bordeaux-dark);
-    color: white;
-    padding: 0 32px;
+    background: #ffffff;
+    border-bottom: 1px solid var(--border);
+    padding: 16px 32px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 64px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
   }
   .logo-area {
     display: flex;
-    align-items: center;
-    gap: 14px;
-  }
-  .logo-box {
-    width: 38px;
-    height: 38px;
-    background: var(--gold);
-    border-radius: 6px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 900;
-    font-size: 18px;
-    color: var(--bordeaux-dark);
-    letter-spacing: -1px;
-  }
-  .logo-text {
-    display: flex;
     flex-direction: column;
+    line-height: 1;
   }
-  .logo-text strong { font-size: 15px; font-weight: 700; letter-spacing: 0.3px; }
-  .logo-text span { font-size: 11px; opacity: 0.7; letter-spacing: 1px; text-transform: uppercase; }
-
+  .logo-main {
+    display: flex;
+    align-items: baseline;
+  }
+  .logo-ep {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    font-weight: 400;
+    color: #1a1a1a;
+    letter-spacing: -0.5px;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+  .logo-amp {
+    color: #8B1C2C;
+    font-style: italic;
+    font-family: 'DM Serif Display', serif;
+    font-size: 18px;
+    margin: 0 3px;
+  }
+  .logo-sub {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 8px;
+    font-weight: 400;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #5c5650;
+    margin-top: 3px;
+  }
   .header-right {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 16px;
   }
   .badge-demo {
-    background: var(--gold);
-    color: var(--bordeaux-dark);
-    font-size: 11px;
-    font-weight: 700;
+    background: var(--bordeaux);
+    color: white;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    font-weight: 600;
     padding: 4px 10px;
-    border-radius: 20px;
+    border-radius: 4px;
     letter-spacing: 0.5px;
     text-transform: uppercase;
   }
-  .header-date { font-size: 13px; opacity: 0.7; }
+  .header-date { font-size: 12px; color: var(--muted); }
 
   /* NAV */
   nav {
@@ -111,13 +120,13 @@
   nav a:hover { color: white; }
 
   /* MAIN */
-  main { padding: 28px 32px; max-width: 1400px; }
+  main { padding: 14px 24px; max-width: 1400px; margin: 0 auto; }
 
   /* FILTER BAR */
   .filter-bar {
     display: flex;
-    gap: 12px;
-    margin-bottom: 24px;
+    gap: 10px;
+    margin-bottom: 12px;
     flex-wrap: wrap;
     align-items: center;
   }
@@ -167,17 +176,17 @@
   .kpi-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 16px;
-    margin-bottom: 24px;
+    gap: 10px;
+    margin-bottom: 14px;
   }
   .kpi-card {
     background: white;
-    border-radius: 12px;
-    padding: 20px 22px;
+    border-radius: 10px;
+    padding: 12px 16px;
     border: 1px solid var(--border);
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 4px;
     position: relative;
     overflow: hidden;
   }
@@ -200,7 +209,7 @@
     font-weight: 600;
   }
   .kpi-value {
-    font-size: 26px;
+    font-size: 20px;
     font-weight: 800;
     color: var(--text);
     line-height: 1;
@@ -229,14 +238,14 @@
   .charts-row {
     display: grid;
     grid-template-columns: 1.6fr 1fr;
-    gap: 16px;
-    margin-bottom: 24px;
+    gap: 10px;
+    margin-bottom: 12px;
   }
   .chart-card {
     background: white;
-    border-radius: 12px;
+    border-radius: 10px;
     border: 1px solid var(--border);
-    padding: 20px 22px;
+    padding: 12px 16px;
   }
   .chart-title {
     font-size: 14px;
@@ -254,10 +263,10 @@
   /* TABLE */
   .table-card {
     background: white;
-    border-radius: 12px;
+    border-radius: 10px;
     border: 1px solid var(--border);
     overflow: hidden;
-    margin-bottom: 24px;
+    margin-bottom: 14px;
   }
   .table-header {
     padding: 18px 22px;
@@ -354,8 +363,8 @@
     border: 1px solid #ffe082;
     border-left: 4px solid var(--gold);
     border-radius: 10px;
-    padding: 14px 18px;
-    margin-bottom: 24px;
+    padding: 10px 14px;
+    margin-bottom: 12px;
     display: flex;
     align-items: flex-start;
     gap: 12px;
@@ -368,8 +377,8 @@
   .charts-row-2 {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 16px;
-    margin-bottom: 24px;
+    gap: 10px;
+    margin-bottom: 12px;
   }
 
   /* FOOTER */
@@ -413,24 +422,6 @@
 </style>
 </head>
 <body>
-
-<header>
-  <div class="logo-area">
-    <div class="logo-box">E&P</div>
-    <div class="logo-text">
-      <strong>Estevão & Pinheiro</strong>
-      <span>Advogados Associados</span>
-    </div>
-  </div>
-  <div class="header-right">
-    <div class="atualizado-tag">
-      <div class="atualizado-dot"></div>
-      Atualizado automaticamente
-    </div>
-    <div class="badge-demo">DEMONSTRAÇÃO</div>
-    <div class="header-date">Quinta, 21 mai 2026</div>
-  </div>
-</header>
 
 <nav>
   <a href="#" class="active">Financeiro de Causas</a>
@@ -529,14 +520,14 @@
       <div class="chart-title">Recebimentos mensais por fonte</div>
       <div class="chart-sub">Histórico dos últimos 8 meses — valores em R$ mil</div>
       <div class="chart-wrap">
-        <canvas id="chartHistorico" height="100"></canvas>
+        <canvas id="chartHistorico" height="70"></canvas>
       </div>
     </div>
     <div class="chart-card">
       <div class="chart-title">Distribuição por Banco / Origem</div>
       <div class="chart-sub">% do total pendente a receber</div>
       <div class="chart-wrap">
-        <canvas id="chartPizza" height="180"></canvas>
+        <canvas id="chartPizza" height="120"></canvas>
       </div>
     </div>
   </div>
@@ -546,12 +537,12 @@
     <div class="chart-card">
       <div class="chart-title">Status das causas</div>
       <div class="chart-sub">Distribuição por situação atual de pagamento</div>
-      <canvas id="chartStatus" height="130"></canvas>
+      <canvas id="chartStatus" height="90"></canvas>
     </div>
     <div class="chart-card">
       <div class="chart-title">Evolução do total pendente</div>
       <div class="chart-sub">Comparativo com meta de recebimento mensal</div>
-      <canvas id="chartMeta" height="130"></canvas>
+      <canvas id="chartMeta" height="90"></canvas>
     </div>
   </div>
 
@@ -692,7 +683,7 @@
 </main>
 
 <footer>
-  Painel desenvolvido por <span>Automação de Processos</span> · Dados coletados automaticamente dos portais oficiais · Atualização diária às 06h00 · Estevão & Pinheiro Advogados Associados © 2026
+  Painel desenvolvido por <span>Yasmin G. Lopes</span> · Dados coletados automaticamente dos portais oficiais · Atualização diária às 06h00 · Estevão & Pinheiro Advogados Associados © 2026
 </footer>
 
 <script>

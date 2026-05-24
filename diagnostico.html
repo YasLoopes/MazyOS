@@ -1,0 +1,1143 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diagnóstico — Estevão & Pinheiro Advogados</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f5f3f0;
+    --white: #ffffff;
+    --surface: #ffffff;
+    --border: #e5e1db;
+    --border2: #ccc8c2;
+    --text: #1a1a1a;
+    --text2: #5c5650;
+    --text3: #9a9490;
+    --bordeaux: #8B1C2C;
+    --bordeaux-dark: #6B1420;
+    --bordeaux-mid: #a82234;
+    --bordeaux-light: #faf0f1;
+    --bordeaux-ultra: #fdf5f6;
+    --green: #2a7a4a;
+    --green-bg: #eaf4ef;
+    --amber: #7d5500;
+    --amber-bg: #fdf6e6;
+    --purple: #4a3a9a;
+    --purple-bg: #eeeaf8;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 400;
+    min-height: 100vh;
+  }
+
+  /* ── LOGO HEADER ── */
+  .site-header {
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    padding: 18px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo {
+    display: flex;
+    flex-direction: column;
+    line-height: 1;
+  }
+
+  .logo-main {
+    display: flex;
+    align-items: baseline;
+    gap: 0;
+  }
+
+  .logo-ep {
+    font-family: 'DM Serif Display', serif;
+    font-size: 26px;
+    font-weight: 400;
+    color: var(--text);
+    letter-spacing: -0.5px;
+    text-transform: uppercase;
+  }
+
+  .logo-ep span {
+    display: inline-flex;
+    flex-direction: column;
+  }
+
+  .logo-amp {
+    color: var(--bordeaux);
+    font-style: italic;
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    margin: 0 3px;
+  }
+
+  .logo-sub {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 8.5px;
+    font-weight: 400;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--text2);
+    margin-top: 3px;
+  }
+
+  .header-meta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 2px;
+  }
+
+  .header-meta .author {
+    font-size: 11px;
+    font-family: 'DM Mono', monospace;
+    letter-spacing: .08em;
+    color: var(--bordeaux);
+    font-weight: 500;
+    text-align: right;
+  }
+
+  .header-meta .meeting {
+    font-size: 13px;
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  .header-meta .place {
+    font-size: 11px;
+    color: var(--text3);
+  }
+
+  /* ── TABS ── */
+  .tab-nav {
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    padding: 0 40px;
+    display: flex;
+    gap: 0;
+  }
+
+  .tab-btn {
+    padding: 14px 22px;
+    font-size: 13px;
+    font-weight: 500;
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text3);
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+    transition: color .15s, border-color .15s;
+    white-space: nowrap;
+  }
+
+  .tab-btn:hover { color: var(--text2); }
+
+  .tab-btn.active {
+    color: var(--bordeaux);
+    border-bottom-color: var(--bordeaux);
+    font-weight: 600;
+  }
+
+  .tab-pane { display: none; }
+  .tab-pane.active { display: block; }
+
+  /* ── DEMO IFRAME ── */
+  #tab-demo {
+    height: calc(100vh - 120px);
+  }
+
+  #tab-demo iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+  }
+
+  /* ── MAIN (diagnóstico) ── */
+  .main {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 32px 24px 60px;
+  }
+
+  /* ── PAGE HEADER ── */
+  .page-header {
+    margin-bottom: 28px;
+  }
+
+  .page-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--bordeaux);
+    margin-bottom: 8px;
+  }
+
+  .page-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 26px;
+    font-weight: 400;
+    line-height: 1.2;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+
+  .page-title em { font-style: italic; color: var(--text2); }
+
+  .page-sub {
+    font-size: 13px;
+    color: var(--text2);
+    margin-bottom: 14px;
+  }
+
+  .meta-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .meta-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--text3);
+    background: var(--bg);
+    border: 1px solid var(--border2);
+    border-radius: 4px;
+    padding: 3px 9px;
+    letter-spacing: .04em;
+  }
+
+  /* ── PROGRESS ── */
+  .progress-wrap {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin-bottom: 20px;
+  }
+
+  .progress-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 10px;
+  }
+
+  .progress-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--text3);
+  }
+
+  .progress-count {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--text2);
+    font-weight: 500;
+  }
+
+  .progress-bar {
+    height: 3px;
+    background: var(--border);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: var(--bordeaux);
+    border-radius: 3px;
+    transition: width .4s cubic-bezier(.4,0,.2,1);
+    width: 0%;
+  }
+
+  /* ── EXPORT BAR ── */
+  .export-bar {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    font-family: 'DM Mono', monospace;
+    font-size: 10.5px;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    border-radius: 6px;
+    padding: 8px 14px;
+    cursor: pointer;
+    border: 1px solid var(--border2);
+    transition: all .15s;
+    font-weight: 500;
+  }
+
+  .btn-primary {
+    background: var(--bordeaux);
+    color: #fff;
+    border-color: var(--bordeaux);
+  }
+  .btn-primary:hover { background: var(--bordeaux-dark); border-color: var(--bordeaux-dark); }
+
+  .btn-secondary {
+    background: var(--white);
+    color: var(--text2);
+  }
+  .btn-secondary:hover { border-color: var(--bordeaux); color: var(--bordeaux); }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--text3);
+    border-color: transparent;
+  }
+  .btn-ghost:hover { color: var(--text2); border-color: var(--border2); }
+
+  /* ── BLOCK ── */
+  .block { margin-bottom: 32px; }
+
+  .block-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .block-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 36px;
+    color: var(--border2);
+    line-height: 1;
+    min-width: 36px;
+  }
+
+  .block-meta { flex: 1; }
+
+  .block-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .block-time {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--text3);
+    letter-spacing: .06em;
+    margin-top: 2px;
+  }
+
+  /* ── TIP ── */
+  .tip {
+    border-left: 3px solid var(--border2);
+    padding: 8px 14px;
+    margin-bottom: 12px;
+    font-size: 12px;
+    color: var(--text3);
+    line-height: 1.65;
+    background: var(--bg);
+    border-radius: 0 6px 6px 0;
+  }
+  .tip b { color: var(--text2); }
+
+  /* ── Q-ITEM ── */
+  .q-item {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin-bottom: 10px;
+    overflow: hidden;
+    transition: border-color .15s, box-shadow .15s;
+  }
+
+  .q-item:hover { border-color: var(--border2); }
+
+  .q-item.star { border-color: #c9a030; background: var(--amber-bg); }
+  .q-item.highlight { border-color: #9080d0; background: var(--purple-bg); }
+
+  .q-item.checked { opacity: .55; }
+  .q-item.checked .q-text {
+    text-decoration: line-through;
+    color: var(--text3);
+  }
+
+  .q-top {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    padding: 14px 16px 10px;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .checkbox {
+    width: 20px;
+    height: 20px;
+    border-radius: 5px;
+    border: 1.5px solid var(--border2);
+    flex-shrink: 0;
+    margin-top: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all .15s;
+    background: var(--white);
+  }
+
+  .q-item.checked .checkbox {
+    background: var(--bordeaux);
+    border-color: var(--bordeaux);
+  }
+
+  .checkmark {
+    display: none;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+  }
+  .q-item.checked .checkmark { display: block; }
+
+  .q-body { flex: 1; min-width: 0; }
+
+  .q-text {
+    font-size: 13.5px;
+    color: var(--text);
+    line-height: 1.58;
+    font-weight: 400;
+  }
+
+  .q-why {
+    font-size: 11px;
+    color: var(--text3);
+    margin-top: 5px;
+    line-height: 1.55;
+    padding-left: 0;
+  }
+
+  /* ── NOTES ── */
+  .notes-area {
+    padding: 0 16px 12px 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .notes-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9.5px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--text3);
+  }
+
+  .notes-input {
+    width: 100%;
+    min-height: 60px;
+    padding: 9px 12px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    color: var(--text);
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    resize: vertical;
+    outline: none;
+    line-height: 1.55;
+    transition: border-color .15s;
+  }
+
+  .notes-input::placeholder { color: var(--text3); }
+
+  .notes-input:focus {
+    border-color: var(--bordeaux);
+    background: var(--white);
+  }
+
+  .notes-saved {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    color: var(--green);
+    letter-spacing: .05em;
+    opacity: 0;
+    transition: opacity .3s;
+    align-self: flex-end;
+  }
+
+  .notes-saved.show { opacity: 1; }
+
+  /* ── DIVIDER ── */
+  .divider {
+    height: 1px;
+    background: var(--border);
+    margin: 4px 0 32px;
+  }
+
+  /* ── RESET ── */
+  .actions-bottom {
+    display: flex;
+    gap: 8px;
+    margin-top: 8px;
+  }
+
+  /* ── TOAST ── */
+  .toast {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    background: var(--text);
+    color: #fff;
+    font-size: 13px;
+    padding: 12px 20px;
+    border-radius: 8px;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity .25s, transform .25s;
+    pointer-events: none;
+    z-index: 999;
+  }
+  .toast.show { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 640px) {
+    .site-header { padding: 14px 16px; }
+    .tab-nav { padding: 0 16px; }
+    .main { padding: 20px 14px 48px; }
+    .notes-area { padding-left: 16px; }
+    .header-meta { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- SITE HEADER -->
+<header class="site-header">
+  <div class="logo">
+    <div class="logo-main">
+      <div class="logo-ep">
+        ESTEVÃO<br>PINHEIRO
+      </div>
+      <div class="logo-amp">&amp;</div>
+    </div>
+    <div class="logo-sub">Advogados Associados</div>
+  </div>
+  <div class="header-meta">
+    <div class="author">Yasmin G. Lopes</div>
+    <div class="meeting">Reunião de diagnóstico · 21/05/2026 às 15h</div>
+    <div class="place">Waldir Rodrigues · Rua Dom Vital, 48 — Santo Amaro, Recife - PE</div>
+  </div>
+</header>
+
+<!-- TABS -->
+<nav class="tab-nav">
+  <button class="tab-btn active" onclick="switchTab('diagnostico', this)">Diagnóstico</button>
+  <button class="tab-btn" onclick="switchTab('demo', this)">Demonstração do Painel</button>
+</nav>
+
+<!-- TAB: DIAGNÓSTICO -->
+<div id="tab-diagnostico" class="tab-pane active">
+<div class="main">
+
+  <div class="page-header">
+    <div class="page-eyebrow">Roteiro de diagnóstico · 20 perguntas · 60 min</div>
+    <h1 class="page-title">Estevão &amp; Pinheiro <em>Advogados</em></h1>
+    <div class="page-sub">Advocacia trabalhista e sindical · 40 anos de atuação · RPVs e precatórios</div>
+    <div class="meta-tags">
+      <span class="meta-tag">⚖ Advocacia trabalhista</span>
+      <span class="meta-tag">40 anos de atuação</span>
+      <span class="meta-tag">🎯 RPVs e precatórios</span>
+      <span class="meta-tag">⏱ 1h · 20 perguntas</span>
+    </div>
+  </div>
+
+  <div class="progress-wrap">
+    <div class="progress-top">
+      <span class="progress-label">Progresso da reunião</span>
+      <span class="progress-count" id="progress-label">0 / 20 respondidas</span>
+    </div>
+    <div class="progress-bar">
+      <div class="progress-fill" id="progress-fill"></div>
+    </div>
+  </div>
+
+  <div class="export-bar">
+    <button class="btn btn-primary" onclick="exportCSV()">↓ Exportar anotações (CSV)</button>
+    <button class="btn btn-secondary" onclick="exportTXT()">↓ Exportar como texto</button>
+    <button class="btn btn-secondary" onclick="copyAll()">⎘ Copiar tudo</button>
+    <button class="btn btn-ghost" onclick="resetAll()">↺ Reiniciar</button>
+  </div>
+
+  <!-- BLOCO 1 -->
+  <div class="block">
+    <div class="block-header">
+      <div class="block-num">01</div>
+      <div class="block-meta">
+        <div class="block-title">Abertura e contexto</div>
+        <div class="block-time">0 – 10 min</div>
+      </div>
+    </div>
+    <div class="tip">Chegue curiosa, não como quem já tem a solução. Deixe ele falar. Seu papel aqui é ouvir e criar rapport.</div>
+
+    <div class="q-item">
+      <div class="q-top" onclick="toggleCheck(this.parentElement)">
+        <div class="checkbox"><span class="checkmark">✓</span></div>
+        <div class="q-body">
+          <div class="q-text">"Me conta um pouco sobre o escritório — o que vocês fazem, como está o momento atual e quem está envolvido na operação do dia a dia?"</div>
+          <div class="q-why">Abre a conversa naturalmente. Ele precisa sentir que está sendo ouvido do zero.</div>
+        </div>
+      </div>
+      <div class="notes-area">
+        <div class="notes-label">Anotações</div>
+        <textarea class="notes-input" placeholder="Escreva aqui o que ele responder..." oninput="autoSave(this)"></textarea>
+        <span class="notes-saved">✓ salvo</span>
+      </div>
+    </div>
+
+    <div class="q-item">
+      <div class="q-top" onclick="toggleCheck(this.parentElement)">
+        <div class="checkbox"><span class="checkmark">✓</span></div>
+        <div class="q-body">
+          <div class="q-text">"Quantas pessoas compõem a equipe hoje — jurídica e administrativa separadamente?"</div>
+          <div class="q-why">Define escala do problema e quem será impactado pelas automações.</div>
+        </div>
+      </div>
+      <div class="notes-area">
+        <div class="notes-label">Anotações</div>
+        <textarea class="notes-input" placeholder="Escreva aqui o que ele responder..." oninput="autoSave(this)"></textarea>
+        <span class="notes-saved">✓ salvo</span>
+      </div>
+    </div>
+
+    <div class="q-item">
+      <div class="q-top" onclick="toggleCheck(this.parentElement)">
+        <div class="checkbox"><span class="checkmark">✓</span></div>
+        <div class="q-body">
+          <div class="q-text">"Quais sistemas e ferramentas vocês usam hoje — portal jurídico, planilha, WhatsApp, sistema próprio? Tudo conta."</div>
+          <div class="q-why">Mapeia o ecossistema tecnológico antes de entrar no processo específico.</div>
+        </div>
+      </div>
+      <div class="notes-area">
+        <div class="notes-label">Anotações</div>
+        <textarea class="notes-input" placeholder="Escreva aqui o que ele responder..." oninput="autoSave(this)"></textarea>
+        <span class="notes-saved">✓ salvo</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- BLOCO 2 -->
+  <div class="block">
+    <div class="block-header">
+      <div class="block-num">02</div>
+      <div class="block-meta">
+        <div class="block-title">Mapeamento do processo — RPVs e precatórios</div>
+        <div class="block-time">10 – 30 min</div>
+      </div>
+    </div>
+    <div class="tip">Peça para ele <b>mostrar</b> como faz, não só descrever. "Você pode abrir aqui e me mostrar?" vale mais que 5 perguntas.</div>
+
+    <div class="q-item">
+      <div class="q-top" onclick="toggleCheck(this.parentElement)">
+        <div class="checkbox"><span class="checkmark">✓</span></div>
+        <div class="q-body">
+          <div class="q-text">"Quais são os sites que vocês consultam para verificar os valores a receber? Me lista todos — TRTs, Caixa, SIAPE, bancos."</div>
+          <div class="q-why">Mapeia todas as fontes de dados — cada fonte é um ponto de integração potencial.</div>
+        </div>
+      </div>
+      <div class="notes-area">
+        <div class="notes-label">Anotações</div>
+        <textarea class="notes-input" placeholder="Liste os portais que ele mencionar..." oninput="autoSave(this)"></textarea>
+        <span class="notes-saved">✓ salvo</span>
+      </div>
+    </div>
+
+    <div class="q-item">
+      <div class="q-top" onclick="toggleCheck(this.parentElement)">
+        <div class="checkbox"><span class="checkmark">✓</span></div>
+        <div class="q-body">
+          <div class="q-text">"Você pode me mostrar como faz essa consulta hoje, do começo ao fim — abrindo o site mesmo?"</div>
+          <div class="q-why">A pergunta de ouro. Observar o processo real revela o que nenhuma descrição captura.</div>
+        </div>
+      </div>
+      <div class="notes-area">
+        <div class="notes-label">Anotações</div>
+        <textarea class="notes-input" placeholder="Descreva o que você viu no processo ao vivo..." oninput="autoSave(this)"></textarea>
+        <span class="notes-saved">✓ salvo</span>
+      </div>
+    </div>
+
+    <div class="q-item">
+      <div class="q-top" onclick="toggleCheck(this.parentElement)">
+        <div class="checkbox"><span class="checkmark">✓</span></div>
+        <div class="q-body">
+          <div class="q-text">"Com que frequência essa consulta é feita — todo dia, semanal, quando chega um comunicado?"</div>
+          <div class="q-why">Frequência × tempo gasto = base do cálculo de ROI. Anote o número exato.</div>
+        </div>
+      </div>
+      <div class="notes-area">
+        <div class="notes-label">Anotações</div>
+        <textarea class="notes-input" placeholder="Frequência exata (diário, 2x/semana, etc.)..." oninput="autoSave(this)"></textarea>
+        <span class="notes-saved">✓ salvo</span>
+      </div>
+    </div>
+
+    <div class="q-item">
+      <div class="q-top" onclick="toggleCheck(this.parentElement)">
+        <div class="checkbox"><span class="checkmark">✓</span></div>
+        <div class="q-body">
+          <div class="q-text">"Quem faz isso hoje? É uma pessoa específica ou mais de uma dividem essa tarefa?"</div>
+          <div class="q-why">Define responsável e quem será liberado com a automação.</div>
+        </div>
+      </div>
+      <div class="notes-area">
+        <div class="notes-label">Anotações</div>
+        <textarea class="notes-input" placeholder="Nome ou cargo de quem executa o processo..." oninput="autoSave(this)"></textarea>
+        <span class="notes-saved">✓ salvo</span>
+      </div>
+    </div>
+
+    <div class="q-item">
+      <div class="q-top" onclick="toggleCheck(this.parentElement)">
+        <div class="checkbox"><span class="checkmark">✓</span></div>
+        <div class="q-body">
+          <div class="q-text">"Quanto tempo essa pessoa gasta nisso por semana, na estimativa dela?"</div>
+          <div class="q-why">Segundo número do ROI. Se não souber, pergunte por consulta: "cada consulta leva quanto?"</div>
+        </div>
+      </div>
+      <div class="notes-area">
+        <div class="notes-label">Anotações</div>
+        <textarea class="notes-input" placeholder="Horas por semana ou minutos por consulta..." oninput="autoSave(this)"></textarea>
+        <span class="notes-saved">✓ salvo</span>
+      </div>
+    </div>
+
+    <div class="q-item">
+      <div class="q-top" onclick="toggleCheck(this.parentElement)">
+        <div class="checkbox"><span class="checkmark">✓</span></div>
+        <div class="q-body">
+          <div class="q-text">"Depois de consultar o site, qual é o próximo passo exato — ela copia os dados, faz download, imprime, digita em planilha?"</div>
+          <div class="q-why">Mapeia o fluxo pós-consulta — onde estão os gargalos de digitação e retrabalho.</div>
+        </div>
+      </div>
+      <div class="notes-area">
+        <div class="notes-label">Anotações</div>
+        <textarea class="notes-input" placeholder="Descreva cada passo do fluxo pós-consulta..." oninput="autoSave(this)"></textarea>
+        <span class="notes-saved">✓ salvo</span>
+      </div>
+    </div>
+
+    <div class="q-item">
+      <div class="q-top" onclick="toggleCheck(this.parentElement)">
+        <div class="checkbox"><span class="checkmark">✓</span></div>
+        <div class="q-body">
+          <div class="q-text">"Essa planilha que vocês preenchem — você pode me mostrar como ela está estruturada? Quais colunas tem?"</div>
+          <div class="q-why">A planilha é provavelmente o coração da automação. Veja ao vivo se possível.</div>
+        </div>
+      </div>
+      <div class="notes-area">
+        <div class="notes-label">Anotações</div>
+        <textarea class="notes-input" placeholder="Colunas da planilha, formato dos dados, onde fica armazenada..." oninput="autoSave(this)"></textarea>
+        <span class="notes-saved">✓ salvo</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- BLOCO 3 -->
+  <div class="block">
+    <div class="block-header">
+      <div class="block-num">03</div>
+      <div class="block-meta">
+        <div class="block-title">Volume, dor real e impacto financeiro</div>
+        <div class="block-time">30 – 45 min</div>
+      </div>
+    </div>
+    <div class="tip">Este bloco é onde você encontra o argumento de venda. Escuta mais, fala menos. Se ele pausar, espere — a dor real costuma vir depois do silêncio.</div>
+
+    <div class="q-item">
+      <div class="q-top" onclick="toggleCheck(this.parentElement)">
+        <div class="checkbox"><span class="checkmark">✓</span></div>
+        <div class="q-body">
+          <div class="q-text">"Quantas causas ativas vocês acompanham hoje, aproximadamente? E quantas fontes diferentes precisam consultar?"</div>
+          <div class="q-why">Volume × fontes = complexidade real. Define o escopo técnico da automação.</div>
+        </div>
+      </div>
+      <div class="notes-area">
+        <div class="notes-label">Anotações</div>
+        <textarea class="notes-input" placeholder="Nº de causas ativas · Nº de fontes consultadas..." oninput="autoSave(this)"></textarea>
+        <span class="notes-saved">✓ salvo</span>
+      </div>
+    </div>
+
+    <div class="q-item">
+      <div class="q-top" onclick="toggleCheck(this.parentElement)">
+        <div class="checkbox"><span class="checkmark">✓</span></div>
+        <div class="q-body">
+          <div class="q-text">"Já tiveram problema concreto por erro de preenchimento — um valor errado, um prazo perdido, um repasse feito com dado incorreto?"</div>
+          <div class="q-why">Uma história de erro real vale mais que qualquer argumento técnico. Anota.</div>
+        </div>
+      </div>
+      <div class="notes-area">
+        <div class="notes-label">Anotações</div>
+        <textarea class="notes-input" placeholder="Descreva o caso que ele mencionar (quanto perderam, qual foi o impacto)..." oninput="autoSave(this)"></textarea>
+        <span class="notes-saved">✓ salvo</span>
+      </div>
+    </div>
+
+    <div class="q-item">
+      <div class="q-top" onclick="toggleCheck(this.parentElement)">
+        <div class="checkbox"><span class="checkmark">✓</span></div>
+        <div class="q-body">
+          <div class="q-text">"O atraso nessa consulta já causou problema — tipo não saber que tinha um valor disponível para sacar?"</div>
+          <div class="q-why">Valor esquecido ou atrasado é argumento direto de ROI na proposta.</div>
+        </div>
+      </div>
+      <div class="notes-area">
+        <div class="notes-label">Anotações</div>
+        <textarea class="notes-input" placeholder="Valor aproximado que ficou parado ou foi percebido com atraso..." oninput="autoSave(this)"></textarea>
+        <span class="notes-saved">✓ salvo</span>
+      </div>
+    </div>
+
+    <div class="q-item">
+      <div class="q-top" onclick="toggleCheck(this.parentElement)">
+        <div class="checkbox"><span class="checkmark">✓</span></div>
+        <div class="q-body">
+          <div class="q-text">"Se você pudesse eliminar uma tarefa do dia a dia da equipe hoje — qual seria? E o que essa pessoa faria com esse tempo?"</div>
+          <div class="q-why">Revela a dor prioritária e o valor percebido do tempo recuperado. Anote textualmente.</div>
+        </div>
+      </div>
+      <div class="notes-area">
+        <div class="notes-label">Anotações</div>
+        <textarea class="notes-input" placeholder="Anote as palavras exatas dele — vira o título da proposta..." oninput="autoSave(this)"></textarea>
+        <span class="notes-saved">✓ salvo</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- BLOCO 4 -->
+  <div class="block">
+    <div class="block-header">
+      <div class="block-num">04</div>
+      <div class="block-meta">
+        <div class="block-title">Painel, requisitos e identidade visual</div>
+        <div class="block-time">45 – 53 min</div>
+      </div>
+    </div>
+
+    <div class="q-item">
+      <div class="q-top" onclick="toggleCheck(this.parentElement)">
+        <div class="checkbox"><span class="checkmark">✓</span></div>
+        <div class="q-body">
+          <div class="q-text">"Quando vocês falam em painel de relatório — onde querem ver isso? Computador, celular, projetado em reunião com os sócios?"</div>
+          <div class="q-why">Define o formato da entrega. Muda completamente a solução técnica.</div>
+        </div>
+      </div>
+      <div class="notes-area">
+        <div class="notes-label">Anotações</div>
+        <textarea class="notes-input" placeholder="Dispositivo e contexto de uso do painel..." oninput="autoSave(this)"></textarea>
+        <span class="notes-saved">✓ salvo</span>
+      </div>
+    </div>
+
+    <div class="q-item">
+      <div class="q-top" onclick="toggleCheck(this.parentElement)">
+        <div class="checkbox"><span class="checkmark">✓</span></div>
+        <div class="q-body">
+          <div class="q-text">"Quem precisa acessar esse painel — só o financeiro, os sócios, os advogados de cada causa?"</div>
+          <div class="q-why">Define permissões e complexidade de acesso da solução.</div>
+        </div>
+      </div>
+      <div class="notes-area">
+        <div class="notes-label">Anotações</div>
+        <textarea class="notes-input" placeholder="Perfis de usuário que precisam de acesso..." oninput="autoSave(this)"></textarea>
+        <span class="notes-saved">✓ salvo</span>
+      </div>
+    </div>
+
+    <div class="q-item highlight">
+      <div class="q-top" onclick="toggleCheck(this.parentElement)">
+        <div class="checkbox"><span class="checkmark">✓</span></div>
+        <div class="q-body">
+          <div class="q-text">"Vocês têm uma identidade visual do escritório — logo, cores, fontes? Conseguimos acesso ao arquivo para que a entrega seja no visual de vocês?"</div>
+          <div class="q-why">Mostra profissionalismo. Solicite logo em PNG ou SVG + manual de marca se houver.</div>
+        </div>
+      </div>
+      <div class="notes-area">
+        <div class="notes-label">Anotações</div>
+        <textarea class="notes-input" placeholder="Arquivos disponíveis, quem tem acesso, onde estão..." oninput="autoSave(this)"></textarea>
+        <span class="notes-saved">✓ salvo</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- BLOCO 5 -->
+  <div class="block">
+    <div class="block-header">
+      <div class="block-num">05</div>
+      <div class="block-meta">
+        <div class="block-title">Fechamento e decisão</div>
+        <div class="block-time">53 – 60 min</div>
+      </div>
+    </div>
+    <div class="tip">Não tente fechar a venda agora. Saia com clareza sobre quem decide, qual o prazo e o que está travando.</div>
+
+    <div class="q-item">
+      <div class="q-top" onclick="toggleCheck(this.parentElement)">
+        <div class="checkbox"><span class="checkmark">✓</span></div>
+        <div class="q-body">
+          <div class="q-text">"Há alguma urgência ou prazo que torna esse problema mais crítico agora do que daqui a 3 meses?"</div>
+          <div class="q-why">Identifica janela de decisão sem pressionar.</div>
+        </div>
+      </div>
+      <div class="notes-area">
+        <div class="notes-label">Anotações</div>
+        <textarea class="notes-input" placeholder="Prazos, eventos ou contextos que criam urgência..." oninput="autoSave(this)"></textarea>
+        <span class="notes-saved">✓ salvo</span>
+      </div>
+    </div>
+
+    <div class="q-item">
+      <div class="q-top" onclick="toggleCheck(this.parentElement)">
+        <div class="checkbox"><span class="checkmark">✓</span></div>
+        <div class="q-body">
+          <div class="q-text">"Quem mais precisa estar de acordo com essa decisão — você decide aqui ou precisa apresentar para outra pessoa?"</div>
+          <div class="q-why">Descobre outros decisores. Evita proposta que morre na mesa de quem não decide.</div>
+        </div>
+      </div>
+      <div class="notes-area">
+        <div class="notes-label">Anotações</div>
+        <textarea class="notes-input" placeholder="Nome e cargo de todos os decisores envolvidos..." oninput="autoSave(this)"></textarea>
+        <span class="notes-saved">✓ salvo</span>
+      </div>
+    </div>
+
+    <div class="q-item star">
+      <div class="q-top" onclick="toggleCheck(this.parentElement)">
+        <div class="checkbox"><span class="checkmark">✓</span></div>
+        <div class="q-body">
+          <div class="q-text">⭐ "Se eu chegasse aqui daqui a 3 meses e você me dissesse que foi o melhor investimento que o escritório fez — o que teria acontecido?"</div>
+          <div class="q-why">A pergunta mais valiosa da reunião. A resposta vira o título da sua proposta. Anote palavra por palavra.</div>
+        </div>
+      </div>
+      <div class="notes-area">
+        <div class="notes-label">Anotações — anote as palavras exatas</div>
+        <textarea class="notes-input" style="min-height:90px" placeholder="Escreva aqui textualmente o que ele disser. Essa frase vai pra proposta..." oninput="autoSave(this)"></textarea>
+        <span class="notes-saved">✓ salvo</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="actions-bottom">
+    <button class="btn btn-primary" onclick="exportCSV()">↓ Exportar anotações (CSV)</button>
+    <button class="btn btn-secondary" onclick="exportTXT()">↓ Exportar como texto</button>
+    <button class="btn btn-ghost" onclick="resetAll()">↺ Reiniciar checklist</button>
+  </div>
+
+</div>
+</div>
+
+<!-- TAB: DEMO PANEL -->
+<div id="tab-demo" class="tab-pane">
+  <iframe src="demo_painel.html" title="Demonstração do Painel Financeiro"></iframe>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const STORAGE_KEY = 'ep_diag_';
+
+// ── Tab switching ──
+function switchTab(name, btn) {
+  document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+  btn.classList.add('active');
+}
+
+// ── Checkbox ──
+function toggleCheck(item) {
+  item.classList.toggle('checked');
+  updateProgress();
+  saveState();
+}
+
+// ── Progress ──
+function updateProgress() {
+  const items = document.querySelectorAll('.q-item');
+  const done = document.querySelectorAll('.q-item.checked').length;
+  const pct = Math.round((done / items.length) * 100);
+  document.getElementById('progress-fill').style.width = pct + '%';
+  document.getElementById('progress-label').textContent = done + ' / ' + items.length + ' respondidas';
+}
+
+// ── Auto-save notes ──
+let saveTimer;
+function autoSave(textarea) {
+  autoResize(textarea);
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(() => {
+    saveState();
+    const saved = textarea.closest('.notes-area').querySelector('.notes-saved');
+    saved.classList.add('show');
+    setTimeout(() => saved.classList.remove('show'), 1800);
+  }, 600);
+}
+
+function autoResize(el) {
+  el.style.height = 'auto';
+  el.style.height = Math.max(60, el.scrollHeight) + 'px';
+}
+
+// ── Persist to localStorage ──
+function saveState() {
+  const state = { checks: [], notes: [] };
+  document.querySelectorAll('.q-item').forEach((item, i) => {
+    state.checks[i] = item.classList.contains('checked');
+    state.notes[i] = item.querySelector('.notes-input').value;
+  });
+  localStorage.setItem(STORAGE_KEY + 'state', JSON.stringify(state));
+}
+
+function loadState() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY + 'state');
+    if (!raw) return;
+    const state = JSON.parse(raw);
+    document.querySelectorAll('.q-item').forEach((item, i) => {
+      if (state.checks[i]) item.classList.add('checked');
+      const ta = item.querySelector('.notes-input');
+      if (state.notes[i]) {
+        ta.value = state.notes[i];
+        autoResize(ta);
+      }
+    });
+    updateProgress();
+  } catch(e) {}
+}
+
+// ── Reset ──
+function resetAll() {
+  if (!confirm('Apagar checklist e todas as anotações?')) return;
+  document.querySelectorAll('.q-item').forEach(item => {
+    item.classList.remove('checked');
+    const ta = item.querySelector('.notes-input');
+    ta.value = '';
+    ta.style.height = '';
+  });
+  localStorage.removeItem(STORAGE_KEY + 'state');
+  updateProgress();
+  showToast('Checklist reiniciado.');
+}
+
+// ── Collect data ──
+function collectData() {
+  const rows = [];
+  let currentBlock = '';
+  document.querySelectorAll('.block').forEach(block => {
+    currentBlock = block.querySelector('.block-title').textContent.trim();
+    const time = block.querySelector('.block-time').textContent.trim();
+    block.querySelectorAll('.q-item').forEach(item => {
+      rows.push({
+        bloco: currentBlock,
+        tempo: time,
+        pergunta: item.querySelector('.q-text').textContent.trim(),
+        anotacoes: item.querySelector('.notes-input').value.trim(),
+        respondida: item.classList.contains('checked') ? 'Sim' : 'Não'
+      });
+    });
+  });
+  return rows;
+}
+
+// ── Export CSV ──
+function exportCSV() {
+  const rows = collectData();
+  const header = ['Bloco', 'Tempo', 'Pergunta', 'Anotações', 'Respondida'];
+  const lines = [header, ...rows.map(r => [r.bloco, r.tempo, r.pergunta, r.anotacoes, r.respondida])];
+  const csv = lines.map(row => row.map(cell => '"' + (cell || '').replace(/"/g, '""') + '"').join(',')).join('\r\n');
+  download('﻿' + csv, 'diagnostico-estevao-pinheiro-21052026.csv', 'text/csv;charset=utf-8');
+  showToast('CSV exportado com sucesso.');
+}
+
+// ── Export TXT ──
+function exportTXT() {
+  const rows = collectData();
+  let out = 'DIAGNÓSTICO — ESTEVÃO & PINHEIRO ADVOGADOS\n';
+  out += 'Reunião: 21/05/2026 às 15h\n';
+  out += '='.repeat(60) + '\n\n';
+  let lastBlock = '';
+  rows.forEach(r => {
+    if (r.bloco !== lastBlock) {
+      out += '\n' + r.bloco.toUpperCase() + ' · ' + r.tempo + '\n';
+      out += '-'.repeat(50) + '\n';
+      lastBlock = r.bloco;
+    }
+    out += '\n[' + (r.respondida === 'Sim' ? '✓' : ' ') + '] ' + r.pergunta + '\n';
+    if (r.anotacoes) out += 'Anotações: ' + r.anotacoes + '\n';
+  });
+  download(out, 'diagnostico-estevao-pinheiro-21052026.txt', 'text/plain;charset=utf-8');
+  showToast('Arquivo de texto exportado.');
+}
+
+// ── Copy all ──
+function copyAll() {
+  const rows = collectData();
+  let out = 'DIAGNÓSTICO — ESTEVÃO & PINHEIRO ADVOGADOS\nReunião: 21/05/2026 às 15h\n\n';
+  let lastBlock = '';
+  rows.forEach(r => {
+    if (r.bloco !== lastBlock) {
+      out += '\n' + r.bloco + '\n';
+      lastBlock = r.bloco;
+    }
+    out += '• ' + r.pergunta + '\n';
+    if (r.anotacoes) out += '  → ' + r.anotacoes + '\n';
+  });
+  navigator.clipboard.writeText(out).then(() => showToast('Copiado para a área de transferência.'));
+}
+
+// ── Download helper ──
+function download(content, filename, type) {
+  const blob = new Blob([content], { type });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  a.click();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+
+// ── Toast ──
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2800);
+}
+
+// ── Init ──
+loadState();
+updateProgress();
+</script>
+</body>
+</html>
