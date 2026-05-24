@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Estevão & Pinheiro — Sistema Financeiro de Causas · Demo v2</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bx:#6B1C2E;--bxd:#4a1220;--bxl:#8b2a40;--gold:#c9a84c;--bg:#f4f1ee;--wh:#fff;--tx:#1a1a1a;--mu:#6b6b6b;--bd:#e0d9d4;--gn:#2d7d46;--gnb:#e8f5ec;--or:#c07000;--orb:#fff3e0;--rd:#c0392b;--rdb:#fdecea;--bl:#1a5276;--blb:#eaf1f8}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--tx);min-height:100vh}
+
+/* HEADER */
+header{background:#fff;border-bottom:1px solid var(--bd);padding:12px 28px;display:flex;align-items:center;justify-content:space-between}
+.logo-ep{font-family:'DM Serif Display',serif;font-size:19px;color:#1a1a1a;letter-spacing:-.3px;text-transform:uppercase}
+.logo-amp{color:#8B1C2C;font-style:italic}
+.logo-sub{font-family:'DM Sans',sans-serif;font-size:7.5px;letter-spacing:.22em;text-transform:uppercase;color:#5c5650;margin-top:3px}
+.hdr-r{display:flex;align-items:center;gap:10px}
+.badge-demo{background:var(--bx);color:#fff;font-family:'DM Mono',monospace;font-size:10px;font-weight:600;padding:4px 10px;border-radius:4px;letter-spacing:.5px;text-transform:uppercase}
+.hdr-date{font-size:12px;color:var(--mu);font-family:'DM Mono',monospace}
+
+/* PHASE NAV */
+.phase-nav{background:var(--bxd);padding:0 20px;display:flex;overflow-x:auto}
+.ptab{display:flex;flex-direction:column;padding:9px 20px;text-decoration:none;border-bottom:3px solid transparent;cursor:pointer;min-width:160px;border-right:1px solid rgba(255,255,255,.07);transition:background .15s}
+.ptab:hover{background:rgba(255,255,255,.05)}
+.ptab.active{border-bottom-color:var(--gold);background:rgba(255,255,255,.06)}
+.tab-n{font-family:'DM Mono',monospace;font-size:9px;color:rgba(255,255,255,.4);letter-spacing:.12em;text-transform:uppercase;margin-bottom:2px}
+.ptab.active .tab-n{color:var(--gold)}
+.tab-l{font-size:13px;font-weight:600;color:rgba(255,255,255,.75);margin-bottom:3px}
+.ptab.active .tab-l{color:#fff}
+.tab-s{font-size:9px;font-family:'DM Mono',monospace;font-weight:600;padding:2px 7px;border-radius:10px;display:inline-block;text-transform:uppercase;letter-spacing:.07em}
+.ts-cur{background:rgba(201,168,76,.22);color:var(--gold)}
+.ts-ok{background:rgba(45,125,70,.22);color:#5cb57a}
+.ts-dev{background:rgba(255,255,255,.08);color:rgba(255,255,255,.35)}
+
+/* PHASE CONTENT */
+.phase-content{display:none}
+.phase-content.active{display:block}
+.pbadge-bar{background:#fff;border-bottom:1px solid var(--bd);padding:7px 28px;display:flex;align-items:center;gap:10px}
+.pbadge{font-family:'DM Mono',monospace;font-size:10px;font-weight:600;padding:3px 10px;border-radius:4px;text-transform:uppercase;letter-spacing:.08em}
+.pb1{background:rgba(201,168,76,.15);color:#7a5c0a;border:1px solid rgba(201,168,76,.4)}
+.pb2{background:rgba(45,125,70,.12);color:#1e5a32;border:1px solid rgba(45,125,70,.3)}
+.pb3{background:rgba(107,28,46,.1);color:var(--bx);border:1px solid rgba(107,28,46,.25)}
+.pbadge-desc{font-size:12px;color:var(--mu)}
+
+/* SHARED TABLE */
+table{width:100%;border-collapse:collapse;font-size:13px}
+thead th{background:#faf8f6;padding:9px 14px;text-align:left;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--mu);border-bottom:1px solid var(--bd);white-space:nowrap}
+tbody tr{border-bottom:1px solid var(--bd);transition:background .12s}
+tbody tr:last-child{border-bottom:none}
+tbody tr:hover{background:#faf8f6}
+tbody td{padding:10px 14px;vertical-align:middle}
+th.chk-col,td.chk-col{width:36px;text-align:center;padding:8px 4px}
+input[type=checkbox]{width:15px;height:15px;cursor:pointer;accent-color:var(--bx)}
+.proc-num{font-family:'DM Mono',monospace;font-size:11px;color:var(--bx);font-weight:600}
+.causa-desc{font-weight:600;font-size:13px}
+.causa-sub{font-size:11px;color:var(--mu);margin-top:1px}
+.val-cell{font-weight:700;font-size:13px;font-family:'DM Mono',monospace;white-space:nowrap}
+.val-pos{color:var(--gn)}.val-neg{color:var(--rd)}.val-or{color:var(--or)}
+.data-cell{color:var(--mu);font-size:12px;white-space:nowrap}
+
+/* STATUS BADGES */
+.sbadge{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:700;padding:3px 8px;border-radius:20px;white-space:nowrap;cursor:pointer;transition:opacity .15s}
+.sbadge:hover{opacity:.8}
+.sb-disp{background:var(--gnb);color:var(--gn)}
+.sb-pend{background:var(--orb);color:var(--or)}
+.sb-fila{background:#f5f5f5;color:#555}
+.sb-rec{background:var(--blb);color:var(--bl)}
+.sb-arq{background:#eee;color:#888}
+.dot{width:5px;height:5px;border-radius:50%;background:currentColor;flex-shrink:0}
+.overdue-row{background:#fff7f0!important}
+.overdue-row:hover{background:#ffede0!important}
+.vencida-badge{font-family:'DM Mono',monospace;font-size:9px;font-weight:700;color:var(--rd);margin-left:5px;background:var(--rdb);padding:2px 6px;border-radius:10px}
+
+/* STATUS SELECT (inline edit) */
+.status-select{border:1px solid var(--bx);border-radius:6px;padding:4px 8px;font-size:12px;font-family:'DM Sans',sans-serif;color:var(--tx);background:#fff;cursor:pointer;outline:none}
+
+/* FONTE BADGES */
+.fbadge{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:600;padding:2px 8px;border-radius:20px}
+.fb-cef{background:#e8f0fe;color:#1a3c8f}
+.fb-bb{background:#fff8e1;color:#7d5a00}
+.fb-trt6{background:#f3e5f5;color:#6a1b9a}
+.fb-trt15{background:#e0f2f1;color:#00695c}
+.fb-brad{background:#fce4ec;color:#880e4f}
+.fb-siap{background:#e8eaf6;color:#283593}
+
+/* BULK BAR */
+.bulk-bar{background:var(--bx);color:#fff;padding:10px 18px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;border-bottom:1px solid rgba(255,255,255,.15)}
+.bulk-info{font-size:13px;font-weight:600}
+.bulk-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.bulk-actions label{font-size:12px}
+.bulk-select{border:1px solid rgba(255,255,255,.4);border-radius:6px;padding:5px 10px;font-size:12px;background:rgba(255,255,255,.1);color:#fff;cursor:pointer}
+.bulk-select option{background:var(--bx);color:#fff}
+.btn-bulk-apply{background:#fff;color:var(--bx);border:none;border-radius:6px;padding:5px 14px;font-size:12px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif}
+.btn-bulk-cancel{background:transparent;color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.3);border-radius:6px;padding:5px 12px;font-size:12px;cursor:pointer;font-family:'DM Sans',sans-serif}
+
+/* FILTER CHIPS */
+.filter-chips{display:flex;gap:8px;flex-wrap:wrap;padding:8px 28px;background:#f9f6f3;border-bottom:1px solid var(--bd);align-items:center}
+.chip{display:inline-flex;align-items:center;gap:5px;background:var(--bx);color:#fff;font-size:11px;font-weight:600;padding:4px 10px;border-radius:20px;font-family:'DM Mono',monospace}
+.chip-x{cursor:pointer;opacity:.7;font-size:13px;line-height:1}
+.chip-x:hover{opacity:1}
+.btn-clear-all{font-size:12px;color:var(--bx);cursor:pointer;background:none;border:none;text-decoration:underline;font-family:'DM Sans',sans-serif}
+
+/* ===== PHASE 1 ===== */
+.p1-main{padding:18px 28px;max-width:1300px;margin:0 auto}
+.p1-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:18px}
+.form-card,.calc-panel{background:#fff;border-radius:12px;border:1px solid var(--bd);padding:22px}
+.card-title{font-size:15px;font-weight:700;margin-bottom:3px}
+.card-sub{font-size:12px;color:var(--mu);margin-bottom:18px}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+.frow.full{grid-template-columns:1fr}
+.frow.three{grid-template-columns:1fr 1fr 1fr}
+.field{display:flex;flex-direction:column;gap:4px}
+.field label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--mu)}
+.field input,.field select{border:1px solid var(--bd);border-radius:7px;padding:8px 11px;font-size:13px;font-family:'DM Sans',sans-serif;color:var(--tx);outline:none;background:#fff;transition:border-color .2s}
+.field input:focus,.field select:focus{border-color:var(--bx)}
+.field .hint{font-size:10px;color:var(--mu)}
+.form-actions{display:flex;gap:8px;margin-top:18px;padding-top:14px;border-top:1px solid var(--bd);flex-wrap:wrap}
+.btn-primary{background:var(--bx);color:#fff;border:none;border-radius:7px;padding:9px 16px;font-size:13px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif}
+.btn-secondary{background:#fff;color:var(--bx);border:1px solid var(--bx);border-radius:7px;padding:9px 14px;font-size:13px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif}
+.btn-gold{background:var(--gold);color:#3a2800;border:none;border-radius:7px;padding:9px 16px;font-size:13px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif}
+.calc-panel{display:flex;flex-direction:column}
+.calc-row{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid #f0ece8}
+.calc-lbl{font-size:13px;color:var(--mu)}
+.calc-val{font-size:15px;font-weight:700;font-family:'DM Mono',monospace}
+.cv-bx{color:var(--bx)}.cv-rd{color:var(--rd)}.cv-gn{color:var(--gn)}.cv-big{font-size:22px}
+.calc-div{border:none;border-top:2px solid var(--bx);margin:10px 0}
+.accum-box{margin-top:14px;padding:11px;background:var(--orb);border-radius:8px;border-left:3px solid var(--or)}
+.accum-lbl{font-size:10px;color:var(--or);font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:3px}
+.accum-val{font-size:18px;font-weight:800;color:var(--or);font-family:'DM Mono',monospace}
+.accum-note{font-size:11px;color:#a07000;margin-top:3px}
+.calc-note{margin-top:14px;font-size:11px;color:var(--mu);background:#faf8f6;padding:10px;border-radius:6px;line-height:1.6}
+.tcard{background:#fff;border-radius:12px;border:1px solid var(--bd);overflow:hidden;margin-bottom:18px}
+.tcard-hdr{padding:13px 18px;border-bottom:1px solid var(--bd);display:flex;align-items:center;justify-content:space-between}
+.tcard-hdr h3{font-size:14px;font-weight:700}
+.tcard-hdr span{font-size:12px;color:var(--mu)}
+
+/* ===== PHASE 2 ===== */
+.p2-main{padding:14px 28px;max-width:1440px;margin:0 auto}
+.filter-bar{display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap;align-items:flex-end}
+.filter-bar label{font-size:12px;color:var(--mu);display:flex;flex-direction:column;gap:3px}
+.filter-bar select,.filter-bar input[type=date]{font-size:12px;border:1px solid var(--bd);border-radius:6px;padding:6px 10px;background:#fff;color:var(--tx);outline:none;cursor:pointer;font-family:'DM Sans',sans-serif}
+.filter-bar select:focus,.filter-bar input[type=date]:focus{border-color:var(--bx)}
+.btn-filter{background:var(--bx);color:#fff;border:none;border-radius:6px;padding:7px 16px;font-size:12px;font-weight:600;cursor:pointer;align-self:flex-end;font-family:'DM Sans',sans-serif}
+.btn-clear-f{background:#fff;color:var(--bx);border:1px solid var(--bx);border-radius:6px;padding:7px 14px;font-size:12px;font-weight:600;cursor:pointer;align-self:flex-end;font-family:'DM Sans',sans-serif}
+.btn-export{background:#fff;color:var(--bx);border:1px solid var(--bx);border-radius:6px;padding:7px 14px;font-size:12px;font-weight:600;cursor:pointer;margin-left:auto;align-self:flex-end;font-family:'DM Sans',sans-serif}
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:12px}
+.kpi-card{background:#fff;border-radius:10px;padding:12px 16px;border:1px solid var(--bd);position:relative;overflow:hidden;transition:transform .15s,box-shadow .15s,border .15s;cursor:pointer}
+.kpi-card:hover{transform:translateY(-1px);box-shadow:0 4px 14px rgba(0,0,0,.08)}
+.kpi-card.kpi-active{border:2px solid}
+.kpi-card.kpi-active.k-bx{border-color:var(--bx)}
+.kpi-card.kpi-active.k-gn{border-color:var(--gn)}
+.kpi-card.kpi-active.k-or{border-color:var(--or)}
+.kpi-card.kpi-active.k-bl{border-color:var(--bl)}
+.kpi-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.k-bx::before{background:var(--bx)}.k-gn::before{background:var(--gn)}.k-or::before{background:var(--or)}.k-bl::before{background:var(--bl)}
+.kpi-lbl{font-size:10px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;font-weight:600}
+.kpi-val{font-size:20px;font-weight:800;line-height:1;margin:3px 0}
+.kv-bx{color:var(--bx)}.kv-gn{color:var(--gn)}.kv-or{color:var(--or)}.kv-bl{color:var(--bl)}
+.kpi-sub{font-size:11px;color:var(--mu)}
+.kpi-icon{position:absolute;top:14px;right:14px;font-size:24px;opacity:.08}
+.kpi-filter-hint{font-size:9px;color:var(--mu);margin-top:4px;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:.06em}
+.kpi-card.kpi-active .kpi-filter-hint{color:var(--bx);font-weight:700}
+.charts-row{display:grid;grid-template-columns:1.5fr 1fr;gap:10px;margin-bottom:10px}
+.charts-row-2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
+.chart-card{background:#fff;border-radius:10px;border:1px solid var(--bd);padding:12px 16px}
+.chart-title{font-size:13px;font-weight:700;margin-bottom:3px}
+.chart-sub{font-size:11px;color:var(--mu);margin-bottom:12px}
+
+/* BANK DIST CARD */
+.bank-dist-layout{display:grid;grid-template-columns:160px 1fr;gap:14px;align-items:start}
+.bank-legend{display:flex;flex-direction:column;gap:6px;overflow-y:auto;max-height:220px}
+.bl-row{display:flex;align-items:center;gap:8px;padding:5px 8px;border-radius:6px;cursor:pointer;transition:background .12s;font-size:12px}
+.bl-row:hover{background:#f5f0ee}
+.bl-row.bl-active{background:rgba(107,28,46,.08)}
+.bl-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.bl-name{flex:0 0 50px;font-weight:600;font-size:11px;color:var(--tx)}
+.bl-bar-wrap{flex:1;height:6px;background:#f0ece8;border-radius:3px;overflow:hidden}
+.bl-bar{height:100%;border-radius:3px;transition:width .4s}
+.bl-val{font-family:'DM Mono',monospace;font-size:11px;font-weight:600;color:var(--tx);white-space:nowrap;min-width:80px;text-align:right}
+.bl-pct{font-size:10px;color:var(--mu);min-width:34px;text-align:right}
+.table-card{background:#fff;border-radius:10px;border:1px solid var(--bd);overflow:hidden;margin-bottom:14px}
+.table-hdr{padding:12px 18px;border-bottom:1px solid var(--bd);display:flex;align-items:center;justify-content:space-between}
+.table-hdr h3{font-size:14px;font-weight:700}
+.table-hdr p{font-size:11px;color:var(--mu);margin-top:2px}
+.alert-banner{background:linear-gradient(135deg,#fff8e1,#fffde7);border:1px solid #ffe082;border-left:4px solid var(--gold);border-radius:10px;padding:9px 13px;margin-bottom:10px;display:flex;align-items:flex-start;gap:10px}
+.ab-icon{font-size:17px;flex-shrink:0}
+.ab-txt strong{font-size:13px;color:#7d5a00;display:block;margin-bottom:1px}
+.ab-txt p{font-size:12px;color:#a07000}
+.overdue-alert{background:var(--rdb);border:1px solid #f5c6cb;border-left:4px solid var(--rd);border-radius:10px;padding:9px 13px;margin-bottom:10px;display:flex;align-items:center;gap:10px;cursor:pointer}
+.overdue-alert:hover{background:#fdd}
+.oa-txt{font-size:13px;color:var(--rd);font-weight:600}
+.oa-link{font-size:12px;color:var(--rd);text-decoration:underline;margin-left:8px}
+
+/* ===== PHASE 3 ===== */
+.p3-main{padding:18px 28px;max-width:1300px;margin:0 auto}
+.p3-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:18px}
+.p3-card{background:#fff;border-radius:12px;border:1px solid var(--bd);padding:20px}
+.p3-card-hdr{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid var(--bd)}
+.p3-card-title{font-size:14px;font-weight:700}
+.p3-card-sub{font-size:11px;color:var(--mu);margin-top:3px}
+.c-phase{background:rgba(107,28,46,.1);color:var(--bx);font-size:9px;font-weight:700;padding:3px 8px;border-radius:4px;font-family:'DM Mono',monospace;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;flex-shrink:0;margin-left:8px}
+.period-row{display:flex;align-items:center;gap:8px;margin-bottom:12px;flex-wrap:wrap}
+.period-row label{font-size:12px;color:var(--mu);display:flex;align-items:center;gap:5px}
+.period-row input[type=date]{border:1px solid var(--bd);border-radius:6px;padding:6px 10px;font-size:12px;font-family:'DM Sans',sans-serif;outline:none}
+.period-row input[type=date]:focus{border-color:var(--bx)}
+.period-radio{display:flex;gap:6px}
+.prad{display:flex;align-items:center;gap:4px;cursor:pointer;font-size:12px;color:var(--mu);padding:5px 10px;border-radius:20px;border:1px solid var(--bd);transition:all .15s}
+.prad.active{background:var(--bx);color:#fff;border-color:var(--bx)}
+.wa-bubble{background:#dcf8c6;border-radius:12px 12px 4px 12px;padding:14px 18px;font-family:'DM Mono',monospace;font-size:11.5px;line-height:1.7;color:#1a1a1a;white-space:pre-wrap;display:inline-block;max-width:100%;box-shadow:0 2px 8px rgba(0,0,0,.08);word-break:break-word}
+.wa-time{font-size:10px;color:#888;margin-top:4px;text-align:right}
+.p3-btns{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+.btn-wa-off{background:#25d366;color:#fff;border:none;border-radius:7px;padding:8px 16px;font-size:12px;font-weight:600;opacity:.5;cursor:not-allowed;font-family:'DM Sans',sans-serif;display:flex;align-items:center;gap:6px}
+.btn-em-off{background:#fff;color:var(--bl);border:1px solid var(--bl);border-radius:7px;padding:8px 14px;font-size:12px;font-weight:600;opacity:.5;cursor:not-allowed;font-family:'DM Sans',sans-serif;display:flex;align-items:center;gap:6px}
+.soon-tag{font-size:9px;font-family:'DM Mono',monospace;background:rgba(0,0,0,.15);padding:1px 5px;border-radius:3px}
+.workflow-steps{display:flex;flex-direction:column;gap:8px;margin:12px 0}
+.ws-step{display:flex;align-items:flex-start;gap:10px}
+.ws-num{width:22px;height:22px;background:var(--bx);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;margin-top:1px}
+.ws-text{font-size:12px;color:var(--tx);line-height:1.5}
+.ws-text strong{color:var(--bx)}
+.rec-row{display:flex;align-items:center;justify-content:space-between;padding:9px 0;border-bottom:1px solid #f5f0ee}
+.rec-row:last-of-type{border-bottom:none}
+.rec-info .rec-proc{font-weight:600;font-size:13px}
+.rec-info .rec-val{font-size:11px;color:var(--mu)}
+.user-row{display:flex;align-items:center;justify-content:space-between;padding:9px 0;border-bottom:1px solid #f5f0ee}
+.user-row:last-of-type{border-bottom:none}
+.user-info{display:flex;align-items:center;gap:9px}
+.uavatar{width:30px;height:30px;border-radius:50%;background:var(--bx);color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0}
+.uname{font-weight:600;font-size:13px}
+.uemail{font-size:11px;color:var(--mu)}
+.rbadge{font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:.06em}
+.rb-admin{background:rgba(107,28,46,.1);color:var(--bx)}
+.rb-editor{background:var(--blb);color:var(--bl)}
+.rb-viewer{background:#f5f5f5;color:#555}
+.integ-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.ig-card{border:1px solid var(--bd);border-radius:8px;padding:12px;display:flex;flex-direction:column;gap:5px}
+.ig-icon{font-size:20px}
+.ig-name{font-weight:700;font-size:13px}
+.ig-desc{font-size:11px;color:var(--mu);line-height:1.45}
+.ig-status{font-size:10px;font-weight:600;padding:2px 8px;border-radius:20px;width:fit-content;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:.05em}
+.igs-plan{background:rgba(107,28,46,.1);color:var(--bx)}
+.igs-rec{background:rgba(40,83,147,.1);color:#283593}
+.igs-fut{background:#f0ece8;color:#888}
+
+/* FOOTER */
+footer{text-align:center;padding:16px 28px;font-size:11px;color:var(--mu);border-top:1px solid var(--bd);background:#fff;margin-top:16px}
+footer span{color:var(--bx);font-weight:600}
+
+/* RESPONSIVE */
+@media(max-width:1050px){.p1-grid,.p3-grid{grid-template-columns:1fr}.kpi-grid{grid-template-columns:repeat(2,1fr)}.charts-row,.charts-row-2{grid-template-columns:1fr}.bank-dist-layout{grid-template-columns:1fr}.integ-grid{grid-template-columns:1fr}}
+@media(max-width:640px){header,.pbadge-bar{padding:10px 14px}.phase-nav{padding:0 6px}.p1-main,.p2-main,.p3-main{padding:12px 14px}.ptab{min-width:120px;padding:7px 10px}.frow.three{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <div style="display:flex;align-items:baseline">
+      <span class="logo-ep">Estevão <span class="logo-amp">&</span> Pinheiro</span>
+    </div>
+    <div class="logo-sub">Advogados Associados</div>
+  </div>
+  <div class="hdr-r">
+    <div class="badge-demo">Demonstração v2</div>
+    <div class="hdr-date" id="hdrDate"></div>
+  </div>
+</header>
+
+<nav class="phase-nav">
+  <a class="ptab active" data-phase="1" onclick="switchPhase(1);return false;" href="#">
+    <div class="tab-n">Fase 1</div>
+    <div class="tab-l">Entrada & Cálculo</div>
+    <div class="tab-s ts-cur">Fase atual</div>
+  </a>
+  <a class="ptab" data-phase="2" onclick="switchPhase(2);return false;" href="#">
+    <div class="tab-n">Fase 2</div>
+    <div class="tab-l">Painel Financeiro</div>
+    <div class="tab-s ts-ok">Disponível</div>
+  </a>
+  <a class="ptab" data-phase="3" onclick="switchPhase(3);return false;" href="#">
+    <div class="tab-n">Fase 3</div>
+    <div class="tab-l">Automações Avançadas</div>
+    <div class="tab-s ts-dev">Em desenvolvimento</div>
+  </a>
+</nav>
+
+<!-- ═══ FASE 1 ═══ -->
+<div id="phase-1" class="phase-content active">
+  <div class="pbadge-bar">
+    <div class="pbadge pb1">Fase 1 · Ativa</div>
+    <div class="pbadge-desc">Entrada de RPVs · Cálculo automático · Lançamentos com edição e controle de status</div>
+  </div>
+  <div class="p1-main">
+    <div class="p1-grid">
+      <div class="form-card">
+        <div class="card-title">Novo lançamento de RPV / Precatório</div>
+        <div class="card-sub">Valores calculados automaticamente ao lado</div>
+        <div class="frow">
+          <div class="field"><label>Sindicato</label>
+            <select id="f-sindic" oninput="calcU()"><option value="">Selecione...</option><option>SINDSEP</option><option>SINDPD</option><option>SEEB</option><option>SINDIFISCO</option><option>SINTETEL</option></select></div>
+          <div class="field"><label>Advogado responsável</label>
+            <select id="f-adv"><option value="">Selecione...</option><option>Cláudio Estevão</option><option>Fred Pinheiro</option><option>Dra. Beatriz Cavalcanti</option><option>Dr. Marco A. Lins</option></select></div>
+        </div>
+        <div class="frow full">
+          <div class="field"><label>Número do processo</label>
+            <input type="text" id="f-proc" placeholder="0001823-45.2022.5.06.0012" oninput="calcU()"></div>
+        </div>
+        <div class="frow">
+          <div class="field"><label>Data de recebimento</label><input type="date" id="f-data"></div>
+          <div class="field"><label>Banco / Fonte</label>
+            <select id="f-banco"><option value="">Selecione...</option><option value="CEF">Caixa Econômica Federal</option><option value="BB">Banco do Brasil</option><option value="TRT6">TRT 6ª Região</option><option value="TRT15">TRT 15ª Região</option><option value="Bradesco">Bradesco</option><option value="SIAPE">SIAPE</option></select></div>
+        </div>
+        <div class="frow full">
+          <div class="field"><label>Valor bruto RPV (R$)</label>
+            <input type="number" id="f-bruto" placeholder="28400.00" step="0.01" min="0" oninput="calcU()"></div>
+        </div>
+        <div class="frow three">
+          <div class="field"><label>% Honorários</label>
+            <input type="number" id="f-hon" value="30" step="0.01" min="0" max="100" oninput="calcU()">
+            <div class="hint">Padrão: 30%</div></div>
+          <div class="field"><label>% Tributos</label>
+            <input type="number" id="f-trib" value="18" step="0.01" min="0" max="100" oninput="calcU()">
+            <div class="hint">Padrão: 18%</div></div>
+          <div class="field"><label>Tipo</label>
+            <select id="f-tipo"><option value="RPV">RPV</option><option value="Precatório">Precatório</option></select></div>
+        </div>
+        <div class="frow full">
+          <div class="field"><label>Beneficiário (trabalhador)</label>
+            <input type="text" id="f-benef" placeholder="Nome do cliente do sindicato"></div>
+        </div>
+        <div class="form-actions">
+          <button class="btn-secondary" onclick="clearP1()">Limpar</button>
+          <button class="btn-primary" onclick="saveP1()">Salvar lançamento</button>
+        </div>
+      </div>
+
+      <div class="calc-panel">
+        <div class="card-title">Cálculo em tempo real</div>
+        <div class="card-sub">Atualizado automaticamente conforme você preenche</div>
+        <div class="calc-row"><div class="calc-lbl">Valor bruto RPV</div><div class="calc-val cv-bx" id="c-bruto">R$ —</div></div>
+        <div class="calc-row"><div class="calc-lbl">Honorários (<span id="c-hon-lbl">30</span>%)</div><div class="calc-val cv-rd" id="c-hon">− R$ —</div></div>
+        <div class="calc-row"><div class="calc-lbl">Tributos (<span id="c-trib-lbl">18</span>% s/ bruto)</div><div class="calc-val cv-rd" id="c-trib">− R$ —</div></div>
+        <hr class="calc-div">
+        <div class="calc-row" style="border:none"><div class="calc-lbl" style="font-weight:700;color:var(--tx);font-size:14px">Saldo líquido ao sindicato</div><div class="calc-val cv-gn cv-big" id="c-liq">R$ —</div></div>
+        <div class="accum-box">
+          <div class="accum-lbl">Acumulado tributos Q2/2026</div>
+          <div class="accum-val" id="c-accum">R$ —</div>
+          <div class="accum-note">Soma Abr + Mai + Jun · Recolher até 31/07/2026</div>
+        </div>
+        <div class="calc-note"><strong>Distribuição de honorários</strong><br>Pró-labore: fixo mensal aos sócios<br>Fundo: % de participação por sócio<br>Diferenciada: por processo / advogado</div>
+      </div>
+    </div>
+
+    <!-- LANÇAMENTOS RECENTES -->
+    <div class="tcard">
+      <div class="tcard-hdr">
+        <h3>Lançamentos recentes</h3>
+        <span id="p1-count">5 lançamentos · Maio 2026</span>
+      </div>
+      <div class="bulk-bar" id="p1-bulk" style="display:none">
+        <div class="bulk-info"><span id="p1-sel-n">0</span> lançamentos selecionados</div>
+        <div class="bulk-actions">
+          <label>Alterar status para:
+            <select class="bulk-select" id="p1-bulk-sel">
+              <option value="">Escolha...</option>
+              <option value="disponivel">Disponível</option>
+              <option value="pendente">Pendente</option>
+              <option value="recebido">Recebido</option>
+              <option value="arquivado">Arquivado</option>
+            </select>
+          </label>
+          <button class="btn-bulk-apply" onclick="applyP1Bulk()">Aplicar</button>
+          <button class="btn-bulk-cancel" onclick="clearP1Sel()">Cancelar</button>
+        </div>
+      </div>
+      <div style="overflow-x:auto">
+        <table>
+          <thead>
+            <tr>
+              <th class="chk-col"><input type="checkbox" id="p1-chk-all" onchange="selAllP1(this)"></th>
+              <th>Data</th><th>Processo</th><th>Sindicato</th><th>Banco</th>
+              <th>Bruto</th><th>Honorários</th><th>Tributos</th><th>Líquido</th>
+              <th>Status</th><th>Advogado</th>
+            </tr>
+          </thead>
+          <tbody id="p1-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ FASE 2 ═══ -->
+<div id="phase-2" class="phase-content">
+  <div class="pbadge-bar">
+    <div class="pbadge pb2">Fase 2 · Painel</div>
+    <div class="pbadge-desc">Controle financeiro · Filtros interativos · Clique em qualquer card ou gráfico para filtrar toda a página</div>
+  </div>
+  <div class="p2-main">
+
+    <div class="alert-banner">
+      <div class="ab-icon">🔔</div>
+      <div class="ab-txt">
+        <strong>3 novos valores disponíveis para levantamento</strong>
+        <p>CEF liberou R$ 48.420,00 em 2 RPVs — proc. 0001823-45 e 0003412-78. Bradesco liberou R$ 21.900,00 — proc. 0007291-33. Detectado automaticamente hoje às 07:42.</p>
+      </div>
+    </div>
+
+    <div class="overdue-alert" id="overdue-alert" onclick="filterOverdue()">
+      <div class="ab-icon">⚠</div>
+      <div class="oa-txt" id="overdue-txt">2 processos pendentes com prazo vencido (+ 30 dias)</div>
+      <span class="oa-link">Ver processos →</span>
+    </div>
+
+    <!-- FILTER BAR -->
+    <div class="filter-bar">
+      <label>Banco / Fonte
+        <select id="f2-banco" onchange="applyP2Filters()">
+          <option value="">Todos</option>
+          <option value="CEF">Caixa Econômica Federal</option>
+          <option value="BB">Banco do Brasil</option>
+          <option value="TRT6">TRT 6ª Região</option>
+          <option value="TRT15">TRT 15ª Região</option>
+          <option value="Bradesco">Bradesco</option>
+          <option value="SIAPE">SIAPE</option>
+        </select>
+      </label>
+      <label>Status
+        <select id="f2-status" onchange="applyP2Filters()">
+          <option value="">Todos</option>
+          <option value="disponivel">Disponível</option>
+          <option value="pendente">Pendente</option>
+          <option value="em-fila">Em fila</option>
+          <option value="recebido">Recebido</option>
+        </select>
+      </label>
+      <label>Sindicato
+        <select id="f2-sindic" onchange="applyP2Filters()">
+          <option value="">Todos</option>
+          <option value="SINDSEP">SINDSEP</option>
+          <option value="SINDPD">SINDPD</option>
+          <option value="SEEB">SEEB</option>
+          <option value="SINDIFISCO">SINDIFISCO</option>
+        </select>
+      </label>
+      <label>Tipo
+        <select id="f2-tipo" onchange="applyP2Filters()">
+          <option value="">Todos</option>
+          <option value="RPV">RPV</option>
+          <option value="Precatório">Precatório</option>
+        </select>
+      </label>
+      <label>De
+        <input type="date" id="f2-de" onchange="applyP2Filters()">
+      </label>
+      <label>Até
+        <input type="date" id="f2-ate" onchange="applyP2Filters()">
+      </label>
+      <button class="btn-clear-f" onclick="clearP2Filters()">✕ Limpar filtros</button>
+      <button class="btn-export">⬇ Exportar Excel</button>
+    </div>
+
+    <!-- CHIPS -->
+    <div class="filter-chips" id="f2-chips" style="display:none"></div>
+
+    <!-- KPIs -->
+    <div class="kpi-grid">
+      <div class="kpi-card k-bx" onclick="kpiFilter('status','')">
+        <div class="kpi-icon">⚖️</div>
+        <div class="kpi-lbl">Total a Receber</div>
+        <div class="kpi-val kv-bx" id="kv-total">R$ —</div>
+        <div class="kpi-sub" id="ks-total">—</div>
+        <div class="kpi-filter-hint">Clique para ver todas</div>
+      </div>
+      <div class="kpi-card k-gn" onclick="kpiFilter('status','disponivel')">
+        <div class="kpi-icon">✅</div>
+        <div class="kpi-lbl">Disponível para Levantamento</div>
+        <div class="kpi-val kv-gn" id="kv-disp">R$ —</div>
+        <div class="kpi-sub" id="ks-disp">—</div>
+        <div class="kpi-filter-hint">Clique para filtrar</div>
+      </div>
+      <div class="kpi-card k-or" onclick="kpiFilter('status','pendente')">
+        <div class="kpi-icon">⏳</div>
+        <div class="kpi-lbl">Pendente / Em análise</div>
+        <div class="kpi-val kv-or" id="kv-pend">R$ —</div>
+        <div class="kpi-sub" id="ks-pend">—</div>
+        <div class="kpi-filter-hint">Clique para filtrar</div>
+      </div>
+      <div class="kpi-card k-bl" onclick="kpiFilter('status','recebido')">
+        <div class="kpi-icon">🏦</div>
+        <div class="kpi-lbl">Recebido — Maio/2026</div>
+        <div class="kpi-val kv-bl" id="kv-rec">R$ —</div>
+        <div class="kpi-sub" id="ks-rec">—</div>
+        <div class="kpi-filter-hint">Clique para filtrar</div>
+      </div>
+    </div>
+
+    <!-- CHARTS -->
+    <div class="charts-row">
+      <div class="chart-card">
+        <div class="chart-title">Recebimentos mensais por fonte</div>
+        <div class="chart-sub">Histórico 8 meses — R$ mil</div>
+        <canvas id="p2c1" height="75"></canvas>
+      </div>
+      <div class="chart-card">
+        <div class="chart-title">Distribuição por Banco / Origem</div>
+        <div class="chart-sub">Clique em um banco para filtrar toda a página</div>
+        <div class="bank-dist-layout">
+          <canvas id="p2c2" height="180"></canvas>
+          <div class="bank-legend" id="bank-legend"></div>
+        </div>
+      </div>
+    </div>
+    <div class="charts-row-2">
+      <div class="chart-card">
+        <div class="chart-title">Status das causas filtradas</div>
+        <div class="chart-sub">Distribuição por situação de pagamento</div>
+        <canvas id="p2c3" height="90"></canvas>
+      </div>
+      <div class="chart-card">
+        <div class="chart-title">Evolução do recebido vs. meta</div>
+        <div class="chart-sub">Histórico mensal · linha pontilhada = meta</div>
+        <canvas id="p2c4" height="90"></canvas>
+      </div>
+    </div>
+
+    <!-- CAUSES TABLE -->
+    <div class="table-card">
+      <div class="table-hdr">
+        <div>
+          <h3>Causas monitoradas — detalhamento</h3>
+          <p>Clique no status para editar · Selecione linhas para edição em massa · Vencidas destacadas em laranja</p>
+        </div>
+        <div style="font-size:12px;color:var(--mu)" id="p2-count-lbl">Exibindo — causas</div>
+      </div>
+      <div class="bulk-bar" id="p2-bulk" style="display:none">
+        <div class="bulk-info"><span id="p2-sel-n">0</span> causas selecionadas</div>
+        <div class="bulk-actions">
+          <label>Alterar status para:
+            <select class="bulk-select" id="p2-bulk-sel">
+              <option value="">Escolha...</option>
+              <option value="disponivel">Disponível</option>
+              <option value="pendente">Pendente</option>
+              <option value="em-fila">Em fila</option>
+              <option value="recebido">Recebido</option>
+              <option value="arquivado">Arquivado</option>
+            </select>
+          </label>
+          <button class="btn-bulk-apply" onclick="applyP2Bulk()">Aplicar</button>
+          <button class="btn-bulk-cancel" onclick="clearP2Sel()">Cancelar</button>
+        </div>
+      </div>
+      <div style="overflow-x:auto">
+        <table>
+          <thead>
+            <tr>
+              <th class="chk-col"><input type="checkbox" id="p2-chk-all" onchange="selAllP2(this)"></th>
+              <th>Nº Processo</th><th>Descrição / Sindicato</th>
+              <th>Banco</th><th>Tipo</th><th>Valor Bruto</th>
+              <th>Status <small style="font-weight:400;text-transform:none">(clique p/ editar)</small></th>
+              <th>Atualização</th><th>Advogado</th>
+            </tr>
+          </thead>
+          <tbody id="p2-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ FASE 3 ═══ -->
+<div id="phase-3" class="phase-content">
+  <div class="pbadge-bar">
+    <div class="pbadge pb3">Fase 3 · Em desenvolvimento</div>
+    <div class="pbadge-desc">Relatórios automáticos · Assinatura digital via ClickSign · Gestão de acessos · Integrações</div>
+  </div>
+  <div class="p3-main">
+    <div class="p3-grid">
+
+      <!-- RELATÓRIO AUTOMÁTICO -->
+      <div class="p3-card">
+        <div class="p3-card-hdr">
+          <div>
+            <div class="p3-card-title">Relatório automático de causas</div>
+            <div class="p3-card-sub">Gerado para o período selecionado — envio via WhatsApp e e-mail</div>
+          </div>
+          <span class="c-phase">Fase 3</span>
+        </div>
+        <div class="period-radio" style="margin-bottom:10px">
+          <div class="prad active" onclick="setPeriodType(this,'diario')">Diário</div>
+          <div class="prad" onclick="setPeriodType(this,'semanal')">Semanal</div>
+          <div class="prad" onclick="setPeriodType(this,'mensal')">Mensal</div>
+        </div>
+        <div class="period-row">
+          <label>De <input type="date" id="p3-de" value="2026-05-01"></label>
+          <label>Até <input type="date" id="p3-ate" value="2026-05-24"></label>
+          <select style="border:1px solid var(--bd);border-radius:6px;padding:6px 10px;font-size:12px;font-family:'DM Sans',sans-serif">
+            <option>Todos os sindicatos</option><option>SINDSEP</option><option>SINDPD</option><option>SEEB</option><option>SINDIFISCO</option>
+          </select>
+        </div>
+        <div class="wa-bubble">📊 *RELATÓRIO DE CAUSAS — 01/05/2026 a 24/05/2026*
+━━━━━━━━━━━━━━━━━━━━━
+*SINDSEP* · 4 processos
+
+• 0001823-45: R$ 28.400 → líq. R$ 14.768
+• 0009834-67: R$ 43.750 → líq. R$ 22.750
+• 0011234-05: R$ 12.800 → líq. R$ 6.656
+• 0013445-77: R$ 95.000 (precatório · em fila)
+
+*Total bruto SINDSEP:* R$ 179.950,00
+*Total honorários:* R$ 53.985,00
+━━━━━━━━━━━━━━━━━━━━━
+*ACUM. TRIBUTOS Q2/2026:* R$ 32.391,00
+⚠ Recolher até: 31/07/2026
+
+_Gerado em 24/05/2026 às 08:00_</div>
+        <div class="wa-time">✓✓ Pronto para envio</div>
+        <div class="p3-btns">
+          <button class="btn-wa-off">📱 Enviar WhatsApp <span class="soon-tag">Em breve</span></button>
+          <button class="btn-em-off">✉ Enviar E-mail <span class="soon-tag">Em breve</span></button>
+        </div>
+      </div>
+
+      <!-- RECIBOS & ASSINATURA -->
+      <div class="p3-card">
+        <div class="p3-card-hdr">
+          <div>
+            <div class="p3-card-title">Recibos & Assinatura digital</div>
+            <div class="p3-card-sub">Integração via ClickSign API — assinatura válida juridicamente no Brasil (ICP-Brasil)</div>
+          </div>
+          <span class="c-phase">Fase 3</span>
+        </div>
+
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--mu);margin-bottom:6px">Fluxo de assinatura</div>
+        <div class="workflow-steps">
+          <div class="ws-step"><div class="ws-num">1</div><div class="ws-text">Processo marcado como <strong>Recebido</strong> → sistema gera o recibo automaticamente com todos os valores calculados</div></div>
+          <div class="ws-step"><div class="ws-num">2</div><div class="ws-text">Advogado clica <strong>Solicitar assinatura</strong> → sistema chama API ClickSign com e-mail + telefone do representante</div></div>
+          <div class="ws-step"><div class="ws-num">3</div><div class="ws-text">Representante recebe e-mail e SMS com link para assinar no celular em 1 clique</div></div>
+          <div class="ws-step"><div class="ws-num">4</div><div class="ws-text">ClickSign notifica o sistema via <strong>webhook</strong> → status atualiza para <strong>Assinado</strong> automaticamente</div></div>
+          <div class="ws-step"><div class="ws-num">5</div><div class="ws-text">Documento armazenado na nuvem · equipe notificada · auditoria completa disponível</div></div>
+        </div>
+
+        <div style="border-top:1px solid var(--bd);margin-top:12px;padding-top:12px">
+          <div class="rec-row">
+            <div class="rec-info"><div class="rec-proc">0001823-45 · SINDSEP</div><div class="rec-val">R$ 14.768,00 · João C. Ferreira</div></div>
+            <span class="sbadge sb-disp"><div class="dot"></div>Assinado</span>
+          </div>
+          <div class="rec-row">
+            <div class="rec-info"><div class="rec-proc">0003412-78 · SINDPD</div><div class="rec-val">R$ 10.410,40 · Maria L. Souza</div></div>
+            <span class="sbadge sb-pend"><div class="dot"></div>Aguardando assinatura</span>
+          </div>
+          <div class="rec-row">
+            <div class="rec-info"><div class="rec-proc">0007291-33 · SEEB</div><div class="rec-val">R$ 11.388,00 · Carlos A. Nunes</div></div>
+            <span class="sbadge sb-fila"><div class="dot"></div>Recibo não emitido</span>
+          </div>
+        </div>
+        <div style="margin-top:12px">
+          <button class="btn-wa-off" style="background:var(--bx);width:100%;justify-content:center">Solicitar assinatura digital <span class="soon-tag">Em breve</span></button>
+        </div>
+      </div>
+
+      <!-- GESTÃO DE ACESSOS -->
+      <div class="p3-card">
+        <div class="p3-card-hdr">
+          <div>
+            <div class="p3-card-title">Gestão de acessos</div>
+            <div class="p3-card-sub">Controle granular por perfil — o que cada usuário vê e faz</div>
+          </div>
+          <span class="c-phase">Fase 3</span>
+        </div>
+        <div class="user-row">
+          <div class="user-info"><div class="uavatar">WR</div><div><div class="uname">Waldir Rodrigues</div><div class="uemail">Administrador financeiro · entrada e relatórios</div></div></div>
+          <span class="rbadge rb-admin">Admin</span>
+        </div>
+        <div class="user-row">
+          <div class="user-info"><div class="uavatar" style="background:#1a5276">AM</div><div><div class="uname">Andrielly Moura</div><div class="uemail">Entrada e acompanhamento de causas</div></div></div>
+          <span class="rbadge rb-editor">Editor</span>
+        </div>
+        <div class="user-row">
+          <div class="user-info"><div class="uavatar" style="background:#2d7d46">CE</div><div><div class="uname">Cláudio Estevão</div><div class="uemail">Sócio · painel consolidado</div></div></div>
+          <span class="rbadge rb-viewer">Visualização</span>
+        </div>
+        <div class="user-row">
+          <div class="user-info"><div class="uavatar" style="background:#6a1b9a">FP</div><div><div class="uname">Fred Pinheiro</div><div class="uemail">Sócio · painel consolidado</div></div></div>
+          <span class="rbadge rb-viewer">Visualização</span>
+        </div>
+        <div style="margin-top:12px;font-size:11px;color:var(--mu);background:#faf8f6;padding:10px;border-radius:6px;line-height:1.55">
+          Sócios acessam painel resumido sem honorários individuais por advogado ou dados granulares de processos.
+        </div>
+      </div>
+
+      <!-- INTEGRAÇÕES -->
+      <div class="p3-card">
+        <div class="p3-card-hdr">
+          <div>
+            <div class="p3-card-title">Integrações externas</div>
+            <div class="p3-card-sub">Conexão com sistemas e APIs externas</div>
+          </div>
+        </div>
+        <div class="integ-grid">
+          <div class="ig-card">
+            <div class="ig-icon">✍️</div>
+            <div class="ig-name">ClickSign</div>
+            <div class="ig-desc">Assinatura digital brasileira · ICP-Brasil · API REST · SMS + e-mail · recomendado para custo-benefício</div>
+            <div class="ig-status igs-rec">Recomendado · F3</div>
+          </div>
+          <div class="ig-card">
+            <div class="ig-icon">🖊️</div>
+            <div class="ig-name">DocuSign</div>
+            <div class="ig-desc">Alternativa internacional · suporte global · maior custo mensal · integração idêntica via webhook</div>
+            <div class="ig-status igs-plan">Alternativa · F3</div>
+          </div>
+          <div class="ig-card">
+            <div class="ig-icon">⚖️</div>
+            <div class="ig-name">Alter Data</div>
+            <div class="ig-desc">Importação de processos cadastrados no sistema de gestão do escritório</div>
+            <div class="ig-status igs-plan">Planejado · F3</div>
+          </div>
+          <div class="ig-card">
+            <div class="ig-icon">🏦</div>
+            <div class="ig-name">Open Banking</div>
+            <div class="ig-desc">API BACEN para monitoramento automático de RPVs disponíveis nos portais bancários</div>
+            <div class="ig-status igs-fut">Futuro</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<footer>
+  Demonstração desenvolvida por <span>Yasmin G. Lopes</span> · CNPJ <span>44.704.456/0001-08</span> · Dados fictícios para fins de apresentação · Estevão & Pinheiro Advogados Associados © 2026
+</footer>
+
+<script>
+// ─── SETUP ───
+document.getElementById('hdrDate').textContent = new Date().toLocaleDateString('pt-BR',{day:'2-digit',month:'long',year:'numeric'});
+
+const TODAY = new Date('2026-05-24');
+const ACCUM_PREV = 3287;
+const BANK_COLORS = {CEF:'#1a3c8f',BB:'#7d5a00',TRT6:'#6a1b9a',TRT15:'#00695c',Bradesco:'#880e4f',SIAPE:'#283593'};
+const STATUS_CFG = {
+  'disponivel':{label:'Disponível',cls:'sb-disp'},
+  'pendente':  {label:'Pendente',  cls:'sb-pend'},
+  'em-fila':   {label:'Em fila',   cls:'sb-fila'},
+  'recebido':  {label:'Recebido',  cls:'sb-rec'},
+  'arquivado': {label:'Arquivado', cls:'sb-arq'},
+};
+function fmt(v){return'R$ '+v.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2})}
+function fmtK(v){return'R$ '+(v/1000).toLocaleString('pt-BR',{minimumFractionDigits:0,maximumFractionDigits:0})+'k'}
+
+// ─── PHASE SWITCH ───
+let p2Init=false;
+function switchPhase(n){
+  document.querySelectorAll('.phase-content').forEach(e=>e.classList.remove('active'));
+  document.querySelectorAll('.ptab').forEach(e=>e.classList.remove('active'));
+  document.getElementById('phase-'+n).classList.add('active');
+  document.querySelector('[data-phase="'+n+'"]').classList.add('active');
+  if(n===2&&!p2Init){initP2();p2Init=true;}
+}
+
+// ─── PHASE 1 ───
+function calcU(){
+  const br=parseFloat(document.getElementById('f-bruto').value)||0;
+  const hp=parseFloat(document.getElementById('f-hon').value)||0;
+  const tp=parseFloat(document.getElementById('f-trib').value)||0;
+  document.getElementById('c-hon-lbl').textContent=hp;
+  document.getElementById('c-trib-lbl').textContent=tp;
+  if(!br){['c-bruto','c-hon','c-trib','c-liq','c-accum'].forEach(id=>document.getElementById(id).textContent='R$ —');return;}
+  const hon=br*hp/100,trib=br*tp/100,liq=br-hon-trib;
+  document.getElementById('c-bruto').textContent=fmt(br);
+  document.getElementById('c-hon').textContent='− '+fmt(hon);
+  document.getElementById('c-trib').textContent='− '+fmt(trib);
+  document.getElementById('c-liq').textContent=fmt(liq);
+  document.getElementById('c-accum').textContent=fmt(ACCUM_PREV+trib);
+}
+
+let p1Entries=[
+  {id:101,data:'22/05/2026',proc:'0011234-05.2022',sindic:'SINDSEP',banco:'SIAPE',    bruto:12800,honPct:30,tribPct:18,adv:'Fred Pinheiro',   status:'recebido', benef:'Lucia B. Ramos'},
+  {id:102,data:'20/05/2026',proc:'0007291-33.2023',sindic:'SEEB',   banco:'Bradesco', bruto:21900,honPct:30,tribPct:18,adv:'Cláudio Estevão', status:'disponivel',benef:'Carlos A. Nunes'},
+  {id:103,data:'19/05/2026',proc:'0003412-78.2021',sindic:'SINDPD', banco:'CEF',      bruto:20020,honPct:30,tribPct:18,adv:'Fred Pinheiro',   status:'disponivel',benef:'Maria L. Souza'},
+  {id:104,data:'15/05/2026',proc:'0001823-45.2022',sindic:'SINDSEP',banco:'CEF',      bruto:28400,honPct:30,tribPct:18,adv:'Cláudio Estevão', status:'disponivel',benef:'João C. Ferreira'},
+  {id:105,data:'12/05/2026',proc:'0004102-88.2023',sindic:'SINDPD', banco:'TRT15',    bruto:67500,honPct:30,tribPct:18,adv:'Dr. Marco A. Lins',status:'pendente', benef:'Silvia M. Torres'},
+];
+let p1NextId=106;
+let p1Sel=new Set();
+
+function saveP1(){
+  const br=parseFloat(document.getElementById('f-bruto').value)||0;
+  if(!br){alert('Preencha o Valor Bruto.');return;}
+  p1Entries.unshift({
+    id:p1NextId++,data:new Date().toLocaleDateString('pt-BR'),
+    proc:document.getElementById('f-proc').value||'—',
+    sindic:document.getElementById('f-sindic').value||'—',
+    banco:document.getElementById('f-banco').value||'—',
+    bruto:br,
+    honPct:parseFloat(document.getElementById('f-hon').value)||30,
+    tribPct:parseFloat(document.getElementById('f-trib').value)||18,
+    adv:document.getElementById('f-adv').value||'—',
+    status:'disponivel',
+    benef:document.getElementById('f-benef').value||'—',
+  });
+  renderP1Table();
+  clearP1();
+}
+function clearP1(){
+  ['f-sindic','f-adv','f-proc','f-banco','f-benef'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('f-bruto').value='';
+  document.getElementById('f-data').value='';
+  document.getElementById('f-hon').value=30;
+  document.getElementById('f-trib').value=18;
+  document.getElementById('f-tipo').value='RPV';
+  calcU();
+}
+function renderP1Table(){
+  document.getElementById('p1-count').textContent=p1Entries.length+' lançamentos · Maio 2026';
+  document.getElementById('p1-tbody').innerHTML=p1Entries.map(e=>{
+    const hon=e.bruto*e.honPct/100,trib=e.bruto*e.tribPct/100,liq=e.bruto-hon-trib;
+    const sc=STATUS_CFG[e.status]||STATUS_CFG['disponivel'];
+    return`<tr>
+      <td class="chk-col"><input type="checkbox" ${p1Sel.has(e.id)?'checked':''} onchange="toggleP1(${e.id},this)"></td>
+      <td><div class="data-cell">${e.data}</div></td>
+      <td><div class="proc-num">${e.proc}</div></td>
+      <td>${e.sindic}</td><td><div class="data-cell">${e.banco}</div></td>
+      <td><div class="val-cell">${fmt(e.bruto)}</div></td>
+      <td><div class="val-cell val-neg">−${fmt(hon)}</div></td>
+      <td><div class="val-cell val-or">−${fmt(trib)}</div></td>
+      <td><div class="val-cell val-pos">${fmt(liq)}</div></td>
+      <td><span class="sbadge ${sc.cls}" onclick="editP1Status(${e.id},this)"><div class="dot"></div>${sc.label}</span></td>
+      <td><div class="data-cell">${e.adv}</div></td>
+    </tr>`;
+  }).join('');
+}
+function toggleP1(id,chk){
+  if(chk.checked)p1Sel.add(id);else p1Sel.delete(id);
+  updateP1Bulk();
+}
+function selAllP1(chk){
+  p1Entries.forEach(e=>{if(chk.checked)p1Sel.add(e.id);else p1Sel.delete(e.id);});
+  renderP1Table();updateP1Bulk();
+}
+function updateP1Bulk(){
+  const bar=document.getElementById('p1-bulk');
+  if(p1Sel.size>0){bar.style.display='flex';document.getElementById('p1-sel-n').textContent=p1Sel.size;}
+  else{bar.style.display='none';}
+}
+function applyP1Bulk(){
+  const ns=document.getElementById('p1-bulk-sel').value;
+  if(!ns)return;
+  p1Entries.forEach(e=>{if(p1Sel.has(e.id))e.status=ns;});
+  p1Sel.clear();renderP1Table();updateP1Bulk();
+}
+function clearP1Sel(){p1Sel.clear();renderP1Table();updateP1Bulk();}
+function editP1Status(id,span){
+  const e=p1Entries.find(x=>x.id===id);if(!e)return;
+  const sel=document.createElement('select');sel.className='status-select';
+  Object.entries(STATUS_CFG).forEach(([k,v])=>{const o=document.createElement('option');o.value=k;o.textContent=v.label;if(k===e.status)o.selected=true;sel.appendChild(o);});
+  sel.onchange=()=>{e.status=sel.value;renderP1Table();};
+  sel.onblur=()=>renderP1Table();
+  span.parentNode.replaceChild(sel,span);sel.focus();
+}
+renderP1Table();
+
+// ─── PHASE 2 DATA ───
+const causasData=[
+  {id:1, proc:'0001823-45.2022.5.06.0012',desc:'Complemento salarial retroativo',  sindic:'SINDSEP',   benef:'João C. Ferreira',   banco:'CEF',     tipo:'RPV',       valor:28400, status:'disponivel',data:'2026-05-24',adv:'Cláudio Estevão'},
+  {id:2, proc:'0003412-78.2021.5.06.0008',desc:'Horas extras não pagas',            sindic:'SINDPD',    benef:'Maria L. Souza',     banco:'CEF',     tipo:'RPV',       valor:20020, status:'disponivel',data:'2026-05-24',adv:'Fred Pinheiro'},
+  {id:3, proc:'0007291-33.2023.5.06.0001',desc:'Adicional de insalubridade',        sindic:'SEEB',      benef:'Carlos A. Nunes',    banco:'Bradesco',tipo:'RPV',       valor:21900, status:'disponivel',data:'2026-05-24',adv:'Cláudio Estevão'},
+  {id:4, proc:'0004521-12.2020.5.06.0034',desc:'Equiparação salarial',              sindic:'SINDIFISCO',benef:'Ana R. Lima',        banco:'BB',      tipo:'Precatório',valor:85000, status:'em-fila',   data:'2026-05-20',adv:'Fred Pinheiro'},
+  {id:5, proc:'0009834-67.2022.5.15.0144',desc:'Desvio de função',                  sindic:'SINDSEP',   benef:'Paulo M. Costa',     banco:'TRT15',   tipo:'RPV',       valor:43750, status:'pendente',  data:'2026-05-19',adv:'Dra. Beatriz Cavalcanti'},
+  {id:6, proc:'0002198-91.2021.5.06.0009',desc:'FGTS não depositado',               sindic:'SINDPD',    benef:'Fernanda O.',        banco:'CEF',     tipo:'RPV',       valor:31200, status:'pendente',  data:'2026-05-18',adv:'Cláudio Estevão'},
+  {id:7, proc:'0006712-44.2019.5.06.0021',desc:'Verbas rescisórias',                sindic:'SEEB',      benef:'Roberto S. Melo',    banco:'TRT6',    tipo:'RPV',       valor:18640, status:'recebido',  data:'2026-05-15',adv:'Fred Pinheiro'},
+  {id:8, proc:'0011234-05.2022.5.06.0055',desc:'Adicional noturno',                 sindic:'SINDSEP',   benef:'Lucia B. Ramos',     banco:'SIAPE',   tipo:'RPV',       valor:12800, status:'recebido',  data:'2026-05-14',adv:'Dr. Marco A. Lins'},
+  {id:9, proc:'0008991-22.2018.5.06.0003',desc:'Diferenças salariais',              sindic:'SINDIFISCO',benef:'Marcos V.',          banco:'BB',      tipo:'Precatório',valor:120000,status:'em-fila',   data:'2026-05-13',adv:'Fred Pinheiro'},
+  {id:10,proc:'0004102-88.2023.5.15.0031',desc:'Reintegração e salários',           sindic:'SINDPD',    benef:'Silvia M. Torres',   banco:'TRT15',   tipo:'RPV',       valor:67500, status:'pendente',  data:'2026-05-12',adv:'Dra. Beatriz Cavalcanti'},
+  {id:11,proc:'0005567-13.2021.5.06.0018',desc:'Horas in itinere',                  sindic:'SEEB',      benef:'André L. Brito',     banco:'CEF',     tipo:'RPV',       valor:9870,  status:'recebido',  data:'2026-05-10',adv:'Cláudio Estevão'},
+  {id:12,proc:'0013445-77.2020.5.06.0041',desc:'Indenização por danos morais',      sindic:'SINDSEP',   benef:'Cristiane P.',       banco:'BB',      tipo:'Precatório',valor:95000, status:'em-fila',   data:'2026-05-08',adv:'Fred Pinheiro'},
+  {id:13,proc:'0014221-09.2022.5.06.0017',desc:'Diferença de gratificação',         sindic:'SINDIFISCO',benef:'Lucas T. Oliveira',  banco:'SIAPE',   tipo:'RPV',       valor:15400, status:'pendente',  data:'2026-04-10',adv:'Dr. Marco A. Lins'},
+  {id:14,proc:'0015830-22.2021.5.06.0034',desc:'Adicional de periculosidade',       sindic:'SEEB',      benef:'Patricia M. Santos', banco:'TRT6',    tipo:'RPV',       valor:22100, status:'pendente',  data:'2026-04-15',adv:'Dra. Beatriz Cavalcanti'},
+];
+
+let p2Filters={banco:'',status:'',sindic:'',tipo:'',de:'',ate:''};
+let p2Sel=new Set();
+let p2Charts={};
+
+function isOverdue(c){
+  if(c.status!=='pendente')return false;
+  return(TODAY-new Date(c.data))/86400000>30;
+}
+function getFiltered(){
+  return causasData.filter(c=>{
+    if(p2Filters.banco  &&c.banco !==p2Filters.banco) return false;
+    if(p2Filters.status &&c.status!==p2Filters.status)return false;
+    if(p2Filters.sindic &&c.sindic!==p2Filters.sindic)return false;
+    if(p2Filters.tipo   &&c.tipo  !==p2Filters.tipo)  return false;
+    if(p2Filters.de     &&c.data  <p2Filters.de)      return false;
+    if(p2Filters.ate    &&c.data  >p2Filters.ate)      return false;
+    return true;
+  });
+}
+function applyP2Filters(){
+  p2Filters.banco =document.getElementById('f2-banco').value;
+  p2Filters.status=document.getElementById('f2-status').value;
+  p2Filters.sindic=document.getElementById('f2-sindic').value;
+  p2Filters.tipo  =document.getElementById('f2-tipo').value;
+  p2Filters.de    =document.getElementById('f2-de').value;
+  p2Filters.ate   =document.getElementById('f2-ate').value;
+  renderP2All();
+}
+function clearP2Filters(){
+  p2Filters={banco:'',status:'',sindic:'',tipo:'',de:'',ate:''};
+  ['f2-banco','f2-status','f2-sindic','f2-tipo'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('f2-de').value='';
+  document.getElementById('f2-ate').value='';
+  document.querySelectorAll('.kpi-card').forEach(k=>k.classList.remove('kpi-active'));
+  renderP2All();
+}
+function kpiFilter(type,val){
+  if(p2Filters[type]===val){p2Filters[type]='';document.querySelectorAll('.kpi-card').forEach(k=>k.classList.remove('kpi-active'));}
+  else{
+    p2Filters[type]=val;
+    document.querySelectorAll('.kpi-card').forEach(k=>k.classList.remove('kpi-active'));
+    if(val){
+      const map={'disponivel':1,'pendente':2,'recebido':3,'':0};
+      const card=document.querySelectorAll('.kpi-card')[map[val]||0];
+      if(card)card.classList.add('kpi-active');
+    }
+  }
+  if(type==='status')document.getElementById('f2-status').value=val;
+  renderP2All();
+}
+function filterOverdue(){
+  p2Filters.status='pendente';
+  document.getElementById('f2-status').value='pendente';
+  renderP2All();
+  document.getElementById('p2-tbody').scrollIntoView({behavior:'smooth',block:'start'});
+}
+function renderP2All(){
+  const data=getFiltered();
+  renderP2KPIs();
+  renderP2Table(data);
+  renderBankLegend(data);
+  renderFilterChips();
+  updateP2Charts(data);
+}
+function renderP2KPIs(){
+  const all=causasData;
+  const total=all.reduce((a,c)=>a+c.valor,0);
+  const disp=all.filter(c=>c.status==='disponivel');
+  const pend=all.filter(c=>c.status==='pendente');
+  const rec=all.filter(c=>c.status==='recebido');
+  document.getElementById('kv-total').textContent=fmtK(total);
+  document.getElementById('ks-total').textContent='Em '+all.length+' causas monitoradas';
+  document.getElementById('kv-disp').textContent=fmtK(disp.reduce((a,c)=>a+c.valor,0));
+  document.getElementById('ks-disp').textContent=disp.length+' causas liberadas';
+  document.getElementById('kv-pend').textContent=fmtK(pend.reduce((a,c)=>a+c.valor,0));
+  document.getElementById('ks-pend').textContent=pend.length+' causas · '+pend.filter(isOverdue).length+' vencidas';
+  document.getElementById('kv-rec').textContent=fmtK(rec.reduce((a,c)=>a+c.valor,0));
+  document.getElementById('ks-rec').textContent=rec.length+' processos recebidos';
+}
+function renderP2Table(data){
+  const od=data.filter(isOverdue).length;
+  document.getElementById('overdue-txt').textContent=od+' processo'+(od!==1?'s':'')+' pendente'+(od!==1?'s':'')+' com prazo vencido (+30 dias)';
+  document.getElementById('overdue-alert').style.display=od>0?'flex':'none';
+  document.getElementById('p2-count-lbl').textContent='Exibindo '+data.length+' de '+causasData.length+' causas';
+  document.getElementById('p2-tbody').innerHTML=data.map(c=>{
+    const sc=STATUS_CFG[c.status]||STATUS_CFG['pendente'];
+    const ov=isOverdue(c);
+    const fbClass={CEF:'fb-cef',BB:'fb-bb',TRT6:'fb-trt6',TRT15:'fb-trt15',Bradesco:'fb-brad',SIAPE:'fb-siap'}[c.banco]||'';
+    return`<tr class="${ov?'overdue-row':''}">
+      <td class="chk-col"><input type="checkbox" ${p2Sel.has(c.id)?'checked':''} onchange="toggleP2(${c.id},this)"></td>
+      <td><div class="proc-num">${c.proc}</div></td>
+      <td><div class="causa-desc">${c.desc}</div><div class="causa-sub">${c.sindic} · ${c.benef}</div></td>
+      <td><span class="fbadge ${fbClass}">${c.banco}</span></td>
+      <td><div class="data-cell">${c.tipo}</div></td>
+      <td><div class="val-cell ${c.status==='disponivel'||c.status==='recebido'?'val-pos':''}">${fmt(c.valor)}</div></td>
+      <td style="white-space:nowrap">
+        <span class="sbadge ${sc.cls}" onclick="editP2Status(${c.id},this)"><div class="dot"></div>${sc.label}</span>
+        ${ov?'<span class="vencida-badge">⚠ Vencida</span>':''}
+      </td>
+      <td><div class="data-cell">${c.data.split('-').reverse().join('/')}</div></td>
+      <td><div class="data-cell">${c.adv}</div></td>
+    </tr>`;
+  }).join('');
+}
+function renderBankLegend(data){
+  const totals={};
+  data.forEach(c=>totals[c.banco]=(totals[c.banco]||0)+c.valor);
+  const total=Object.values(totals).reduce((a,b)=>a+b,0)||1;
+  const sorted=Object.entries(totals).sort((a,b)=>b[1]-a[1]);
+  const maxVal=sorted[0]?sorted[0][1]:1;
+  document.getElementById('bank-legend').innerHTML=sorted.map(([bank,val])=>{
+    const pct=((val/total)*100).toFixed(1);
+    const barW=((val/maxVal)*100).toFixed(0);
+    const active=p2Filters.banco===bank;
+    return`<div class="bl-row ${active?'bl-active':''}" onclick="bankFilter('${bank}')">
+      <div class="bl-dot" style="background:${BANK_COLORS[bank]||'#888'}"></div>
+      <div class="bl-name">${bank}</div>
+      <div class="bl-bar-wrap"><div class="bl-bar" style="width:${barW}%;background:${BANK_COLORS[bank]||'#888'}"></div></div>
+      <div class="bl-val">${fmtK(val)}</div>
+      <div class="bl-pct">${pct}%</div>
+    </div>`;
+  }).join('');
+}
+function bankFilter(bank){
+  if(p2Filters.banco===bank)p2Filters.banco='';else p2Filters.banco=bank;
+  document.getElementById('f2-banco').value=p2Filters.banco;
+  renderP2All();
+}
+function renderFilterChips(){
+  const chips=[];
+  const labels={banco:'Banco',status:'Status',sindic:'Sindicato',tipo:'Tipo',de:'De',ate:'Até'};
+  Object.entries(p2Filters).forEach(([k,v])=>{
+    if(v)chips.push(`<div class="chip">${labels[k]}: ${v} <span class="chip-x" onclick="removeChip('${k}')">×</span></div>`);
+  });
+  const el=document.getElementById('f2-chips');
+  if(chips.length){
+    el.style.display='flex';
+    el.innerHTML=chips.join('')+'<button class="btn-clear-all" onclick="clearP2Filters()">Limpar todos</button>';
+  }else{el.style.display='none';}
+}
+function removeChip(key){
+  p2Filters[key]='';
+  if(document.getElementById('f2-'+key))document.getElementById('f2-'+key).value='';
+  renderP2All();
+}
+function toggleP2(id,chk){if(chk.checked)p2Sel.add(id);else p2Sel.delete(id);updateP2Bulk();}
+function selAllP2(chk){const data=getFiltered();data.forEach(c=>{if(chk.checked)p2Sel.add(c.id);else p2Sel.delete(c.id);});renderP2Table(data);updateP2Bulk();}
+function updateP2Bulk(){
+  const bar=document.getElementById('p2-bulk');
+  if(p2Sel.size>0){bar.style.display='flex';document.getElementById('p2-sel-n').textContent=p2Sel.size;}
+  else bar.style.display='none';
+}
+function applyP2Bulk(){
+  const ns=document.getElementById('p2-bulk-sel').value;if(!ns)return;
+  causasData.forEach(c=>{if(p2Sel.has(c.id))c.status=ns;});
+  p2Sel.clear();renderP2All();updateP2Bulk();
+}
+function clearP2Sel(){p2Sel.clear();renderP2All();updateP2Bulk();}
+function editP2Status(id,span){
+  const c=causasData.find(x=>x.id===id);if(!c)return;
+  const sel=document.createElement('select');sel.className='status-select';
+  Object.entries(STATUS_CFG).forEach(([k,v])=>{const o=document.createElement('option');o.value=k;o.textContent=v.label;if(k===c.status)o.selected=true;sel.appendChild(o);});
+  sel.onchange=()=>{c.status=sel.value;renderP2All();};
+  sel.onblur=()=>renderP2All();
+  span.parentNode.replaceChild(sel,span);sel.focus();
+}
+
+function initP2(){
+  renderP2KPIs();
+  const filtered=getFiltered();
+  renderP2Table(filtered);
+  renderBankLegend(filtered);
+  const LABELS=['Out/25','Nov/25','Dez/25','Jan/26','Fev/26','Mar/26','Abr/26','Mai/26'];
+  p2Charts.bar=new Chart(document.getElementById('p2c1'),{
+    type:'bar',
+    data:{labels:LABELS,datasets:[
+      {label:'CEF',          data:[42,55,31,68,44,72,58,91],  backgroundColor:'#1a3c8f',borderRadius:4},
+      {label:'Banco do Brasil',data:[28,18,45,22,39,31,44,38],backgroundColor:'#7d5a00',borderRadius:4},
+      {label:'TRT 6ª/15ª',   data:[19,33,27,15,28,41,22,67],  backgroundColor:'#6a1b9a',borderRadius:4},
+      {label:'Bradesco/SIAPE',data:[12,8,21,18,14,22,19,33],  backgroundColor:'#c9a84c',borderRadius:4},
+    ]},
+    options:{responsive:true,plugins:{legend:{position:'bottom',labels:{font:{size:10},padding:10}}},scales:{x:{stacked:true,grid:{display:false}},y:{stacked:true,grid:{color:'#f0ece8'},ticks:{callback:v=>'R$'+v+'k'}}}}
+  });
+  const bankTotals={};filtered.forEach(c=>bankTotals[c.banco]=(bankTotals[c.banco]||0)+c.valor);
+  const bKeys=Object.keys(bankTotals);
+  p2Charts.bank=new Chart(document.getElementById('p2c2'),{
+    type:'doughnut',
+    data:{labels:bKeys,datasets:[{data:bKeys.map(k=>bankTotals[k]),backgroundColor:bKeys.map(k=>BANK_COLORS[k]||'#888'),borderWidth:2,borderColor:'#fff',hoverOffset:6}]},
+    options:{responsive:true,cutout:'58%',
+      onClick:(e,els)=>{if(els.length){const bank=bKeys[els[0].index];bankFilter(bank);}},
+      plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>' '+ctx.label+': '+fmtK(ctx.parsed)}}}
+    }
+  });
+  const statCounts=[
+    filtered.filter(c=>c.status==='disponivel').length,
+    filtered.filter(c=>c.status==='pendente').length,
+    filtered.filter(c=>c.status==='em-fila').length,
+    filtered.filter(c=>c.status==='recebido').length,
+  ];
+  p2Charts.status=new Chart(document.getElementById('p2c3'),{
+    type:'bar',
+    data:{labels:['Disponível','Pendente','Em fila','Recebido'],datasets:[{data:statCounts,backgroundColor:['#2d7d46','#c07000','#6b6b6b','#1a5276'],borderRadius:5}]},
+    options:{indexAxis:'y',responsive:true,plugins:{legend:{display:false}},scales:{x:{grid:{color:'#f0ece8'}},y:{grid:{display:false}}}}
+  });
+  p2Charts.meta=new Chart(document.getElementById('p2c4'),{
+    type:'line',
+    data:{labels:LABELS,datasets:[
+      {label:'Recebido',data:[101,114,124,123,125,166,143,229],borderColor:'#6B1C2E',backgroundColor:'rgba(107,28,46,.08)',fill:true,tension:.4,pointRadius:4,pointBackgroundColor:'#6B1C2E'},
+      {label:'Meta',    data:[120,120,120,150,150,180,180,350],borderColor:'#c9a84c',borderDash:[6,4],fill:false,tension:.1,pointRadius:3,pointBackgroundColor:'#c9a84c'},
+    ]},
+    options:{responsive:true,plugins:{legend:{position:'bottom',labels:{font:{size:10},padding:10}}},scales:{x:{grid:{display:false}},y:{grid:{color:'#f0ece8'},ticks:{callback:v=>'R$'+v+'k'}}}}
+  });
+}
+
+function updateP2Charts(data){
+  if(!p2Charts.bank)return;
+  const bankTotals={};data.forEach(c=>bankTotals[c.banco]=(bankTotals[c.banco]||0)+c.valor);
+  const bKeys=Object.keys(bankTotals);
+  p2Charts.bank.data.labels=bKeys;
+  p2Charts.bank.data.datasets[0].data=bKeys.map(k=>bankTotals[k]);
+  p2Charts.bank.data.datasets[0].backgroundColor=bKeys.map(k=>BANK_COLORS[k]||'#888');
+  p2Charts.bank.update();
+  const sc=[
+    data.filter(c=>c.status==='disponivel').length,
+    data.filter(c=>c.status==='pendente').length,
+    data.filter(c=>c.status==='em-fila').length,
+    data.filter(c=>c.status==='recebido').length,
+  ];
+  p2Charts.status.data.datasets[0].data=sc;
+  p2Charts.status.update();
+}
+
+// ─── PHASE 3 ───
+function setPeriodType(el,type){
+  document.querySelectorAll('.prad').forEach(r=>r.classList.remove('active'));
+  el.classList.add('active');
+}
+</script>
+</body>
+</html>
