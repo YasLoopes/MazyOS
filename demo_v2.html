@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Estevão & Pinheiro — Sistema Financeiro de Causas · Demo v2</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2/dist/chartjs-plugin-datalabels.min.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{--bx:#6B1C2E;--bxd:#4a1220;--bxl:#8b2a40;--gold:#c9a84c;--bg:#f4f1ee;--wh:#fff;--tx:#1a1a1a;--mu:#6b6b6b;--bd:#e0d9d4;--gn:#2d7d46;--gnb:#e8f5ec;--or:#c07000;--orb:#fff3e0;--rd:#c0392b;--rdb:#fdecea;--bl:#1a5276;--blb:#eaf1f8}
@@ -184,9 +185,13 @@ input[type=checkbox]{width:15px;height:15px;cursor:pointer;accent-color:var(--bx
 .chart-title{font-size:13px;font-weight:700;margin-bottom:3px}
 .chart-sub{font-size:11px;color:var(--mu);margin-bottom:12px}
 
-/* BANK DIST */
-.bank-dist-layout{display:grid;grid-template-columns:150px 1fr;gap:14px;align-items:start}
-.bank-legend{display:flex;flex-direction:column;gap:6px}
+/* CHART WRAPPER — explicit height, no white-space issues */
+.ch-wrap{position:relative;height:210px}
+.ch-wrap-sm{position:relative;height:170px}
+
+/* BANK DIST — donut centered, legend below */
+.bank-dist-layout{display:flex;flex-direction:column;align-items:center;gap:10px}
+.bank-legend{display:flex;flex-direction:column;gap:5px;width:100%}
 .bl-row{display:flex;align-items:center;gap:8px;padding:5px 8px;border-radius:6px;cursor:pointer;transition:background .12s;font-size:12px}
 .bl-row:hover{background:#f5f0ee}
 .bl-row.bl-active{background:rgba(107,28,46,.08)}
@@ -194,8 +199,49 @@ input[type=checkbox]{width:15px;height:15px;cursor:pointer;accent-color:var(--bx
 .bl-name{flex:0 0 38px;font-weight:600;font-size:11px;color:var(--tx)}
 .bl-bar-wrap{flex:1;height:6px;background:#f0ece8;border-radius:3px;overflow:hidden}
 .bl-bar{height:100%;border-radius:3px;transition:width .4s}
-.bl-val{font-family:'DM Mono',monospace;font-size:11px;font-weight:600;color:var(--tx);white-space:nowrap;min-width:70px;text-align:right}
+.bl-val{font-family:'DM Mono',monospace;font-size:12px;font-weight:700;color:var(--tx);white-space:nowrap;min-width:70px;text-align:right}
 .bl-pct{font-size:10px;color:var(--mu);min-width:34px;text-align:right}
+
+/* RESULTADO (Receitas & Custos) */
+.resultado-card{background:#fff;border-radius:10px;border:1px solid var(--bd);padding:14px 16px;margin-bottom:10px}
+.resultado-kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:10px 0 14px}
+.rk-item{padding:10px 12px;border-radius:8px;border:1px solid var(--bd);text-align:center}
+.rk-val{font-size:18px;font-weight:800;font-family:'DM Mono',monospace}
+.rk-lbl{font-size:10px;color:var(--mu);text-transform:uppercase;letter-spacing:.04em;margin-top:2px}
+.rk-gn .rk-val{color:var(--gn)}
+.rk-rd .rk-val{color:var(--rd)}
+.rk-bx .rk-val{color:var(--bx)}
+.resultado-split{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+
+/* COST RANKING */
+.cost-toggle{display:flex;gap:4px;margin-bottom:10px}
+.ct-btn{padding:4px 12px;border-radius:20px;border:1px solid var(--bd);font-size:11px;font-weight:600;cursor:pointer;background:#fff;color:var(--mu);font-family:'DM Sans',sans-serif;transition:all .15s}
+.ct-btn.ct-active{background:var(--bx);color:#fff;border-color:var(--bx)}
+.cost-list{display:flex;flex-direction:column;gap:6px}
+.cbr{display:flex;align-items:center;gap:8px;font-size:12px}
+.cbr-label{flex:0 0 140px;font-size:11px;color:var(--tx);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cbr-track{flex:1;height:8px;background:#f0ece8;border-radius:4px;overflow:hidden}
+.cbr-fill{height:100%;border-radius:4px;transition:width .4s}
+.cbr-val{font-family:'DM Mono',monospace;font-size:11px;font-weight:700;white-space:nowrap;min-width:46px;text-align:right}
+.cbr-tag{font-size:9px;font-weight:700;padding:1px 6px;border-radius:10px;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:.04em}
+.tag-fixo{background:#f5f5f5;color:#555}
+.tag-var{background:rgba(201,168,76,.15);color:#7a5c0a}
+
+/* PIPE GRID — no horizontal scroll */
+.pipe-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:12px;margin-top:4px}
+.pipe-step{background:#fff;border:1px solid var(--bd);border-radius:10px;padding:12px 14px;text-align:center}
+.pipe-step.ps-done{border-color:var(--gn);background:var(--gnb)}
+.pipe-step.ps-active{border-color:var(--bx);background:rgba(107,28,46,.04)}
+.pipe-step.ps-wait{border-color:var(--bd);background:#faf8f6}
+.ps-icon{font-size:22px;margin-bottom:4px}
+.ps-num{font-family:'DM Mono',monospace;font-size:9px;color:var(--mu);font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:2px}
+.ps-label{font-size:12px;font-weight:700;color:var(--tx)}
+.ps-desc{font-size:10px;color:var(--mu);margin-top:3px;line-height:1.4}
+.ps-done .ps-label{color:var(--gn)}
+.ps-active .ps-label{color:var(--bx)}
+
+/* HOJE SECTION at top of painel */
+.hoje-section{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
 
 /* OVERDUE ALERT */
 .overdue-alert{background:var(--rdb);border:1px solid #f5c6cb;border-left:4px solid var(--rd);border-radius:10px;padding:9px 13px;margin-bottom:10px;display:flex;align-items:center;gap:10px;cursor:pointer}
@@ -486,10 +532,81 @@ footer span{color:var(--bx);font-weight:600}
   </div>
   <div class="t2-main">
 
-    <div class="overdue-alert" id="overdue-alert" onclick="filterOverdue()" style="display:none">
-      <div style="font-size:17px;flex-shrink:0">⚠</div>
-      <div class="oa-txt" id="overdue-txt">processos com prazo vencido (+60 dias da expedição)</div>
-      <span class="oa-link">Ver processos →</span>
+    <!-- O QUE FAZER HOJE — sempre no topo -->
+    <div class="hoje-section">
+      <div class="hoje-card">
+        <div class="hoje-title">📋 O que fazer hoje</div>
+        <div class="hoje-list">
+          <div class="hoje-item hi-urgente">
+            <div class="hi-icon">🚨</div>
+            <div class="hi-body">
+              <div class="hi-label">2 RPVs com prazo vencido — levantar urgente</div>
+              <div class="hi-desc">Proc. 0014221-09 (SINDIFISCO) e 0015830-22 (SEEB) — passaram de 60 dias da expedição</div>
+            </div>
+          </div>
+          <div class="hoje-item hi-atencao">
+            <div class="hi-icon">✍️</div>
+            <div class="hi-body">
+              <div class="hi-label">3 recibos aguardando assinatura digital</div>
+              <div class="hi-desc">SINDPD · SEEB · SINDSEP — recibos gerados, assinatura pendente há +5 dias</div>
+            </div>
+          </div>
+          <div class="hoje-item hi-atencao">
+            <div class="hi-icon">📊</div>
+            <div class="hi-body">
+              <div class="hi-label">Relatório semanal para Ricardo Estevam</div>
+              <div class="hi-desc">Última entrega: 19/05/2026 — envio via WhatsApp pendente</div>
+            </div>
+          </div>
+          <div class="hoje-item hi-info">
+            <div class="hi-icon">💰</div>
+            <div class="hi-body">
+              <div class="hi-label">Cobrar SINIJUDE — 4 meses em atraso</div>
+              <div class="hi-desc">Mensalidade R$ 1.200/mês — total pendente: R$ 4.800,00</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- RECIBOS / ASSINATURA -->
+      <div class="contratos-card">
+        <div style="font-size:13px;font-weight:700;margin-bottom:4px">Recibos de honorários</div>
+        <div style="font-size:11px;color:var(--mu);margin-bottom:12px">Após o levantamento do RPV, o sindicato assina o recibo confirmando o repasse</div>
+        <div class="contratos-kpis">
+          <div class="ck-item" style="border-color:var(--bd)">
+            <div class="ck-val" style="color:var(--tx)">8</div>
+            <div class="ck-lbl">Total / mês</div>
+          </div>
+          <div class="ck-item" style="border-color:var(--gn);background:var(--gnb)">
+            <div class="ck-val" style="color:var(--gn)">3</div>
+            <div class="ck-lbl">Assinados</div>
+          </div>
+          <div class="ck-item" style="border-color:var(--or);background:var(--orb)">
+            <div class="ck-val" style="color:var(--or)">3</div>
+            <div class="ck-lbl">Aguardando</div>
+          </div>
+          <div class="ck-item" style="border-color:var(--mu);background:#f5f5f5">
+            <div class="ck-val" style="color:var(--mu)">2</div>
+            <div class="ck-lbl">Sem recibo</div>
+          </div>
+        </div>
+        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--mu);margin-bottom:8px">Pendentes</div>
+        <div class="contrato-row">
+          <div><div class="cr-info">0003412-78 · SINDPD</div><div class="cr-sub">Maria L. Souza · R$ 10.410,40</div></div>
+          <span class="sbadge sb-pend"><div class="dot"></div>Aguardando</span>
+        </div>
+        <div class="contrato-row">
+          <div><div class="cr-info">0007291-33 · SEEB</div><div class="cr-sub">Carlos A. Nunes · R$ 11.388,00</div></div>
+          <span class="sbadge sb-pend"><div class="dot"></div>Aguardando</span>
+        </div>
+        <div class="contrato-row">
+          <div><div class="cr-info">0001823-45 · SINDSEP</div><div class="cr-sub">João C. Ferreira · R$ 14.768,00</div></div>
+          <span class="sbadge sb-fila"><div class="dot"></div>Sem recibo</span>
+        </div>
+        <div class="contrato-row">
+          <div><div class="cr-info">0005567-13 · SEEB</div><div class="cr-sub">André L. Brito · R$ 5.132,40</div></div>
+          <span class="sbadge sb-disp"><div class="dot"></div>Assinado</span>
+        </div>
+      </div>
     </div>
 
     <!-- FILTER BAR -->
@@ -575,107 +692,48 @@ footer span{color:var(--bx);font-weight:600}
     <div class="charts-row">
       <div class="chart-card">
         <div class="chart-title">Honorários por advogado</div>
-        <div class="chart-sub">Participação calculada sobre causas ativas — R$ mil</div>
-        <canvas id="chartAdv" height="80"></canvas>
+        <div class="chart-sub">Clique em uma barra para filtrar as causas abaixo</div>
+        <div class="ch-wrap"><canvas id="chartAdv"></canvas></div>
       </div>
       <div class="chart-card">
         <div class="chart-title">Distribuição por banco</div>
-        <div class="chart-sub">Clique em um banco para filtrar toda a página</div>
+        <div class="chart-sub">Clique para filtrar toda a página</div>
         <div class="bank-dist-layout">
-          <canvas id="chartBank" height="160"></canvas>
+          <div style="position:relative;height:160px;width:160px"><canvas id="chartBank"></canvas></div>
           <div class="bank-legend" id="bank-legend"></div>
         </div>
       </div>
     </div>
 
-    <!-- CHARTS ROW 2: sindicato + P&L -->
+    <!-- CHARTS ROW 2: sindicato + resultado/custos -->
     <div class="charts-row-2">
       <div class="chart-card">
-        <div class="chart-title">Performance por sindicato</div>
-        <div class="chart-sub">Volume total de causas por cliente — R$ mil</div>
-        <canvas id="chartSindic" height="100"></canvas>
+        <div class="chart-title">Volume de causas por sindicato</div>
+        <div class="chart-sub">Clique em uma barra para filtrar as causas abaixo</div>
+        <div class="ch-wrap"><canvas id="chartSindic"></canvas></div>
       </div>
-      <div class="chart-card">
-        <div class="chart-title">P&amp;L — Escritório · últimos 6 meses</div>
-        <div class="chart-sub">Receitas de honorários vs. despesas fixas e variáveis</div>
-        <canvas id="chartPL" height="100"></canvas>
-      </div>
-    </div>
-
-    <!-- O QUE FAZER HOJE + CONTRATOS em grid -->
-    <div class="charts-row-3">
-      <!-- O QUE FAZER HOJE -->
-      <div class="hoje-card">
-        <div class="hoje-title">📋 O que fazer hoje</div>
-        <div class="hoje-list">
-          <div class="hoje-item hi-urgente">
-            <div class="hi-icon">🚨</div>
-            <div class="hi-body">
-              <div class="hi-label">2 RPVs com prazo vencido — levantar urgente</div>
-              <div class="hi-desc">Proc. 0014221-09 (SINDIFISCO) e 0015830-22 (SEEB) — passaram de 60 dias da expedição</div>
+      <div class="chart-card" style="padding:14px 16px">
+        <div class="chart-title">Receitas e Custos — últimos 6 meses</div>
+        <div class="chart-sub">Quanto o escritório recebeu, quanto gastou e qual foi o resultado</div>
+        <div class="resultado-kpis">
+          <div class="rk-item rk-gn"><div class="rk-val">R$ 275k</div><div class="rk-lbl">Total recebido</div></div>
+          <div class="rk-item rk-rd"><div class="rk-val">R$ 172k</div><div class="rk-lbl">Total custos</div></div>
+          <div class="rk-item rk-bx"><div class="rk-val">R$ 103k</div><div class="rk-lbl">Resultado líquido</div></div>
+        </div>
+        <div class="resultado-split">
+          <div>
+            <div style="font-size:11px;font-weight:600;color:var(--mu);margin-bottom:6px;text-transform:uppercase;letter-spacing:.04em">Composição do resultado</div>
+            <div style="position:relative;height:150px"><canvas id="chartResultado"></canvas></div>
+          </div>
+          <div>
+            <div style="font-size:11px;font-weight:600;color:var(--mu);margin-bottom:8px;text-transform:uppercase;letter-spacing:.04em">Principais custos</div>
+            <div class="cost-toggle">
+              <button class="ct-btn ct-active" onclick="setCostView('todos',this)">Todos</button>
+              <button class="ct-btn" onclick="setCostView('fixo',this)">Fixos</button>
+              <button class="ct-btn" onclick="setCostView('variavel',this)">Variáveis</button>
             </div>
+            <div class="cost-list" id="cost-bars"></div>
           </div>
-          <div class="hoje-item hi-atencao">
-            <div class="hi-icon">✍️</div>
-            <div class="hi-body">
-              <div class="hi-label">3 contratos aguardando assinatura digital</div>
-              <div class="hi-desc">SINDPD · SEEB · SINDSEP — recibos gerados, assinatura pendente há +5 dias</div>
-            </div>
-          </div>
-          <div class="hoje-item hi-atencao">
-            <div class="hi-icon">📊</div>
-            <div class="hi-body">
-              <div class="hi-label">Relatório semanal para Ricardo Estevam</div>
-              <div class="hi-desc">Última entrega: 19/05/2026 — envio via WhatsApp pendente</div>
-            </div>
-          </div>
-          <div class="hoje-item hi-info">
-            <div class="hi-icon">💰</div>
-            <div class="hi-body">
-              <div class="hi-label">Cobrar SINIJUDE — 4 meses em atraso</div>
-              <div class="hi-desc">Mensalidade R$ 1.200/mês — total pendente: R$ 4.800,00</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- CONTRATOS -->
-      <div class="contratos-card">
-        <div style="font-size:13px;font-weight:700;margin-bottom:12px">Contratos · Assinaturas digitais</div>
-        <div class="contratos-kpis">
-          <div class="ck-item" style="border-color:var(--bd)">
-            <div class="ck-val" style="color:var(--tx)">8</div>
-            <div class="ck-lbl">Total ativo</div>
-          </div>
-          <div class="ck-item" style="border-color:var(--gn);background:var(--gnb)">
-            <div class="ck-val" style="color:var(--gn)">3</div>
-            <div class="ck-lbl">Assinados / mês</div>
-          </div>
-          <div class="ck-item" style="border-color:var(--or);background:var(--orb)">
-            <div class="ck-val" style="color:var(--or)">3</div>
-            <div class="ck-lbl">Aguardando assin.</div>
-          </div>
-          <div class="ck-item" style="border-color:var(--mu);background:#f5f5f5">
-            <div class="ck-val" style="color:var(--mu)">2</div>
-            <div class="ck-lbl">Sem recibo</div>
-          </div>
-        </div>
-        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--mu);margin-bottom:8px">Pendentes de assinatura</div>
-        <div class="contrato-row">
-          <div><div class="cr-info">0003412-78 · SINDPD</div><div class="cr-sub">Maria L. Souza · R$ 10.410,40</div></div>
-          <span class="sbadge sb-pend"><div class="dot"></div>Aguardando</span>
-        </div>
-        <div class="contrato-row">
-          <div><div class="cr-info">0007291-33 · SEEB</div><div class="cr-sub">Carlos A. Nunes · R$ 11.388,00</div></div>
-          <span class="sbadge sb-pend"><div class="dot"></div>Aguardando</span>
-        </div>
-        <div class="contrato-row">
-          <div><div class="cr-info">0001823-45 · SINDSEP</div><div class="cr-sub">João C. Ferreira · R$ 14.768,00</div></div>
-          <span class="sbadge sb-fila"><div class="dot"></div>Sem recibo</span>
-        </div>
-        <div class="contrato-row">
-          <div><div class="cr-info">0005567-13 · SEEB</div><div class="cr-sub">André L. Brito · R$ 5.132,40</div></div>
-          <span class="sbadge sb-disp"><div class="dot"></div>Assinado</span>
         </div>
       </div>
     </div>
@@ -826,51 +884,45 @@ contato@estevaoepinheiro.adv.br · (81) 3423-2494</div>
       </div>
     </div>
 
-    <!-- PIPELINE ASSINATURA DIGITAL (full width) -->
+    <!-- RECIBOS DE HONORÁRIOS — ASSINATURA DIGITAL -->
     <div class="t3-card-full">
       <div class="t3-card-hdr">
         <div>
-          <div class="t3-card-title">Fluxo de assinatura digital — Recibos</div>
-          <div class="t3-card-sub">Processo automático do recebimento ao arquivamento · integração via plataforma de assinatura digital (ICP-Brasil)</div>
+          <div class="t3-card-title">Recibos de honorários — Assinatura digital</div>
+          <div class="t3-card-sub">Após levantar um RPV, o sindicato recebe o recibo com os valores calculados e assina digitalmente pelo celular ou computador, com validade jurídica (ICP-Brasil)</div>
         </div>
         <span class="c-phase">Fase 3</span>
       </div>
-      <div class="pipeline-wrap">
-        <div class="pipeline">
-          <div class="pipe-step ps-done">
-            <div class="ps-num">Passo 1</div>
-            <div class="ps-icon">✅</div>
-            <div class="ps-label">Recebimento</div>
-            <div class="ps-desc">Processo marcado como Recebido no sistema</div>
-          </div>
-          <div class="pipe-arrow">→</div>
-          <div class="pipe-step ps-done">
-            <div class="ps-num">Passo 2</div>
-            <div class="ps-icon">📄</div>
-            <div class="ps-label">Gerar Recibo</div>
-            <div class="ps-desc">Recibo gerado automaticamente com todos os valores calculados</div>
-          </div>
-          <div class="pipe-arrow">→</div>
-          <div class="pipe-step ps-active">
-            <div class="ps-num">Passo 3</div>
-            <div class="ps-icon">📤</div>
-            <div class="ps-label">Solicitar Assinatura</div>
-            <div class="ps-desc">Link enviado por e-mail e SMS ao representante do sindicato</div>
-          </div>
-          <div class="pipe-arrow">→</div>
-          <div class="pipe-step ps-wait">
-            <div class="ps-num">Passo 4</div>
-            <div class="ps-icon">✍️</div>
-            <div class="ps-label">Assinado</div>
-            <div class="ps-desc">Sistema notificado via webhook · status atualiza automaticamente</div>
-          </div>
-          <div class="pipe-arrow">→</div>
-          <div class="pipe-step ps-wait">
-            <div class="ps-num">Passo 5</div>
-            <div class="ps-icon">🗂️</div>
-            <div class="ps-label">Arquivado</div>
-            <div class="ps-desc">Documento armazenado na nuvem · auditoria disponível</div>
-          </div>
+      <div class="pipe-grid">
+        <div class="pipe-step ps-done">
+          <div class="ps-num">Passo 1</div>
+          <div class="ps-icon">✅</div>
+          <div class="ps-label">RPV Levantado</div>
+          <div class="ps-desc">Waldir registra o recebimento e os valores são calculados automaticamente</div>
+        </div>
+        <div class="pipe-step ps-done">
+          <div class="ps-num">Passo 2</div>
+          <div class="ps-icon">📄</div>
+          <div class="ps-label">Gerar Recibo</div>
+          <div class="ps-desc">Recibo criado com bruto, honorários, tributos e líquido ao sindicato</div>
+        </div>
+        <div class="pipe-step ps-active">
+          <div class="ps-num">Passo 3</div>
+          <div class="ps-icon">📤</div>
+          <div class="ps-label">Enviar para Assinar</div>
+          <div class="ps-desc">O representante do sindicato recebe um link por e-mail ou WhatsApp</div>
+        </div>
+        <div class="pipe-step ps-wait">
+          <div class="ps-num">Passo 4</div>
+          <div class="ps-icon">✍️</div>
+          <div class="ps-label">Assinado</div>
+          <div class="ps-desc">Assinatura feita em 1 clique no celular — sem necessidade de impressão</div>
+        </div>
+        <div class="pipe-step ps-wait">
+          <div class="ps-num">Passo 5</div>
+          <div class="ps-icon">🗂️</div>
+          <div class="ps-label">Arquivado</div>
+          <div class="ps-desc">Documento salvo na nuvem, rastreável, com histórico completo</div>
         </div>
       </div>
     </div>
@@ -933,6 +985,7 @@ contato@estevaoepinheiro.adv.br · (81) 3423-2494</div>
 
 <script>
 // ─── SETUP ───
+Chart.register(ChartDataLabels);
 document.getElementById('hdrDate').textContent = new Date().toLocaleDateString('pt-BR',{day:'2-digit',month:'long',year:'numeric'});
 
 const TODAY = new Date('2026-05-24');
@@ -1085,9 +1138,44 @@ function editT1Status(id,span){
 renderT1Table();
 
 // ─── TAB 2 ───
-let p2Filters = {banco:'',status:'',sindic:'',tipo:'',de:'',ate:''};
+let p2Filters = {banco:'',status:'',sindic:'',tipo:'',de:'',ate:'',adv:''};
 let p2Sel = new Set();
 let p2Charts = {};
+const ADV_COLORS = ['#6B1C2E','#7d5a00','#1a5276','#2d7d46','#c9a84c'];
+const SINDIC_COLORS = ['#6B1C2E','#7d5a00','#1a5276','#2d7d46'];
+const CUSTOS_FIXO = [
+  {label:'Folha de pagamento',val:45000},{label:'Aluguel',val:24000},
+  {label:'Contabilidade',val:15000},{label:'Softwares jurídicos',val:12000},
+  {label:'Internet / Telefonia',val:8000},{label:'Outros fixos',val:4000},
+];
+const CUSTOS_VAR = [
+  {label:'Despesas processuais',val:28000},{label:'Honorários periciais',val:18000},
+  {label:'Deslocamentos',val:9000},{label:'Material de escritório',val:5000},
+  {label:'Outros variáveis',val:4000},
+];
+let costView = 'todos';
+function setCostView(v,btn){
+  costView = v;
+  document.querySelectorAll('.ct-btn').forEach(b=>b.classList.remove('ct-active'));
+  btn.classList.add('ct-active');
+  renderCostBars();
+}
+function renderCostBars(){
+  const list = costView==='fixo' ? CUSTOS_FIXO : costView==='variavel' ? CUSTOS_VAR : [...CUSTOS_FIXO,...CUSTOS_VAR].sort((a,b)=>b.val-a.val);
+  const max = list[0]?.val||1;
+  const isFixo = l => CUSTOS_FIXO.some(c=>c.label===l);
+  document.getElementById('cost-bars').innerHTML = list.map(c=>{
+    const pct = Math.round(c.val/max*100);
+    const tag = isFixo(c.label) ? '<span class="cbr-tag tag-fixo">Fixo</span>' : '<span class="cbr-tag tag-var">Variável</span>';
+    const color = isFixo(c.label) ? '#888' : '#c9a84c';
+    return`<div class="cbr">
+      <div class="cbr-label" title="${c.label}">${c.label}</div>
+      <div class="cbr-track"><div class="cbr-fill" style="width:${pct}%;background:${color}"></div></div>
+      <div class="cbr-val">R$${Math.round(c.val/1000)}k</div>
+      ${costView==='todos'?tag:''}
+    </div>`;
+  }).join('');
+}
 
 function getFiltered(){
   return causasData.filter(c=>{
@@ -1095,6 +1183,7 @@ function getFiltered(){
     if(p2Filters.status && c.status !== p2Filters.status) return false;
     if(p2Filters.sindic && c.sindic !== p2Filters.sindic) return false;
     if(p2Filters.tipo   && c.tipo   !== p2Filters.tipo)   return false;
+    if(p2Filters.adv    && c.adv    !== p2Filters.adv)    return false;
     if(p2Filters.de     && c.data   <  p2Filters.de)      return false;
     if(p2Filters.ate    && c.data   >  p2Filters.ate)     return false;
     return true;
@@ -1110,11 +1199,12 @@ function applyP2Filters(){
   renderP2All();
 }
 function clearP2Filters(){
-  p2Filters = {banco:'',status:'',sindic:'',tipo:'',de:'',ate:''};
+  p2Filters = {banco:'',status:'',sindic:'',tipo:'',de:'',ate:'',adv:''};
   ['f2-banco','f2-status','f2-sindic','f2-tipo'].forEach(id=>document.getElementById(id).value='');
   document.getElementById('f2-de').value='';
   document.getElementById('f2-ate').value='';
   document.querySelectorAll('.kpi-card').forEach(k=>k.classList.remove('kpi-active'));
+  updateAdvChart();updateSindicChart();
   renderP2All();
 }
 function kpiFilter(type,val){
@@ -1137,9 +1227,9 @@ function renderP2All(){
   const data = getFiltered();
   renderP2KPIs();
   renderP2Table(data);
-  renderBankLegend(data);
   renderFilterChips();
   if(p2Charts.bank) updateP2Charts(data);
+  else renderBankLegend(data);
 }
 function renderP2KPIs(){
   const all = causasData;
@@ -1157,12 +1247,6 @@ function renderP2KPIs(){
   document.getElementById('ks-rec').textContent   = rec.length+' processos recebidos';
 }
 function renderP2Table(data){
-  const od = data.filter(isOverdue).length;
-  const alert = document.getElementById('overdue-alert');
-  if(od>0){
-    alert.style.display='flex';
-    document.getElementById('overdue-txt').textContent = od+' processo'+(od!==1?'s':'')+' com prazo vencido (+60 dias da expedição)';
-  } else alert.style.display='none';
   document.getElementById('p2-count-lbl').textContent = 'Exibindo '+data.length+' de '+causasData.length+' causas';
   document.getElementById('p2-tbody').innerHTML = data.map(c=>{
     const sc = STATUS_CFG[c.status]||STATUS_CFG['pendente'];
@@ -1211,9 +1295,9 @@ function bankFilter(bank){
 }
 function renderFilterChips(){
   const chips=[];
-  const labels={banco:'Banco',status:'Status',sindic:'Sindicato',tipo:'Tipo',de:'De',ate:'Até'};
+  const labels={banco:'Banco',status:'Status',sindic:'Sindicato',tipo:'Tipo',de:'De',ate:'Até',adv:'Advogado'};
   Object.entries(p2Filters).forEach(([k,v])=>{
-    if(v)chips.push(`<div class="chip">${labels[k]}: ${v} <span class="chip-x" onclick="removeChip('${k}')">×</span></div>`);
+    if(v)chips.push(`<div class="chip">${labels[k]||k}: ${v} <span class="chip-x" onclick="removeChip('${k}')">×</span></div>`);
   });
   const el=document.getElementById('f2-chips');
   if(chips.length){el.style.display='flex';el.innerHTML=chips.join('')+'<button class="btn-clear-all" onclick="clearP2Filters()">Limpar todos</button>';}
@@ -1223,6 +1307,8 @@ function removeChip(key){
   p2Filters[key]='';
   const el=document.getElementById('f2-'+key);
   if(el)el.value='';
+  if(key==='adv') updateAdvChart();
+  if(key==='sindic') updateSindicChart();
   renderP2All();
 }
 function toggleP2(id,chk){if(chk.checked)p2Sel.add(id);else p2Sel.delete(id);updateP2Bulk();}
@@ -1247,76 +1333,121 @@ function editP2Status(id,span){
   span.parentNode.replaceChild(sel,span);sel.focus();
 }
 
+function updateAdvChart(){
+  if(!p2Charts.adv) return;
+  p2Charts.adv.data.datasets[0].backgroundColor = p2Charts.adv.data.labels.map((lbl,i)=>
+    !p2Filters.adv || p2Filters.adv===lbl ? ADV_COLORS[i%ADV_COLORS.length] : ADV_COLORS[i%ADV_COLORS.length]+'44'
+  );
+  p2Charts.adv.update();
+}
+function updateSindicChart(){
+  if(!p2Charts.sindic) return;
+  p2Charts.sindic.data.datasets[0].backgroundColor = p2Charts.sindic.data.labels.map((lbl,i)=>
+    !p2Filters.sindic || p2Filters.sindic===lbl ? SINDIC_COLORS[i%SINDIC_COLORS.length] : SINDIC_COLORS[i%SINDIC_COLORS.length]+'44'
+  );
+  p2Charts.sindic.update();
+}
+
 function initT2(){
   renderP2KPIs();
   const filtered = getFiltered();
   renderP2Table(filtered);
   renderBankLegend(filtered);
+  renderCostBars();
 
-  // Chart 1: Honorários por advogado
+  // Chart 1: Honorários por advogado (interactive — click filters table)
   const advMap = {};
-  causasData.forEach(c=>{
-    advMap[c.adv] = (advMap[c.adv]||0) + c.valor*0.30;
-  });
+  causasData.forEach(c=>{ advMap[c.adv] = (advMap[c.adv]||0) + c.valor*0.30; });
   const advLabels = Object.keys(advMap);
-  const advVals = advLabels.map(k=>Math.round(advMap[k]/1000*10)/10);
-  const advColors = ['#6B1C2E','#7d5a00','#1a5276','#2d7d46','#c9a84c'];
+  const advVals = advLabels.map(k=>+(advMap[k]/1000).toFixed(1));
   p2Charts.adv = new Chart(document.getElementById('chartAdv'),{
     type:'bar',
-    data:{
-      labels:advLabels,
-      datasets:[{data:advVals,backgroundColor:advColors.slice(0,advLabels.length),borderRadius:5}]
-    },
-    options:{responsive:true,plugins:{legend:{display:false}},scales:{
-      x:{grid:{display:false},ticks:{font:{size:11}}},
-      y:{grid:{color:'#f0ece8'},ticks:{callback:v=>'R$'+v+'k'}}
-    }}
+    data:{labels:advLabels,datasets:[{data:advVals,backgroundColor:ADV_COLORS.slice(0,advLabels.length),borderRadius:5}]},
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      onClick:(e,els)=>{
+        if(!els.length)return;
+        const lbl=advLabels[els[0].index];
+        p2Filters.adv = p2Filters.adv===lbl ? '' : lbl;
+        updateAdvChart(); renderP2All();
+      },
+      plugins:{
+        legend:{display:false},
+        datalabels:{anchor:'end',align:'top',formatter:v=>'R$'+v+'k',font:{size:10,weight:'700'},color:'#333'}
+      },
+      scales:{
+        x:{grid:{display:false},ticks:{font:{size:10}}},
+        y:{grid:{color:'#f0ece8'},ticks:{callback:v=>'R$'+v+'k'},beginAtZero:true}
+      }
+    }
   });
 
-  // Chart 2: Banco donut (CEF vs BB)
+  // Chart 2: Banco donut (CEF vs BB) — legend below
   const bankTotals={};
   filtered.forEach(c=>bankTotals[c.banco]=(bankTotals[c.banco]||0)+c.valor);
   const bKeys = Object.keys(bankTotals);
   p2Charts.bank = new Chart(document.getElementById('chartBank'),{
     type:'doughnut',
     data:{labels:bKeys,datasets:[{data:bKeys.map(k=>bankTotals[k]),backgroundColor:bKeys.map(k=>BANK_COLORS[k]||'#888'),borderWidth:2,borderColor:'#fff',hoverOffset:6}]},
-    options:{responsive:true,cutout:'58%',
+    options:{
+      responsive:true, maintainAspectRatio:false, cutout:'60%',
       onClick:(e,els)=>{if(els.length){bankFilter(bKeys[els[0].index]);}},
-      plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>' '+ctx.label+': '+fmtK(ctx.parsed)}}}
+      plugins:{
+        legend:{display:false},
+        datalabels:{display:false},
+        tooltip:{callbacks:{label:ctx=>' '+ctx.label+': '+fmtK(ctx.parsed)}}
+      }
     }
   });
 
-  // Chart 3: Performance por sindicato (horizontal bar)
+  // Chart 3: Volume por sindicato (interactive — click filters table)
   const sindicMap={};
   causasData.forEach(c=>sindicMap[c.sindic]=(sindicMap[c.sindic]||0)+c.valor);
   const sLabels=Object.keys(sindicMap);
   const sVals=sLabels.map(k=>Math.round(sindicMap[k]/1000));
   p2Charts.sindic = new Chart(document.getElementById('chartSindic'),{
     type:'bar',
-    data:{labels:sLabels,datasets:[{data:sVals,backgroundColor:['#6B1C2E','#7d5a00','#1a5276','#2d7d46'],borderRadius:4}]},
-    options:{indexAxis:'y',responsive:true,plugins:{legend:{display:false}},scales:{
-      x:{grid:{color:'#f0ece8'},ticks:{callback:v=>'R$'+v+'k'}},
-      y:{grid:{display:false},ticks:{font:{size:11}}}
-    }}
+    data:{labels:sLabels,datasets:[{data:sVals,backgroundColor:SINDIC_COLORS,borderRadius:4}]},
+    options:{
+      indexAxis:'y', responsive:true, maintainAspectRatio:false,
+      onClick:(e,els)=>{
+        if(!els.length)return;
+        const lbl=sLabels[els[0].index];
+        p2Filters.sindic = p2Filters.sindic===lbl ? '' : lbl;
+        if(document.getElementById('f2-sindic'))document.getElementById('f2-sindic').value=p2Filters.sindic;
+        updateSindicChart(); renderP2All();
+      },
+      plugins:{
+        legend:{display:false},
+        datalabels:{anchor:'end',align:'right',formatter:v=>'R$'+v+'k',font:{size:10,weight:'700'},color:'#333'}
+      },
+      scales:{
+        x:{grid:{color:'#f0ece8'},ticks:{callback:v=>'R$'+v+'k'},beginAtZero:true},
+        y:{grid:{display:false},ticks:{font:{size:11}}}
+      }
+    }
   });
 
-  // Chart 4: P&L
-  const plLabels=['Dez/25','Jan/26','Fev/26','Mar/26','Abr/26','Mai/26'];
-  p2Charts.pl = new Chart(document.getElementById('chartPL'),{
-    type:'bar',
-    data:{labels:plLabels,datasets:[
-      {label:'Honorários recebidos',data:[38,42,35,51,44,65],backgroundColor:'rgba(107,28,46,.8)',borderRadius:4,stack:'a'},
-      {label:'Despesas fixas',       data:[-18,-18,-18,-18,-18,-18],backgroundColor:'rgba(107,107,107,.55)',borderRadius:4,stack:'b'},
-      {label:'Despesas variáveis',   data:[-8,-11,-9,-14,-10,-12], backgroundColor:'rgba(201,168,76,.7)',borderRadius:4,stack:'b'},
-    ]},
-    options:{responsive:true,plugins:{legend:{position:'bottom',labels:{font:{size:10},padding:10}}},scales:{
-      x:{grid:{display:false}},
-      y:{grid:{color:'#f0ece8'},ticks:{callback:v=>(v>=0?'':'−')+'R$'+Math.abs(v)+'k'}}
-    }}
+  // Chart 4: Resultado donut (lucro vs custos fixos vs custos variáveis)
+  p2Charts.resultado = new Chart(document.getElementById('chartResultado'),{
+    type:'doughnut',
+    data:{
+      labels:['Resultado líquido','Custos fixos','Custos variáveis'],
+      datasets:[{data:[103,108,64],backgroundColor:['#2d7d46','#888','#c9a84c'],borderWidth:2,borderColor:'#fff',hoverOffset:4}]
+    },
+    options:{
+      responsive:true, maintainAspectRatio:false, cutout:'55%',
+      plugins:{
+        legend:{position:'bottom',labels:{font:{size:10},padding:8,boxWidth:10}},
+        datalabels:{display:false},
+        tooltip:{callbacks:{label:ctx=>' '+ctx.label+': R$'+ctx.parsed+'k'}}
+      }
+    }
   });
 }
 
 function updateP2Charts(data){
+  if(!p2Charts.bank) return;
   const bankTotals={};
   data.forEach(c=>bankTotals[c.banco]=(bankTotals[c.banco]||0)+c.valor);
   const bKeys=Object.keys(bankTotals);
@@ -1324,6 +1455,7 @@ function updateP2Charts(data){
   p2Charts.bank.data.datasets[0].data=bKeys.map(k=>bankTotals[k]);
   p2Charts.bank.data.datasets[0].backgroundColor=bKeys.map(k=>BANK_COLORS[k]||'#888');
   p2Charts.bank.update();
+  renderBankLegend(data);
 }
 
 // ─── TAB 3 ───
