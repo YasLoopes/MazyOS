@@ -344,6 +344,87 @@ input[type=checkbox]{width:15px;height:15px;cursor:pointer;accent-color:var(--bx
 footer{text-align:center;padding:16px 28px;font-size:11px;color:var(--mu);border-top:1px solid var(--bd);background:#fff;margin-top:16px}
 footer span{color:var(--bx);font-weight:600}
 
+/* ═══ RESULTADO HIGHLIGHT ═══ */
+.resultado-highlight{background:#fff;border-radius:12px;border:2px solid var(--bx);border-left:6px solid var(--bx);padding:20px 24px;margin-bottom:14px}
+.rh-header{font-family:'DM Serif Display',serif;font-size:16px;font-weight:700;color:var(--bx);margin-bottom:3px}
+.rh-sub{font-size:11px;color:var(--mu);margin-bottom:14px}
+.rh-body{display:grid;grid-template-columns:auto 1fr 1.2fr;gap:20px;align-items:start}
+.rh-kpis{display:flex;flex-direction:column;gap:8px;min-width:160px}
+.rh-kpi{padding:10px 14px;border-radius:8px;border:1px solid var(--bd)}
+.rh-kpi-val{font-size:18px;font-weight:800;font-family:'DM Mono',monospace}
+.rh-kpi-lbl{font-size:10px;color:var(--mu);text-transform:uppercase;letter-spacing:.04em;margin-top:2px}
+.rh-gn .rh-kpi-val{color:var(--gn)}.rh-rd .rh-kpi-val{color:var(--rd)}.rh-bx .rh-kpi-val{color:var(--bx)}
+.rh-chart-col{display:flex;flex-direction:column;align-items:center}
+.rh-chart-title{font-size:11px;font-weight:600;color:var(--mu);text-transform:uppercase;letter-spacing:.04em;margin-bottom:8px;text-align:center}
+.rh-costs-col .cost-toggle{margin-bottom:8px}
+
+/* ═══ KPI + BANCO ROW ═══ */
+.kpi-banco-row{display:grid;grid-template-columns:1fr 270px;gap:10px;margin-bottom:12px;align-items:start}
+.kpi-grid-4{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.banco-card{background:#fff;border-radius:10px;border:1px solid var(--bd);padding:14px 16px}
+
+/* ═══ HOJE ITEM COM CHECKBOX ═══ */
+.hoje-item{display:flex;align-items:flex-start;gap:8px;padding:8px 10px;border-radius:8px;border:1px solid}
+.hi-chk{width:16px;height:16px;flex-shrink:0;margin-top:2px;cursor:pointer;accent-color:var(--bx)}
+.hi-body{flex:1;cursor:pointer}
+.hi-link{font-size:11px;font-weight:700;color:var(--bx);white-space:nowrap;background:rgba(107,28,46,.08);padding:3px 8px;border-radius:4px;cursor:pointer;border:none;font-family:'DM Sans',sans-serif;align-self:center;flex-shrink:0}
+.hi-link:hover{background:rgba(107,28,46,.18)}
+.hoje-done .hi-body{opacity:.4}
+.hoje-done .hi-body *{text-decoration:line-through}
+
+/* ═══ NOTA FISCAL PANEL ═══ */
+.nota-panel{background:#fff;border-radius:12px;border:1px solid var(--bd);padding:22px}
+.nota-fiscal{background:#fffcf5;border:1.5px dashed var(--gold);border-radius:10px;padding:16px;margin-top:10px;position:relative}
+.nota-hdr{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.nota-logo{width:34px;height:34px;border-radius:8px;background:var(--bx);color:#fff;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0}
+.nota-brand{font-family:'DM Serif Display',serif;font-size:12px;font-weight:700;color:var(--bx)}
+.nota-brand-sub{font-size:9px;color:var(--mu)}
+.nota-div{border-top:1px dashed var(--gold);margin:8px 0}
+.nota-row{display:flex;justify-content:space-between;font-size:11px;padding:3px 0;font-family:'DM Mono',monospace}
+.nota-row span:first-child{color:var(--mu)}
+.nota-row span:last-child{font-weight:600;color:var(--tx);text-align:right;max-width:60%}
+.nota-valor-row{display:flex;justify-content:space-between;align-items:center;margin-top:6px}
+.nota-valor-lbl{font-size:13px;font-weight:700;font-family:'DM Mono',monospace}
+.nota-valor-val{font-size:22px;font-weight:800;color:var(--rd);font-family:'DM Mono',monospace}
+.nota-stamp{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-20deg);font-size:28px;font-weight:900;color:var(--gn);opacity:.25;pointer-events:none;font-family:'DM Mono',monospace;letter-spacing:.1em;border:4px solid var(--gn);padding:4px 10px;border-radius:4px;display:none}
+
+/* ═══ OFX DEMO ═══ */
+.ofx-demo{margin-top:14px}
+.ofx-demo-lbl{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--mu);margin-bottom:8px}
+.ofx-txn{border-radius:9px;padding:12px 14px;margin-bottom:8px;border:1px solid}
+.ofx-match{border-color:rgba(45,125,70,.3);background:rgba(232,245,236,.5)}
+.ofx-unknown{border-color:rgba(192,112,0,.3);background:rgba(255,243,224,.5)}
+.ofx-txn-hdr{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+.ofx-txn-date{font-size:11px;color:var(--mu);font-family:'DM Mono',monospace}
+.ofx-txn-desc{flex:1;font-size:12px;font-weight:600;color:var(--tx)}
+.ofx-txn-val{font-size:13px;font-weight:700;font-family:'DM Mono',monospace;white-space:nowrap}
+.ofx-txn-val.pos{color:var(--gn)}.ofx-txn-val.neg{color:var(--rd)}
+.ofx-match-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+.mbadge-ok{background:var(--gn);color:#fff;font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px;font-family:'DM Mono',monospace;white-space:nowrap}
+.mbadge-no{background:var(--or);color:#fff;font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px;font-family:'DM Mono',monospace;white-space:nowrap}
+.ofx-match-info{font-size:11px;color:var(--mu)}
+.ofx-txn-btns{display:flex;gap:8px}
+.ofx-cat-row{display:flex;align-items:flex-end;gap:8px;flex-wrap:wrap}
+
+/* ═══ INADIMPLENTES LIST ═══ */
+.inad-list{display:flex;flex-direction:column;gap:6px;margin-bottom:12px}
+.inad-item{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:8px;border:1px solid var(--bd);background:#faf8f6;cursor:pointer}
+.inad-item:hover{background:#f5f0ee}
+.inad-chk{width:15px;height:15px;flex-shrink:0;cursor:pointer;accent-color:var(--bx)}
+.inad-nome{font-size:13px;font-weight:700}
+.inad-det{font-size:11px;color:var(--mu)}
+
+/* ═══ AUTOMAÇÃO EXTRA ═══ */
+.automacao-card{border:1.5px solid rgba(201,168,76,.5)!important;box-shadow:0 0 0 3px rgba(201,168,76,.07)}
+.automacao-badge{display:inline-flex;align-items:center;gap:4px;background:linear-gradient(135deg,var(--gold),#b8960e);color:#3a2800;font-family:'DM Mono',monospace;font-size:9px;font-weight:700;padding:3px 9px;border-radius:4px;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap;flex-shrink:0;margin-top:4px}
+.automacao-extra{background:linear-gradient(135deg,rgba(201,168,76,.07),rgba(107,28,46,.04));border:1.5px dashed rgba(201,168,76,.5);border-radius:10px;padding:14px 16px;margin-top:14px}
+.automacao-extra h4{font-size:12px;font-weight:700;color:#5a4000;margin-bottom:5px;display:flex;align-items:center;gap:5px}
+.automacao-extra p{font-size:12px;color:#5a4000;line-height:1.5}
+.automacao-extra ul{margin:6px 0 0 16px;font-size:11px;color:#5a4000;line-height:1.7}
+
+/* ═══ CHARTS BOTTOM ROW ═══ */
+.charts-row-bottom{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
+
 /* RESPONSIVE */
 @media(max-width:1050px){.t1-top,.t3-grid{grid-template-columns:1fr}.kpi-grid{grid-template-columns:repeat(2,1fr)}.charts-row,.charts-row-2,.charts-row-3{grid-template-columns:1fr}.bank-dist-layout{grid-template-columns:1fr}.contratos-kpis{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:640px){header,.pbadge-bar{padding:10px 14px}.tab-nav{padding:0 6px}.t1-main,.t2-main,.t3-main,.t4-main{padding:12px 14px}.ttab{min-width:110px;padding:8px 10px}.frow.three{grid-template-columns:1fr 1fr}.kpi-grid{grid-template-columns:1fr 1fr}}
@@ -386,10 +467,74 @@ footer span{color:var(--bx);font-weight:600}
 <!-- ═══ TAB 1: LANÇAMENTOS ═══ -->
 <div id="tab-1" class="tab-content active">
   <div class="pbadge-bar">
-    <div class="pbadge pb1">Fase 1 · Ativa</div>
+    <div class="pbadge pb1">Fase 1</div>
     <div class="pbadge-desc">Entrada manual de RPVs e despesas · cálculo automático · importação via extrato bancário</div>
   </div>
   <div class="t1-main">
+
+    <!-- OFX UPLOAD — sempre no topo -->
+    <div class="ofx-section">
+      <h3>Importar extrato bancário</h3>
+      <p>Importe o extrato diretamente do banco — o sistema reconhece os lançamentos e sugere categorias automaticamente.</p>
+      <div class="ofx-drop">
+        <div class="ofx-icon">📂</div>
+        <div class="ofx-label">Arraste o arquivo aqui ou clique para selecionar</div>
+        <div class="ofx-formats">
+          <span>OFX</span><span>CSV</span><span>PDF</span>
+        </div>
+        <div class="ofx-note">⚠ Área de demonstração — importação funcional disponível na versão contratada</div>
+      </div>
+      <!-- DEMO: Como o sistema valida as transações -->
+      <div class="ofx-demo">
+        <div class="ofx-demo-lbl">Simulação — como o sistema processa o extrato</div>
+        <!-- Reconhecida -->
+        <div class="ofx-txn ofx-match">
+          <div class="ofx-txn-hdr">
+            <span class="fbadge fb-cef">CEF</span>
+            <span class="ofx-txn-date">22/05/2026</span>
+            <span class="ofx-txn-desc">TED RECEBIDO - TRIBUNAL REGIONAL DO TRABALHO 6ª REGIÃO</span>
+            <span class="ofx-txn-val pos">+ R$ 28.400,00</span>
+          </div>
+          <div class="ofx-match-row">
+            <span class="mbadge-ok">Reconhecido automaticamente</span>
+            <span class="ofx-match-info">→ Causa 0001823-45 · SINDSEP · João C. Ferreira</span>
+          </div>
+          <div class="ofx-txn-btns">
+            <button class="btn-primary" style="padding:6px 12px;font-size:12px" onclick="alert('Lançamento confirmado!\n\nProcesso 0001823-45 marcado como Recebido automaticamente.')">Confirmar</button>
+            <button class="btn-secondary" style="padding:6px 12px;font-size:12px" onclick="alert('Abrindo categorização manual...')">Ajustar</button>
+          </div>
+        </div>
+        <!-- Não reconhecida -->
+        <div class="ofx-txn ofx-unknown">
+          <div class="ofx-txn-hdr">
+            <span class="fbadge fb-bb">BB</span>
+            <span class="ofx-txn-date">21/05/2026</span>
+            <span class="ofx-txn-desc">DEB AUTO - PRISCILA ASSESSORIA JURIDICA LTDA</span>
+            <span class="ofx-txn-val neg">− R$ 4.320,00</span>
+          </div>
+          <div class="ofx-match-row">
+            <span class="mbadge-no">Não reconhecido</span>
+            <span class="ofx-match-info">Categorize para registrar este lançamento</span>
+          </div>
+          <div class="ofx-cat-row">
+            <div class="field" style="flex:1;min-width:120px">
+              <label>Categoria</label>
+              <select id="ofx-cat" onchange="updateOfxTipo()">
+                <option value="">Selecione...</option>
+                <option value="fixo">Custo fixo</option>
+                <option value="variavel">Custo variável</option>
+              </select>
+            </div>
+            <div class="field" style="flex:1;min-width:130px">
+              <label>Tipo de despesa</label>
+              <select id="ofx-tipo"><option value="">—</option></select>
+            </div>
+            <button class="btn-primary" style="padding:7px 12px;font-size:12px;align-self:flex-end" onclick="alert('Lançamento registrado!\n\nDébito automático categorizado como despesa e salvo.')">Registrar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="t1-top">
 
       <!-- FORM -->
@@ -400,63 +545,104 @@ footer span{color:var(--bx);font-weight:600}
           <button id="btn-entrada" class="active-ent" onclick="setTipoLanc('entrada')">+ Entrada (RPV / Honorário)</button>
           <button id="btn-despesa" onclick="setTipoLanc('despesa')">− Despesa do escritório</button>
         </div>
-        <div class="frow">
-          <div class="field"><label>Sindicato</label>
-            <select id="f-sindic" oninput="calcU()">
-              <option value="">Selecione...</option>
-              <option>SINDSEP</option><option>SINDPD</option><option>SEEB</option>
-              <option>SINDIFISCO</option><option>SINTETEL</option><option>SINIJUDE</option>
-            </select></div>
-          <div class="field"><label>Advogado responsável</label>
-            <select id="f-adv">
-              <option value="">Selecione...</option>
-              <option>Cláudio Estevão</option><option>Fred Pinheiro</option>
-              <option>Dra. Beatriz Cavalcanti</option><option>Dr. Marco A. Lins</option>
-              <option>Andrielly Gutierrez</option>
-            </select></div>
+
+        <!-- CAMPOS ENTRADA (RPV / Honorário) -->
+        <div id="rpv-fields">
+          <div class="frow">
+            <div class="field"><label>Sindicato</label>
+              <select id="f-sindic" oninput="calcU()">
+                <option value="">Selecione...</option>
+                <option>SINDSEP</option><option>SINDPD</option><option>SEEB</option>
+                <option>SINDIFISCO</option><option>SINTETEL</option><option>SINIJUDE</option>
+              </select></div>
+            <div class="field"><label>Advogado responsável</label>
+              <select id="f-adv">
+                <option value="">Selecione...</option>
+                <option>Cláudio Estevão</option><option>Fred Pinheiro</option>
+                <option>Dra. Beatriz Cavalcanti</option><option>Dr. Marco A. Lins</option>
+                <option>Andrielly Gutierrez</option>
+              </select></div>
+          </div>
+          <div class="frow full">
+            <div class="field"><label>Número do processo</label>
+              <input type="text" id="f-proc" placeholder="0001823-45.2022.5.06.0012" oninput="calcU()"></div>
+          </div>
+          <div class="frow">
+            <div class="field"><label>Data de expedição (tribunal)</label>
+              <input type="date" id="f-expedicao">
+              <div class="hint">Prazo de levantamento: 60 dias</div></div>
+            <div class="field"><label>Banco destino</label>
+              <select id="f-banco">
+                <option value="">Selecione...</option>
+                <option value="CEF">Caixa Econômica Federal</option>
+                <option value="BB">Banco do Brasil</option>
+              </select></div>
+          </div>
+          <div class="frow full">
+            <div class="field"><label>Valor bruto (R$)</label>
+              <input type="number" id="f-bruto" placeholder="28400.00" step="0.01" min="0" oninput="calcU()"></div>
+          </div>
+          <div class="frow three">
+            <div class="field"><label>% Honorários</label>
+              <input type="number" id="f-hon" value="30" step="0.01" min="0" max="100" oninput="calcU()">
+              <div class="hint">Padrão: 30%</div></div>
+            <div class="field"><label>% Tributos</label>
+              <input type="number" id="f-trib" value="18" step="0.01" min="0" max="100" oninput="calcU()">
+              <div class="hint">Padrão: 18%</div></div>
+            <div class="field"><label>Tipo</label>
+              <select id="f-tipo"><option value="RPV">RPV</option><option value="Precatório">Precatório</option></select></div>
+          </div>
+          <div class="frow full">
+            <div class="field"><label>Beneficiário (trabalhador)</label>
+              <input type="text" id="f-benef" placeholder="Nome do trabalhador beneficiário"></div>
+          </div>
         </div>
-        <div class="frow full">
-          <div class="field"><label>Número do processo</label>
-            <input type="text" id="f-proc" placeholder="0001823-45.2022.5.06.0012" oninput="calcU()"></div>
+
+        <!-- CAMPOS DESPESA -->
+        <div id="desp-fields" style="display:none">
+          <div class="frow">
+            <div class="field"><label>Categoria</label>
+              <select id="fd-categoria" onchange="onCatChange()">
+                <option value="">Selecione...</option>
+                <option value="fixo">Custo Fixo</option>
+                <option value="variavel">Custo Variável</option>
+              </select></div>
+            <div class="field"><label>Tipo de despesa</label>
+              <select id="fd-tipo-desp" onchange="updateNota()">
+                <option value="">Selecione a categoria primeiro</option>
+              </select></div>
+          </div>
+          <div class="frow full">
+            <div class="field"><label>Fornecedor / Credor</label>
+              <input type="text" id="fd-fornecedor" placeholder="Ex: Marcelo Locações" oninput="updateNota()"></div>
+          </div>
+          <div class="frow">
+            <div class="field"><label>Data de vencimento</label>
+              <input type="date" id="fd-vencimento" onchange="updateNota()"></div>
+            <div class="field"><label>Valor (R$)</label>
+              <input type="number" id="fd-valor" placeholder="0,00" step="0.01" min="0" oninput="updateNota()"></div>
+          </div>
+          <div class="frow full">
+            <div class="field"><label>Forma de pagamento</label>
+              <select id="fd-pagamento" onchange="updateNota()">
+                <option value="">Selecione...</option>
+                <option>Boleto</option><option>TED / PIX</option>
+                <option>Débito automático</option><option>Cartão</option><option>Dinheiro</option>
+              </select></div>
+          </div>
         </div>
-        <div class="frow">
-          <div class="field"><label>Data de expedição (tribunal)</label>
-            <input type="date" id="f-expedicao">
-            <div class="hint">Prazo de levantamento: 60 dias</div></div>
-          <div class="field"><label>Banco destino</label>
-            <select id="f-banco">
-              <option value="">Selecione...</option>
-              <option value="CEF">Caixa Econômica Federal</option>
-              <option value="BB">Banco do Brasil</option>
-            </select></div>
-        </div>
-        <div class="frow full">
-          <div class="field"><label>Valor bruto (R$)</label>
-            <input type="number" id="f-bruto" placeholder="28400.00" step="0.01" min="0" oninput="calcU()"></div>
-        </div>
-        <div class="frow three">
-          <div class="field"><label>% Honorários</label>
-            <input type="number" id="f-hon" value="30" step="0.01" min="0" max="100" oninput="calcU()">
-            <div class="hint">Padrão: 30%</div></div>
-          <div class="field"><label>% Tributos</label>
-            <input type="number" id="f-trib" value="18" step="0.01" min="0" max="100" oninput="calcU()">
-            <div class="hint">Padrão: 18%</div></div>
-          <div class="field"><label>Tipo</label>
-            <select id="f-tipo"><option value="RPV">RPV</option><option value="Precatório">Precatório</option></select></div>
-        </div>
-        <div class="frow full">
-          <div class="field"><label>Beneficiário (trabalhador)</label>
-            <input type="text" id="f-benef" placeholder="Nome do trabalhador beneficiário"></div>
-        </div>
+
         <div class="form-actions">
           <button class="btn-secondary" onclick="clearT1()">Limpar</button>
           <button class="btn-primary" onclick="saveT1()">Salvar lançamento</button>
         </div>
       </div>
 
+      <!-- PAINEL DIREITO: Cálculo (entrada) ou Nota Fiscal (despesa) -->
+
       <!-- CALC PANEL -->
-      <div class="calc-panel">
-        <div class="card-title">Cálculo em tempo real</div>
+      <div class="calc-panel" id="calc-panel">
+        <div class="card-title">Cálculo em tempo real — RPV / Honorário</div>
         <div class="card-sub">Atualizado conforme você preenche</div>
         <div class="calc-row"><div class="calc-lbl">Valor bruto RPV</div><div class="calc-val cv-bx" id="c-bruto">R$ —</div></div>
         <div class="calc-row"><div class="calc-lbl">Honorários (<span id="c-hon-lbl">30</span>%)</div><div class="calc-val cv-rd" id="c-hon">− R$ —</div></div>
@@ -470,19 +656,32 @@ footer span{color:var(--bx);font-weight:600}
         </div>
         <div class="calc-note"><strong>Distribuição de honorários</strong><br>Pró-labore: fixo mensal aos sócios<br>Fundo: participação por sócio<br>Diferenciada: por processo / advogado</div>
       </div>
-    </div>
 
-    <!-- OFX UPLOAD -->
-    <div class="ofx-section">
-      <h3>Importar extrato bancário</h3>
-      <p>Importe o extrato diretamente do banco — o sistema reconhece os lançamentos e sugere categorias automaticamente.</p>
-      <div class="ofx-drop">
-        <div class="ofx-icon">📂</div>
-        <div class="ofx-label">Arraste o arquivo aqui ou clique para selecionar</div>
-        <div class="ofx-formats">
-          <span>OFX</span><span>CSV</span><span>PDF</span>
+      <!-- NOTA PANEL (despesa) -->
+      <div class="nota-panel" id="nota-panel" style="display:none">
+        <div class="card-title">Comprovante de despesa</div>
+        <div class="card-sub">Preenchendo em tempo real</div>
+        <div class="nota-fiscal">
+          <div class="nota-hdr">
+            <div class="nota-logo">E&amp;P</div>
+            <div>
+              <div class="nota-brand">Estevão &amp; Pinheiro</div>
+              <div class="nota-brand-sub">Advogados Associados</div>
+            </div>
+          </div>
+          <div class="nota-div"></div>
+          <div class="nota-row"><span>Categoria</span><span id="nota-cat">—</span></div>
+          <div class="nota-row"><span>Tipo</span><span id="nota-tipo">—</span></div>
+          <div class="nota-row"><span>Fornecedor</span><span id="nota-forn">—</span></div>
+          <div class="nota-row"><span>Vencimento</span><span id="nota-venc">—</span></div>
+          <div class="nota-row"><span>Forma pag.</span><span id="nota-pag">—</span></div>
+          <div class="nota-div"></div>
+          <div class="nota-valor-row">
+            <span class="nota-valor-lbl">Valor</span>
+            <span class="nota-valor-val" id="nota-val">R$ —</span>
+          </div>
+          <div class="nota-stamp" id="nota-stamp">REGISTRADO</div>
         </div>
-        <div class="ofx-note">⚠ Área de demonstração — importação funcional disponível na versão contratada</div>
       </div>
     </div>
 
@@ -527,7 +726,7 @@ footer span{color:var(--bx);font-weight:600}
 <!-- ═══ TAB 2: PAINEL FINANCEIRO ═══ -->
 <div id="tab-2" class="tab-content">
   <div class="pbadge-bar">
-    <div class="pbadge pb2">Fase 2 · Painel</div>
+    <div class="pbadge pb2">Fase 2</div>
     <div class="pbadge-desc">BI interativo · Clique em qualquer card, gráfico ou banco para filtrar toda a página</div>
   </div>
   <div class="t2-main">
@@ -535,35 +734,39 @@ footer span{color:var(--bx);font-weight:600}
     <!-- O QUE FAZER HOJE — sempre no topo -->
     <div class="hoje-section">
       <div class="hoje-card">
-        <div class="hoje-title">📋 O que fazer hoje</div>
+        <div class="hoje-title" style="font-size:13px;font-weight:700;margin-bottom:10px;display:flex;align-items:center;gap:6px">O que fazer hoje</div>
         <div class="hoje-list">
-          <div class="hoje-item hi-urgente">
-            <div class="hi-icon">🚨</div>
-            <div class="hi-body">
+          <div class="hoje-item hi-urgente" id="hi-1">
+            <input type="checkbox" class="hi-chk" onchange="markHoje('hi-1',this)">
+            <div class="hi-body" onclick="goOverdue()">
               <div class="hi-label">2 RPVs com prazo vencido — levantar urgente</div>
-              <div class="hi-desc">Proc. 0014221-09 (SINDIFISCO) e 0015830-22 (SEEB) — passaram de 60 dias da expedição</div>
+              <div class="hi-desc">Proc. 0014221-09 (SINDIFISCO) e 0015830-22 (SEEB) — passaram de 60 dias</div>
             </div>
+            <button class="hi-link" onclick="goOverdue()">Ver →</button>
           </div>
-          <div class="hoje-item hi-atencao">
-            <div class="hi-icon">✍️</div>
-            <div class="hi-body">
-              <div class="hi-label">3 recibos aguardando assinatura digital</div>
-              <div class="hi-desc">SINDPD · SEEB · SINDSEP — recibos gerados, assinatura pendente há +5 dias</div>
-            </div>
-          </div>
-          <div class="hoje-item hi-atencao">
-            <div class="hi-icon">📊</div>
-            <div class="hi-body">
+          <div class="hoje-item hi-atencao" id="hi-2">
+            <input type="checkbox" class="hi-chk" onchange="markHoje('hi-2',this)">
+            <div class="hi-body" onclick="goRelatorio()">
               <div class="hi-label">Relatório semanal para Ricardo Estevam</div>
               <div class="hi-desc">Última entrega: 19/05/2026 — envio via WhatsApp pendente</div>
             </div>
+            <button class="hi-link" onclick="goRelatorio()">Enviar →</button>
           </div>
-          <div class="hoje-item hi-info">
-            <div class="hi-icon">💰</div>
-            <div class="hi-body">
+          <div class="hoje-item hi-info" id="hi-3">
+            <input type="checkbox" class="hi-chk" onchange="markHoje('hi-3',this)">
+            <div class="hi-body" onclick="goCobranca('sinijude')">
               <div class="hi-label">Cobrar SINIJUDE — 4 meses em atraso</div>
               <div class="hi-desc">Mensalidade R$ 1.200/mês — total pendente: R$ 4.800,00</div>
             </div>
+            <button class="hi-link" onclick="goCobranca('sinijude')">Cobrar →</button>
+          </div>
+          <div class="hoje-item hi-atencao" id="hi-4">
+            <input type="checkbox" class="hi-chk" onchange="markHoje('hi-4',this)">
+            <div class="hi-body" onclick="goAssinatura()">
+              <div class="hi-label">3 recibos aguardando assinatura digital</div>
+              <div class="hi-desc">SINDPD · SEEB · SINDSEP — assinatura pendente há +5 dias</div>
+            </div>
+            <button class="hi-link" onclick="goAssinatura()">Ver →</button>
           </div>
         </div>
       </div>
@@ -605,6 +808,31 @@ footer span{color:var(--bx);font-weight:600}
         <div class="contrato-row">
           <div><div class="cr-info">0005567-13 · SEEB</div><div class="cr-sub">André L. Brito · R$ 5.132,40</div></div>
           <span class="sbadge sb-disp"><div class="dot"></div>Assinado</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- RECEITAS & CUSTOS — destaque full width -->
+    <div class="resultado-highlight">
+      <div class="rh-header">Receitas &amp; Custos — últimos 6 meses</div>
+      <div class="rh-sub">Visão consolidada do período · Clique no gráfico para detalhar os custos</div>
+      <div class="rh-body">
+        <div class="rh-kpis">
+          <div class="rh-kpi rh-gn"><div class="rh-kpi-val">R$ 275k</div><div class="rh-kpi-lbl">Total recebido</div></div>
+          <div class="rh-kpi rh-rd"><div class="rh-kpi-val">R$ 172k</div><div class="rh-kpi-lbl">Total custos</div></div>
+          <div class="rh-kpi rh-bx"><div class="rh-kpi-val">R$ 103k</div><div class="rh-kpi-lbl">Resultado líquido</div></div>
+        </div>
+        <div class="rh-chart-col">
+          <div class="rh-chart-title">Composição do resultado</div>
+          <div style="position:relative;height:160px;width:180px"><canvas id="chartResultado"></canvas></div>
+        </div>
+        <div class="rh-costs-col">
+          <div style="font-size:11px;font-weight:600;color:var(--mu);text-transform:uppercase;letter-spacing:.04em;margin-bottom:8px">Principais custos</div>
+          <div class="cost-toggle">
+            <button class="ct-btn ct-active" data-view="fixo" onclick="setCostView('fixo',this)">Custos fixos</button>
+            <button class="ct-btn" data-view="variavel" onclick="setCostView('variavel',this)">Custos variáveis</button>
+          </div>
+          <div class="cost-list" id="cost-bars"></div>
         </div>
       </div>
     </div>
@@ -656,84 +884,40 @@ footer span{color:var(--bx);font-weight:600}
 
     <div class="filter-chips" id="f2-chips" style="display:none"></div>
 
-    <!-- KPIs -->
-    <div class="kpi-grid">
-      <div class="kpi-card k-bx" onclick="kpiFilter('status','')">
-        <div class="kpi-icon">⚖️</div>
-        <div class="kpi-lbl">Total a Receber</div>
-        <div class="kpi-val kv-bx" id="kv-total">R$ —</div>
-        <div class="kpi-sub" id="ks-total">—</div>
-        <div class="kpi-filter-hint">Clique para ver todas</div>
+    <!-- KPIs + BANCO (interagem com a tabela abaixo) -->
+    <div class="kpi-banco-row">
+      <div class="kpi-grid-4">
+        <div class="kpi-card k-bx" onclick="kpiFilter('status','')">
+          <div class="kpi-lbl">Total a Receber</div>
+          <div class="kpi-val kv-bx" id="kv-total">R$ —</div>
+          <div class="kpi-sub" id="ks-total">—</div>
+          <div class="kpi-filter-hint">Clique para ver todas</div>
+        </div>
+        <div class="kpi-card k-gn" onclick="kpiFilter('status','disponivel')">
+          <div class="kpi-lbl">Disponível para Levantamento</div>
+          <div class="kpi-val kv-gn" id="kv-disp">R$ —</div>
+          <div class="kpi-sub" id="ks-disp">—</div>
+          <div class="kpi-filter-hint">Clique para filtrar</div>
+        </div>
+        <div class="kpi-card k-or" onclick="kpiFilter('status','pendente')">
+          <div class="kpi-lbl">Pendente / Em análise</div>
+          <div class="kpi-val kv-or" id="kv-pend">R$ —</div>
+          <div class="kpi-sub" id="ks-pend">—</div>
+          <div class="kpi-filter-hint">Clique para filtrar</div>
+        </div>
+        <div class="kpi-card k-bl" onclick="kpiFilter('status','recebido')">
+          <div class="kpi-lbl">Recebido — Maio/2026</div>
+          <div class="kpi-val kv-bl" id="kv-rec">R$ —</div>
+          <div class="kpi-sub" id="ks-rec">—</div>
+          <div class="kpi-filter-hint">Clique para filtrar</div>
+        </div>
       </div>
-      <div class="kpi-card k-gn" onclick="kpiFilter('status','disponivel')">
-        <div class="kpi-icon">✅</div>
-        <div class="kpi-lbl">Disponível para Levantamento</div>
-        <div class="kpi-val kv-gn" id="kv-disp">R$ —</div>
-        <div class="kpi-sub" id="ks-disp">—</div>
-        <div class="kpi-filter-hint">Clique para filtrar</div>
-      </div>
-      <div class="kpi-card k-or" onclick="kpiFilter('status','pendente')">
-        <div class="kpi-icon">⏳</div>
-        <div class="kpi-lbl">Pendente / Em análise</div>
-        <div class="kpi-val kv-or" id="kv-pend">R$ —</div>
-        <div class="kpi-sub" id="ks-pend">—</div>
-        <div class="kpi-filter-hint">Clique para filtrar</div>
-      </div>
-      <div class="kpi-card k-bl" onclick="kpiFilter('status','recebido')">
-        <div class="kpi-icon">🏦</div>
-        <div class="kpi-lbl">Recebido — Maio/2026</div>
-        <div class="kpi-val kv-bl" id="kv-rec">R$ —</div>
-        <div class="kpi-sub" id="ks-rec">—</div>
-        <div class="kpi-filter-hint">Clique para filtrar</div>
-      </div>
-    </div>
-
-    <!-- CHARTS ROW 1: honorários + banco -->
-    <div class="charts-row">
-      <div class="chart-card">
-        <div class="chart-title">Honorários por advogado</div>
-        <div class="chart-sub">Clique em uma barra para filtrar as causas abaixo</div>
-        <div class="ch-wrap"><canvas id="chartAdv"></canvas></div>
-      </div>
-      <div class="chart-card">
+      <div class="banco-card">
         <div class="chart-title">Distribuição por banco</div>
-        <div class="chart-sub">Clique para filtrar toda a página</div>
+        <div class="chart-sub" style="font-size:10px;color:var(--mu);margin-bottom:8px">Clique para filtrar</div>
         <div class="bank-dist-layout">
-          <div style="position:relative;height:160px;width:160px"><canvas id="chartBank"></canvas></div>
+          <div style="position:relative;height:140px;width:140px"><canvas id="chartBank"></canvas></div>
           <div class="bank-legend" id="bank-legend"></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- CHARTS ROW 2: sindicato + resultado/custos -->
-    <div class="charts-row-2">
-      <div class="chart-card">
-        <div class="chart-title">Volume de causas por sindicato</div>
-        <div class="chart-sub">Clique em uma barra para filtrar as causas abaixo</div>
-        <div class="ch-wrap"><canvas id="chartSindic"></canvas></div>
-      </div>
-      <div class="chart-card" style="padding:14px 16px">
-        <div class="chart-title">Receitas e Custos — últimos 6 meses</div>
-        <div class="chart-sub">Quanto o escritório recebeu, quanto gastou e qual foi o resultado</div>
-        <div class="resultado-kpis">
-          <div class="rk-item rk-gn"><div class="rk-val">R$ 275k</div><div class="rk-lbl">Total recebido</div></div>
-          <div class="rk-item rk-rd"><div class="rk-val">R$ 172k</div><div class="rk-lbl">Total custos</div></div>
-          <div class="rk-item rk-bx"><div class="rk-val">R$ 103k</div><div class="rk-lbl">Resultado líquido</div></div>
-        </div>
-        <div class="resultado-split">
-          <div>
-            <div style="font-size:11px;font-weight:600;color:var(--mu);margin-bottom:6px;text-transform:uppercase;letter-spacing:.04em">Composição do resultado</div>
-            <div style="position:relative;height:150px"><canvas id="chartResultado"></canvas></div>
-          </div>
-          <div>
-            <div style="font-size:11px;font-weight:600;color:var(--mu);margin-bottom:8px;text-transform:uppercase;letter-spacing:.04em">Principais custos</div>
-            <div class="cost-toggle">
-              <button class="ct-btn ct-active" onclick="setCostView('todos',this)">Todos</button>
-              <button class="ct-btn" onclick="setCostView('fixo',this)">Fixos</button>
-              <button class="ct-btn" onclick="setCostView('variavel',this)">Variáveis</button>
-            </div>
-            <div class="cost-list" id="cost-bars"></div>
-          </div>
         </div>
       </div>
     </div>
@@ -780,26 +964,44 @@ footer span{color:var(--bx);font-weight:600}
         </table>
       </div>
     </div>
+
+    <!-- CHARTS BOTTOM: honorários + sindicato -->
+    <div class="charts-row-bottom">
+      <div class="chart-card">
+        <div class="chart-title">Honorários por advogado</div>
+        <div class="chart-sub">Clique em uma barra para filtrar as causas acima</div>
+        <div class="ch-wrap"><canvas id="chartAdv"></canvas></div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-title">Volume de causas por sindicato</div>
+        <div class="chart-sub">Clique em uma barra para filtrar as causas acima</div>
+        <div class="ch-wrap"><canvas id="chartSindic"></canvas></div>
+      </div>
+    </div>
+
   </div>
 </div>
 
 <!-- ═══ TAB 3: COMUNICAÇÃO ═══ -->
 <div id="tab-3" class="tab-content">
   <div class="pbadge-bar">
-    <div class="pbadge pb3">Fase 3 · Em desenvolvimento</div>
+    <div class="pbadge pb3">Fase 3</div>
     <div class="pbadge-desc">Relatórios automáticos · Cobrança de sindicatos · Assinatura digital</div>
   </div>
   <div class="t3-main">
     <div class="t3-grid">
 
       <!-- RELATÓRIO WHATSAPP/EMAIL -->
-      <div class="t3-card">
+      <div class="t3-card automacao-card" id="t3-relatorio">
         <div class="t3-card-hdr">
           <div>
             <div class="t3-card-title">Relatório de causas</div>
             <div class="t3-card-sub">Gerado para o período selecionado · envio via WhatsApp e e-mail</div>
           </div>
-          <span class="c-phase">Fase 3</span>
+          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px">
+            <span class="c-phase">Fase 3</span>
+            <span class="automacao-badge">+ Automação disponível</span>
+          </div>
         </div>
         <div class="period-radio">
           <div class="prad active" onclick="setPrad(this)">Diário</div>
@@ -838,46 +1040,72 @@ _Gerado em 24/05/2026 às 08:00_</div>
           <button class="btn-wa-off">📱 Enviar WhatsApp <span class="soon-tag">Em breve</span></button>
           <button class="btn-em-off">✉ Enviar E-mail <span class="soon-tag">Em breve</span></button>
         </div>
+        <div class="automacao-extra">
+          <h4>Possibilidade de Automação Extra</h4>
+          <p>Com integração à API WhatsApp Business e configuração de agenda:</p>
+          <ul>
+            <li>Relatório gerado e enviado automaticamente em horário programado</li>
+            <li>Disparo diário, semanal ou mensal — sem intervenção manual</li>
+            <li>Destinatários configuráveis por sindicato ou sócio</li>
+          </ul>
+        </div>
       </div>
 
       <!-- COBRANÇA SINDICATOS -->
-      <div class="t3-card">
+      <div class="t3-card automacao-card" id="t3-cobranca">
         <div class="t3-card-hdr">
           <div>
             <div class="t3-card-title">Cobrança de mensalidades</div>
-            <div class="t3-card-sub">Modelo de comunicação externa para sindicatos em atraso</div>
+            <div class="t3-card-sub">Selecione os inadimplentes e envie a comunicação</div>
           </div>
-          <span class="c-phase">Fase 3</span>
+          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px">
+            <span class="c-phase">Fase 3</span>
+            <span class="automacao-badge">+ Automação disponível</span>
+          </div>
         </div>
-        <div class="email-subject">Assunto: Mensalidades em Aberto — SINIJUDE · Maio/2026</div>
-        <div class="email-template">Prezados,
 
-Identificamos <strong>4 mensalidades em aberto</strong> referentes ao período de
-Janeiro/2026 a Abril/2026, no valor total de <strong>R$ 4.800,00</strong>.
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--mu);margin-bottom:8px">Selecionar destinatários</div>
+        <div class="inad-list">
+          <label class="inad-item">
+            <input type="checkbox" id="chk-sinijude" class="inad-chk" onchange="updateCobTemplate()">
+            <div style="flex:1">
+              <div class="inad-nome">SINIJUDE</div>
+              <div class="inad-det">4 meses em atraso · R$ 4.800,00 total</div>
+            </div>
+            <span class="sbadge sb-pend"><div class="dot"></div>Inadimplente</span>
+          </label>
+          <label class="inad-item">
+            <input type="checkbox" id="chk-sintetel" class="inad-chk" onchange="updateCobTemplate()">
+            <div style="flex:1">
+              <div class="inad-nome">SINTETEL</div>
+              <div class="inad-det">2 meses em atraso · R$ 2.400,00 total</div>
+            </div>
+            <span class="sbadge sb-pend"><div class="dot"></div>Inadimplente</span>
+          </label>
+          <label class="inad-item">
+            <input type="checkbox" id="chk-sindpd-inad" class="inad-chk" onchange="updateCobTemplate()">
+            <div style="flex:1">
+              <div class="inad-nome">SINDPD</div>
+              <div class="inad-det">1 mês em atraso · R$ 1.200,00 total</div>
+            </div>
+            <span class="sbadge sb-pend"><div class="dot"></div>Inadimplente</span>
+          </label>
+        </div>
 
-Solicitamos a regularização até <strong>05/06/2026</strong> para manutenção
-dos serviços de assessoria jurídica contratados.
-
-Caso já tenha realizado o pagamento, favor desconsiderar este aviso
-e encaminhar o comprovante para confirmação.
-
-Em caso de dúvidas, estamos à disposição.
-
-Atenciosamente,
-<strong>Estevão & Pinheiro Advogados Associados</strong>
-contato@estevaoepinheiro.adv.br · (81) 3423-2494</div>
+        <div class="email-subject">Assunto: Mensalidades em Aberto — <span id="cob-subject-names">selecione acima</span></div>
+        <div class="email-template" id="cob-template" style="font-style:italic;color:var(--mu)">Selecione os destinatários acima para gerar a mensagem.</div>
         <div class="t3-btns">
           <button class="btn-em-off">✉ Enviar e-mail <span class="soon-tag">Em breve</span></button>
-          <button class="btn-secondary" style="font-size:12px" onclick="alert('Cópia copiada para a área de transferência.')">Copiar texto</button>
+          <button class="btn-wa-off">📱 WhatsApp <span class="soon-tag">Em breve</span></button>
+          <button class="btn-secondary" style="font-size:12px" onclick="alert('Texto copiado.')">Copiar</button>
         </div>
 
-        <div class="upsell-box">
-          <h4>💡 Automação possível para este processo</h4>
-          <p>Este fluxo pode ser totalmente automatizado — o sistema identifica inadimplência e dispara cobranças sem intervenção manual:</p>
+        <div class="automacao-extra">
+          <h4>Possibilidade de Automação Extra</h4>
+          <p>Com integração à API do WhatsApp Business e configuração de régua de cobrança:</p>
           <ul>
-            <li>Mensalidades em atraso → alerta automático após vencimento</li>
-            <li>Honorários pendentes → lembrete por e-mail ao sindicato</li>
-            <li>Escalonamento → 1ª cobrança no e-mail, 2ª via WhatsApp</li>
+            <li>Alerta automático após vencimento — sem intervenção manual</li>
+            <li>Escalonamento: 1ª cobrança por e-mail, 2ª via WhatsApp</li>
             <li>Dashboard de inadimplência atualizado em tempo real</li>
           </ul>
         </div>
@@ -885,13 +1113,16 @@ contato@estevaoepinheiro.adv.br · (81) 3423-2494</div>
     </div>
 
     <!-- RECIBOS DE HONORÁRIOS — ASSINATURA DIGITAL -->
-    <div class="t3-card-full">
+    <div class="t3-card-full automacao-card" id="t3-assinatura">
       <div class="t3-card-hdr">
         <div>
           <div class="t3-card-title">Recibos de honorários — Assinatura digital</div>
           <div class="t3-card-sub">Após levantar um RPV, o sindicato recebe o recibo com os valores calculados e assina digitalmente pelo celular ou computador, com validade jurídica (ICP-Brasil)</div>
         </div>
-        <span class="c-phase">Fase 3</span>
+        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px">
+          <span class="c-phase">Fase 3</span>
+          <span class="automacao-badge">+ Automação disponível</span>
+        </div>
       </div>
       <div class="pipe-grid">
         <div class="pipe-step ps-done">
@@ -925,6 +1156,15 @@ contato@estevaoepinheiro.adv.br · (81) 3423-2494</div>
           <div class="ps-desc">Documento salvo na nuvem, rastreável, com histórico completo</div>
         </div>
       </div>
+      <div class="automacao-extra" style="margin-top:16px">
+        <h4>Possibilidade de Automação Extra</h4>
+        <p>Com integração à DocSign ou plataforma similar (ex: Clicksign):</p>
+        <ul>
+          <li>Recibo gerado e enviado automaticamente após o lançamento do RPV</li>
+          <li>Representante do sindicato assina em 1 clique pelo celular — sem impressão</li>
+          <li>Documento arquivado na nuvem com validade jurídica (ICP-Brasil)</li>
+        </ul>
+      </div>
     </div>
   </div>
 </div>
@@ -932,7 +1172,7 @@ contato@estevaoepinheiro.adv.br · (81) 3423-2494</div>
 <!-- ═══ TAB 4: CONFIGURAÇÕES ═══ -->
 <div id="tab-4" class="tab-content">
   <div class="pbadge-bar">
-    <div class="pbadge pb3">Fase 3 · Em desenvolvimento</div>
+    <div class="pbadge pb3">Fase 3</div>
     <div class="pbadge-desc">Controle de acessos · permissões por perfil</div>
   </div>
   <div class="t4-main">
@@ -976,6 +1216,36 @@ contato@estevaoepinheiro.adv.br · (81) 3423-2494</div>
         Sócios acessam painel resumido sem honorários individuais por advogado ou dados granulares de processos de terceiros. Administrador configura as permissões por módulo: lançamentos, painel, relatórios e configurações.
       </div>
     </div>
+
+    <!-- AGENDA DE CONTATOS -->
+    <div class="t4-card">
+      <div class="t4-card-hdr">
+        <div>
+          <div class="t4-card-title">Agenda de contatos — Sindicatos</div>
+          <div class="t4-card-sub">Contatos usados no envio automático de relatórios e cobranças · cadastrado uma vez, usado em todas as comunicações</div>
+        </div>
+        <span class="c-phase">Fase 3</span>
+      </div>
+      <div style="overflow-x:auto">
+        <table>
+          <thead>
+            <tr><th>Sindicato</th><th>Responsável</th><th>E-mail</th><th>WhatsApp</th><th style="width:70px"></th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>SINDSEP</strong></td><td>Carlos Mendes</td><td style="font-family:'DM Mono',monospace;font-size:11px">carlos@sindsep.org.br</td><td style="font-family:'DM Mono',monospace;font-size:11px">(81) 99123-4567</td><td><button class="btn-secondary" style="padding:3px 10px;font-size:11px" onclick="alert('Edição disponível na versão contratada.')">Editar</button></td></tr>
+            <tr><td><strong>SINDPD</strong></td><td>Maria Oliveira</td><td style="font-family:'DM Mono',monospace;font-size:11px">maria@sindpd.org.br</td><td style="font-family:'DM Mono',monospace;font-size:11px">(81) 99234-5678</td><td><button class="btn-secondary" style="padding:3px 10px;font-size:11px" onclick="alert('Edição disponível na versão contratada.')">Editar</button></td></tr>
+            <tr><td><strong>SEEB</strong></td><td>João Santos</td><td style="font-family:'DM Mono',monospace;font-size:11px">joao@seeb.org.br</td><td style="font-family:'DM Mono',monospace;font-size:11px">(81) 99345-6789</td><td><button class="btn-secondary" style="padding:3px 10px;font-size:11px" onclick="alert('Edição disponível na versão contratada.')">Editar</button></td></tr>
+            <tr><td><strong>SINDIFISCO</strong></td><td>Ana Lima</td><td style="font-family:'DM Mono',monospace;font-size:11px">ana@sindifisco.org.br</td><td style="font-family:'DM Mono',monospace;font-size:11px">(81) 99456-7890</td><td><button class="btn-secondary" style="padding:3px 10px;font-size:11px" onclick="alert('Edição disponível na versão contratada.')">Editar</button></td></tr>
+            <tr style="background:rgba(192,112,0,.04)"><td><strong style="color:var(--rd)">SINIJUDE</strong> <span class="vencida-badge">Inadimplente</span></td><td>Roberto Braga</td><td style="font-family:'DM Mono',monospace;font-size:11px">roberto@sinijude.org.br</td><td style="font-family:'DM Mono',monospace;font-size:11px">(81) 99567-8901</td><td><button class="btn-secondary" style="padding:3px 10px;font-size:11px" onclick="alert('Edição disponível na versão contratada.')">Editar</button></td></tr>
+            <tr style="background:rgba(192,112,0,.04)"><td><strong style="color:var(--or)">SINTETEL</strong> <span class="vencida-badge">Inadimplente</span></td><td>Patricia Cruz</td><td style="font-family:'DM Mono',monospace;font-size:11px">patricia@sintetel.org.br</td><td style="font-family:'DM Mono',monospace;font-size:11px">(81) 99678-9012</td><td><button class="btn-secondary" style="padding:3px 10px;font-size:11px" onclick="alert('Edição disponível na versão contratada.')">Editar</button></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div style="margin-top:14px;padding-top:12px;border-top:1px solid var(--bd);display:flex;justify-content:space-between;align-items:center">
+        <span style="font-size:12px;color:var(--mu)">6 contatos cadastrados · 2 inadimplentes</span>
+        <button class="btn-primary" style="font-size:12px;padding:7px 14px" onclick="alert('Formulário de novo contato disponível na versão contratada.')">+ Novo contato</button>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -1013,11 +1283,47 @@ function switchTab(n){
 }
 
 // ─── TAB 1 ───
+const DESP_TIPOS = {
+  fixo:['Aluguel','Folha de pagamento','Contabilidade','Softwares jurídicos','Internet / Telefonia','Outros fixos'],
+  variavel:['Despesas processuais','Honorários periciais','Deslocamentos','Material de escritório','Outros variáveis']
+};
 let tipoLanc = 'entrada';
 function setTipoLanc(t){
   tipoLanc = t;
   document.getElementById('btn-entrada').className = t==='entrada' ? 'active-ent' : '';
   document.getElementById('btn-despesa').className = t==='despesa' ? 'active-desp' : '';
+  document.getElementById('rpv-fields').style.display = t==='entrada' ? '' : 'none';
+  document.getElementById('desp-fields').style.display = t==='despesa' ? '' : 'none';
+  document.getElementById('calc-panel').style.display = t==='entrada' ? '' : 'none';
+  document.getElementById('nota-panel').style.display = t==='despesa' ? '' : 'none';
+}
+function onCatChange(){
+  const cat = document.getElementById('fd-categoria').value;
+  const tipos = DESP_TIPOS[cat]||[];
+  const sel = document.getElementById('fd-tipo-desp');
+  sel.innerHTML = '<option value="">Selecione...</option>'+tipos.map(t=>`<option>${t}</option>`).join('');
+  updateNota();
+}
+function updateNota(){
+  const cat = document.getElementById('fd-categoria')?.value;
+  const tipo = document.getElementById('fd-tipo-desp')?.value;
+  const forn = document.getElementById('fd-fornecedor')?.value;
+  const venc = document.getElementById('fd-vencimento')?.value;
+  const val = parseFloat(document.getElementById('fd-valor')?.value)||0;
+  const pag = document.getElementById('fd-pagamento')?.value;
+  document.getElementById('nota-cat').textContent = cat ? (cat==='fixo'?'Custo Fixo':'Custo Variável') : '—';
+  document.getElementById('nota-tipo').textContent = tipo||'—';
+  document.getElementById('nota-forn').textContent = forn||'—';
+  document.getElementById('nota-venc').textContent = venc ? fmtDate(venc) : '—';
+  document.getElementById('nota-val').textContent = val ? fmt(val) : 'R$ —';
+  document.getElementById('nota-pag').textContent = pag||'—';
+}
+function updateOfxTipo(){
+  const cat = document.getElementById('ofx-cat')?.value;
+  const tipos = DESP_TIPOS[cat]||[];
+  const sel = document.getElementById('ofx-tipo');
+  if(!sel) return;
+  sel.innerHTML = '<option value="">Selecione...</option>'+tipos.map(t=>`<option>${t}</option>`).join('');
 }
 
 function calcU(){
@@ -1063,27 +1369,39 @@ let t1NextId = 100;
 let t1Sel = new Set();
 
 function saveT1(){
-  const br = parseFloat(document.getElementById('f-bruto').value)||0;
+  if(tipoLanc==='despesa'){
+    const val=parseFloat(document.getElementById('fd-valor')?.value)||0;
+    if(!val){alert('Preencha o Valor.');return;}
+    const stamp=document.getElementById('nota-stamp');
+    if(stamp){stamp.style.display='block';setTimeout(()=>{stamp.style.display='none';clearT1();},1400);}
+    return;
+  }
+  const br=parseFloat(document.getElementById('f-bruto').value)||0;
   if(!br){alert('Preencha o Valor Bruto.');return;}
-  const newEntry = {
-    id: t1NextId++,
-    proc: document.getElementById('f-proc').value||'—',
-    desc: tipoLanc === 'entrada' ? 'RPV / Honorário' : 'Despesa',
-    sindic: document.getElementById('f-sindic').value||'—',
-    benef: document.getElementById('f-benef').value||'—',
-    banco: document.getElementById('f-banco').value||'—',
-    tipo: document.getElementById('f-tipo').value||'RPV',
-    valor: br,
-    status: 'disponivel',
-    data: new Date().toISOString().split('T')[0],
-    dataExpedicao: document.getElementById('f-expedicao').value||new Date().toISOString().split('T')[0],
-    adv: document.getElementById('f-adv').value||'—',
-  };
-  causasData.unshift(newEntry);
+  causasData.unshift({
+    id:t1NextId++,
+    proc:document.getElementById('f-proc').value||'—',
+    desc:'RPV / Honorário',
+    sindic:document.getElementById('f-sindic').value||'—',
+    benef:document.getElementById('f-benef').value||'—',
+    banco:document.getElementById('f-banco').value||'—',
+    tipo:document.getElementById('f-tipo').value||'RPV',
+    valor:br,
+    status:'disponivel',
+    data:new Date().toISOString().split('T')[0],
+    dataExpedicao:document.getElementById('f-expedicao').value||new Date().toISOString().split('T')[0],
+    adv:document.getElementById('f-adv').value||'—',
+  });
   renderT1Table();
   clearT1();
 }
 function clearT1(){
+  if(tipoLanc==='despesa'){
+    ['fd-categoria','fd-tipo-desp','fd-fornecedor','fd-pagamento'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
+    const fd=document.getElementById('fd-vencimento');if(fd)fd.value='';
+    const fv=document.getElementById('fd-valor');if(fv)fv.value='';
+    updateNota();return;
+  }
   ['f-sindic','f-adv','f-proc','f-banco','f-benef'].forEach(id=>document.getElementById(id).value='');
   document.getElementById('f-bruto').value='';
   document.getElementById('f-expedicao').value='';
@@ -1092,25 +1410,48 @@ function clearT1(){
   document.getElementById('f-tipo').value='RPV';
   calcU();
 }
+function editT1Cell(id,field,el){
+  if(el.querySelector('input,select'))return;
+  const e=causasData.find(x=>x.id===id);if(!e)return;
+  let inp;
+  const s='border:1px solid var(--bx);border-radius:4px;padding:3px 6px;font-size:12px;font-family:"DM Sans",sans-serif;outline:none;';
+  if(field==='status'){
+    inp=document.createElement('select');inp.className='status-select';
+    Object.entries(STATUS_CFG).forEach(([k,v])=>{const o=document.createElement('option');o.value=k;o.textContent=v.label;if(k===e.status)o.selected=true;inp.appendChild(o);});
+  } else if(field==='banco'){
+    inp=document.createElement('select');inp.style.cssText=s;
+    ['CEF','BB'].forEach(b=>{const o=document.createElement('option');o.value=b;o.textContent=b;if(b===e.banco)o.selected=true;inp.appendChild(o);});
+  } else if(field==='valor'){
+    inp=document.createElement('input');inp.type='number';inp.value=e.valor;inp.style.cssText=s+'width:90px;';
+  } else if(field==='dataExpedicao'){
+    inp=document.createElement('input');inp.type='date';inp.value=e.dataExpedicao;inp.style.cssText=s;
+  } else {
+    inp=document.createElement('input');inp.type='text';inp.value=e[field]||'';inp.style.cssText=s+'width:130px;';
+  }
+  const save=()=>{e[field]=field==='valor'?parseFloat(inp.value)||0:inp.value;renderT1Table();};
+  inp.onchange=save;inp.onblur=save;
+  el.innerHTML='';el.appendChild(inp);inp.focus();
+}
 function renderT1Table(){
   document.getElementById('t1-count').textContent = causasData.length+' registros';
+  const tip='title="Clique para editar" style="cursor:pointer"';
   document.getElementById('t1-tbody').innerHTML = causasData.map(e=>{
     const hon=e.valor*0.30, trib=e.valor*0.18, liq=e.valor-hon-trib;
-    const sc = STATUS_CFG[e.status]||STATUS_CFG['disponivel'];
-    const fbCls = {CEF:'fb-cef',BB:'fb-bb'}[e.banco]||'';
+    const sc=STATUS_CFG[e.status]||STATUS_CFG['disponivel'];
+    const fbCls={CEF:'fb-cef',BB:'fb-bb'}[e.banco]||'';
     return`<tr>
       <td class="chk-col"><input type="checkbox" ${t1Sel.has(e.id)?'checked':''} onchange="toggleT1(${e.id},this)"></td>
-      <td><div class="data-cell">${fmtDate(e.dataExpedicao)}</div></td>
-      <td><div class="proc-num">${e.proc}</div></td>
-      <td>${e.sindic}</td>
-      <td><div class="data-cell">${e.benef}</div></td>
-      <td><span class="fbadge ${fbCls}">${e.banco}</span></td>
-      <td><div class="val-cell">${fmt(e.valor)}</div></td>
+      <td ${tip} onclick="editT1Cell(${e.id},'dataExpedicao',this)"><div class="data-cell">${fmtDate(e.dataExpedicao)}</div></td>
+      <td ${tip} onclick="editT1Cell(${e.id},'proc',this)"><div class="proc-num">${e.proc}</div></td>
+      <td ${tip} onclick="editT1Cell(${e.id},'sindic',this)">${e.sindic}</td>
+      <td ${tip} onclick="editT1Cell(${e.id},'benef',this)"><div class="data-cell">${e.benef}</div></td>
+      <td ${tip} onclick="editT1Cell(${e.id},'banco',this)"><span class="fbadge ${fbCls}">${e.banco}</span></td>
+      <td ${tip} onclick="editT1Cell(${e.id},'valor',this)"><div class="val-cell">${fmt(e.valor)}</div></td>
       <td><div class="val-cell val-neg">−${fmt(hon)}</div></td>
       <td><div class="val-cell val-or">−${fmt(trib)}</div></td>
       <td><div class="val-cell val-pos">${fmt(liq)}</div></td>
-      <td><span class="sbadge ${sc.cls}" onclick="editT1Status(${e.id},this)"><div class="dot"></div>${sc.label}</span></td>
-      <td><div class="data-cell">${e.adv}</div></td>
+      <td ${tip} onclick="editT1Cell(${e.id},'status',this)"><span class="sbadge ${sc.cls}"><div class="dot"></div>${sc.label}</span></td>
+      <td ${tip} onclick="editT1Cell(${e.id},'adv',this)"><div class="data-cell">${e.adv}</div></td>
     </tr>`;
   }).join('');
 }
@@ -1153,28 +1494,56 @@ const CUSTOS_VAR = [
   {label:'Deslocamentos',val:9000},{label:'Material de escritório',val:5000},
   {label:'Outros variáveis',val:4000},
 ];
-let costView = 'todos';
+let costView = 'fixo';
 function setCostView(v,btn){
   costView = v;
   document.querySelectorAll('.ct-btn').forEach(b=>b.classList.remove('ct-active'));
-  btn.classList.add('ct-active');
+  if(btn) btn.classList.add('ct-active');
+  else document.querySelectorAll(`.ct-btn[data-view="${v}"]`).forEach(b=>b.classList.add('ct-active'));
   renderCostBars();
 }
 function renderCostBars(){
-  const list = costView==='fixo' ? CUSTOS_FIXO : costView==='variavel' ? CUSTOS_VAR : [...CUSTOS_FIXO,...CUSTOS_VAR].sort((a,b)=>b.val-a.val);
+  const list = costView==='variavel' ? CUSTOS_VAR : CUSTOS_FIXO;
   const max = list[0]?.val||1;
-  const isFixo = l => CUSTOS_FIXO.some(c=>c.label===l);
+  const color = costView==='variavel' ? '#c9a84c' : '#888';
   document.getElementById('cost-bars').innerHTML = list.map(c=>{
-    const pct = Math.round(c.val/max*100);
-    const tag = isFixo(c.label) ? '<span class="cbr-tag tag-fixo">Fixo</span>' : '<span class="cbr-tag tag-var">Variável</span>';
-    const color = isFixo(c.label) ? '#888' : '#c9a84c';
+    const pct=Math.round(c.val/max*100);
     return`<div class="cbr">
       <div class="cbr-label" title="${c.label}">${c.label}</div>
       <div class="cbr-track"><div class="cbr-fill" style="width:${pct}%;background:${color}"></div></div>
       <div class="cbr-val">R$${Math.round(c.val/1000)}k</div>
-      ${costView==='todos'?tag:''}
     </div>`;
   }).join('');
+}
+function goOverdue(){
+  p2Filters.status='pendente';
+  const el=document.getElementById('f2-status');if(el)el.value='pendente';
+  renderP2All();
+  setTimeout(()=>document.querySelector('.table-card')?.scrollIntoView({behavior:'smooth',block:'start'}),150);
+}
+function goRelatorio(){
+  switchTab(3);
+  setTimeout(()=>document.getElementById('t3-relatorio')?.scrollIntoView({behavior:'smooth',block:'start'}),200);
+}
+function goCobranca(sindic){
+  switchTab(3);
+  setTimeout(()=>{
+    document.getElementById('t3-cobranca')?.scrollIntoView({behavior:'smooth',block:'start'});
+    if(sindic){
+      const chk=document.getElementById('chk-'+sindic.replace(/[^a-z]/g,''));
+      if(chk){chk.checked=true;updateCobTemplate();}
+    }
+  },200);
+}
+function goAssinatura(){
+  switchTab(3);
+  setTimeout(()=>document.getElementById('t3-assinatura')?.scrollIntoView({behavior:'smooth',block:'start'}),200);
+}
+function markHoje(id,chk){
+  const item=document.getElementById(id);if(!item)return;
+  const body=item.querySelector('.hi-body');
+  if(body)body.style.opacity=chk.checked?'0.38':'1';
+  item.style.opacity=chk.checked?'0.7':'1';
 }
 
 function getFiltered(){
@@ -1353,6 +1722,7 @@ function initT2(){
   const filtered = getFiltered();
   renderP2Table(filtered);
   renderBankLegend(filtered);
+  costView = 'fixo';
   renderCostBars();
 
   // Chart 1: Honorários por advogado (interactive — click filters table)
@@ -1428,17 +1798,23 @@ function initT2(){
     }
   });
 
-  // Chart 4: Resultado donut (lucro vs custos fixos vs custos variáveis)
+  // Chart 4: Resultado donut — clique filtra custos
   p2Charts.resultado = new Chart(document.getElementById('chartResultado'),{
     type:'doughnut',
     data:{
       labels:['Resultado líquido','Custos fixos','Custos variáveis'],
-      datasets:[{data:[103,108,64],backgroundColor:['#2d7d46','#888','#c9a84c'],borderWidth:2,borderColor:'#fff',hoverOffset:4}]
+      datasets:[{data:[103,108,64],backgroundColor:['#2d7d46','#888','#c9a84c'],borderWidth:2,borderColor:'#fff',hoverOffset:6}]
     },
     options:{
       responsive:true, maintainAspectRatio:false, cutout:'55%',
+      onClick:(e,els)=>{
+        if(!els.length)return;
+        const idx=els[0].index;
+        if(idx===1) setCostView('fixo',null);
+        else if(idx===2) setCostView('variavel',null);
+      },
       plugins:{
-        legend:{position:'bottom',labels:{font:{size:10},padding:8,boxWidth:10}},
+        legend:{position:'bottom',labels:{font:{size:10},padding:6,boxWidth:8}},
         datalabels:{display:false},
         tooltip:{callbacks:{label:ctx=>' '+ctx.label+': R$'+ctx.parsed+'k'}}
       }
@@ -1462,6 +1838,25 @@ function updateP2Charts(data){
 function setPrad(el){
   document.querySelectorAll('.prad').forEach(r=>r.classList.remove('active'));
   el.classList.add('active');
+}
+function updateCobTemplate(){
+  const sel=[];
+  if(document.getElementById('chk-sinijude')?.checked) sel.push({nome:'SINIJUDE',meses:4,total:4800});
+  if(document.getElementById('chk-sintetel')?.checked) sel.push({nome:'SINTETEL',meses:2,total:2400});
+  if(document.getElementById('chk-sindpd-inad')?.checked) sel.push({nome:'SINDPD',meses:1,total:1200});
+  const subEl=document.getElementById('cob-subject-names');
+  const tmpl=document.getElementById('cob-template');
+  if(!tmpl) return;
+  if(!sel.length){
+    if(subEl) subEl.textContent='selecione acima';
+    tmpl.style.fontStyle='italic'; tmpl.style.color='var(--mu)';
+    tmpl.textContent='Selecione os destinatários acima para gerar a mensagem.'; return;
+  }
+  if(subEl) subEl.textContent=sel.map(s=>s.nome).join(', ');
+  const lista=sel.map(s=>`  • ${s.nome}: ${s.meses} mensalidade${s.meses>1?'s':''} — R$ ${s.total.toLocaleString('pt-BR')},00`).join('\n');
+  const total=sel.reduce((a,s)=>a+s.total,0);
+  tmpl.style.fontStyle='normal'; tmpl.style.color='var(--tx)';
+  tmpl.textContent=`Prezados,\n\nIdentificamos mensalidades em aberto referentes às seguintes representações:\n\n${lista}\n\nTotal pendente: R$ ${total.toLocaleString('pt-BR')},00\n\nSolicitamos a regularização até 05/06/2026 para manutenção dos serviços contratados.\n\nAtenciosamente,\nEstevão & Pinheiro Advogados Associados\ncontato@estevaoepinheiro.adv.br · (81) 3423-2494`;
 }
 </script>
 </body>
