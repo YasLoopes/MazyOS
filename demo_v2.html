@@ -388,36 +388,47 @@ footer span{color:var(--bx);font-weight:600}
 .nota-valor-val{font-size:22px;font-weight:800;color:var(--rd);font-family:'DM Mono',monospace}
 .nota-stamp{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-20deg);font-size:28px;font-weight:900;color:var(--gn);opacity:.25;pointer-events:none;font-family:'DM Mono',monospace;letter-spacing:.1em;border:4px solid var(--gn);padding:4px 10px;border-radius:4px;display:none}
 
-/* ═══ OFX DEMO ═══ */
+/* ═══ OFX DEMO — ACCORDION ═══ */
 .ofx-demo{margin-top:14px}
-.ofx-demo-lbl{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--mu);margin-bottom:8px}
-.ofx-txn{border-radius:9px;padding:12px 14px;margin-bottom:8px;border:1px solid}
-.ofx-match{border-color:rgba(45,125,70,.3);background:rgba(232,245,236,.5)}
-.ofx-unknown{border-color:rgba(192,112,0,.3);background:rgba(255,243,224,.5)}
-.ofx-txn-hdr{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px}
-.ofx-txn-date{font-size:11px;color:var(--mu);font-family:'DM Mono',monospace}
-.ofx-txn-desc{flex:1;font-size:12px;font-weight:600;color:var(--tx)}
-.ofx-txn-val{font-size:13px;font-weight:700;font-family:'DM Mono',monospace;white-space:nowrap}
+.ofx-summary-bar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px;padding:8px 10px;background:#faf8f6;border-radius:8px;border:1px solid var(--bd)}
+.ofx-sum-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--mu);flex:1;min-width:100px}
+.oss{font-size:11px;font-weight:700;padding:2px 9px;border-radius:5px}
+.oss-ok{background:var(--gnb);color:var(--gn);border:1px solid rgba(45,125,70,.3)}
+.oss-pending{background:var(--orb);color:var(--or);border:1px solid rgba(192,112,0,.3)}
+.ofx-filter-tabs{display:flex;gap:0;border:1px solid var(--bd);border-radius:6px;overflow:hidden}
+.ofx-filter-tabs button{padding:4px 10px;border:none;border-right:1px solid var(--bd);background:#f9f6f3;font-size:11px;font-weight:600;color:var(--mu);cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .12s}
+.ofx-filter-tabs button:last-child{border-right:none}
+.ofx-filter-tabs button.oft-active{background:var(--bx);color:#fff}
+.ofx-row{border:1px solid var(--bd);border-left:3px solid var(--bd);border-radius:9px;margin-bottom:6px;overflow:hidden;background:#fff;transition:box-shadow .15s}
+.ofx-row:hover{box-shadow:0 1px 5px rgba(0,0,0,.07)}
+.ofx-row-ok{border-left-color:var(--gn)}
+.ofx-row-pending{border-left-color:var(--or)}
+.ofx-row-hdr{display:flex;align-items:center;gap:7px;padding:9px 12px;user-select:none;flex-wrap:nowrap}
+.ofx-row-hdr.clickable{cursor:pointer}
+.ofx-row-desc{flex:1;font-size:12px;font-weight:600;color:var(--tx);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+.ofx-row-chevron{font-size:10px;color:var(--mu);flex-shrink:0;margin-left:2px;display:inline-block;transition:transform .18s}
+.ofx-row-chevron.open{transform:rotate(90deg)}
+.ofx-row-match{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:0 12px 10px 12px}
+.ofx-row-body{padding:10px 12px 12px;border-top:1px solid var(--bd)}
+.ofx-txn-date{font-size:11px;color:var(--mu);font-family:'DM Mono',monospace;white-space:nowrap;flex-shrink:0}
+.ofx-txn-val{font-size:13px;font-weight:700;font-family:'DM Mono',monospace;white-space:nowrap;flex-shrink:0}
 .ofx-txn-val.pos{color:var(--gn)}.ofx-txn-val.neg{color:var(--rd)}
-.ofx-match-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px}
-.mbadge-ok{background:var(--gn);color:#fff;font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px;font-family:'DM Mono',monospace;white-space:nowrap}
-.mbadge-no{background:var(--or);color:#fff;font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px;font-family:'DM Mono',monospace;white-space:nowrap}
+.mbadge-ok{background:var(--gnb);color:var(--gn);border:1.5px solid rgba(45,125,70,.45);font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px;font-family:'DM Mono',monospace;white-space:nowrap;flex-shrink:0}
+.mbadge-no{background:var(--orb);color:var(--or);border:1.5px solid rgba(192,112,0,.45);font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px;font-family:'DM Mono',monospace;white-space:nowrap;flex-shrink:0}
 .ofx-match-info{font-size:11px;color:var(--mu)}
 .ofx-txn-btns{display:flex;gap:8px}
 .ofx-cat-row{display:flex;align-items:flex-end;gap:8px;flex-wrap:wrap}
-.ofx-tipo-toggle{display:flex;gap:0;border:1px solid var(--bd);border-radius:7px;overflow:hidden;margin:8px 0}
-.ofx-tipo-toggle button{flex:1;padding:6px;border:none;background:#f9f6f3;font-size:11px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;color:var(--mu);transition:all .15s}
-.ofx-tipo-toggle button.ot-ent{background:var(--gnb);color:var(--gn)}
-.ofx-tipo-toggle button.ot-desp{background:var(--rdb);color:var(--rd)}
 .ofx-sub-toggle{display:flex;gap:0;border:1px solid var(--bd);border-radius:6px;overflow:hidden;margin-bottom:10px;width:fit-content}
 .ofx-sub-toggle button{padding:5px 13px;border:none;background:#f9f6f3;font-size:11px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;color:var(--mu);transition:all .15s}
 .ofx-sub-toggle button.ost-active{background:var(--gnb);color:var(--gn)}
 .ofx-mode-fields{display:flex;flex-direction:column;gap:8px}
 .ofx-proc-row{display:flex;gap:6px;align-items:flex-end;margin-bottom:8px}
 .ofx-proc-row .field{flex:1}
-.ofx-autofill{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:10px 12px;background:#f4f7f5;border-radius:8px;border:1px solid rgba(30,92,56,.2);margin-bottom:8px}
+.ofx-autofill{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:10px 12px;background:#f4f7f5;border-radius:8px;border:1px solid rgba(30,92,56,.2);margin-bottom:6px}
 .oaf-lbl{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--mu);margin-bottom:2px}
 .oaf-val{font-size:12px;font-weight:700;color:var(--tx)}
+.ofx-adv-row{display:flex;align-items:flex-end;gap:8px;margin-bottom:8px}
+.ofx-adv-row .field{flex:1}
 .ofx-not-found{font-size:11px;color:var(--or);background:var(--orb);padding:7px 10px;border-radius:6px;display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px}
 .ofx-not-found button{background:none;border:none;font-size:11px;font-weight:700;color:var(--bx);cursor:pointer;text-decoration:underline;font-family:'DM Sans',sans-serif;white-space:nowrap}
 
@@ -501,38 +512,47 @@ footer span{color:var(--bx);font-weight:600}
       </div>
       <!-- DEMO: Como o sistema valida as transações -->
       <div class="ofx-demo">
-        <div class="ofx-demo-lbl">Simulação — como o sistema processa o extrato</div>
-        <!-- Reconhecida -->
-        <div class="ofx-txn ofx-match">
-          <div class="ofx-txn-hdr">
-            <span class="fbadge fb-cef">CEF</span>
-            <span class="ofx-txn-date">22/05/2026</span>
-            <span class="ofx-txn-desc">TED RECEBIDO - TRIBUNAL REGIONAL DO TRABALHO 6ª REGIÃO</span>
-            <span class="ofx-txn-val pos">+ R$ 28.400,00</span>
-          </div>
-          <div class="ofx-match-row">
-            <span class="mbadge-ok">Reconhecido automaticamente</span>
-            <span class="ofx-match-info">→ Causa 0001823-45 · SINDSEP · João C. Ferreira</span>
-          </div>
-          <div class="ofx-txn-btns">
-            <button class="btn-primary" style="padding:6px 12px;font-size:12px" onclick="alert('Lançamento confirmado!\n\nProcesso 0001823-45 marcado como Recebido automaticamente.')">Confirmar</button>
-            <button class="btn-secondary" style="padding:6px 12px;font-size:12px" onclick="alert('Abrindo categorização manual...')">Ajustar</button>
+        <!-- Barra de resumo + filtros -->
+        <div class="ofx-summary-bar">
+          <div class="ofx-sum-title">Simulação — processamento do extrato</div>
+          <span class="oss oss-ok">✓ 1 reconhecido</span>
+          <span class="oss oss-pending">⚠ 2 a conciliar</span>
+          <div class="ofx-filter-tabs">
+            <button class="oft-active" onclick="filterOfx('all',this)">Todos 3</button>
+            <button onclick="filterOfx('pending',this)">A conciliar 2</button>
+            <button onclick="filterOfx('ok',this)">Conciliados 1</button>
           </div>
         </div>
-        <!-- Não reconhecida — ENTRADA (TRT não mapeado) -->
-        <div class="ofx-txn ofx-unknown" style="border-color:rgba(26,82,118,.3);background:rgba(234,241,248,.4)">
-          <div class="ofx-txn-hdr">
+
+        <!-- Row 1: Reconhecido (sem accordion — compacto fixo) -->
+        <div class="ofx-row ofx-row-ok" id="ofxr-1" data-status="ok">
+          <div class="ofx-row-hdr">
             <span class="fbadge fb-cef">CEF</span>
-            <span class="ofx-txn-date">20/05/2026</span>
-            <span class="ofx-txn-desc">TED RECEBIDO - TRIBUNAL REGIONAL DO TRABALHO 6ª REGIÃO OF.2026/0087</span>
+            <span class="ofx-txn-date">22/05</span>
+            <span class="ofx-row-desc">TED RECEBIDO - TRIBUNAL REGIONAL DO TRABALHO 6ª REGIÃO</span>
+            <span class="ofx-txn-val pos">+ R$ 28.400,00</span>
+          </div>
+          <div class="ofx-row-match">
+            <span class="mbadge-ok">✓ Reconhecido</span>
+            <span class="ofx-match-info">→ Causa 0001823-45 · SINDSEP · João C. Ferreira · Adv: Cláudio Estevão</span>
+            <div class="ofx-txn-btns" style="margin-left:auto">
+              <button class="btn-primary" style="padding:5px 11px;font-size:11px" onclick="alert('Lançamento confirmado!\n\nProcesso 0001823-45 marcado como Recebido automaticamente.')">Confirmar</button>
+              <button class="btn-secondary" style="padding:5px 11px;font-size:11px" onclick="alert('Abrindo categorização manual...')">Ajustar</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Row 2: Não reconhecido — ENTRADA (acordeão) -->
+        <div class="ofx-row ofx-row-pending" id="ofxr-2" data-status="pending">
+          <div class="ofx-row-hdr clickable" onclick="toggleOfxRow(2)">
+            <span class="fbadge fb-cef">CEF</span>
+            <span class="ofx-txn-date">20/05</span>
+            <span class="ofx-row-desc">TED RECEBIDO - TRIBUNAL REGIONAL DO TRABALHO 6ª REGIÃO OF.2026/0087</span>
             <span class="ofx-txn-val pos">+ R$ 15.400,00</span>
+            <span class="mbadge-no">⚠ A conciliar</span>
+            <span class="ofx-row-chevron" id="chv-2">▶</span>
           </div>
-          <div class="ofx-match-row">
-            <span class="mbadge-no">Não reconhecido</span>
-            <span class="ofx-match-info">Entrada — vincule a uma causa ou registre como honorário</span>
-          </div>
-          <!-- Entrada: determinado pelo sinal positivo -->
-          <div class="ofx-mode-fields">
+          <div class="ofx-row-body" id="ofxb-2" style="display:none">
             <div class="ofx-sub-toggle">
               <button id="t2-btn-causa" class="ost-active" onclick="setOfxSubMode('t2','causa')">Causa / RPV</button>
               <button id="t2-btn-hon" onclick="setOfxSubMode('t2','hon')">Honorários do sindicato</button>
@@ -543,7 +563,7 @@ footer span{color:var(--bx);font-weight:600}
                 <div class="field" style="flex:1">
                   <label>Buscar processo cadastrado</label>
                   <div style="display:flex;gap:6px">
-                    <input type="text" id="t2-proc" placeholder="Número do processo ou nome do beneficiário..." style="flex:1;font-size:12px">
+                    <input type="text" id="t2-proc" placeholder="Nº do processo, beneficiário ou sindicato..." style="flex:1;font-size:12px">
                     <button class="btn-secondary" style="padding:6px 12px;font-size:12px;white-space:nowrap" onclick="procSearch('t2')">Buscar</button>
                   </div>
                 </div>
@@ -551,14 +571,25 @@ footer span{color:var(--bx);font-weight:600}
               <div class="ofx-autofill" id="t2-autofill" style="display:none">
                 <div><div class="oaf-lbl">Sindicato</div><div class="oaf-val" id="t2-af-sindic">—</div></div>
                 <div><div class="oaf-lbl">Beneficiário</div><div class="oaf-val" id="t2-af-benef">—</div></div>
-                <div><div class="oaf-lbl">Advogado</div><div class="oaf-val" id="t2-af-adv">—</div></div>
                 <div><div class="oaf-lbl">Tipo</div><div class="oaf-val" id="t2-af-tipo">—</div></div>
+              </div>
+              <!-- Advogado editável — aparece quando processo é encontrado -->
+              <div class="ofx-adv-row" id="t2-adv-row" style="display:none">
+                <div class="field" style="flex:1;max-width:280px">
+                  <label>Advogado responsável</label>
+                  <select id="t2-adv-sel">
+                    <option value="">Selecione...</option>
+                    <option>Cláudio Estevão</option><option>Fred Pinheiro</option>
+                    <option>Dra. Beatriz Cavalcanti</option><option>Dr. Marco A. Lins</option>
+                    <option>Andrielly Gutierrez</option>
+                  </select>
+                </div>
               </div>
               <div class="ofx-not-found" id="t2-not-found" style="display:none">
                 ⚠ Processo não encontrado no sistema.
                 <button onclick="showNewProc('t2')">Preencher como processo novo →</button>
               </div>
-              <!-- Campos para processo novo (oculto até clicar) -->
+              <!-- Campos para processo novo -->
               <div id="t2-new-proc" style="display:none">
                 <div class="ofx-cat-row" style="flex-wrap:wrap;gap:8px;margin-bottom:8px">
                   <div class="field" style="flex:1;min-width:130px">
@@ -592,6 +623,7 @@ footer span{color:var(--bx);font-weight:600}
               </div>
               <div style="display:flex;gap:8px;align-items:center;margin-top:4px">
                 <button class="btn-primary" id="t2-btn-vincular" style="padding:7px 14px;font-size:12px" disabled onclick="vincularCausa('t2')">Vincular causa →</button>
+                <button class="btn-secondary" style="padding:7px 12px;font-size:12px" onclick="closeOfxRow(2)">Ignorar</button>
               </div>
             </div>
             <!-- Sub-modo: Honorários do sindicato -->
@@ -625,21 +657,18 @@ footer span{color:var(--bx);font-weight:600}
           </div>
         </div>
 
-        <!-- Não reconhecida — DESPESA (débito automático) -->
-        <div class="ofx-txn ofx-unknown">
-          <div class="ofx-txn-hdr">
+        <!-- Row 3: Não reconhecido — DESPESA (acordeão) -->
+        <div class="ofx-row ofx-row-pending" id="ofxr-3" data-status="pending">
+          <div class="ofx-row-hdr clickable" onclick="toggleOfxRow(3)">
             <span class="fbadge fb-bb">BB</span>
-            <span class="ofx-txn-date">21/05/2026</span>
-            <span class="ofx-txn-desc">DEB AUTO - PRISCILA ASSESSORIA JURIDICA LTDA</span>
+            <span class="ofx-txn-date">21/05</span>
+            <span class="ofx-row-desc">DEB AUTO - PRISCILA ASSESSORIA JURIDICA LTDA</span>
             <span class="ofx-txn-val neg">− R$ 4.320,00</span>
+            <span class="mbadge-no">⚠ A conciliar</span>
+            <span class="ofx-row-chevron" id="chv-3">▶</span>
           </div>
-          <div class="ofx-match-row">
-            <span class="mbadge-no">Não reconhecido</span>
-            <span class="ofx-match-info">Saída — categorize como despesa</span>
-          </div>
-          <!-- Despesa: determinado pelo sinal negativo -->
-          <div class="ofx-mode-fields">
-            <div class="ofx-cat-row" style="flex-wrap:wrap;gap:8px">
+          <div class="ofx-row-body" id="ofxb-3" style="display:none">
+            <div class="ofx-cat-row" style="flex-wrap:wrap;gap:8px;margin-bottom:10px">
               <div class="field" style="flex:2;min-width:150px">
                 <label>Tipo de despesa</label>
                 <select id="t3-tipo-desp">
@@ -664,7 +693,10 @@ footer span{color:var(--bx);font-weight:600}
                 <label>Data</label>
                 <input type="date" id="t3-data-desp" value="2026-05-21">
               </div>
-              <button class="btn-primary" style="padding:7px 12px;font-size:12px;align-self:flex-end" onclick="alert('Despesa registrada!\n\nDébito automático de R$ 4.320,00 categorizado e salvo no painel financeiro.')">Registrar</button>
+            </div>
+            <div style="display:flex;gap:8px">
+              <button class="btn-primary" style="padding:7px 12px;font-size:12px" onclick="alert('Despesa registrada!\n\nDébito automático de R$ 4.320,00 categorizado e salvo no painel financeiro.')">Registrar</button>
+              <button class="btn-secondary" style="padding:7px 12px;font-size:12px" onclick="closeOfxRow(3)">Ignorar</button>
             </div>
           </div>
         </div>
@@ -1504,9 +1536,13 @@ function procSearch(id){
   if(found){
     document.getElementById(id+'-af-sindic').textContent = found.sindic;
     document.getElementById(id+'-af-benef').textContent  = found.benef;
-    document.getElementById(id+'-af-adv').textContent    = found.adv;
     document.getElementById(id+'-af-tipo').textContent   = found.tipo;
+    // Pré-seleciona advogado no select editável
+    const advSel = document.getElementById(id+'-adv-sel');
+    if(advSel){ Array.from(advSel.options).forEach((o,i)=>{ if(o.text===found.adv) advSel.selectedIndex=i; }); }
+    const advRow = document.getElementById(id+'-adv-row');
     if(autofill) autofill.style.display = 'grid';
+    if(advRow)   advRow.style.display   = '';
     if(notFound) notFound.style.display = 'none';
     if(newProc)  newProc.style.display  = 'none';
     if(btnVinc){ btnVinc.disabled=false; btnVinc.textContent='Vincular → '+found.proc.substring(0,14)+'…'; }
@@ -1531,8 +1567,49 @@ function showNewProc(id){
 function vincularCausa(id){
   const proc = document.getElementById(id+'-proc')?.value||'';
   const afSindic = document.getElementById(id+'-af-sindic')?.textContent;
-  const det = afSindic && afSindic!=='—' ? proc+' · '+afSindic : proc;
+  const advSel = document.getElementById(id+'-adv-sel');
+  const adv = advSel && advSel.value ? ' · Adv: '+advSel.options[advSel.selectedIndex].text : '';
+  const det = afSindic && afSindic!=='—' ? proc+' · '+afSindic+adv : proc;
   alert('Causa vinculada!\n\n'+det+'\n\nLançamento registrado como Recebido no painel financeiro.');
+  closeOfxRow(parseInt(id.replace(/\D/g,''))||2);
+}
+
+// ── OFX: accordion — abre/fecha row ──
+function toggleOfxRow(id){
+  const body = document.getElementById('ofxb-'+id);
+  const chv  = document.getElementById('chv-'+id);
+  if(!body) return;
+  const isOpen = body.style.display !== 'none';
+  // Fecha todos os outros
+  [2,3].forEach(n=>{
+    if(n===id) return;
+    const b = document.getElementById('ofxb-'+n);
+    const c = document.getElementById('chv-'+n);
+    if(b) b.style.display = 'none';
+    if(c) c.classList.remove('open');
+  });
+  body.style.display = isOpen ? 'none' : '';
+  if(chv){ isOpen ? chv.classList.remove('open') : chv.classList.add('open'); }
+}
+
+// ── OFX: fecha row específica ──
+function closeOfxRow(id){
+  const body = document.getElementById('ofxb-'+id);
+  const chv  = document.getElementById('chv-'+id);
+  if(body) body.style.display = 'none';
+  if(chv)  chv.classList.remove('open');
+}
+
+// ── OFX: filtrar por status ──
+function filterOfx(status, btn){
+  document.querySelectorAll('.ofx-filter-tabs button').forEach(b=>b.classList.remove('oft-active'));
+  btn.classList.add('oft-active');
+  document.querySelectorAll('.ofx-row').forEach(r=>{
+    const s = r.dataset.status;
+    if(status==='all')     r.style.display = '';
+    else if(status==='ok') r.style.display = s==='ok'      ? '' : 'none';
+    else                   r.style.display = s==='pending' ? '' : 'none';
+  });
 }
 
 function calcU(){
