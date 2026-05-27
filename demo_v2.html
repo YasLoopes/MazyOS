@@ -8,7 +8,7 @@
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2/dist/chartjs-plugin-datalabels.min.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{--bx:#6B1C2E;--bxd:#4a1220;--bxl:#8b2a40;--gold:#c9a84c;--bg:#f4f1ee;--wh:#fff;--tx:#1a1a1a;--mu:#6b6b6b;--bd:#e0d9d4;--gn:#1e5c38;--gnb:#e9f2ed;--or:#c07000;--orb:#fff3e0;--rd:#c0392b;--rdb:#fdecea;--bl:#1a5276;--blb:#eaf1f8}
+:root{--bx:#6B1C2E;--bxd:#4a1220;--bxl:#8b2a40;--gold:#c9a84c;--bg:#f4f1ee;--wh:#fff;--tx:#1a1a1a;--mu:#6b6b6b;--bd:#e0d9d4;--gn:#2d7d46;--gnb:#e8f5ec;--or:#c07000;--orb:#fff3e0;--rd:#c0392b;--rdb:#fdecea;--bl:#1a5276;--blb:#eaf1f8}
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--tx);min-height:100vh}
 
@@ -103,8 +103,8 @@ input[type=checkbox]{width:15px;height:15px;cursor:pointer;accent-color:var(--bx
 .soon-tag{font-size:9px;font-family:'DM Mono',monospace;background:rgba(0,0,0,.15);padding:1px 5px;border-radius:3px}
 
 /* ═══ TAB 1: LANÇAMENTOS ═══ */
-.t1-main{padding:14px 28px;max-width:1300px;margin:0 auto}
-.t1-top{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:18px;align-items:start}
+.t1-main{padding:18px 28px;max-width:1300px;margin:0 auto}
+.t1-top{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:18px}
 .form-card,.calc-panel{background:#fff;border-radius:12px;border:1px solid var(--bd);padding:22px}
 .card-title{font-size:15px;font-weight:700;margin-bottom:3px}
 .card-sub{font-size:12px;color:var(--mu);margin-bottom:16px}
@@ -387,14 +387,12 @@ footer span{color:var(--bx);font-weight:600}
 .nota-valor-lbl{font-size:13px;font-weight:700;font-family:'DM Mono',monospace}
 .nota-valor-val{font-size:22px;font-weight:800;color:var(--rd);font-family:'DM Mono',monospace}
 .nota-stamp{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-20deg);font-size:28px;font-weight:900;color:var(--gn);opacity:.25;pointer-events:none;font-family:'DM Mono',monospace;letter-spacing:.1em;border:4px solid var(--gn);padding:4px 10px;border-radius:4px;display:none}
-.nota-canhoto{margin:14px -16px -16px;padding:8px 16px;background:#fdf9f0;border-top:2px dashed rgba(201,168,76,.55);border-radius:0 0 10px 10px;display:flex;align-items:center;justify-content:center;gap:8px;font-size:9px;color:var(--mu);letter-spacing:.08em;text-transform:uppercase;font-family:'DM Mono',monospace}
-.nota-canhoto-scissor{font-size:12px;opacity:.5}
 
 /* ═══ OFX DEMO ═══ */
 .ofx-demo{margin-top:14px}
 .ofx-demo-lbl{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--mu);margin-bottom:8px}
 .ofx-txn{border-radius:9px;padding:12px 14px;margin-bottom:8px;border:1px solid}
-.ofx-match{border-color:rgba(30,92,56,.3);background:rgba(233,242,237,.5)}
+.ofx-match{border-color:rgba(45,125,70,.3);background:rgba(232,245,236,.5)}
 .ofx-unknown{border-color:rgba(192,112,0,.3);background:rgba(255,243,224,.5)}
 .ofx-txn-hdr{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px}
 .ofx-txn-date{font-size:11px;color:var(--mu);font-family:'DM Mono',monospace}
@@ -424,30 +422,11 @@ footer span{color:var(--bx);font-weight:600}
 .automacao-extra p{font-size:12px;color:#5a4000;line-height:1.5}
 .automacao-extra ul{margin:6px 0 0 16px;font-size:11px;color:#5a4000;line-height:1.7}
 
-/* ═══ TAREFAS BAR ═══ */
-.tarefas-bar{background:#fff;border:1px solid var(--bd);border-radius:10px;padding:9px 16px;margin-bottom:12px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
-.tarefas-bar-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--mu);white-space:nowrap;padding-right:12px;border-right:1px solid var(--bd)}
-.tarefas-bar-items{display:flex;gap:6px;flex-wrap:wrap;flex:1}
-.tb-item{display:flex;align-items:center;gap:5px;padding:4px 9px;border-radius:6px;cursor:pointer;border:1px solid var(--bd);background:#faf8f6;transition:background .12s;text-decoration:none}
-.tb-item:hover{background:#f5f0ee}
-.tb-item.tb-done .tb-text{opacity:.45;text-decoration:line-through}
-.tb-item input[type=checkbox]{width:13px;height:13px;cursor:pointer;accent-color:var(--bx);flex-shrink:0}
-.tb-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
-.tb-urgente .tb-dot{background:var(--rd)}
-.tb-atencao .tb-dot{background:var(--or)}
-.tb-info .tb-dot{background:var(--bl)}
-.tb-text{font-size:12px;font-weight:600;color:var(--tx);white-space:nowrap}
-.tb-link{background:none;border:none;font-size:11px;color:var(--bx);cursor:pointer;padding:0 2px;font-family:'DM Sans',sans-serif;font-weight:600;flex-shrink:0}
-.tb-link:hover{text-decoration:underline}
-
-/* ═══ RECIBOS + INADIMPLENTES ROW ═══ */
-.recibos-inad-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
-
 /* ═══ CHARTS BOTTOM ROW ═══ */
 .charts-row-bottom{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
 
 /* RESPONSIVE */
-@media(max-width:1050px){.t1-top,.t3-grid,.recibos-inad-row{grid-template-columns:1fr}.kpi-grid{grid-template-columns:repeat(2,1fr)}.charts-row,.charts-row-2,.charts-row-3,.charts-row-bottom{grid-template-columns:1fr}.bank-dist-layout{grid-template-columns:1fr}.contratos-kpis{grid-template-columns:repeat(2,1fr)}.tarefas-bar-items{gap:4px}}
+@media(max-width:1050px){.t1-top,.t3-grid{grid-template-columns:1fr}.kpi-grid{grid-template-columns:repeat(2,1fr)}.charts-row,.charts-row-2,.charts-row-3{grid-template-columns:1fr}.bank-dist-layout{grid-template-columns:1fr}.contratos-kpis{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:640px){header,.pbadge-bar{padding:10px 14px}.tab-nav{padding:0 6px}.t1-main,.t2-main,.t3-main,.t4-main{padding:12px 14px}.ttab{min-width:110px;padding:8px 10px}.frow.three{grid-template-columns:1fr 1fr}.kpi-grid{grid-template-columns:1fr 1fr}}
 </style>
 </head>
@@ -537,60 +516,20 @@ footer span{color:var(--bx);font-weight:600}
             <span class="mbadge-no">Não reconhecido</span>
             <span class="ofx-match-info">Categorize para registrar este lançamento</span>
           </div>
-          <div class="ofx-cat-row" style="flex-direction:column;gap:10px">
-            <div class="tipo-toggle" style="margin-bottom:0">
-              <button id="ofx-btn-desp" class="active-desp" onclick="setOfxTipo('despesa')">− Despesa</button>
-              <button id="ofx-btn-ent" onclick="setOfxTipo('entrada')">+ Entrada (RPV / Honorário)</button>
+          <div class="ofx-cat-row">
+            <div class="field" style="flex:1;min-width:120px">
+              <label>Categoria</label>
+              <select id="ofx-cat" onchange="updateOfxTipo()">
+                <option value="">Selecione...</option>
+                <option value="fixo">Custo fixo</option>
+                <option value="variavel">Custo variável</option>
+              </select>
             </div>
-            <!-- Despesa fields -->
-            <div id="ofx-desp-fields" style="display:flex;gap:8px;flex-wrap:wrap;align-items:flex-end">
-              <div class="field" style="flex:1;min-width:120px">
-                <label>Categoria</label>
-                <select id="ofx-cat" onchange="updateOfxTipo()">
-                  <option value="">Selecione...</option>
-                  <option value="fixo">Custo fixo</option>
-                  <option value="variavel">Custo variável</option>
-                </select>
-              </div>
-              <div class="field" style="flex:1;min-width:130px">
-                <label>Tipo de despesa</label>
-                <select id="ofx-tipo"><option value="">—</option></select>
-              </div>
-              <button class="btn-primary" style="padding:7px 12px;font-size:12px;align-self:flex-end" onclick="alert('Lançamento registrado!\n\nDébito automático categorizado como despesa e salvo.')">Registrar</button>
+            <div class="field" style="flex:1;min-width:130px">
+              <label>Tipo de despesa</label>
+              <select id="ofx-tipo"><option value="">—</option></select>
             </div>
-            <!-- Entrada (RPV / Honorário) fields -->
-            <div id="ofx-ent-fields" style="display:none;flex-wrap:wrap;gap:8px;align-items:flex-end">
-              <div class="field" style="flex:1;min-width:140px">
-                <label>Sindicato</label>
-                <select id="ofx-sindic">
-                  <option value="">Selecione...</option>
-                  <option>SINDSEP</option><option>SINDPD</option><option>SEEB</option>
-                  <option>SINDIFISCO</option><option>SINTETEL</option><option>SINIJUDE</option>
-                </select>
-              </div>
-              <div class="field" style="flex:2;min-width:180px">
-                <label>Número do processo</label>
-                <input type="text" id="ofx-proc" placeholder="0001823-45.2022.5.06.0012">
-              </div>
-              <div class="field" style="flex:1;min-width:150px">
-                <label>Advogado responsável</label>
-                <select id="ofx-adv">
-                  <option value="">Selecione...</option>
-                  <option>Cláudio Estevão</option><option>Fred Pinheiro</option>
-                  <option>Dra. Beatriz Cavalcanti</option><option>Dr. Marco A. Lins</option>
-                  <option>Andrielly Gutierrez</option>
-                </select>
-              </div>
-              <div class="field" style="flex:1;min-width:110px">
-                <label>Tipo</label>
-                <select id="ofx-tipo-rpv">
-                  <option value="RPV">RPV</option>
-                  <option value="Precatório">Precatório</option>
-                  <option value="Honorário">Honorário</option>
-                </select>
-              </div>
-              <button class="btn-primary" style="padding:7px 12px;font-size:12px;align-self:flex-end" onclick="alert('Causa vinculada!\n\nTransação vinculada ao processo e lançamento registrado como entrada.')">Vincular</button>
-            </div>
+            <button class="btn-primary" style="padding:7px 12px;font-size:12px;align-self:flex-end" onclick="alert('Lançamento registrado!\n\nDébito automático categorizado como despesa e salvo.')">Registrar</button>
           </div>
         </div>
       </div>
@@ -742,7 +681,6 @@ footer span{color:var(--bx);font-weight:600}
             <span class="nota-valor-val" id="nota-val">R$ —</span>
           </div>
           <div class="nota-stamp" id="nota-stamp">REGISTRADO</div>
-          <div class="nota-canhoto"><span class="nota-canhoto-scissor">✂</span> via do cliente · canhoto</div>
         </div>
       </div>
     </div>
@@ -793,6 +731,87 @@ footer span{color:var(--bx);font-weight:600}
   </div>
   <div class="t2-main">
 
+    <!-- O QUE FAZER HOJE — sempre no topo -->
+    <div class="hoje-section">
+      <div class="hoje-card">
+        <div class="hoje-title" style="font-size:13px;font-weight:700;margin-bottom:10px;display:flex;align-items:center;gap:6px">O que fazer hoje</div>
+        <div class="hoje-list">
+          <div class="hoje-item hi-urgente" id="hi-1">
+            <input type="checkbox" class="hi-chk" onchange="markHoje('hi-1',this)">
+            <div class="hi-body" onclick="goOverdue()">
+              <div class="hi-label">2 RPVs com prazo vencido — levantar urgente</div>
+              <div class="hi-desc">Proc. 0014221-09 (SINDIFISCO) e 0015830-22 (SEEB) — passaram de 60 dias</div>
+            </div>
+            <button class="hi-link" onclick="goOverdue()">Ver →</button>
+          </div>
+          <div class="hoje-item hi-atencao" id="hi-2">
+            <input type="checkbox" class="hi-chk" onchange="markHoje('hi-2',this)">
+            <div class="hi-body" onclick="goRelatorio()">
+              <div class="hi-label">Relatório semanal para Ricardo Estevam</div>
+              <div class="hi-desc">Última entrega: 19/05/2026 — envio via WhatsApp pendente</div>
+            </div>
+            <button class="hi-link" onclick="goRelatorio()">Enviar →</button>
+          </div>
+          <div class="hoje-item hi-info" id="hi-3">
+            <input type="checkbox" class="hi-chk" onchange="markHoje('hi-3',this)">
+            <div class="hi-body" onclick="goCobranca('sinijude')">
+              <div class="hi-label">Cobrar SINIJUDE — 4 meses em atraso</div>
+              <div class="hi-desc">Mensalidade R$ 1.200/mês — total pendente: R$ 4.800,00</div>
+            </div>
+            <button class="hi-link" onclick="goCobranca('sinijude')">Cobrar →</button>
+          </div>
+          <div class="hoje-item hi-atencao" id="hi-4">
+            <input type="checkbox" class="hi-chk" onchange="markHoje('hi-4',this)">
+            <div class="hi-body" onclick="goAssinatura()">
+              <div class="hi-label">3 recibos aguardando assinatura digital</div>
+              <div class="hi-desc">SINDPD · SEEB · SINDSEP — assinatura pendente há +5 dias</div>
+            </div>
+            <button class="hi-link" onclick="goAssinatura()">Ver →</button>
+          </div>
+        </div>
+      </div>
+      <!-- RECIBOS / ASSINATURA -->
+      <div class="contratos-card">
+        <div style="font-size:13px;font-weight:700;margin-bottom:4px">Recibos de honorários</div>
+        <div style="font-size:11px;color:var(--mu);margin-bottom:12px">Após o levantamento do RPV, o sindicato assina o recibo confirmando o repasse</div>
+        <div class="contratos-kpis">
+          <div class="ck-item" style="border-color:var(--bd)">
+            <div class="ck-val" style="color:var(--tx)">8</div>
+            <div class="ck-lbl">Total / mês</div>
+          </div>
+          <div class="ck-item" style="border-color:var(--gn);background:var(--gnb)">
+            <div class="ck-val" style="color:var(--gn)">3</div>
+            <div class="ck-lbl">Assinados</div>
+          </div>
+          <div class="ck-item" style="border-color:var(--or);background:var(--orb)">
+            <div class="ck-val" style="color:var(--or)">3</div>
+            <div class="ck-lbl">Aguardando</div>
+          </div>
+          <div class="ck-item" style="border-color:var(--mu);background:#f5f5f5">
+            <div class="ck-val" style="color:var(--mu)">2</div>
+            <div class="ck-lbl">Sem recibo</div>
+          </div>
+        </div>
+        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--mu);margin-bottom:8px">Pendentes</div>
+        <div class="contrato-row">
+          <div><div class="cr-info">0003412-78 · SINDPD</div><div class="cr-sub">Maria L. Souza · R$ 10.410,40</div></div>
+          <span class="sbadge sb-pend"><div class="dot"></div>Aguardando</span>
+        </div>
+        <div class="contrato-row">
+          <div><div class="cr-info">0007291-33 · SEEB</div><div class="cr-sub">Carlos A. Nunes · R$ 11.388,00</div></div>
+          <span class="sbadge sb-pend"><div class="dot"></div>Aguardando</span>
+        </div>
+        <div class="contrato-row">
+          <div><div class="cr-info">0001823-45 · SINDSEP</div><div class="cr-sub">João C. Ferreira · R$ 14.768,00</div></div>
+          <span class="sbadge sb-fila"><div class="dot"></div>Sem recibo</span>
+        </div>
+        <div class="contrato-row">
+          <div><div class="cr-info">0005567-13 · SEEB</div><div class="cr-sub">André L. Brito · R$ 5.132,40</div></div>
+          <span class="sbadge sb-disp"><div class="dot"></div>Assinado</span>
+        </div>
+      </div>
+    </div>
+
     <!-- RECEITAS & CUSTOS — destaque full width -->
     <div class="resultado-highlight">
       <div class="rh-header">Receitas &amp; Custos — últimos 6 meses</div>
@@ -818,76 +837,7 @@ footer span{color:var(--bx);font-weight:600}
       </div>
     </div>
 
-    <!-- TAREFAS SUGERIDAS — barra horizontal compacta -->
-    <div class="tarefas-bar">
-      <div class="tarefas-bar-label">Tarefas do dia</div>
-      <div class="tarefas-bar-items">
-        <label class="tb-item tb-urgente">
-          <input type="checkbox" onchange="this.closest('.tb-item').classList.toggle('tb-done',this.checked)">
-          <span class="tb-dot"></span>
-          <span class="tb-text">2 RPVs vencidos</span>
-          <button class="tb-link" onclick="event.preventDefault();goOverdue()">Ver →</button>
-        </label>
-        <label class="tb-item tb-atencao">
-          <input type="checkbox" onchange="this.closest('.tb-item').classList.toggle('tb-done',this.checked)">
-          <span class="tb-dot"></span>
-          <span class="tb-text">Relatório semanal</span>
-          <button class="tb-link" onclick="event.preventDefault();goRelatorio()">Enviar →</button>
-        </label>
-        <label class="tb-item tb-info">
-          <input type="checkbox" onchange="this.closest('.tb-item').classList.toggle('tb-done',this.checked)">
-          <span class="tb-dot"></span>
-          <span class="tb-text">Cobrar SINIJUDE (4m)</span>
-          <button class="tb-link" onclick="event.preventDefault();goCobranca('sinijude')">Cobrar →</button>
-        </label>
-        <label class="tb-item tb-atencao">
-          <input type="checkbox" onchange="this.closest('.tb-item').classList.toggle('tb-done',this.checked)">
-          <span class="tb-dot"></span>
-          <span class="tb-text">3 recibos aguardando assinatura</span>
-          <button class="tb-link" onclick="event.preventDefault();goAssinatura()">Assinar →</button>
-        </label>
-      </div>
-    </div>
-
-    <!-- KPIs + BANCO (interagem com a tabela abaixo) -->
-    <div class="kpi-banco-row">
-      <div class="kpi-grid-4">
-        <div class="kpi-card k-bx" onclick="kpiFilter('status','')">
-          <div class="kpi-lbl">Total a Receber</div>
-          <div class="kpi-val kv-bx" id="kv-total">R$ —</div>
-          <div class="kpi-sub" id="ks-total">—</div>
-          <div class="kpi-filter-hint">Clique para ver todas</div>
-        </div>
-        <div class="kpi-card k-gn" onclick="kpiFilter('status','disponivel')">
-          <div class="kpi-lbl">Disponível para Levantamento</div>
-          <div class="kpi-val kv-gn" id="kv-disp">R$ —</div>
-          <div class="kpi-sub" id="ks-disp">—</div>
-          <div class="kpi-filter-hint">Clique para filtrar</div>
-        </div>
-        <div class="kpi-card k-or" onclick="kpiFilter('status','pendente')">
-          <div class="kpi-lbl">Pendente / Em análise</div>
-          <div class="kpi-val kv-or" id="kv-pend">R$ —</div>
-          <div class="kpi-sub" id="ks-pend">—</div>
-          <div class="kpi-filter-hint">Clique para filtrar</div>
-        </div>
-        <div class="kpi-card k-bl" onclick="kpiFilter('status','recebido')">
-          <div class="kpi-lbl">Recebido — Maio/2026</div>
-          <div class="kpi-val kv-bl" id="kv-rec">R$ —</div>
-          <div class="kpi-sub" id="ks-rec">—</div>
-          <div class="kpi-filter-hint">Clique para filtrar</div>
-        </div>
-      </div>
-      <div class="banco-card">
-        <div class="chart-title">Distribuição por banco</div>
-        <div class="chart-sub" style="font-size:10px;color:var(--mu);margin-bottom:8px">Clique para filtrar</div>
-        <div class="bank-dist-layout">
-          <div style="position:relative;height:140px;width:140px"><canvas id="chartBank"></canvas></div>
-          <div class="bank-legend" id="bank-legend"></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- FILTER BAR — abaixo dos KPIs -->
+    <!-- FILTER BAR -->
     <div class="filter-bar">
       <label>Banco
         <select id="f2-banco" onchange="applyP2Filters()">
@@ -934,98 +884,41 @@ footer span{color:var(--bx);font-weight:600}
 
     <div class="filter-chips" id="f2-chips" style="display:none"></div>
 
-    <!-- CHARTS: honorários + sindicato — acima das causas -->
-    <div class="charts-row-bottom">
-      <div class="chart-card">
-        <div class="chart-title">Honorários por advogado</div>
-        <div class="chart-sub">Clique em uma barra para filtrar as causas abaixo</div>
-        <div class="ch-wrap"><canvas id="chartAdv"></canvas></div>
-      </div>
-      <div class="chart-card">
-        <div class="chart-title">Volume de causas por sindicato</div>
-        <div class="chart-sub">Clique em uma barra para filtrar as causas abaixo</div>
-        <div class="ch-wrap"><canvas id="chartSindic"></canvas></div>
-      </div>
-    </div>
-
-    <!-- RECIBOS + INADIMPLENTES -->
-    <div class="recibos-inad-row">
-      <div class="chart-card">
-        <div class="chart-title">Recibos de honorários</div>
-        <div class="chart-sub">Após o levantamento do RPV, o sindicato assina o recibo confirmando o repasse</div>
-        <div class="contratos-kpis" style="grid-template-columns:repeat(4,1fr);margin:10px 0 14px">
-          <div class="ck-item" style="border-color:var(--bd)">
-            <div class="ck-val" style="color:var(--tx)">8</div>
-            <div class="ck-lbl">Total / mês</div>
-          </div>
-          <div class="ck-item" style="border-color:var(--gn);background:var(--gnb)">
-            <div class="ck-val" style="color:var(--gn)">3</div>
-            <div class="ck-lbl">Assinados</div>
-          </div>
-          <div class="ck-item" style="border-color:var(--or);background:var(--orb)">
-            <div class="ck-val" style="color:var(--or)">3</div>
-            <div class="ck-lbl">Aguardando</div>
-          </div>
-          <div class="ck-item" style="border-color:var(--mu);background:#f5f5f5">
-            <div class="ck-val" style="color:var(--mu)">2</div>
-            <div class="ck-lbl">Sem recibo</div>
-          </div>
+    <!-- KPIs + BANCO (interagem com a tabela abaixo) -->
+    <div class="kpi-banco-row">
+      <div class="kpi-grid-4">
+        <div class="kpi-card k-bx" onclick="kpiFilter('status','')">
+          <div class="kpi-lbl">Total a Receber</div>
+          <div class="kpi-val kv-bx" id="kv-total">R$ —</div>
+          <div class="kpi-sub" id="ks-total">—</div>
+          <div class="kpi-filter-hint">Clique para ver todas</div>
         </div>
-        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--mu);margin-bottom:8px">Pendentes</div>
-        <div class="contrato-row">
-          <div><div class="cr-info">0003412-78 · SINDPD</div><div class="cr-sub">Maria L. Souza · R$ 10.410,40</div></div>
-          <span class="sbadge sb-pend"><div class="dot"></div>Aguardando</span>
+        <div class="kpi-card k-gn" onclick="kpiFilter('status','disponivel')">
+          <div class="kpi-lbl">Disponível para Levantamento</div>
+          <div class="kpi-val kv-gn" id="kv-disp">R$ —</div>
+          <div class="kpi-sub" id="ks-disp">—</div>
+          <div class="kpi-filter-hint">Clique para filtrar</div>
         </div>
-        <div class="contrato-row">
-          <div><div class="cr-info">0007291-33 · SEEB</div><div class="cr-sub">Carlos A. Nunes · R$ 11.388,00</div></div>
-          <span class="sbadge sb-pend"><div class="dot"></div>Aguardando</span>
+        <div class="kpi-card k-or" onclick="kpiFilter('status','pendente')">
+          <div class="kpi-lbl">Pendente / Em análise</div>
+          <div class="kpi-val kv-or" id="kv-pend">R$ —</div>
+          <div class="kpi-sub" id="ks-pend">—</div>
+          <div class="kpi-filter-hint">Clique para filtrar</div>
         </div>
-        <div class="contrato-row">
-          <div><div class="cr-info">0001823-45 · SINDSEP</div><div class="cr-sub">João C. Ferreira · R$ 14.768,00</div></div>
-          <span class="sbadge sb-fila"><div class="dot"></div>Sem recibo</span>
-        </div>
-        <div class="contrato-row">
-          <div><div class="cr-info">0005567-13 · SEEB</div><div class="cr-sub">André L. Brito · R$ 5.132,40</div></div>
-          <span class="sbadge sb-disp"><div class="dot"></div>Assinado</span>
+        <div class="kpi-card k-bl" onclick="kpiFilter('status','recebido')">
+          <div class="kpi-lbl">Recebido — Maio/2026</div>
+          <div class="kpi-val kv-bl" id="kv-rec">R$ —</div>
+          <div class="kpi-sub" id="ks-rec">—</div>
+          <div class="kpi-filter-hint">Clique para filtrar</div>
         </div>
       </div>
-      <div class="chart-card">
-        <div class="chart-title">Honorários em atraso</div>
-        <div class="chart-sub">Mensalidades pendentes por sindicato · Total: <strong style="color:var(--rd)">R$ 8.400,00</strong></div>
-        <div class="inad-list">
-          <div class="inad-item" onclick="goCobranca('sinijude')">
-            <input type="checkbox" class="inad-chk" id="chk-sinijude">
-            <div style="flex:1">
-              <div class="inad-nome">SINIJUDE</div>
-              <div class="inad-det">4 meses em atraso · R$ 1.200/mês</div>
-            </div>
-            <div style="font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:var(--rd)">R$ 4.800</div>
-            <button class="btn-secondary" style="padding:4px 10px;font-size:11px" onclick="event.stopPropagation();goCobranca('sinijude')">Cobrar</button>
-          </div>
-          <div class="inad-item" onclick="goCobranca('sintetel')">
-            <input type="checkbox" class="inad-chk" id="chk-sintetel">
-            <div style="flex:1">
-              <div class="inad-nome">SINTETEL</div>
-              <div class="inad-det">2 meses em atraso · R$ 1.200/mês</div>
-            </div>
-            <div style="font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:var(--rd)">R$ 2.400</div>
-            <button class="btn-secondary" style="padding:4px 10px;font-size:11px" onclick="event.stopPropagation();goCobranca('sintetel')">Cobrar</button>
-          </div>
-          <div class="inad-item" onclick="goCobranca('sindpd')">
-            <input type="checkbox" class="inad-chk" id="chk-sindpd-inad">
-            <div style="flex:1">
-              <div class="inad-nome">SINDPD</div>
-              <div class="inad-det">1 mês em atraso · R$ 1.200/mês</div>
-            </div>
-            <div style="font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:var(--rd)">R$ 1.200</div>
-            <button class="btn-secondary" style="padding:4px 10px;font-size:11px" onclick="event.stopPropagation();goCobranca('sindpd')">Cobrar</button>
-          </div>
+      <div class="banco-card">
+        <div class="chart-title">Distribuição por banco</div>
+        <div class="chart-sub" style="font-size:10px;color:var(--mu);margin-bottom:8px">Clique para filtrar</div>
+        <div class="bank-dist-layout">
+          <div style="position:relative;height:140px;width:140px"><canvas id="chartBank"></canvas></div>
+          <div class="bank-legend" id="bank-legend"></div>
         </div>
-        <div style="border-top:1px solid var(--bd);padding-top:10px;display:flex;justify-content:space-between;align-items:center;margin-top:8px">
-          <span style="font-size:12px;font-weight:700">Total pendente</span>
-          <span style="font-family:'DM Mono',monospace;font-size:16px;font-weight:800;color:var(--rd)">R$ 8.400,00</span>
-        </div>
-        <button class="btn-primary" style="width:100%;margin-top:10px;font-size:12px" onclick="alert('Abrindo cobrança em lote para os inadimplentes selecionados...')">Cobrar todos em lote →</button>
       </div>
     </div>
 
@@ -1069,6 +962,20 @@ footer span{color:var(--bx);font-weight:600}
           </thead>
           <tbody id="p2-tbody"></tbody>
         </table>
+      </div>
+    </div>
+
+    <!-- CHARTS BOTTOM: honorários + sindicato -->
+    <div class="charts-row-bottom">
+      <div class="chart-card">
+        <div class="chart-title">Honorários por advogado</div>
+        <div class="chart-sub">Clique em uma barra para filtrar as causas acima</div>
+        <div class="ch-wrap"><canvas id="chartAdv"></canvas></div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-title">Volume de causas por sindicato</div>
+        <div class="chart-sub">Clique em uma barra para filtrar as causas acima</div>
+        <div class="ch-wrap"><canvas id="chartSindic"></canvas></div>
       </div>
     </div>
 
@@ -1354,7 +1261,6 @@ document.getElementById('hdrDate').textContent = new Date().toLocaleDateString('
 const TODAY = new Date('2026-05-24');
 const ACCUM_PREV = 3287;
 const BANK_COLORS = {CEF:'#1a3c8f', BB:'#7d5a00'};
-const BANK_NAMES  = {CEF:'Caixa Econômica Federal', BB:'Banco do Brasil'};
 const STATUS_CFG = {
   'disponivel':{label:'Disponível',cls:'sb-disp'},
   'pendente':  {label:'Pendente',  cls:'sb-pend'},
@@ -1411,13 +1317,6 @@ function updateNota(){
   document.getElementById('nota-venc').textContent = venc ? fmtDate(venc) : '—';
   document.getElementById('nota-val').textContent = val ? fmt(val) : 'R$ —';
   document.getElementById('nota-pag').textContent = pag||'—';
-}
-function setOfxTipo(tipo){
-  const isDesp = tipo==='despesa';
-  document.getElementById('ofx-desp-fields').style.display = isDesp ? 'flex' : 'none';
-  document.getElementById('ofx-ent-fields').style.display = isDesp ? 'none' : 'flex';
-  document.getElementById('ofx-btn-desp').className = isDesp ? 'active-desp' : '';
-  document.getElementById('ofx-btn-ent').className = isDesp ? '' : 'active-ent';
 }
 function updateOfxTipo(){
   const cat = document.getElementById('ofx-cat')?.value;
@@ -1521,7 +1420,7 @@ function editT1Cell(id,field,el){
     Object.entries(STATUS_CFG).forEach(([k,v])=>{const o=document.createElement('option');o.value=k;o.textContent=v.label;if(k===e.status)o.selected=true;inp.appendChild(o);});
   } else if(field==='banco'){
     inp=document.createElement('select');inp.style.cssText=s;
-    ['CEF','BB'].forEach(b=>{const o=document.createElement('option');o.value=b;o.textContent=BANK_NAMES[b]||b;if(b===e.banco)o.selected=true;inp.appendChild(o);});
+    ['CEF','BB'].forEach(b=>{const o=document.createElement('option');o.value=b;o.textContent=b;if(b===e.banco)o.selected=true;inp.appendChild(o);});
   } else if(field==='valor'){
     inp=document.createElement('input');inp.type='number';inp.value=e.valor;inp.style.cssText=s+'width:90px;';
   } else if(field==='dataExpedicao'){
@@ -1546,7 +1445,7 @@ function renderT1Table(){
       <td ${tip} onclick="editT1Cell(${e.id},'proc',this)"><div class="proc-num">${e.proc}</div></td>
       <td ${tip} onclick="editT1Cell(${e.id},'sindic',this)">${e.sindic}</td>
       <td ${tip} onclick="editT1Cell(${e.id},'benef',this)"><div class="data-cell">${e.benef}</div></td>
-      <td ${tip} onclick="editT1Cell(${e.id},'banco',this)"><span class="fbadge ${fbCls}">${BANK_NAMES[e.banco]||e.banco}</span></td>
+      <td ${tip} onclick="editT1Cell(${e.id},'banco',this)"><span class="fbadge ${fbCls}">${e.banco}</span></td>
       <td ${tip} onclick="editT1Cell(${e.id},'valor',this)"><div class="val-cell">${fmt(e.valor)}</div></td>
       <td><div class="val-cell val-neg">−${fmt(hon)}</div></td>
       <td><div class="val-cell val-or">−${fmt(trib)}</div></td>
@@ -1727,7 +1626,7 @@ function renderP2Table(data){
       <td><div class="proc-num">${c.proc}</div></td>
       <td><div class="causa-desc">${c.desc}</div><div class="causa-sub">${c.sindic}</div></td>
       <td><div class="data-cell">${c.benef}</div></td>
-      <td><span class="fbadge ${fbCls}">${BANK_NAMES[c.banco]||c.banco}</span></td>
+      <td><span class="fbadge ${fbCls}">${c.banco}</span></td>
       <td><div class="data-cell">${c.tipo}</div></td>
       <td><div class="val-cell ${c.status==='disponivel'||c.status==='recebido'?'val-pos':''}">${fmt(c.valor)}</div></td>
       <td style="white-space:nowrap">
@@ -1751,7 +1650,7 @@ function renderBankLegend(data){
     const active=p2Filters.banco===bank;
     return`<div class="bl-row ${active?'bl-active':''}" onclick="bankFilter('${bank}')">
       <div class="bl-dot" style="background:${BANK_COLORS[bank]||'#888'}"></div>
-      <div class="bl-name">${BANK_NAMES[bank]||bank}</div>
+      <div class="bl-name">${bank}</div>
       <div class="bl-bar-wrap"><div class="bl-bar" style="width:${barW}%;background:${BANK_COLORS[bank]||'#888'}"></div></div>
       <div class="bl-val">${fmtK(val)}</div>
       <div class="bl-pct">${pct}%</div>
@@ -1903,8 +1802,8 @@ function initT2(){
   p2Charts.resultado = new Chart(document.getElementById('chartResultado'),{
     type:'doughnut',
     data:{
-      labels:['Resultado','Fixos','Variáveis'],
-      datasets:[{data:[103,108,64],backgroundColor:['#1e5c38','#888','#c9a84c'],borderWidth:2,borderColor:'#fff',hoverOffset:6}]
+      labels:['Resultado líquido','Custos fixos','Custos variáveis'],
+      datasets:[{data:[103,108,64],backgroundColor:['#2d7d46','#888','#c9a84c'],borderWidth:2,borderColor:'#fff',hoverOffset:6}]
     },
     options:{
       responsive:true, maintainAspectRatio:false, cutout:'55%',
@@ -1915,8 +1814,8 @@ function initT2(){
         else if(idx===2) setCostView('variavel',null);
       },
       plugins:{
-        legend:{position:'bottom',labels:{font:{size:10},padding:5,boxWidth:8}},
-        datalabels:{display:true,formatter:(v)=>'R$'+v+'k',color:'#fff',font:{size:9,weight:'bold'},anchor:'center',align:'center'},
+        legend:{position:'bottom',labels:{font:{size:10},padding:6,boxWidth:8}},
+        datalabels:{display:false},
         tooltip:{callbacks:{label:ctx=>' '+ctx.label+': R$'+ctx.parsed+'k'}}
       }
     }
