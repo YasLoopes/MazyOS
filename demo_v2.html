@@ -382,7 +382,7 @@ footer span{color:var(--bx);font-weight:600}
 
 /* ═══ NOTA FISCAL PANEL ═══ */
 .nota-panel{background:#fff;border-radius:12px;border:1px solid var(--bd);padding:22px;display:flex;flex-direction:column}
-.nota-fiscal{background:#fffcf5;border:1.5px dashed var(--gold);border-radius:10px;margin-top:10px;position:relative;flex:1}
+.nota-fiscal{background:#fffcf5;border:1.5px dashed var(--gold);border-radius:10px;margin-top:0;position:relative;flex:1}
 .nota-body{padding:16px 16px 10px}
 .nota-tear{height:12px;background:linear-gradient(135deg,#fffcf5 25%,transparent 25%) -10px 0,linear-gradient(225deg,#fffcf5 25%,transparent 25%) -10px 0,linear-gradient(315deg,#fffcf5 25%,transparent 25%),linear-gradient(45deg,#fffcf5 25%,transparent 25%);background-size:20px 12px;background-color:var(--bxd);background-repeat:repeat-x}
 .nota-stub{background:var(--bxd);padding:10px 16px;display:flex;align-items:center;justify-content:space-between}
@@ -618,9 +618,10 @@ footer span{color:var(--bx);font-weight:600}
                 <div class="field" style="flex:1;min-width:120px">
                   <label>Status ao registrar</label>
                   <select id="t2-status-sel">
-                    <option value="recebido" selected>✓ Recebido</option>
                     <option value="disponivel">Disponível</option>
                     <option value="pendente">Pendente</option>
+                    <option value="recebido" selected>Recebido</option>
+                    <option value="arquivado">Arquivado</option>
                   </select>
                 </div>
                 <div class="field" style="flex:1;min-width:120px">
@@ -697,9 +698,10 @@ footer span{color:var(--bx);font-weight:600}
                 <div class="field" style="flex:1;min-width:140px">
                   <label>Status ao registrar</label>
                   <select id="t2-hon-status">
-                    <option value="recebido" selected>✓ Recebido</option>
                     <option value="disponivel">Disponível</option>
                     <option value="pendente">Pendente</option>
+                    <option value="recebido" selected>Recebido</option>
+                    <option value="arquivado">Arquivado</option>
                   </select>
                 </div>
                 <button class="btn-primary" style="padding:7px 12px;font-size:12px;align-self:flex-end" onclick="alert('Honorário registrado!\n\nEntrada de R$ 15.400,00 vinculada ao sindicato e lançada no painel financeiro.')">Registrar</button>
