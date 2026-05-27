@@ -405,6 +405,21 @@ footer span{color:var(--bx);font-weight:600}
 .ofx-match-info{font-size:11px;color:var(--mu)}
 .ofx-txn-btns{display:flex;gap:8px}
 .ofx-cat-row{display:flex;align-items:flex-end;gap:8px;flex-wrap:wrap}
+.ofx-tipo-toggle{display:flex;gap:0;border:1px solid var(--bd);border-radius:7px;overflow:hidden;margin:8px 0}
+.ofx-tipo-toggle button{flex:1;padding:6px;border:none;background:#f9f6f3;font-size:11px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;color:var(--mu);transition:all .15s}
+.ofx-tipo-toggle button.ot-ent{background:var(--gnb);color:var(--gn)}
+.ofx-tipo-toggle button.ot-desp{background:var(--rdb);color:var(--rd)}
+.ofx-sub-toggle{display:flex;gap:0;border:1px solid var(--bd);border-radius:6px;overflow:hidden;margin-bottom:10px;width:fit-content}
+.ofx-sub-toggle button{padding:5px 13px;border:none;background:#f9f6f3;font-size:11px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;color:var(--mu);transition:all .15s}
+.ofx-sub-toggle button.ost-active{background:var(--gnb);color:var(--gn)}
+.ofx-mode-fields{display:flex;flex-direction:column;gap:8px}
+.ofx-proc-row{display:flex;gap:6px;align-items:flex-end;margin-bottom:8px}
+.ofx-proc-row .field{flex:1}
+.ofx-autofill{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:10px 12px;background:#f4f7f5;border-radius:8px;border:1px solid rgba(30,92,56,.2);margin-bottom:8px}
+.oaf-lbl{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--mu);margin-bottom:2px}
+.oaf-val{font-size:12px;font-weight:700;color:var(--tx)}
+.ofx-not-found{font-size:11px;color:var(--or);background:var(--orb);padding:7px 10px;border-radius:6px;display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px}
+.ofx-not-found button{background:none;border:none;font-size:11px;font-weight:700;color:var(--bx);cursor:pointer;text-decoration:underline;font-family:'DM Sans',sans-serif;white-space:nowrap}
 
 /* ═══ INADIMPLENTES LIST ═══ */
 .inad-list{display:flex;flex-direction:column;gap:6px;margin-bottom:12px}
@@ -504,7 +519,147 @@ footer span{color:var(--bx);font-weight:600}
             <button class="btn-secondary" style="padding:6px 12px;font-size:12px" onclick="alert('Abrindo categorização manual...')">Ajustar</button>
           </div>
         </div>
-        <!-- Não reconhecida -->
+        <!-- Não reconhecida — ENTRADA (TRT não mapeado) -->
+        <div class="ofx-txn ofx-unknown" style="border-color:rgba(26,82,118,.3);background:rgba(234,241,248,.4)">
+          <div class="ofx-txn-hdr">
+            <span class="fbadge fb-cef">CEF</span>
+            <span class="ofx-txn-date">20/05/2026</span>
+            <span class="ofx-txn-desc">TED RECEBIDO - TRIBUNAL REGIONAL DO TRABALHO 6ª REGIÃO OF.2026/0087</span>
+            <span class="ofx-txn-val pos">+ R$ 15.400,00</span>
+          </div>
+          <div class="ofx-match-row">
+            <span class="mbadge-no">Não reconhecido</span>
+            <span class="ofx-match-info">Valor recebido do tribunal — vincule a uma causa ou registre como novo</span>
+          </div>
+          <div class="ofx-tipo-toggle">
+            <button id="t2-btn-desp" onclick="setOfxMode('t2','desp')">− Despesa</button>
+            <button id="t2-btn-ent" class="ot-ent" onclick="setOfxMode('t2','ent')">+ Entrada (RPV / Honorário)</button>
+          </div>
+          <!-- Modo Entrada (padrão para crédito) -->
+          <div id="t2-ent-fields" class="ofx-mode-fields">
+            <div class="ofx-sub-toggle">
+              <button id="t2-btn-causa" class="ost-active" onclick="setOfxSubMode('t2','causa')">Causa / RPV</button>
+              <button id="t2-btn-hon" onclick="setOfxSubMode('t2','hon')">Honorários do sindicato</button>
+            </div>
+            <!-- Sub-modo: Causa/RPV -->
+            <div id="t2-causa-fields">
+              <div class="ofx-proc-row">
+                <div class="field" style="flex:1">
+                  <label>Buscar processo cadastrado</label>
+                  <div style="display:flex;gap:6px">
+                    <input type="text" id="t2-proc" placeholder="Número do processo ou nome do beneficiário..." style="flex:1;font-size:12px">
+                    <button class="btn-secondary" style="padding:6px 12px;font-size:12px;white-space:nowrap" onclick="procSearch('t2')">Buscar</button>
+                  </div>
+                </div>
+              </div>
+              <div class="ofx-autofill" id="t2-autofill" style="display:none">
+                <div><div class="oaf-lbl">Sindicato</div><div class="oaf-val" id="t2-af-sindic">—</div></div>
+                <div><div class="oaf-lbl">Beneficiário</div><div class="oaf-val" id="t2-af-benef">—</div></div>
+                <div><div class="oaf-lbl">Advogado</div><div class="oaf-val" id="t2-af-adv">—</div></div>
+                <div><div class="oaf-lbl">Tipo</div><div class="oaf-val" id="t2-af-tipo">—</div></div>
+              </div>
+              <div class="ofx-not-found" id="t2-not-found" style="display:none">
+                ⚠ Processo não encontrado no sistema.
+                <button onclick="showNewProc('t2')">Preencher como processo novo →</button>
+              </div>
+              <!-- Campos para processo novo (oculto até clicar) -->
+              <div id="t2-new-proc" style="display:none">
+                <div class="ofx-cat-row" style="flex-wrap:wrap;gap:8px;margin-bottom:8px">
+                  <div class="field" style="flex:1;min-width:130px">
+                    <label>Sindicato</label>
+                    <select id="t2-np-sindic">
+                      <option value="">Selecione...</option>
+                      <option>SINDSEP</option><option>SINDPD</option><option>SEEB</option>
+                      <option>SINDIFISCO</option><option>SINTETEL</option><option>SINIJUDE</option>
+                    </select>
+                  </div>
+                  <div class="field" style="flex:1;min-width:150px">
+                    <label>Advogado responsável</label>
+                    <select id="t2-np-adv">
+                      <option value="">Selecione...</option>
+                      <option>Cláudio Estevão</option><option>Fred Pinheiro</option>
+                      <option>Dra. Beatriz Cavalcanti</option><option>Dr. Marco A. Lins</option>
+                      <option>Andrielly Gutierrez</option>
+                    </select>
+                  </div>
+                  <div class="field" style="flex:1;min-width:100px">
+                    <label>Tipo</label>
+                    <select id="t2-np-tipo">
+                      <option value="RPV">RPV</option><option value="Precatório">Precatório</option>
+                    </select>
+                  </div>
+                  <div class="field" style="flex:1;min-width:120px">
+                    <label>Data de expedição</label>
+                    <input type="date" id="t2-np-expedicao">
+                  </div>
+                </div>
+              </div>
+              <div style="display:flex;gap:8px;align-items:center;margin-top:4px">
+                <button class="btn-primary" id="t2-btn-vincular" style="padding:7px 14px;font-size:12px" disabled onclick="vincularCausa('t2')">Vincular causa →</button>
+              </div>
+            </div>
+            <!-- Sub-modo: Honorários do sindicato -->
+            <div id="t2-hon-fields" style="display:none">
+              <div class="ofx-cat-row" style="flex-wrap:wrap;gap:8px">
+                <div class="field" style="flex:1;min-width:130px">
+                  <label>Sindicato pagador</label>
+                  <select id="t2-hon-sindic">
+                    <option value="">Selecione...</option>
+                    <option>SINDSEP</option><option>SINDPD</option><option>SEEB</option>
+                    <option>SINDIFISCO</option><option>SINTETEL</option><option>SINIJUDE</option>
+                  </select>
+                </div>
+                <div class="field" style="flex:1;min-width:120px">
+                  <label>Mês de referência</label>
+                  <input type="month" id="t2-hon-ref" value="2026-05">
+                </div>
+                <div class="field" style="flex:1;min-width:140px">
+                  <label>Tipo de honorário</label>
+                  <select id="t2-hon-tipo">
+                    <option value="">Selecione...</option>
+                    <option value="mensalidade">Mensalidade</option>
+                    <option value="exito">Honorário de êxito</option>
+                    <option value="adiantamento">Adiantamento</option>
+                    <option value="outro">Outro</option>
+                  </select>
+                </div>
+                <button class="btn-primary" style="padding:7px 12px;font-size:12px;align-self:flex-end" onclick="alert('Honorário registrado!\n\nEntrada de R$ 15.400,00 vinculada ao sindicato e lançada no painel financeiro.')">Registrar</button>
+              </div>
+            </div>
+          </div>
+          <!-- Modo Despesa (oculto) -->
+          <div id="t2-desp-fields" class="ofx-mode-fields" style="display:none">
+            <div class="ofx-cat-row" style="flex-wrap:wrap;gap:8px">
+              <div class="field" style="flex:2;min-width:150px">
+                <label>Tipo de despesa</label>
+                <select id="t2-tipo-desp">
+                  <option value="">Selecione...</option>
+                  <optgroup label="── Custo Fixo ──">
+                    <option>Aluguel</option><option>Folha de pagamento</option>
+                    <option>Contabilidade</option><option>Softwares jurídicos</option>
+                    <option>Internet / Telefonia</option><option>Outros fixos</option>
+                  </optgroup>
+                  <optgroup label="── Custo Variável ──">
+                    <option>Despesas processuais</option><option>Honorários periciais</option>
+                    <option>Deslocamentos</option><option>Material de escritório</option>
+                    <option>Outros variáveis</option>
+                  </optgroup>
+                </select>
+              </div>
+              <div class="field" style="flex:2;min-width:150px">
+                <label>Fornecedor</label>
+                <input type="text" id="t2-forn" placeholder="Nome do fornecedor">
+              </div>
+              <div class="field" style="flex:1;min-width:110px">
+                <label>Data</label>
+                <input type="date" id="t2-data-desp" value="2026-05-20">
+              </div>
+              <button class="btn-primary" style="padding:7px 12px;font-size:12px;align-self:flex-end" onclick="alert('Despesa registrada!\n\nLançamento de R$ 15.400,00 categorizado como despesa e salvo.')">Registrar</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Não reconhecida — DESPESA (débito automático) -->
         <div class="ofx-txn ofx-unknown">
           <div class="ofx-txn-hdr">
             <span class="fbadge fb-bb">BB</span>
@@ -516,20 +671,128 @@ footer span{color:var(--bx);font-weight:600}
             <span class="mbadge-no">Não reconhecido</span>
             <span class="ofx-match-info">Categorize para registrar este lançamento</span>
           </div>
-          <div class="ofx-cat-row">
-            <div class="field" style="flex:1;min-width:120px">
-              <label>Categoria</label>
-              <select id="ofx-cat" onchange="updateOfxTipo()">
-                <option value="">Selecione...</option>
-                <option value="fixo">Custo fixo</option>
-                <option value="variavel">Custo variável</option>
-              </select>
+          <div class="ofx-tipo-toggle">
+            <button id="t3-btn-desp" class="ot-desp" onclick="setOfxMode('t3','desp')">− Despesa</button>
+            <button id="t3-btn-ent" onclick="setOfxMode('t3','ent')">+ Entrada (RPV / Honorário)</button>
+          </div>
+          <!-- Modo Despesa (padrão para débito) -->
+          <div id="t3-desp-fields" class="ofx-mode-fields">
+            <div class="ofx-cat-row" style="flex-wrap:wrap;gap:8px">
+              <div class="field" style="flex:2;min-width:150px">
+                <label>Tipo de despesa</label>
+                <select id="t3-tipo-desp">
+                  <option value="">Selecione...</option>
+                  <optgroup label="── Custo Fixo ──">
+                    <option>Aluguel</option><option>Folha de pagamento</option>
+                    <option>Contabilidade</option><option>Softwares jurídicos</option>
+                    <option>Internet / Telefonia</option><option>Outros fixos</option>
+                  </optgroup>
+                  <optgroup label="── Custo Variável ──">
+                    <option>Despesas processuais</option><option>Honorários periciais</option>
+                    <option>Deslocamentos</option><option>Material de escritório</option>
+                    <option>Outros variáveis</option>
+                  </optgroup>
+                </select>
+              </div>
+              <div class="field" style="flex:2;min-width:150px">
+                <label>Fornecedor</label>
+                <input type="text" id="t3-forn" value="PRISCILA ASSESSORIA JURIDICA LTDA" style="font-size:11px">
+              </div>
+              <div class="field" style="flex:1;min-width:110px">
+                <label>Data</label>
+                <input type="date" id="t3-data-desp" value="2026-05-21">
+              </div>
+              <button class="btn-primary" style="padding:7px 12px;font-size:12px;align-self:flex-end" onclick="alert('Despesa registrada!\n\nDébito automático de R$ 4.320,00 categorizado e salvo no painel financeiro.')">Registrar</button>
             </div>
-            <div class="field" style="flex:1;min-width:130px">
-              <label>Tipo de despesa</label>
-              <select id="ofx-tipo"><option value="">—</option></select>
+          </div>
+          <!-- Modo Entrada (oculto) -->
+          <div id="t3-ent-fields" class="ofx-mode-fields" style="display:none">
+            <div class="ofx-sub-toggle">
+              <button id="t3-btn-causa" class="ost-active" onclick="setOfxSubMode('t3','causa')">Causa / RPV</button>
+              <button id="t3-btn-hon" onclick="setOfxSubMode('t3','hon')">Honorários do sindicato</button>
             </div>
-            <button class="btn-primary" style="padding:7px 12px;font-size:12px;align-self:flex-end" onclick="alert('Lançamento registrado!\n\nDébito automático categorizado como despesa e salvo.')">Registrar</button>
+            <div id="t3-causa-fields">
+              <div class="ofx-proc-row">
+                <div class="field" style="flex:1">
+                  <label>Buscar processo cadastrado</label>
+                  <div style="display:flex;gap:6px">
+                    <input type="text" id="t3-proc" placeholder="Número do processo ou nome do beneficiário..." style="flex:1;font-size:12px">
+                    <button class="btn-secondary" style="padding:6px 12px;font-size:12px;white-space:nowrap" onclick="procSearch('t3')">Buscar</button>
+                  </div>
+                </div>
+              </div>
+              <div class="ofx-autofill" id="t3-autofill" style="display:none">
+                <div><div class="oaf-lbl">Sindicato</div><div class="oaf-val" id="t3-af-sindic">—</div></div>
+                <div><div class="oaf-lbl">Beneficiário</div><div class="oaf-val" id="t3-af-benef">—</div></div>
+                <div><div class="oaf-lbl">Advogado</div><div class="oaf-val" id="t3-af-adv">—</div></div>
+                <div><div class="oaf-lbl">Tipo</div><div class="oaf-val" id="t3-af-tipo">—</div></div>
+              </div>
+              <div class="ofx-not-found" id="t3-not-found" style="display:none">
+                ⚠ Processo não encontrado no sistema.
+                <button onclick="showNewProc('t3')">Preencher como processo novo →</button>
+              </div>
+              <div id="t3-new-proc" style="display:none">
+                <div class="ofx-cat-row" style="flex-wrap:wrap;gap:8px;margin-bottom:8px">
+                  <div class="field" style="flex:1;min-width:130px">
+                    <label>Sindicato</label>
+                    <select id="t3-np-sindic">
+                      <option value="">Selecione...</option>
+                      <option>SINDSEP</option><option>SINDPD</option><option>SEEB</option>
+                      <option>SINDIFISCO</option><option>SINTETEL</option><option>SINIJUDE</option>
+                    </select>
+                  </div>
+                  <div class="field" style="flex:1;min-width:150px">
+                    <label>Advogado responsável</label>
+                    <select id="t3-np-adv">
+                      <option value="">Selecione...</option>
+                      <option>Cláudio Estevão</option><option>Fred Pinheiro</option>
+                      <option>Dra. Beatriz Cavalcanti</option><option>Dr. Marco A. Lins</option>
+                      <option>Andrielly Gutierrez</option>
+                    </select>
+                  </div>
+                  <div class="field" style="flex:1;min-width:100px">
+                    <label>Tipo</label>
+                    <select id="t3-np-tipo">
+                      <option value="RPV">RPV</option><option value="Precatório">Precatório</option>
+                    </select>
+                  </div>
+                  <div class="field" style="flex:1;min-width:120px">
+                    <label>Data de expedição</label>
+                    <input type="date" id="t3-np-expedicao">
+                  </div>
+                </div>
+              </div>
+              <div style="margin-top:4px">
+                <button class="btn-primary" id="t3-btn-vincular" style="padding:7px 14px;font-size:12px" disabled onclick="vincularCausa('t3')">Vincular causa →</button>
+              </div>
+            </div>
+            <div id="t3-hon-fields" style="display:none">
+              <div class="ofx-cat-row" style="flex-wrap:wrap;gap:8px">
+                <div class="field" style="flex:1;min-width:130px">
+                  <label>Sindicato pagador</label>
+                  <select id="t3-hon-sindic">
+                    <option value="">Selecione...</option>
+                    <option>SINDSEP</option><option>SINDPD</option><option>SEEB</option>
+                    <option>SINDIFISCO</option><option>SINTETEL</option><option>SINIJUDE</option>
+                  </select>
+                </div>
+                <div class="field" style="flex:1;min-width:120px">
+                  <label>Mês de referência</label>
+                  <input type="month" id="t3-hon-ref" value="2026-05">
+                </div>
+                <div class="field" style="flex:1;min-width:140px">
+                  <label>Tipo de honorário</label>
+                  <select id="t3-hon-tipo">
+                    <option value="">Selecione...</option>
+                    <option value="mensalidade">Mensalidade</option>
+                    <option value="exito">Honorário de êxito</option>
+                    <option value="adiantamento">Adiantamento</option>
+                    <option value="outro">Outro</option>
+                  </select>
+                </div>
+                <button class="btn-primary" style="padding:7px 12px;font-size:12px;align-self:flex-end" onclick="alert('Honorário registrado!\n\nEntrada de R$ 4.320,00 vinculada ao sindicato e salva.')">Registrar</button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -1324,6 +1587,79 @@ function updateOfxTipo(){
   const sel = document.getElementById('ofx-tipo');
   if(!sel) return;
   sel.innerHTML = '<option value="">Selecione...</option>'+tipos.map(t=>`<option>${t}</option>`).join('');
+}
+
+// ── OFX: toggle entrada / despesa por card ──
+function setOfxMode(id, mode){
+  const isDesp = mode==='desp';
+  const despEl = document.getElementById(id+'-desp-fields');
+  const entEl  = document.getElementById(id+'-ent-fields');
+  const btnD   = document.getElementById(id+'-btn-desp');
+  const btnE   = document.getElementById(id+'-btn-ent');
+  if(despEl) despEl.style.display = isDesp ? '' : 'none';
+  if(entEl)  entEl.style.display  = isDesp ? 'none' : '';
+  if(btnD)   btnD.className = isDesp ? 'ot-desp' : '';
+  if(btnE)   btnE.className = isDesp ? '' : 'ot-ent';
+}
+
+// ── OFX: sub-toggle causa / honorários ──
+function setOfxSubMode(id, mode){
+  const isCausa = mode==='causa';
+  const cEl = document.getElementById(id+'-causa-fields');
+  const hEl = document.getElementById(id+'-hon-fields');
+  const bC  = document.getElementById(id+'-btn-causa');
+  const bH  = document.getElementById(id+'-btn-hon');
+  if(cEl) cEl.style.display = isCausa ? '' : 'none';
+  if(hEl) hEl.style.display = isCausa ? 'none' : '';
+  if(bC)  bC.className = isCausa ? 'ost-active' : '';
+  if(bH)  bH.className = isCausa ? '' : 'ost-active';
+}
+
+// ── OFX: busca processo no dataset e auto-preenche ──
+function procSearch(id){
+  const q = (document.getElementById(id+'-proc')?.value||'').trim().toLowerCase();
+  if(!q) return;
+  const found = causasData.find(c=>
+    c.proc.toLowerCase().includes(q) ||
+    c.benef.toLowerCase().includes(q) ||
+    c.sindic.toLowerCase().includes(q)
+  );
+  const autofill  = document.getElementById(id+'-autofill');
+  const notFound  = document.getElementById(id+'-not-found');
+  const newProc   = document.getElementById(id+'-new-proc');
+  const btnVinc   = document.getElementById(id+'-btn-vincular');
+  if(found){
+    document.getElementById(id+'-af-sindic').textContent = found.sindic;
+    document.getElementById(id+'-af-benef').textContent  = found.benef;
+    document.getElementById(id+'-af-adv').textContent    = found.adv;
+    document.getElementById(id+'-af-tipo').textContent   = found.tipo;
+    if(autofill) autofill.style.display = 'grid';
+    if(notFound) notFound.style.display = 'none';
+    if(newProc)  newProc.style.display  = 'none';
+    if(btnVinc){ btnVinc.disabled=false; btnVinc.textContent='Vincular → '+found.proc.substring(0,14)+'…'; }
+  } else {
+    if(autofill) autofill.style.display = 'none';
+    if(notFound) notFound.style.display = '';
+    if(btnVinc){ btnVinc.disabled=true; btnVinc.textContent='Vincular causa →'; }
+  }
+}
+
+// ── OFX: expande campos de processo novo ──
+function showNewProc(id){
+  const newProc = document.getElementById(id+'-new-proc');
+  const notFound = document.getElementById(id+'-not-found');
+  const btnVinc  = document.getElementById(id+'-btn-vincular');
+  if(newProc)  newProc.style.display  = '';
+  if(notFound) notFound.style.display = 'none';
+  if(btnVinc){ btnVinc.disabled=false; btnVinc.textContent='Criar e vincular →'; }
+}
+
+// ── OFX: confirma vinculação ──
+function vincularCausa(id){
+  const proc = document.getElementById(id+'-proc')?.value||'';
+  const afSindic = document.getElementById(id+'-af-sindic')?.textContent;
+  const det = afSindic && afSindic!=='—' ? proc+' · '+afSindic : proc;
+  alert('Causa vinculada!\n\n'+det+'\n\nLançamento registrado como Recebido no painel financeiro.');
 }
 
 function calcU(){
