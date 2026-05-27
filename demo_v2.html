@@ -382,7 +382,13 @@ footer span{color:var(--bx);font-weight:600}
 
 /* ═══ NOTA FISCAL PANEL ═══ */
 .nota-panel{background:#fff;border-radius:12px;border:1px solid var(--bd);padding:22px}
-.nota-fiscal{background:#fffcf5;border:1.5px dashed var(--gold);border-radius:10px;padding:16px;margin-top:10px;position:relative}
+.nota-fiscal{background:#fffcf5;border:1.5px dashed var(--gold);border-radius:10px;overflow:hidden;margin-top:10px;position:relative}
+.nota-body{padding:16px 16px 10px}
+.nota-tear{height:12px;background:linear-gradient(135deg,#fffcf5 25%,transparent 25%) -10px 0,linear-gradient(225deg,#fffcf5 25%,transparent 25%) -10px 0,linear-gradient(315deg,#fffcf5 25%,transparent 25%),linear-gradient(45deg,#fffcf5 25%,transparent 25%);background-size:20px 12px;background-color:var(--bxd);background-repeat:repeat-x}
+.nota-stub{background:var(--bxd);padding:10px 16px;display:flex;align-items:center;justify-content:space-between}
+.nota-stub-label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.15em;color:rgba(255,255,255,.55);font-family:'DM Mono',monospace}
+.nota-stub-sub{font-size:10px;color:rgba(255,255,255,.65);font-family:'DM Sans',sans-serif;margin-top:2px}
+.nota-stub-num{font-size:10px;color:rgba(255,255,255,.4);font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:.08em}
 .nota-hdr{display:flex;align-items:center;gap:10px;margin-bottom:12px}
 .nota-logo{width:34px;height:34px;border-radius:8px;background:var(--bx);color:#fff;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0}
 .nota-brand{font-family:'DM Serif Display',serif;font-size:12px;font-weight:700;color:var(--bx)}
@@ -391,10 +397,13 @@ footer span{color:var(--bx);font-weight:600}
 .nota-row{display:flex;justify-content:space-between;font-size:11px;padding:3px 0;font-family:'DM Mono',monospace}
 .nota-row span:first-child{color:var(--mu)}
 .nota-row span:last-child{font-weight:600;color:var(--tx);text-align:right;max-width:60%}
-.nota-valor-row{display:flex;justify-content:space-between;align-items:center;margin-top:6px}
+.nota-valor-row{display:flex;justify-content:space-between;align-items:center;margin-top:6px;margin-bottom:4px}
 .nota-valor-lbl{font-size:13px;font-weight:700;font-family:'DM Mono',monospace}
 .nota-valor-val{font-size:22px;font-weight:800;color:var(--rd);font-family:'DM Mono',monospace}
-.nota-stamp{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-20deg);font-size:28px;font-weight:900;color:var(--gn);opacity:.25;pointer-events:none;font-family:'DM Mono',monospace;letter-spacing:.1em;border:4px solid var(--gn);padding:4px 10px;border-radius:4px;display:none}
+.nota-stamp{position:absolute;top:44%;left:50%;transform:translate(-50%,-50%) rotate(-20deg);font-size:26px;font-weight:900;color:var(--gn);opacity:.25;pointer-events:none;font-family:'DM Mono',monospace;letter-spacing:.1em;border:4px solid var(--gn);padding:4px 10px;border-radius:4px;display:none}
+.ofx-cat-toggle{display:flex;gap:0;border:1px solid var(--bd);border-radius:6px;overflow:hidden;margin-top:4px}
+.ofx-cat-toggle button{flex:1;padding:5px 10px;border:none;background:#f9f6f3;font-size:11px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;color:var(--mu);transition:all .15s}
+.ofx-cat-toggle button.oct-active{background:var(--bxd);color:#fff}
 
 /* ═══ OFX DEMO — ACCORDION ═══ */
 .ofx-demo{margin-top:14px}
@@ -629,6 +638,21 @@ footer span{color:var(--bx);font-weight:600}
                   </div>
                 </div>
               </div>
+              <div class="ofx-adv-row" style="margin-bottom:4px">
+                <div class="field" style="flex:1;max-width:200px">
+                  <label>Status ao registrar</label>
+                  <select id="t2-status-sel">
+                    <option value="recebido" selected>✓ Recebido</option>
+                    <option value="disponivel">Disponível</option>
+                    <option value="pendente">Pendente</option>
+                    <option value="em-fila">Em fila</option>
+                  </select>
+                </div>
+                <div class="field" style="flex:1;max-width:170px">
+                  <label>Data do depósito</label>
+                  <input type="date" id="t2-data-dep" value="2026-05-20">
+                </div>
+              </div>
               <div style="display:flex;gap:8px;align-items:center;margin-top:4px">
                 <button class="btn-primary" id="t2-btn-vincular" style="padding:7px 14px;font-size:12px" disabled onclick="vincularCausa('t2')">Vincular causa →</button>
                 <button class="btn-secondary" style="padding:7px 12px;font-size:12px" onclick="closeOfxRow(2)">Ignorar</button>
@@ -659,6 +683,14 @@ footer span{color:var(--bx);font-weight:600}
                     <option value="outro">Outro</option>
                   </select>
                 </div>
+                <div class="field" style="flex:1;min-width:140px">
+                  <label>Status ao registrar</label>
+                  <select id="t2-hon-status">
+                    <option value="recebido" selected>✓ Recebido</option>
+                    <option value="disponivel">Disponível</option>
+                    <option value="pendente">Pendente</option>
+                  </select>
+                </div>
                 <button class="btn-primary" style="padding:7px 12px;font-size:12px;align-self:flex-end" onclick="alert('Honorário registrado!\n\nEntrada de R$ 15.400,00 vinculada ao sindicato e lançada no painel financeiro.')">Registrar</button>
               </div>
             </div>
@@ -677,21 +709,16 @@ footer span{color:var(--bx);font-weight:600}
           </div>
           <div class="ofx-row-body" id="ofxb-3" style="display:none">
             <div class="ofx-cat-row" style="flex-wrap:wrap;gap:8px;margin-bottom:10px">
-              <div class="field" style="flex:2;min-width:150px">
+              <div class="field" style="flex:1;min-width:130px">
+                <label>Categoria</label>
+                <div class="ofx-cat-toggle">
+                  <button id="t3-cat-fixo" class="oct-active" onclick="setOfxDespCat('fixo',this)">Custo Fixo</button>
+                  <button id="t3-cat-var" onclick="setOfxDespCat('variavel',this)">Variável</button>
+                </div>
+              </div>
+              <div class="field" style="flex:2;min-width:160px">
                 <label>Tipo de despesa</label>
-                <select id="t3-tipo-desp">
-                  <option value="">Selecione...</option>
-                  <optgroup label="── Custo Fixo ──">
-                    <option>Aluguel</option><option>Folha de pagamento</option>
-                    <option>Contabilidade</option><option>Softwares jurídicos</option>
-                    <option>Internet / Telefonia</option><option>Outros fixos</option>
-                  </optgroup>
-                  <optgroup label="── Custo Variável ──">
-                    <option>Despesas processuais</option><option>Honorários periciais</option>
-                    <option>Deslocamentos</option><option>Material de escritório</option>
-                    <option>Outros variáveis</option>
-                  </optgroup>
-                </select>
+                <input type="text" id="t3-tipo-desp" placeholder="Ex: Aluguel, contabilidade..." style="font-size:12px">
               </div>
               <div class="field" style="flex:2;min-width:150px">
                 <label>Fornecedor</label>
@@ -784,9 +811,7 @@ footer span{color:var(--bx);font-weight:600}
                 <option value="variavel">Custo Variável</option>
               </select></div>
             <div class="field"><label>Tipo de despesa</label>
-              <select id="fd-tipo-desp" onchange="updateNota()">
-                <option value="">Selecione a categoria primeiro</option>
-              </select></div>
+              <input type="text" id="fd-tipo-desp" placeholder="Selecione a categoria primeiro" oninput="updateNota()"></div>
           </div>
           <div class="frow full">
             <div class="field"><label>Fornecedor / Credor</label>
@@ -852,25 +877,35 @@ footer span{color:var(--bx);font-weight:600}
         <div class="card-title">Comprovante de despesa</div>
         <div class="card-sub">Preenchendo em tempo real</div>
         <div class="nota-fiscal">
-          <div class="nota-hdr">
-            <div class="nota-logo">E&amp;P</div>
-            <div>
-              <div class="nota-brand">Estevão &amp; Pinheiro</div>
-              <div class="nota-brand-sub">Advogados Associados</div>
+          <div class="nota-body">
+            <div class="nota-hdr">
+              <div class="nota-logo">E&amp;P</div>
+              <div>
+                <div class="nota-brand">Estevão &amp; Pinheiro</div>
+                <div class="nota-brand-sub">Advogados Associados</div>
+              </div>
             </div>
+            <div class="nota-div"></div>
+            <div class="nota-row"><span>Categoria</span><span id="nota-cat">—</span></div>
+            <div class="nota-row"><span>Tipo</span><span id="nota-tipo">—</span></div>
+            <div class="nota-row"><span>Fornecedor</span><span id="nota-forn">—</span></div>
+            <div class="nota-row"><span>Vencimento</span><span id="nota-venc">—</span></div>
+            <div class="nota-row"><span>Forma pag.</span><span id="nota-pag">—</span></div>
+            <div class="nota-div"></div>
+            <div class="nota-valor-row">
+              <span class="nota-valor-lbl">Valor</span>
+              <span class="nota-valor-val" id="nota-val">R$ —</span>
+            </div>
+            <div class="nota-stamp" id="nota-stamp">REGISTRADO</div>
           </div>
-          <div class="nota-div"></div>
-          <div class="nota-row"><span>Categoria</span><span id="nota-cat">—</span></div>
-          <div class="nota-row"><span>Tipo</span><span id="nota-tipo">—</span></div>
-          <div class="nota-row"><span>Fornecedor</span><span id="nota-forn">—</span></div>
-          <div class="nota-row"><span>Vencimento</span><span id="nota-venc">—</span></div>
-          <div class="nota-row"><span>Forma pag.</span><span id="nota-pag">—</span></div>
-          <div class="nota-div"></div>
-          <div class="nota-valor-row">
-            <span class="nota-valor-lbl">Valor</span>
-            <span class="nota-valor-val" id="nota-val">R$ —</span>
+          <div class="nota-tear"></div>
+          <div class="nota-stub">
+            <div>
+              <div class="nota-stub-label">Canhoto</div>
+              <div class="nota-stub-sub">Estevão &amp; Pinheiro · Advogados Associados</div>
+            </div>
+            <div class="nota-stub-num">Controle interno</div>
           </div>
-          <div class="nota-stamp" id="nota-stamp">REGISTRADO</div>
         </div>
       </div>
     </div>
@@ -889,6 +924,7 @@ footer span{color:var(--bx);font-weight:600}
               <option value="">—</option>
               <option value="disponivel">Disponível</option>
               <option value="pendente">Pendente</option>
+              <option value="em-fila">Em fila</option>
               <option value="recebido">Recebido</option>
               <option value="arquivado">Arquivado</option>
             </select></label>
@@ -1508,10 +1544,23 @@ function setTipoLanc(t){
 }
 function onCatChange(){
   const cat = document.getElementById('fd-categoria').value;
-  const tipos = DESP_TIPOS[cat]||[];
-  const sel = document.getElementById('fd-tipo-desp');
-  sel.innerHTML = '<option value="">Selecione...</option>'+tipos.map(t=>`<option>${t}</option>`).join('');
+  const hints = {
+    fixo:'Ex: Aluguel, folha de pagamento, contabilidade...',
+    variavel:'Ex: Despesas processuais, honorários periciais...'
+  };
+  const inp = document.getElementById('fd-tipo-desp');
+  if(inp){ inp.value=''; inp.placeholder = hints[cat]||'Descreva o tipo de despesa...'; }
   updateNota();
+}
+function setOfxDespCat(cat, btn){
+  document.querySelectorAll('.ofx-cat-toggle button').forEach(b=>b.classList.remove('oct-active'));
+  btn.classList.add('oct-active');
+  const hints = {
+    fixo:'Ex: Aluguel, folha de pagamento, contabilidade...',
+    variavel:'Ex: Despesas processuais, honorários periciais...'
+  };
+  const inp = document.getElementById('t3-tipo-desp');
+  if(inp) inp.placeholder = hints[cat]||'Tipo de despesa...';
 }
 function updateNota(){
   const cat = document.getElementById('fd-categoria')?.value;
