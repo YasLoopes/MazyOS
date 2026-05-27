@@ -105,7 +105,7 @@ input[type=checkbox]{width:15px;height:15px;cursor:pointer;accent-color:var(--bx
 .soon-tag{font-size:9px;font-family:'DM Mono',monospace;background:rgba(0,0,0,.15);padding:1px 5px;border-radius:3px}
 
 /* ═══ TAB 1: LANÇAMENTOS ═══ */
-.t1-main{padding:14px 16px;max-width:none}
+.t1-main{padding:14px 28px;max-width:1440px;margin:0 auto}
 .t1-top{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:18px}
 .form-card,.calc-panel{background:#fff;border-radius:12px;border:1px solid var(--bd);padding:22px}
 .card-title{font-size:15px;font-weight:700;margin-bottom:3px}
@@ -146,7 +146,13 @@ input[type=checkbox]{width:15px;height:15px;cursor:pointer;accent-color:var(--bx
 .accum-lbl{font-size:10px;color:var(--or);font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:3px}
 .accum-val{font-size:18px;font-weight:800;color:var(--or);font-family:'DM Mono',monospace}
 .accum-note{font-size:11px;color:#a07000;margin-top:3px}
-.calc-note{margin-top:14px;font-size:11px;color:var(--mu);background:#faf8f6;padding:10px;border-radius:6px;line-height:1.6}
+.dist-box{margin-top:14px;border:1px solid var(--bd);border-radius:8px;padding:12px 14px;background:#fff}
+.dist-title{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--mu);margin-bottom:9px;padding-bottom:7px;border-bottom:1px solid var(--bd)}
+.dist-item{display:flex;align-items:flex-start;gap:10px;padding:6px 0;border-bottom:1px solid #f5f2ef}
+.dist-item:last-child{border-bottom:none;padding-bottom:0}
+.dist-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;margin-top:4px}
+.dist-name{font-size:12px;font-weight:600;color:var(--tx);margin-bottom:1px}
+.dist-desc{font-size:11px;color:var(--mu)}
 
 /* TABLE CARD */
 .tcard{background:#fff;border-radius:12px;border:1px solid var(--bd);overflow:hidden;margin-bottom:18px}
@@ -575,8 +581,8 @@ footer span{color:var(--bx);font-weight:600}
                 <div><div class="oaf-lbl">Beneficiário</div><div class="oaf-val" id="t2-af-benef">—</div></div>
                 <div><div class="oaf-lbl">Tipo</div><div class="oaf-val" id="t2-af-tipo">—</div></div>
               </div>
-              <!-- Advogado editável — aparece quando processo é encontrado -->
-              <div class="ofx-adv-row" id="t2-adv-row" style="display:none">
+              <!-- Advogado editável — sempre visível no modo Causa/RPV -->
+              <div class="ofx-adv-row" id="t2-adv-row">
                 <div class="field" style="flex:1;max-width:280px">
                   <label>Advogado responsável</label>
                   <select id="t2-adv-sel">
@@ -824,7 +830,21 @@ footer span{color:var(--bx);font-weight:600}
           <div class="accum-val" id="c-accum">R$ —</div>
           <div class="accum-note">Abr + Mai + Jun · Recolher até 31/07/2026</div>
         </div>
-        <div class="calc-note"><strong>Distribuição de honorários</strong><br>Pró-labore: fixo mensal aos sócios<br>Fundo: participação por sócio<br>Diferenciada: por processo / advogado</div>
+        <div class="dist-box">
+          <div class="dist-title">Distribuição de honorários</div>
+          <div class="dist-item">
+            <div class="dist-dot" style="background:var(--bx)"></div>
+            <div><div class="dist-name">Pró-labore</div><div class="dist-desc">Valor fixo mensal · pago diretamente aos sócios</div></div>
+          </div>
+          <div class="dist-item">
+            <div class="dist-dot" style="background:var(--gold)"></div>
+            <div><div class="dist-name">Fundo de participação</div><div class="dist-desc">Proporcional ao resultado do período por sócio</div></div>
+          </div>
+          <div class="dist-item">
+            <div class="dist-dot" style="background:var(--gn)"></div>
+            <div><div class="dist-name">Honorário diferenciado</div><div class="dist-desc">Calculado por processo · atribuído ao advogado responsável</div></div>
+          </div>
+        </div>
       </div>
 
       <!-- NOTA PANEL (despesa) -->
@@ -864,13 +884,32 @@ footer span{color:var(--bx);font-weight:600}
       <div class="bulk-bar" id="t1-bulk" style="display:none">
         <div class="bulk-info"><span id="t1-sel-n">0</span> selecionados</div>
         <div class="bulk-actions">
-          <label>Alterar status para:
+          <label>Status:
             <select class="bulk-select" id="t1-bulk-sel">
-              <option value="">Escolha...</option>
+              <option value="">—</option>
               <option value="disponivel">Disponível</option>
               <option value="pendente">Pendente</option>
               <option value="recebido">Recebido</option>
               <option value="arquivado">Arquivado</option>
+            </select></label>
+          <label>Banco:
+            <select class="bulk-select" id="t1-bulk-banco">
+              <option value="">—</option>
+              <option value="CEF">CEF</option>
+              <option value="BB">BB</option>
+            </select></label>
+          <label>Sindicato:
+            <select class="bulk-select" id="t1-bulk-sindic">
+              <option value="">—</option>
+              <option>SINDSEP</option><option>SINDPD</option><option>SEEB</option>
+              <option>SINDIFISCO</option><option>SINTETEL</option><option>SINIJUDE</option>
+            </select></label>
+          <label>Advogado:
+            <select class="bulk-select" id="t1-bulk-adv">
+              <option value="">—</option>
+              <option>Cláudio Estevão</option><option>Fred Pinheiro</option>
+              <option>Dra. Beatriz Cavalcanti</option><option>Dr. Marco A. Lins</option>
+              <option>Andrielly Gutierrez</option>
             </select></label>
           <button class="btn-bulk-apply" onclick="applyT1Bulk()">Aplicar</button>
           <button class="btn-bulk-cancel" onclick="clearT1Sel()">Cancelar</button>
@@ -1761,13 +1800,27 @@ function updateT1Bulk(){
   else bar.style.display='none';
 }
 function applyT1Bulk(){
-  const ns=document.getElementById('t1-bulk-sel').value;if(!ns)return;
-  causasData.forEach(e=>{if(t1Sel.has(e.id))e.status=ns;});
+  const ns  = document.getElementById('t1-bulk-sel')?.value;
+  const nb  = document.getElementById('t1-bulk-banco')?.value;
+  const nsi = document.getElementById('t1-bulk-sindic')?.value;
+  const na  = document.getElementById('t1-bulk-adv')?.value;
+  if(!ns && !nb && !nsi && !na) return;
+  causasData.forEach(e=>{
+    if(t1Sel.has(e.id)){
+      if(ns)  e.status = ns;
+      if(nb)  e.banco  = nb;
+      if(nsi) e.sindic = nsi;
+      if(na)  e.adv    = na;
+    }
+  });
   t1Sel.clear();
   const tbl=document.querySelector('#t1-tbody')?.closest('table');
   if(tbl) tbl.classList.remove('sel-active');
   const chkAll=document.getElementById('t1-chk-all');
   if(chkAll) chkAll.checked=false;
+  ['t1-bulk-sel','t1-bulk-banco','t1-bulk-sindic','t1-bulk-adv'].forEach(id=>{
+    const el=document.getElementById(id); if(el) el.value='';
+  });
   renderT1Table();updateT1Bulk();
 }
 function clearT1Sel(){
