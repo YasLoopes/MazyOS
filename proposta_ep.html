@@ -251,7 +251,7 @@ p.body-text{color:#3a3a3a;line-height:1.7;margin-bottom:12px}
       <div class="pain-card"><div class="pain-icon">⏱</div><div><div class="pain-title">Tempo excessivo em trabalho manual</div><div class="pain-desc">Cada RPV exige consulta a múltiplos portais, cálculo de honorários e tributos, e registro em planilha — processo repetido dezenas de vezes por mês.</div></div></div>
       <div class="pain-card"><div class="pain-icon">⚠️</div><div><div class="pain-title">Risco de erro no cálculo</div><div class="pain-desc">Cálculos manuais em planilha aumentam o risco de erros em honorários, tributos acumulados e distribuição entre sócios — erros que só aparecem no fechamento.</div></div></div>
       <div class="pain-card"><div class="pain-icon">📊</div><div><div class="pain-title">Sem visibilidade financeira consolidada</div><div class="pain-desc">Não há painel único que mostre o total a receber, valores por banco, situação de cada processo e tendência mensal — a diretoria depende de relatórios pontuais.</div></div></div>
-      <div class="pain-card"><div class="pain-icon">📄</div><div><div class="pain-title">Relatório mensal feito à mão</div><div class="pain-desc">O resumo enviado à diretoria é digitado manualmente toda vez — sem padronização, sem rastreamento e sem possibilidade de periodicidade diária ou semanal.</div></div></div>
+      <div class="pain-card"><div class="pain-icon">📄</div><div><div class="pain-title">Relatório semanal feito à mão</div><div class="pain-desc">O resumo enviado à diretoria é digitado manualmente toda vez — sem padronização, sem rastreamento e sem possibilidade de periodicidade diária ou semanal.</div></div></div>
       <div class="pain-card"><div class="pain-icon">🔔</div><div><div class="pain-title">Sem alertas de prazo</div><div class="pain-desc">Processos com prazo de levantamento vencido não são sinalizados automaticamente — dependem de memória ou revisão periódica da planilha.</div></div></div>
       <div class="pain-card"><div class="pain-icon">📁</div><div><div class="pain-title">Recibos físicos e sem rastreamento</div><div class="pain-desc">Recibos emitidos em papel ou PDF avulso, sem controle de assinatura, sem armazenamento padronizado e sem confirmação de entrega.</div></div></div>
     </div>
@@ -308,7 +308,7 @@ p.body-text{color:#3a3a3a;line-height:1.7;margin-bottom:12px}
           <p style="font-size:13px;color:#3a3a3a">Formulário web para lançamento de RPVs, precatórios e despesas do escritório. O sistema calcula automaticamente honorários, tributos e saldo líquido — e aprende a reconhecer os lançamentos do extrato bancário a cada confirmação.</p>
           <ul>
             <li>Lançamento de RPV / Precatório: cálculo automático de honorários (%), tributos (%) e saldo líquido ao sindicato</li>
-            <li>Controle de despesas com nota fiscal visual em tempo real (categoria, tipo, fornecedor, vencimento)</li>
+            <li>Controle de despesas com nota visual (categoria, tipo, fornecedor, vencimento)</li>
             <li>Importação de extrato bancário (OFX, CSV, PDF) com reconhecimento automático de padrões</li>
             <li>Auto-categorização por aprendizado — o sistema aprende com cada confirmação e categoriza sozinho nas próximas ocorrências</li>
             <li>Acumulado de tributos por trimestre com alerta de prazo de recolhimento</li>
@@ -444,7 +444,6 @@ p.body-text{color:#3a3a3a;line-height:1.7;margin-bottom:12px}
             <li>Status do recibo atualizado automaticamente via webhook</li>
             <li>Cadastro de sindicatos: representante, e-mail e WhatsApp centralizados por perfil</li>
             <li>Gestão de acessos por perfil: admin (Waldir), editor (Andrielly), visualização (sócios)</li>
-            <li>Preparado para integração com Alter Data e Open Banking BACEN</li>
           </ul>
         </div>
         <div class="ph-mockup">
@@ -502,12 +501,24 @@ p.body-text{color:#3a3a3a;line-height:1.7;margin-bottom:12px}
     </table>
 
     <div style="background:#fff;border:1px solid var(--bd);border-radius:10px;padding:16px 20px;margin-top:16px">
-      <div style="font-weight:700;font-size:13px;margin-bottom:8px">Por que não Google Sheets, Google Sites ou plataformas prontas?</div>
-      <div style="font-size:13px;color:#3a3a3a;line-height:1.65">
-        <strong>Google Sheets</strong> não tem controle de acesso granular por perfil, não gera interfaces personalizadas e não escala bem para relatórios automáticos com múltiplos usuários.
-        <br><strong>Google Sites</strong> é um construtor de páginas estáticas — não suporta lógica de negócio, banco de dados ou formulários conectados.
-        <br><strong>Plataformas prontas de financeiro</strong> resolvem o preenchimento, mas não eliminam o trabalho manual de calcular honorários, tributos e gerar o relatório no formato específico do Estevão & Pinheiro. A dor continua.
-        <br><strong>Sistema próprio:</strong> construído exatamente para as regras do escritório, com flexibilidade total para evoluir conforme as necessidades mudam.
+      <div style="font-weight:700;font-size:13px;margin-bottom:12px;display:flex;align-items:center;gap:6px">🔐 Segurança da plataforma</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+        <div>
+          <div style="font-size:12px;font-weight:700;color:var(--bx);margin-bottom:4px">Acesso e autenticação</div>
+          <div style="font-size:12px;color:#3a3a3a;line-height:1.65">Login via conta Google (OAuth 2.0) — sem criar nova senha, usando o acesso ao Gmail já existente. O sistema aceita apenas e-mails previamente autorizados pelo administrador. Sessões expiram automaticamente após inatividade.</div>
+        </div>
+        <div>
+          <div style="font-size:12px;font-weight:700;color:var(--bx);margin-bottom:4px">Domínio personalizado (recomendado)</div>
+          <div style="font-size:12px;color:#3a3a3a;line-height:1.65">URL própria como <span style="font-family:'DM Mono',monospace;font-size:11px">sistema.estevaoepinheiro.adv.br</span> com certificado HTTPS dedicado — mais seguro que domínio genérico, evita phishing e reforça a identidade do escritório. Custo: ~R$65/ano. Indicado, pois aumenta a confiabilidade percebida e o controle sobre o acesso.</div>
+        </div>
+        <div>
+          <div style="font-size:12px;font-weight:700;color:var(--bx);margin-bottom:4px">Armazenamento dos dados</div>
+          <div style="font-size:12px;color:#3a3a3a;line-height:1.65"><strong>Dados estruturados</strong> (RPVs, despesas, histórico): banco PostgreSQL hospedado no Supabase (AWS), criptografado em repouso com backup automático diário.<br><strong>Arquivos brutos</strong> (extratos OFX/CSV/PDF): armazenados em bucket privado no Supabase Storage — não ficam em planilhas ou pastas abertas. Acesso exclusivamente via sistema autenticado.</div>
+        </div>
+        <div>
+          <div style="font-size:12px;font-weight:700;color:var(--bx);margin-bottom:4px">Rastreabilidade e backup</div>
+          <div style="font-size:12px;color:#3a3a3a;line-height:1.65">Toda ação no sistema é registrada com data, hora e usuário responsável. As planilhas históricas do escritório continuam como backup externo em Google Drive — o sistema não as substitui, apenas absorve os dados para uso interno. Nenhum dado bruto fica exposto.</div>
+        </div>
       </div>
     </div>
   </section>
@@ -523,14 +534,14 @@ p.body-text{color:#3a3a3a;line-height:1.7;margin-bottom:12px}
     <div class="pricing-grid">
       <div class="price-card">
         <span class="pc-badge pc-b3">Apenas Fase 1</span>
-        <div class="pc-name">MVP · Essencial</div>
-        <div class="pc-price">R$ 7.500 <small>à vista</small></div>
-        <div class="pc-sub">ou 2× R$ 3.900</div>
+        <div class="pc-name">Essencial — Lançamentos</div>
+        <div class="pc-price">R$ 6.500 <small>à vista</small></div>
+        <div class="pc-sub">ou 2× R$ 3.400</div>
         <ul class="pc-list">
           <li>Lançamento de RPV/Precatório + Despesas</li>
           <li>Cálculo automático (honorários, tributos, saldo líquido)</li>
           <li>Importação OFX com auto-categorização por aprendizado</li>
-          <li>Nota fiscal visual em tempo real para despesas</li>
+          <li>Nota visual para despesas</li>
           <li>Histórico completo com edição inline e em massa</li>
           <li>Alertas de prazo (60 dias da expedição)</li>
           <li>Exportação Excel / PDF</li>
@@ -541,8 +552,8 @@ p.body-text{color:#3a3a3a;line-height:1.7;margin-bottom:12px}
       <div class="price-card highlight">
         <span class="pc-badge pc-b1">Fases 1 + 2</span>
         <div class="pc-name">Completo · Painel</div>
-        <div class="pc-price">R$ 12.000 <small>à vista</small></div>
-        <div class="pc-sub">ou 3× R$ 4.200</div>
+        <div class="pc-price">R$ 8.500 <small>à vista</small></div>
+        <div class="pc-sub">ou 3× R$ 2.950</div>
         <ul class="pc-list">
           <li>Tudo do MVP Essencial</li>
           <li>"O que fazer hoje" com navegação direta</li>
@@ -557,8 +568,8 @@ p.body-text{color:#3a3a3a;line-height:1.7;margin-bottom:12px}
       <div class="price-card">
         <span class="pc-badge pc-b2">Fases 1 + 2 + 3</span>
         <div class="pc-name">Projeto Completo</div>
-        <div class="pc-price">R$ 18.000 <small>à vista</small></div>
-        <div class="pc-sub">ou 4× R$ 4.750</div>
+        <div class="pc-price">R$ 10.000 <small>à vista</small></div>
+        <div class="pc-sub">ou 4× R$ 2.650</div>
         <ul class="pc-list">
           <li>Tudo dos planos anteriores</li>
           <li>Relatórios automáticos (WhatsApp + e-mail)</li>
@@ -566,20 +577,46 @@ p.body-text{color:#3a3a3a;line-height:1.7;margin-bottom:12px}
           <li>Assinatura digital de recibos (ClickSign)</li>
           <li>Cadastro de sindicatos com contatos</li>
           <li>Gestão de acessos e permissões</li>
-          <li>Preparado para Alter Data + Open Banking</li>
         </ul>
         <div class="pc-note">Automação máxima — zero trabalho manual</div>
+      </div>
+    </div>
+
+    <div style="background:#fffbf0;border:1px solid rgba(201,168,76,.4);border-left:4px solid var(--gold);border-radius:10px;padding:16px 20px;margin-top:16px">
+      <div style="font-weight:700;font-size:13px;margin-bottom:8px">⚙ Ferramentas para automação completa (Fase 3) — custos mensais do escritório</div>
+      <div style="font-size:12px;color:#3a3a3a;line-height:1.65;margin-bottom:12px">Além do investimento de desenvolvimento, a Fase 3 exige a contratação de ferramentas externas para WhatsApp, e-mail e assinatura digital. Estes são custos operacionais do escritório, pagos diretamente aos fornecedores:</div>
+      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px">
+        <div style="background:#fff;border:1px solid var(--bd);border-radius:8px;padding:10px 14px">
+          <div style="font-size:12px;font-weight:700;margin-bottom:2px">ClickSign — assinatura digital</div>
+          <div style="font-family:'DM Mono',monospace;font-size:13px;color:var(--or);font-weight:700">~R$99–R$299/mês</div>
+          <div style="font-size:11px;color:var(--mu);margin-top:2px">Plano por volume · obrigatório para validade ICP-Brasil</div>
+        </div>
+        <div style="background:#fff;border:1px solid var(--bd);border-radius:8px;padding:10px 14px">
+          <div style="font-size:12px;font-weight:700;margin-bottom:2px">WhatsApp Business API</div>
+          <div style="font-family:'DM Mono',monospace;font-size:13px;color:var(--or);font-weight:700">~R$97/mês (Z-API)</div>
+          <div style="font-size:11px;color:var(--mu);margin-top:2px">Necessário para envio automático de relatórios e cobranças via WhatsApp</div>
+        </div>
+        <div style="background:#fff;border:1px solid var(--bd);border-radius:8px;padding:10px 14px">
+          <div style="font-size:12px;font-weight:700;margin-bottom:2px">SendGrid — e-mail automático</div>
+          <div style="font-family:'DM Mono',monospace;font-size:13px;color:var(--gn);font-weight:700">Gratuito</div>
+          <div style="font-size:11px;color:var(--mu);margin-top:2px">Até 100 e-mails/dia — suficiente para o volume do escritório</div>
+        </div>
+        <div style="background:#fff;border:1px solid var(--bd);border-radius:8px;padding:10px 14px">
+          <div style="font-size:12px;font-weight:700;margin-bottom:2px">Supabase — banco de dados</div>
+          <div style="font-family:'DM Mono',monospace;font-size:13px;color:var(--gn);font-weight:700">Gratuito até 500 MB</div>
+          <div style="font-size:11px;color:var(--mu);margin-top:2px">~R$145/mês se ultrapassar — improvável no volume atual</div>
+        </div>
       </div>
     </div>
 
     <div style="background:#fff;border:1px solid var(--bd);border-radius:10px;padding:16px 20px;margin-top:20px;display:grid;grid-template-columns:1fr 1fr;gap:20px">
       <div>
         <div style="font-weight:700;font-size:14px;margin-bottom:8px">Suporte mensal (opcional)</div>
-        <div style="font-family:'DM Serif Display',serif;font-size:26px;color:var(--bx)">R$ 1.200 <span style="font-family:'DM Sans',sans-serif;font-size:13px;color:var(--mu)">/mês</span></div>
-        <div style="font-size:12px;color:var(--mu);margin-top:4px">12 horas mensais de suporte técnico</div>
+        <div style="font-family:'DM Serif Display',serif;font-size:26px;color:var(--bx)">R$ 1.000 <span style="font-family:'DM Sans',sans-serif;font-size:13px;color:var(--mu)">/mês</span></div>
+        <div style="font-size:12px;color:var(--mu);margin-top:4px">Até 5 alterações/mês neste projeto</div>
       </div>
       <div style="font-size:13px;color:#3a3a3a;line-height:1.65">
-        Inclui: manutenção corretiva, pequenas evoluções funcionais, atualização de regras de cálculo (percentuais de honorários e tributos), suporte a dúvidas de uso e monitoramento de estabilidade. Sem fidelidade mínima — cancelamento com 30 dias de aviso.
+        Inclui: manutenção corretiva, pequenas evoluções funcionais (ajustes de telas, regras de cálculo, novos campos), suporte a dúvidas de uso e monitoramento de estabilidade. Sem fidelidade mínima — cancelamento com 30 dias de aviso prévio. Alterações em outros sistemas ou projetos novos demandam nova proposta.
       </div>
     </div>
   </section>
@@ -597,13 +634,11 @@ p.body-text{color:#3a3a3a;line-height:1.7;margin-bottom:12px}
       <tbody>
         <tr><td class="q-num">1</td><td><strong>Os dados históricos (planilhas dos últimos meses) serão migrados para o sistema, ou o início será com dados novos?</strong></td><td class="q-impact">Define escopo e prazo da Fase 1</td></tr>
         <tr><td class="q-num">2</td><td><strong>Quantos RPVs/precatórios são lançados por mês em média? Quantos sindicatos ativos no momento?</strong></td><td class="q-impact">Valida banco de dados e infraestrutura</td></tr>
-        <tr style="opacity:.55"><td class="q-num" style="color:var(--gn)">3 ✓</td><td><strong>Quem terá acesso ao sistema?</strong><br><span style="font-size:12px;color:var(--gn)">Respondido: Waldir Rodrigues (admin), Andrielly Gutierrez (editor), Cláudio Estevão e Fred Pinheiro (visualização)</span></td><td class="q-impact">Implementado na demonstração</td></tr>
+        <tr><td class="q-num">3</td><td><strong>Quem terá acesso ao sistema e quais permissões cada perfil terá?</strong></td><td class="q-impact">Define perfis de usuário e controle de acesso</td></tr>
         <tr><td class="q-num">4</td><td><strong>Os relatórios serão enviados por WhatsApp, e-mail, ou ambos? Quem são os destinatários fixos?</strong></td><td class="q-impact">Define integrações da Fase 3</td></tr>
         <tr><td class="q-num">5</td><td><strong>Existem fórmulas documentadas para o pró-labore e distribuição do fundo entre sócios?</strong></td><td class="q-impact">Essencial para automatizar a distribuição de honorários</td></tr>
         <tr><td class="q-num">6</td><td><strong>Quais advogados têm distribuição diferenciada por processo? Como funciona a regra?</strong></td><td class="q-impact">Define o motor de cálculo</td></tr>
-        <tr style="opacity:.55"><td class="q-num" style="color:var(--gn)">7 ✓</td><td><strong>A assinatura digital dos recibos entra no escopo?</strong><br><span style="font-size:12px;color:var(--gn)">Respondido: sim — incluída na Fase 3, via ClickSign (ICP-Brasil)</span></td><td class="q-impact">Incluída no escopo do projeto completo</td></tr>
-        <tr><td class="q-num">8</td><td><strong>Qual o prazo desejado para a Fase 1 estar operacional?</strong></td><td class="q-impact">Define priorização do desenvolvimento</td></tr>
-        <tr><td class="q-num">9</td><td><strong>O banco de dados do extrato OFX virá da CEF e do BB — há outros bancos no escopo inicial?</strong></td><td class="q-impact">Define escopo da importação OFX na Fase 1</td></tr>
+        <tr><td class="q-num">7</td><td><strong>O banco de dados do extrato OFX virá da CEF e do BB — há outros bancos no escopo inicial?</strong></td><td class="q-impact">Define escopo da importação OFX na Fase 1</td></tr>
       </tbody>
     </table>
   </section>
@@ -641,7 +676,7 @@ p.body-text{color:#3a3a3a;line-height:1.7;margin-bottom:12px}
         <div class="about-text">
           Trabalho com automação de processos de negócio — identificando gargalos operacionais e construindo sistemas que eliminam trabalho manual repetitivo. Cada entrega é pensada para gerar resultado imediato e escalar conforme o negócio cresce.
           <br><br>
-          Minha abordagem: entender profundamente o processo antes de propor qualquer solução. Nenhuma ferramenta é escolhida sem analisar custo-benefício real, manutenibilidade e adequação ao perfil do time que vai usar.
+          Minha abordagem: entender profundamente o processo antes de propor qualquer solução. Nenhuma ferramenta é escolhida sem analisar custo-benefício real, manutenibilidade e adequação ao perfil da equipe que utilizará.
         </div>
         <div class="about-cnpj">CNPJ: 44.704.456/0001-08</div>
         <div class="contact-row">
