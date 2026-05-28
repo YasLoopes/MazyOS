@@ -8,7 +8,7 @@
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2/dist/chartjs-plugin-datalabels.min.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{--bx:#6B1C2E;--bxd:#4a1220;--bxl:#8b2a40;--gold:#c9a84c;--bg:#f4f1ee;--wh:#fff;--tx:#1a1a1a;--mu:#6b6b6b;--bd:#e0d9d4;--gn:#2d7d46;--gnb:#e8f5ec;--or:#c07000;--orb:#fff3e0;--rd:#c0392b;--rdb:#fdecea;--bl:#1a5276;--blb:#eaf1f8}
+:root{--bx:#6B1C2E;--bxd:#4a1220;--bxl:#8b2a40;--gold:#c9a84c;--bg:#f4f1ee;--wh:#fff;--tx:#1a1a1a;--mu:#6b6b6b;--bd:#e0d9d4;--gn:#2c5940;--gnb:#deeae3;--or:#b36a00;--orb:#f8eed6;--rd:#c0392b;--rdb:#fdecea;--bl:#1e4272;--blb:#dde8f4}
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--tx);min-height:100vh}
 
@@ -164,14 +164,14 @@ input[type=checkbox]{width:15px;height:15px;cursor:pointer;accent-color:var(--bx
 /* ═══ TAB 2: PAINEL FINANCEIRO ═══ */
 .t2-main{padding:14px 28px;max-width:1440px;margin:0 auto}
 .filter-bar{display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap;align-items:flex-end}
-.filter-bar label{font-size:12px;color:var(--mu);display:flex;flex-direction:column;gap:3px}
-.filter-bar select,.filter-bar input[type=date]{font-size:12px;border:1px solid var(--bd);border-radius:6px;padding:6px 10px;background:#fff;color:var(--tx);outline:none;cursor:pointer;font-family:'DM Sans',sans-serif}
+.filter-bar label{font-size:12px;color:var(--mu);display:flex;flex-direction:column;gap:3px;flex:1;min-width:80px}
+.filter-bar select,.filter-bar input[type=date]{font-size:12px;border:1px solid var(--bd);border-radius:6px;padding:6px 10px;background:#fff;color:var(--tx);outline:none;cursor:pointer;font-family:'DM Sans',sans-serif;width:100%}
 .filter-bar select:focus,.filter-bar input[type=date]:focus{border-color:var(--bx)}
 .btn-filter-act{background:var(--bx);color:#fff;border:none;border-radius:6px;padding:7px 16px;font-size:12px;font-weight:600;cursor:pointer;align-self:flex-end;font-family:'DM Sans',sans-serif}
 .btn-clear-f{background:#fff;color:var(--bx);border:1px solid var(--bx);border-radius:6px;padding:7px 14px;font-size:12px;font-weight:600;cursor:pointer;align-self:flex-end;font-family:'DM Sans',sans-serif}
-.btn-export{background:#fff;color:var(--bx);border:1px solid var(--bx);border-radius:6px;padding:7px 14px;font-size:12px;font-weight:600;cursor:pointer;margin-left:auto;align-self:flex-end;font-family:'DM Sans',sans-serif}
+.btn-export{background:#fff;color:var(--bx);border:1px solid var(--bx);border-radius:6px;padding:7px 14px;font-size:12px;font-weight:600;cursor:pointer;align-self:flex-end;font-family:'DM Sans',sans-serif}
 .kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:12px}
-.kpi-card{background:#fff;border-radius:10px;padding:12px 16px;border:1px solid var(--bd);position:relative;overflow:hidden;transition:transform .15s,box-shadow .15s,border .15s;cursor:pointer}
+.kpi-card{background:#fff;border-radius:10px;padding:14px 16px;border:1px solid var(--bd);position:relative;overflow:hidden;transition:transform .15s,box-shadow .15s,border .15s;cursor:pointer;display:flex;flex-direction:column;justify-content:space-between}
 .kpi-card:hover{transform:translateY(-1px);box-shadow:0 4px 14px rgba(0,0,0,.08)}
 .kpi-card.kpi-active{border:2px solid}
 .kpi-card.kpi-active.k-bx{border-color:var(--bx)}
@@ -180,12 +180,12 @@ input[type=checkbox]{width:15px;height:15px;cursor:pointer;accent-color:var(--bx
 .kpi-card.kpi-active.k-bl{border-color:var(--bl)}
 .kpi-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
 .k-bx::before{background:var(--bx)}.k-gn::before{background:var(--gn)}.k-or::before{background:var(--or)}.k-bl::before{background:var(--bl)}
-.kpi-lbl{font-size:10px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;font-weight:600}
-.kpi-val{font-size:20px;font-weight:800;line-height:1;margin:3px 0}
+.kpi-lbl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;font-weight:600}
+.kpi-val{font-size:28px;font-weight:800;line-height:1;margin:4px 0 3px}
 .kv-bx{color:var(--bx)}.kv-gn{color:var(--gn)}.kv-or{color:var(--or)}.kv-bl{color:var(--bl)}
-.kpi-sub{font-size:11px;color:var(--mu)}
-.kpi-icon{position:absolute;top:14px;right:14px;font-size:24px;opacity:.08}
-.kpi-filter-hint{font-size:9px;color:var(--mu);margin-top:4px;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:.06em}
+.kpi-sub{font-size:12px;color:var(--mu)}
+.kpi-icon{position:absolute;top:10px;right:12px;font-size:16px;opacity:.07}
+.kpi-filter-hint{font-size:9px;color:var(--mu);margin-top:2px;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:.06em}
 .kpi-card.kpi-active .kpi-filter-hint{color:var(--bx);font-weight:700}
 .charts-row{display:grid;grid-template-columns:1.5fr 1fr;gap:10px;margin-bottom:10px}
 .charts-row-2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
@@ -205,7 +205,7 @@ input[type=checkbox]{width:15px;height:15px;cursor:pointer;accent-color:var(--bx
 .bl-row:hover{background:#f5f0ee}
 .bl-row.bl-active{background:rgba(107,28,46,.08)}
 .bl-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
-.bl-name{flex:0 0 38px;font-weight:600;font-size:11px;color:var(--tx)}
+.bl-name{flex:1;font-weight:600;font-size:10px;color:var(--tx)}
 .bl-bar-wrap{flex:1;height:6px;background:#f0ece8;border-radius:3px;overflow:hidden}
 .bl-bar{height:100%;border-radius:3px;transition:width .4s}
 .bl-val{font-family:'DM Mono',monospace;font-size:12px;font-weight:700;color:var(--tx);white-space:nowrap;min-width:70px;text-align:right}
@@ -226,12 +226,12 @@ input[type=checkbox]{width:15px;height:15px;cursor:pointer;accent-color:var(--bx
 .cost-toggle{display:flex;gap:4px;margin-bottom:10px}
 .ct-btn{padding:4px 12px;border-radius:20px;border:1px solid var(--bd);font-size:11px;font-weight:600;cursor:pointer;background:#fff;color:var(--mu);font-family:'DM Sans',sans-serif;transition:all .15s}
 .ct-btn.ct-active{background:var(--bx);color:#fff;border-color:var(--bx)}
-.cost-list{display:flex;flex-direction:column;gap:6px}
-.cbr{display:flex;align-items:center;gap:8px;font-size:12px}
-.cbr-label{flex:0 0 140px;font-size:11px;color:var(--tx);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.cbr-track{flex:1;height:8px;background:#f0ece8;border-radius:4px;overflow:hidden}
-.cbr-fill{height:100%;border-radius:4px;transition:width .4s}
-.cbr-val{font-family:'DM Mono',monospace;font-size:11px;font-weight:700;white-space:nowrap;min-width:46px;text-align:right}
+.cost-list{display:flex;flex-direction:column;gap:10px}
+.cbr{display:flex;align-items:center;gap:8px;font-size:13px}
+.cbr-label{flex:0 0 150px;font-size:12px;color:var(--tx);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cbr-track{flex:1;height:10px;background:#f0ece8;border-radius:5px;overflow:hidden}
+.cbr-fill{height:100%;border-radius:5px;transition:width .4s}
+.cbr-val{font-family:'DM Mono',monospace;font-size:12px;font-weight:700;white-space:nowrap;min-width:50px;text-align:right}
 .cbr-tag{font-size:9px;font-weight:700;padding:1px 6px;border-radius:10px;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:.04em}
 .tag-fixo{background:#f5f5f5;color:#555}
 .tag-var{background:rgba(201,168,76,.15);color:#7a5c0a}
@@ -278,7 +278,7 @@ input[type=checkbox]{width:15px;height:15px;cursor:pointer;accent-color:var(--bx
 .hi-body .hi-desc{font-size:11px;color:var(--mu);margin-top:1px}
 
 /* CONTRATOS */
-.contratos-card{background:#fff;border-radius:10px;border:1px solid var(--bd);padding:14px 16px;margin-bottom:10px}
+.contratos-card{background:#fff;border-radius:10px;border:1px solid var(--bd);padding:14px 16px;box-sizing:border-box;display:flex;flex-direction:column}
 .contratos-kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:14px}
 .ck-item{text-align:center;padding:10px 8px;border-radius:8px;border:1px solid var(--bd)}
 .ck-val{font-size:20px;font-weight:800;font-family:'DM Mono',monospace}
@@ -355,21 +355,24 @@ footer span{color:var(--bx);font-weight:600}
 
 /* ═══ RESULTADO HIGHLIGHT ═══ */
 .resultado-highlight{background:#fff;border-radius:12px;border:2px solid var(--bx);border-left:6px solid var(--bx);padding:20px 24px;margin-bottom:14px}
-.rh-header{font-family:'DM Serif Display',serif;font-size:16px;font-weight:700;color:var(--bx);margin-bottom:3px}
+.rh-header{font-family:'DM Sans',sans-serif;font-size:15px;font-weight:800;color:var(--bx);margin-bottom:3px;letter-spacing:.01em;text-transform:uppercase}
 .rh-sub{font-size:11px;color:var(--mu);margin-bottom:14px}
-.rh-body{display:grid;grid-template-columns:auto 1fr 1.2fr;gap:20px;align-items:start}
-.rh-kpis{display:flex;flex-direction:column;gap:8px;min-width:160px}
-.rh-kpi{padding:10px 14px;border-radius:8px;border:1px solid var(--bd)}
-.rh-kpi-val{font-size:18px;font-weight:800;font-family:'DM Mono',monospace}
-.rh-kpi-lbl{font-size:10px;color:var(--mu);text-transform:uppercase;letter-spacing:.04em;margin-top:2px}
-.rh-gn .rh-kpi-val{color:var(--gn)}.rh-rd .rh-kpi-val{color:var(--rd)}.rh-bx .rh-kpi-val{color:var(--bx)}
+.rh-body{display:grid;grid-template-columns:auto 1fr 1.2fr;gap:20px;align-items:stretch}
+.rh-kpis{display:flex;flex-direction:column;justify-content:space-between;min-width:160px}
+.rh-kpi{padding:14px 16px;border-radius:8px;border:1px solid var(--bd);cursor:pointer;transition:box-shadow .15s,border-color .15s}
+.rh-kpi:hover{box-shadow:0 3px 12px rgba(0,0,0,.09);border-color:var(--mu)}
+.rh-kpi-val{font-size:22px;font-weight:800;font-family:'DM Mono',monospace}
+.rh-kpi-lbl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.04em;margin-top:3px}
+.rh-gn .rh-kpi-val{color:var(--gn)}.rh-rd .rh-kpi-val{color:var(--rd)}.rh-bx .rh-kpi-val{color:var(--bx)}.rh-gy .rh-kpi-val{color:#777}.rh-gl .rh-kpi-val{color:#c9a84c}
+.rh-kpi-active{outline:2px solid var(--bx);box-shadow:0 2px 10px rgba(107,28,46,.18)!important}
 .rh-chart-col{display:flex;flex-direction:column;align-items:center}
 .rh-chart-title{font-size:11px;font-weight:600;color:var(--mu);text-transform:uppercase;letter-spacing:.04em;margin-bottom:8px;text-align:center}
+.rh-costs-col{display:flex;flex-direction:column;justify-content:space-between}
 .rh-costs-col .cost-toggle{margin-bottom:8px}
 
 /* ═══ KPI + BANCO ROW ═══ */
-.kpi-banco-row{display:grid;grid-template-columns:1fr 270px;gap:10px;margin-bottom:12px;align-items:start}
-.kpi-grid-4{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.kpi-banco-row{display:grid;grid-template-columns:1fr 320px;gap:10px;margin-bottom:12px;align-items:stretch}
+.kpi-grid-4{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;height:100%;align-content:stretch}
 .banco-card{background:#fff;border-radius:10px;border:1px solid var(--bd);padding:14px 16px}
 
 /* ═══ HOJE ITEM COM CHECKBOX ═══ */
@@ -380,6 +383,38 @@ footer span{color:var(--bx);font-weight:600}
 .hi-link:hover{background:rgba(107,28,46,.18)}
 .hoje-done .hi-body{opacity:.4}
 .hoje-done .hi-body *{text-decoration:line-through}
+
+/* TAREFAS SUGERIDAS — strip horizontal */
+.tarefas-strip{background:#fff;border-radius:10px;border:1px solid var(--bd);padding:12px 16px;margin-bottom:12px}
+.tarefas-strip-hdr{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--mu);margin-bottom:10px}
+.tarefas-row{display:flex;gap:8px;flex-wrap:wrap}
+.tarefa-chip{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:8px;border:1px solid var(--bd);border-left:3px solid var(--bd);cursor:pointer;flex:1;min-width:200px;transition:box-shadow .15s}
+.tarefa-chip:hover{box-shadow:0 2px 8px rgba(0,0,0,.08)}
+.tc-urgente{border-left-color:var(--rd);background:var(--rdb)}
+.tc-atencao{border-left-color:var(--or);background:var(--orb)}
+.tc-info{border-left-color:var(--gn);background:var(--gnb)}
+.tc-body{flex:1;min-width:0}
+.tc-label{font-size:12px;font-weight:700;color:var(--tx)}
+.tc-desc{font-size:10px;color:var(--mu);margin-top:1px}
+.tc-btn{background:rgba(107,28,46,.08);border:none;color:var(--bx);font-size:11px;font-weight:700;cursor:pointer;white-space:nowrap;font-family:'DM Sans',sans-serif;padding:3px 8px;border-radius:4px;flex-shrink:0}
+.tc-btn:hover{background:rgba(107,28,46,.18)}
+.tarefa-chip.hoje-done{opacity:.6}
+.tarefa-chip.hoje-done .tc-label{text-decoration:line-through;opacity:.5}
+
+/* RECIBO + INADIMPLENTES ROW */
+.recibo-inad-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
+.inad-mini-card{background:#fff;border-radius:10px;border:1px solid var(--bd);padding:14px 16px;display:flex;flex-direction:column;box-sizing:border-box}
+.inad-mini-hdr{font-size:13px;font-weight:700;margin-bottom:4px}
+.inad-mini-sub{font-size:11px;color:var(--mu);margin-bottom:12px}
+.inad-mini-total{display:flex;justify-content:space-between;align-items:center;padding:8px 10px;background:var(--rdb);border-radius:6px;margin-bottom:10px}
+.inad-mini-total-lbl{font-size:11px;color:var(--rd);font-weight:700}
+.inad-mini-total-val{font-size:15px;font-weight:800;color:var(--rd);font-family:'DM Mono',monospace}
+.inad-mini-row{display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--bd);cursor:pointer}
+.inad-mini-row:hover{background:var(--bg);margin:0 -4px;padding:8px 4px}
+.inad-mini-row:last-of-type{border-bottom:none}
+.inad-mini-nome{font-size:12px;font-weight:700}
+.inad-mini-det{font-size:10px;color:var(--mu);margin-top:1px}
+.inad-mini-val{font-size:12px;font-weight:800;font-family:'DM Mono',monospace;color:var(--rd)}
 
 /* ═══ NOTA FISCAL PANEL ═══ */
 .nota-panel{background:#fff;border-radius:12px;border:1px solid var(--bd);padding:22px;display:flex;flex-direction:column}
@@ -471,7 +506,7 @@ footer span{color:var(--bx);font-weight:600}
 .charts-row-bottom{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
 
 /* RESPONSIVE */
-@media(max-width:1050px){.t1-top,.t3-grid{grid-template-columns:1fr}.kpi-grid{grid-template-columns:repeat(2,1fr)}.charts-row,.charts-row-2,.charts-row-3{grid-template-columns:1fr}.bank-dist-layout{grid-template-columns:1fr}.contratos-kpis{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:1050px){.t1-top,.t3-grid{grid-template-columns:1fr}.kpi-grid{grid-template-columns:repeat(2,1fr)}.charts-row,.charts-row-2,.charts-row-3,.charts-row-bottom,.recibo-inad-row{grid-template-columns:1fr}.bank-dist-layout{grid-template-columns:1fr}.contratos-kpis{grid-template-columns:repeat(2,1fr)}.rh-body{grid-template-columns:1fr;gap:14px}}
 @media(max-width:640px){header,.pbadge-bar{padding:10px 14px}.tab-nav{padding:0 6px}.t1-main,.t2-main,.t3-main,.t4-main{padding:12px 14px}.ttab{min-width:110px;padding:8px 10px}.frow.three{grid-template-columns:1fr 1fr}.kpi-grid{grid-template-columns:1fr 1fr}}
 </style>
 </head>
@@ -1015,49 +1050,76 @@ footer span{color:var(--bx);font-weight:600}
   </div>
   <div class="t2-main">
 
-    <!-- O QUE FAZER HOJE — sempre no topo -->
-    <div class="hoje-section">
-      <div class="hoje-card">
-        <div class="hoje-title" style="font-size:13px;font-weight:700;margin-bottom:10px;display:flex;align-items:center;gap:6px">O que fazer hoje</div>
-        <div class="hoje-list">
-          <div class="hoje-item hi-urgente" id="hi-1">
-            <input type="checkbox" class="hi-chk" onchange="markHoje('hi-1',this)">
-            <div class="hi-body" onclick="goOverdue()">
-              <div class="hi-label">2 RPVs com prazo vencido — levantar urgente</div>
-              <div class="hi-desc">Proc. 0014221-09 (SINDIFISCO) e 0015830-22 (SEEB) — passaram de 60 dias</div>
-            </div>
-            <button class="hi-link" onclick="goOverdue()">Ver →</button>
+    <!-- 1. TAREFAS DO DIA -->
+    <div class="tarefas-strip">
+      <div class="tarefas-strip-hdr">O que fazer hoje</div>
+      <div class="tarefas-row">
+        <div class="tarefa-chip tc-urgente" id="hi-1" onclick="goOverdue()">
+          <div class="tc-body">
+            <div class="tc-label">2 RPVs vencidos — levantar urgente</div>
+            <div class="tc-desc">Proc. 0014221-09 (SINDIFISCO) e 0015830-22 (SEEB) · +60 dias</div>
           </div>
-          <div class="hoje-item hi-atencao" id="hi-2">
-            <input type="checkbox" class="hi-chk" onchange="markHoje('hi-2',this)">
-            <div class="hi-body" onclick="goRelatorio()">
-              <div class="hi-label">Relatório semanal para Ricardo Estevam</div>
-              <div class="hi-desc">Última entrega: 19/05/2026 — envio via WhatsApp pendente</div>
-            </div>
-            <button class="hi-link" onclick="goRelatorio()">Enviar →</button>
+          <button class="tc-btn" onclick="event.stopPropagation();goOverdue()">Ver →</button>
+          <input type="checkbox" class="hi-chk" onchange="markHoje('hi-1',this)" onclick="event.stopPropagation()">
+        </div>
+        <div class="tarefa-chip tc-urgente" id="hi-3" onclick="goCobranca('sinijude')">
+          <div class="tc-body">
+            <div class="tc-label">Cobrar SINIJUDE — 4 meses em atraso</div>
+            <div class="tc-desc">R$ 1.200/mês · total pendente: R$ 4.800,00</div>
           </div>
-          <div class="hoje-item hi-info" id="hi-3">
-            <input type="checkbox" class="hi-chk" onchange="markHoje('hi-3',this)">
-            <div class="hi-body" onclick="goCobranca('sinijude')">
-              <div class="hi-label">Cobrar SINIJUDE — 4 meses em atraso</div>
-              <div class="hi-desc">Mensalidade R$ 1.200/mês — total pendente: R$ 4.800,00</div>
-            </div>
-            <button class="hi-link" onclick="goCobranca('sinijude')">Cobrar →</button>
+          <button class="tc-btn" onclick="event.stopPropagation();goCobranca('sinijude')">Cobrar →</button>
+          <input type="checkbox" class="hi-chk" onchange="markHoje('hi-3',this)" onclick="event.stopPropagation()">
+        </div>
+        <div class="tarefa-chip tc-atencao" id="hi-2" onclick="goRelatorio()">
+          <div class="tc-body">
+            <div class="tc-label">Relatório semanal para Ricardo Estevam</div>
+            <div class="tc-desc">Última entrega: 19/05/2026 · envio WhatsApp pendente</div>
           </div>
-          <div class="hoje-item hi-atencao" id="hi-4">
-            <input type="checkbox" class="hi-chk" onchange="markHoje('hi-4',this)">
-            <div class="hi-body" onclick="goAssinatura()">
-              <div class="hi-label">3 recibos aguardando assinatura digital</div>
-              <div class="hi-desc">SINDPD · SEEB · SINDSEP — assinatura pendente há +5 dias</div>
-            </div>
-            <button class="hi-link" onclick="goAssinatura()">Ver →</button>
+          <button class="tc-btn" onclick="event.stopPropagation();goRelatorio()">Enviar →</button>
+          <input type="checkbox" class="hi-chk" onchange="markHoje('hi-2',this)" onclick="event.stopPropagation()">
+        </div>
+        <div class="tarefa-chip tc-atencao" id="hi-4" onclick="goAssinatura()">
+          <div class="tc-body">
+            <div class="tc-label">3 recibos aguardando assinatura digital</div>
+            <div class="tc-desc">SINDPD · SEEB · SINDSEP · pendente há +5 dias</div>
           </div>
+          <button class="tc-btn" onclick="event.stopPropagation();goAssinatura()">Ver →</button>
+          <input type="checkbox" class="hi-chk" onchange="markHoje('hi-4',this)" onclick="event.stopPropagation()">
         </div>
       </div>
-      <!-- RECIBOS / ASSINATURA -->
+    </div>
+
+    <!-- 2. RECEITAS & CUSTOS -->
+    <div class="resultado-highlight">
+      <div class="rh-header">Receitas &amp; Custos — últimos 6 meses</div>
+      <div class="rh-sub">Visão consolidada do período · Clique no gráfico para detalhar os custos</div>
+      <div class="rh-body">
+        <div class="rh-kpis">
+          <div class="rh-kpi rh-gn" onclick="rhKpiSelect(-1)" title="Ver composição completa"><div class="rh-kpi-val">R$ 275k</div><div class="rh-kpi-lbl">Total recebido</div></div>
+          <div class="rh-kpi rh-rd" onclick="rhKpiSelect('custos');setCostView('fixo',null)" title="Destacar total de custos"><div class="rh-kpi-val">R$ 172k</div><div class="rh-kpi-lbl">Total custos</div></div>
+          <div class="rh-kpi rh-bx" onclick="rhKpiSelect(0)" title="Destacar resultado líquido"><div class="rh-kpi-val">R$ 103k</div><div class="rh-kpi-lbl">Resultado líquido</div></div>
+        </div>
+        <div class="rh-chart-col">
+          <div class="rh-chart-title">Composição do resultado</div>
+          <div style="position:relative;height:190px;width:210px"><canvas id="chartResultado"></canvas></div>
+          <div id="resultado-legend" style="display:flex;flex-direction:row;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:10px"></div>
+        </div>
+        <div class="rh-costs-col">
+          <div style="font-size:11px;font-weight:600;color:var(--mu);text-transform:uppercase;letter-spacing:.04em;margin-bottom:8px">Principais custos</div>
+          <div class="cost-toggle">
+            <button class="ct-btn ct-active" data-view="fixo" onclick="setCostView('fixo',this)">Custos fixos</button>
+            <button class="ct-btn" data-view="variavel" onclick="setCostView('variavel',this)">Custos variáveis</button>
+          </div>
+          <div class="cost-list" id="cost-bars"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. RECIBO DE HONORÁRIOS + INADIMPLENTES -->
+    <div class="recibo-inad-row">
       <div class="contratos-card">
-        <div style="font-size:13px;font-weight:700;margin-bottom:4px">Recibos de honorários</div>
-        <div style="font-size:11px;color:var(--mu);margin-bottom:12px">Após o levantamento do RPV, o sindicato assina o recibo confirmando o repasse</div>
+        <div style="font-size:13px;font-weight:700;margin-bottom:4px">Acompanhamento de Assinaturas</div>
+        <div style="font-size:11px;color:var(--mu);margin-bottom:12px">Recibos de honorários gerados após levantamento de RPV · assinatura digital pelo sindicato</div>
         <div class="contratos-kpis">
           <div class="ck-item" style="border-color:var(--bd)">
             <div class="ck-val" style="color:var(--tx)">8</div>
@@ -1093,82 +1155,61 @@ footer span{color:var(--bx);font-weight:600}
           <div><div class="cr-info">0005567-13 · SEEB</div><div class="cr-sub">André L. Brito · R$ 5.132,40</div></div>
           <span class="sbadge sb-disp"><div class="dot"></div>Assinado</span>
         </div>
+        <button class="btn-primary" style="width:100%;margin-top:auto;padding:10px 16px;font-size:12px" onclick="switchTab(3);setTimeout(()=>document.getElementById('tab-3')?.scrollIntoView({behavior:'smooth',block:'start'}),200)">Gerar novo documento →</button>
       </div>
-    </div>
-
-    <!-- RECEITAS & CUSTOS — destaque full width -->
-    <div class="resultado-highlight">
-      <div class="rh-header">Receitas &amp; Custos — últimos 6 meses</div>
-      <div class="rh-sub">Visão consolidada do período · Clique no gráfico para detalhar os custos</div>
-      <div class="rh-body">
-        <div class="rh-kpis">
-          <div class="rh-kpi rh-gn"><div class="rh-kpi-val">R$ 275k</div><div class="rh-kpi-lbl">Total recebido</div></div>
-          <div class="rh-kpi rh-rd"><div class="rh-kpi-val">R$ 172k</div><div class="rh-kpi-lbl">Total custos</div></div>
-          <div class="rh-kpi rh-bx"><div class="rh-kpi-val">R$ 103k</div><div class="rh-kpi-lbl">Resultado líquido</div></div>
+      <div class="inad-mini-card">
+        <div class="inad-mini-hdr">Inadimplentes</div>
+        <div class="inad-mini-sub">Mensalidades sindicais em atraso · Clique para acionar cobrança</div>
+        <div class="inad-mini-total">
+          <span class="inad-mini-total-lbl">Total em aberto</span>
+          <span class="inad-mini-total-val">R$ 8.400,00</span>
         </div>
-        <div class="rh-chart-col">
-          <div class="rh-chart-title">Composição do resultado</div>
-          <div style="position:relative;height:160px;width:180px"><canvas id="chartResultado"></canvas></div>
-        </div>
-        <div class="rh-costs-col">
-          <div style="font-size:11px;font-weight:600;color:var(--mu);text-transform:uppercase;letter-spacing:.04em;margin-bottom:8px">Principais custos</div>
-          <div class="cost-toggle">
-            <button class="ct-btn ct-active" data-view="fixo" onclick="setCostView('fixo',this)">Custos fixos</button>
-            <button class="ct-btn" data-view="variavel" onclick="setCostView('variavel',this)">Custos variáveis</button>
+        <div class="inad-mini-row" onclick="goCobranca('sinijude')">
+          <div>
+            <div class="inad-mini-nome">SINIJUDE</div>
+            <div class="inad-mini-det">4 meses em atraso · Jan–Abr/2026</div>
           </div>
-          <div class="cost-list" id="cost-bars"></div>
+          <div style="text-align:right">
+            <div class="inad-mini-val">R$ 4.800,00</div>
+            <span class="sbadge sb-pend" style="font-size:10px;margin-top:3px"><div class="dot"></div>Inadimplente</span>
+          </div>
         </div>
+        <div class="inad-mini-row" onclick="goCobranca('sintetel')">
+          <div>
+            <div class="inad-mini-nome">SINTETEL</div>
+            <div class="inad-mini-det">2 meses em atraso · Mar–Abr/2026</div>
+          </div>
+          <div style="text-align:right">
+            <div class="inad-mini-val">R$ 2.400,00</div>
+            <span class="sbadge sb-pend" style="font-size:10px;margin-top:3px"><div class="dot"></div>Inadimplente</span>
+          </div>
+        </div>
+        <div class="inad-mini-row" onclick="goCobranca('sindpd')">
+          <div>
+            <div class="inad-mini-nome">SINDPD</div>
+            <div class="inad-mini-det">1 mês em atraso · Abr/2026</div>
+          </div>
+          <div style="text-align:right">
+            <div class="inad-mini-val">R$ 1.200,00</div>
+            <span class="sbadge sb-pend" style="font-size:10px;margin-top:3px"><div class="dot"></div>Inadimplente</span>
+          </div>
+        </div>
+        <div class="inad-mini-row" style="background:var(--orb);border-radius:6px;margin-top:4px;border-bottom:none" onclick="goCobranca('seeb-pot')">
+          <div>
+            <div class="inad-mini-nome" style="color:var(--or)">SEEB</div>
+            <div class="inad-mini-det">Vencimento em 5 dias · 03/Jun/2026</div>
+          </div>
+          <div style="text-align:right">
+            <div class="inad-mini-val" style="color:var(--or)">R$ 1.200,00</div>
+            <span class="sbadge sb-pend" style="font-size:10px;margin-top:3px"><div class="dot"></div>Vence em breve</span>
+          </div>
+        </div>
+        <div style="flex:1"></div>
+        <button class="btn-primary" style="width:100%;margin-top:auto;padding:10px 16px;font-size:12px" onclick="switchTab(3);setTimeout(()=>document.getElementById('t3-cobranca')?.scrollIntoView({behavior:'smooth',block:'start'}),200)">Gerenciar cobrança →</button>
       </div>
     </div>
 
-    <!-- FILTER BAR -->
-    <div class="filter-bar">
-      <label>Banco
-        <select id="f2-banco" onchange="applyP2Filters()">
-          <option value="">Todos</option>
-          <option value="CEF">Caixa Econômica Federal</option>
-          <option value="BB">Banco do Brasil</option>
-        </select>
-      </label>
-      <label>Status
-        <select id="f2-status" onchange="applyP2Filters()">
-          <option value="">Todos</option>
-          <option value="disponivel">Disponível</option>
-          <option value="pendente">Pendente</option>
-          <option value="em-fila">Em fila</option>
-          <option value="recebido">Recebido</option>
-        </select>
-      </label>
-      <label>Sindicato
-        <select id="f2-sindic" onchange="applyP2Filters()">
-          <option value="">Todos</option>
-          <option value="SINDSEP">SINDSEP</option>
-          <option value="SINDPD">SINDPD</option>
-          <option value="SEEB">SEEB</option>
-          <option value="SINDIFISCO">SINDIFISCO</option>
-        </select>
-      </label>
-      <label>Tipo
-        <select id="f2-tipo" onchange="applyP2Filters()">
-          <option value="">Todos</option>
-          <option value="RPV">RPV</option>
-          <option value="Precatório">Precatório</option>
-        </select>
-      </label>
-      <label>De
-        <input type="date" id="f2-de" onchange="applyP2Filters()">
-      </label>
-      <label>Até
-        <input type="date" id="f2-ate" onchange="applyP2Filters()">
-      </label>
-      <button class="btn-clear-f" onclick="clearP2Filters()">✕ Limpar filtros</button>
-      <button class="btn-export" onclick="alert('Exportação disponível na versão contratada.')">⬇ Exportar Excel</button>
-      <button class="btn-export" onclick="alert('Exportação disponível na versão contratada.')" style="margin-left:0">⬇ Exportar PDF</button>
-    </div>
-
-    <div class="filter-chips" id="f2-chips" style="display:none"></div>
-
-    <!-- KPIs + BANCO (interagem com a tabela abaixo) -->
+    <!-- 5. KPIs + BANCO -->
     <div class="kpi-banco-row">
       <div class="kpi-grid-4">
         <div class="kpi-card k-bx" onclick="kpiFilter('status','')">
@@ -1200,13 +1241,60 @@ footer span{color:var(--bx);font-weight:600}
         <div class="chart-title">Distribuição por banco</div>
         <div class="chart-sub" style="font-size:10px;color:var(--mu);margin-bottom:8px">Clique para filtrar</div>
         <div class="bank-dist-layout">
-          <div style="position:relative;height:140px;width:140px"><canvas id="chartBank"></canvas></div>
+          <div style="position:relative;height:160px;width:160px"><canvas id="chartBank"></canvas></div>
           <div class="bank-legend" id="bank-legend"></div>
         </div>
       </div>
     </div>
 
-    <!-- TABLE CAUSAS -->
+    <!-- 6. FILTROS -->
+    <div class="filter-bar">
+      <label>Banco
+        <select id="f2-banco" onchange="applyP2Filters()">
+          <option value="">Todos</option>
+          <option value="CEF">Caixa Econômica Federal</option>
+          <option value="BB">Banco do Brasil</option>
+        </select>
+      </label>
+      <label>Status
+        <select id="f2-status" onchange="applyP2Filters()">
+          <option value="">Todos</option>
+          <option value="disponivel">Disponível</option>
+          <option value="pendente">Pendente</option>
+          <option value="recebido">Recebido</option>
+          <option value="arquivado">Arquivado</option>
+          <option value="pago">Pago</option>
+        </select>
+      </label>
+      <label>Sindicato
+        <select id="f2-sindic" onchange="applyP2Filters()">
+          <option value="">Todos</option>
+          <option value="SINDSEP">SINDSEP</option>
+          <option value="SINDPD">SINDPD</option>
+          <option value="SEEB">SEEB</option>
+          <option value="SINDIFISCO">SINDIFISCO</option>
+        </select>
+      </label>
+      <label>Tipo
+        <select id="f2-tipo" onchange="applyP2Filters()">
+          <option value="">Todos</option>
+          <option value="RPV">RPV</option>
+          <option value="Precatório">Precatório</option>
+        </select>
+      </label>
+      <label>De
+        <input type="date" id="f2-de" onchange="applyP2Filters()">
+      </label>
+      <label>Até
+        <input type="date" id="f2-ate" onchange="applyP2Filters()">
+      </label>
+      <button class="btn-clear-f" onclick="clearP2Filters()">✕ Limpar filtros</button>
+      <button class="btn-export" onclick="alert('Exportação disponível na versão contratada.')">⬇ Exportar Excel</button>
+      <button class="btn-export" onclick="alert('Exportação disponível na versão contratada.')" style="margin-left:0">⬇ Exportar PDF</button>
+    </div>
+    <div class="filter-chips" id="f2-chips" style="display:none"></div>
+
+    <!-- 7. CAUSAS MONITORADAS -->
     <div class="table-card">
       <div class="table-hdr">
         <div>
@@ -1249,7 +1337,83 @@ footer span{color:var(--bx);font-weight:600}
       </div>
     </div>
 
-    <!-- CHARTS BOTTOM: honorários + sindicato -->
+    <!-- 7. MENSALIDADES DOS SINDICATOS -->
+    <div class="table-card">
+      <div class="table-hdr">
+        <div>
+          <h3>Mensalidades sindicais</h3>
+          <p>Honorários mensais por sindicato · <strong style="color:var(--rd)">3 inadimplentes · R$ 8.400 em aberto</strong></p>
+        </div>
+        <div class="tbl-actions">
+          <button class="btn-secondary" style="font-size:12px;padding:5px 12px" onclick="switchTab(3);setTimeout(()=>document.getElementById('t3-cobranca')?.scrollIntoView({behavior:'smooth',block:'start'}),200)">Gerenciar cobrança →</button>
+        </div>
+      </div>
+      <div style="overflow-x:auto">
+        <table>
+          <thead>
+            <tr><th>Sindicato</th><th>Valor/mês</th><th>Meses em atraso</th><th>Total em aberto</th><th>Próximo vencimento</th><th>Status</th><th style="width:100px"></th></tr>
+          </thead>
+          <tbody>
+            <tr class="overdue-row">
+              <td><strong style="color:var(--rd)">SINIJUDE</strong></td>
+              <td><div class="val-cell">R$ 1.200,00</div></td>
+              <td><span class="vencida-badge">4 meses · Jan–Abr/2026</span></td>
+              <td><div class="val-cell val-neg">R$ 4.800,00</div></td>
+              <td><div class="data-cell" style="color:var(--rd)">Vencido</div></td>
+              <td><span class="sbadge sb-pend"><div class="dot"></div>Inadimplente</span></td>
+              <td><button class="btn-secondary" style="font-size:11px;padding:3px 10px" onclick="goCobranca('sinijude')">Cobrar →</button></td>
+            </tr>
+            <tr class="overdue-row">
+              <td><strong style="color:var(--rd)">SINTETEL</strong></td>
+              <td><div class="val-cell">R$ 1.200,00</div></td>
+              <td><span class="vencida-badge">2 meses · Abr–Mai/2026</span></td>
+              <td><div class="val-cell val-neg">R$ 2.400,00</div></td>
+              <td><div class="data-cell" style="color:var(--rd)">Vencido</div></td>
+              <td><span class="sbadge sb-pend"><div class="dot"></div>Inadimplente</span></td>
+              <td><button class="btn-secondary" style="font-size:11px;padding:3px 10px" onclick="goCobranca('sintetel')">Cobrar →</button></td>
+            </tr>
+            <tr style="background:rgba(192,112,0,.03)">
+              <td><strong style="color:var(--or)">SINDPD</strong></td>
+              <td><div class="val-cell">R$ 1.200,00</div></td>
+              <td><span class="vencida-badge">1 mês · Mai/2026</span></td>
+              <td><div class="val-cell val-neg">R$ 1.200,00</div></td>
+              <td><div class="data-cell" style="color:var(--or)">Vencido</div></td>
+              <td><span class="sbadge sb-pend"><div class="dot"></div>Inadimplente</span></td>
+              <td><button class="btn-secondary" style="font-size:11px;padding:3px 10px" onclick="goCobranca('sindpd')">Cobrar →</button></td>
+            </tr>
+            <tr>
+              <td><strong>SEEB</strong></td>
+              <td><div class="val-cell">R$ 1.200,00</div></td>
+              <td>—</td>
+              <td><div class="val-cell" style="color:var(--or)">Vence em breve</div></td>
+              <td><div class="data-cell" style="color:var(--or)">03/Jun/2026</div></td>
+              <td><span class="sbadge sb-pend"><div class="dot"></div>Vence em breve</span></td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td><strong>SINDSEP</strong></td>
+              <td><div class="val-cell">R$ 1.200,00</div></td>
+              <td>—</td>
+              <td><div class="val-cell val-pos">Em dia</div></td>
+              <td><div class="data-cell">10/Jun/2026</div></td>
+              <td><span class="sbadge sb-disp"><div class="dot"></div>Em dia</span></td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td><strong>SINDIFISCO</strong></td>
+              <td><div class="val-cell">R$ 1.200,00</div></td>
+              <td>—</td>
+              <td><div class="val-cell val-pos">Em dia</div></td>
+              <td><div class="data-cell">15/Jun/2026</div></td>
+              <td><span class="sbadge sb-disp"><div class="dot"></div>Em dia</span></td>
+              <td>—</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 8. HONORÁRIOS + VOLUME POR SINDICATO -->
     <div class="charts-row-bottom">
       <div class="chart-card">
         <div class="chart-title">Honorários por advogado</div>
@@ -1367,7 +1531,7 @@ _Gerado em 24/05/2026 às 08:00_</div>
             <span class="sbadge sb-pend"><div class="dot"></div>Inadimplente</span>
           </label>
           <label class="inad-item">
-            <input type="checkbox" id="chk-sindpd-inad" class="inad-chk" onchange="updateCobTemplate()">
+            <input type="checkbox" id="chk-sindpd" class="inad-chk" onchange="updateCobTemplate()">
             <div style="flex:1">
               <div class="inad-nome">SINDPD</div>
               <div class="inad-det">1 mês em atraso · R$ 1.200,00 total</div>
@@ -1477,14 +1641,14 @@ _Gerado em 24/05/2026 às 08:00_</div>
       </div>
       <div class="user-row">
         <div class="user-info">
-          <div class="uavatar" style="background:#1a5276">AG</div>
+          <div class="uavatar" style="background:#1e4272">AG</div>
           <div><div class="uname">Andrielly Gutierrez</div><div class="uemail">Assistente administrativa · entrada e acompanhamento de causas</div></div>
         </div>
         <span class="rbadge rb-editor">Editor</span>
       </div>
       <div class="user-row">
         <div class="user-info">
-          <div class="uavatar" style="background:#2d7d46">CE</div>
+          <div class="uavatar" style="background:#2c5940">CE</div>
           <div><div class="uname">Cláudio Estevão</div><div class="uemail">Sócio · painel consolidado e causas próprias</div></div>
         </div>
         <span class="rbadge rb-viewer">Visualização</span>
@@ -1544,7 +1708,8 @@ document.getElementById('hdrDate').textContent = new Date().toLocaleDateString('
 
 const TODAY = new Date('2026-05-24');
 const ACCUM_PREV = 3287;
-const BANK_COLORS = {CEF:'#1a3c8f', BB:'#7d5a00'};
+const BANK_COLORS = {CEF:'#1e4272', BB:'#7d5a00'};
+const BANK_NAMES  = {CEF:'Caixa Econômica Federal', BB:'Banco do Brasil'};
 const STATUS_CFG = {
   'disponivel':{label:'Disponível',cls:'sb-disp'},
   'pendente':  {label:'Pendente',  cls:'sb-pend'},
@@ -1935,8 +2100,8 @@ renderT1Table();
 let p2Filters = {banco:'',status:'',sindic:'',tipo:'',de:'',ate:'',adv:''};
 let p2Sel = new Set();
 let p2Charts = {};
-const ADV_COLORS = ['#6B1C2E','#7d5a00','#1a5276','#2d7d46','#c9a84c'];
-const SINDIC_COLORS = ['#6B1C2E','#7d5a00','#1a5276','#2d7d46'];
+const ADV_COLORS = ['#6B1C2E','#7d5a00','#1e4272','#2c5940','#c9a84c'];
+const SINDIC_COLORS = ['#6B1C2E','#7d5a00','#1e4272','#2c5940'];
 const CUSTOS_FIXO = [
   {label:'Folha de pagamento',val:45000},{label:'Aluguel',val:24000},
   {label:'Contabilidade',val:15000},{label:'Softwares jurídicos',val:12000},
@@ -1947,6 +2112,34 @@ const CUSTOS_VAR = [
   {label:'Deslocamentos',val:9000},{label:'Material de escritório',val:5000},
   {label:'Outros variáveis',val:4000},
 ];
+const RH_COLS=['#2c5940','#888888','#c9a84c'];
+const RH_LABELS_DEFAULT=['Resultado líquido','Custos fixos','Custos variáveis'];
+const RH_DATA_DEFAULT=[103,108,64];
+let rhActive=-1;
+function rhKpiSelect(idx){
+  if(rhActive===idx && idx!==-1) idx=-1;
+  rhActive=idx;
+  const chart=p2Charts.resultado;
+  if(chart){
+    if(idx==='custos'){
+      chart.data.labels=['Resultado líquido','Total custos'];
+      chart.data.datasets[0].data=[103,172];
+      chart.data.datasets[0].backgroundColor=[RH_COLS[0]+'44','#888888'];
+    } else {
+      chart.data.labels=RH_LABELS_DEFAULT.slice();
+      chart.data.datasets[0].data=RH_DATA_DEFAULT.slice();
+      chart.data.datasets[0].backgroundColor=idx===-1
+        ? RH_COLS.slice()
+        : RH_COLS.map((c,i)=>i===idx?c:c+'44');
+    }
+    chart.update();
+  }
+  document.querySelectorAll('.rh-kpi').forEach((card,i)=>{
+    card.classList.toggle('rh-kpi-active',
+      (idx==='custos'&&i===1)||(idx===0&&i===2)
+    );
+  });
+}
 let costView = 'fixo';
 function setCostView(v,btn){
   costView = v;
@@ -1983,7 +2176,7 @@ function goCobranca(sindic){
   setTimeout(()=>{
     document.getElementById('t3-cobranca')?.scrollIntoView({behavior:'smooth',block:'start'});
     if(sindic){
-      const chk=document.getElementById('chk-'+sindic.replace(/[^a-z]/g,''));
+      const chk=document.getElementById('chk-'+sindic);
       if(chk){chk.checked=true;updateCobTemplate();}
     }
   },200);
@@ -1994,9 +2187,9 @@ function goAssinatura(){
 }
 function markHoje(id,chk){
   const item=document.getElementById(id);if(!item)return;
-  const body=item.querySelector('.hi-body');
-  if(body)body.style.opacity=chk.checked?'0.38':'1';
-  item.style.opacity=chk.checked?'0.7':'1';
+  if(chk.checked)item.classList.add('hoje-done');
+  else item.classList.remove('hoje-done');
+  item.style.opacity=chk.checked?'0.55':'1';
 }
 
 function getFiltered(){
@@ -2103,10 +2296,9 @@ function renderBankLegend(data){
     const active=p2Filters.banco===bank;
     return`<div class="bl-row ${active?'bl-active':''}" onclick="bankFilter('${bank}')">
       <div class="bl-dot" style="background:${BANK_COLORS[bank]||'#888'}"></div>
-      <div class="bl-name">${bank}</div>
+      <div class="bl-name">${BANK_NAMES[bank]||bank}</div>
       <div class="bl-bar-wrap"><div class="bl-bar" style="width:${barW}%;background:${BANK_COLORS[bank]||'#888'}"></div></div>
       <div class="bl-val">${fmtK(val)}</div>
-      <div class="bl-pct">${pct}%</div>
     </div>`;
   }).join('');
 }
@@ -2211,14 +2403,18 @@ function initT2(){
   const bKeys = Object.keys(bankTotals);
   p2Charts.bank = new Chart(document.getElementById('chartBank'),{
     type:'doughnut',
-    data:{labels:bKeys,datasets:[{data:bKeys.map(k=>bankTotals[k]),backgroundColor:bKeys.map(k=>BANK_COLORS[k]||'#888'),borderWidth:2,borderColor:'#fff',hoverOffset:6}]},
+    data:{labels:bKeys.map(k=>BANK_NAMES[k]||k),datasets:[{data:bKeys.map(k=>bankTotals[k]),backgroundColor:bKeys.map(k=>BANK_COLORS[k]||'#888'),borderWidth:2,borderColor:'#fff',hoverOffset:6}]},
     options:{
       responsive:true, maintainAspectRatio:false, cutout:'60%',
       onClick:(e,els)=>{if(els.length){bankFilter(bKeys[els[0].index]);}},
       plugins:{
         legend:{display:false},
         datalabels:{display:false},
-        tooltip:{callbacks:{label:ctx=>' '+ctx.label+': '+fmtK(ctx.parsed)}}
+        tooltip:{callbacks:{label:ctx=>{
+          const total=ctx.dataset.data.reduce((a,b)=>a+b,0);
+          const pct=Math.round(ctx.parsed/total*100);
+          return ' '+ctx.label+': '+fmtK(ctx.parsed)+' ('+pct+'%)';
+        }}}
       }
     }
   });
@@ -2256,21 +2452,47 @@ function initT2(){
     type:'doughnut',
     data:{
       labels:['Resultado líquido','Custos fixos','Custos variáveis'],
-      datasets:[{data:[103,108,64],backgroundColor:['#2d7d46','#888','#c9a84c'],borderWidth:2,borderColor:'#fff',hoverOffset:6}]
+      datasets:[{data:[103,108,64],backgroundColor:['#2c5940','#888','#c9a84c'],borderWidth:2,borderColor:'#fff',hoverOffset:6}]
     },
     options:{
       responsive:true, maintainAspectRatio:false, cutout:'55%',
       onClick:(e,els)=>{
         if(!els.length)return;
-        const idx=els[0].index;
-        if(idx===1) setCostView('fixo',null);
-        else if(idx===2) setCostView('variavel',null);
+        const si=els[0].index;
+        if(si===1) setCostView('fixo',null);
+        else if(si===2) setCostView('variavel',null);
       },
       plugins:{
-        legend:{position:'bottom',labels:{font:{size:10},padding:6,boxWidth:8}},
-        datalabels:{display:false},
-        tooltip:{callbacks:{label:ctx=>' '+ctx.label+': R$'+ctx.parsed+'k'}}
-      }
+        legend:{display:false},
+        datalabels:{
+          display:true,
+          color:'#fff',
+          font:{size:11,weight:'700'},
+          formatter:(v,ctx)=>{
+            const total=ctx.dataset.data.reduce((a,b)=>a+b,0);
+            return Math.round(v/total*100)+'%';
+          }
+        },
+        tooltip:{callbacks:{label:ctx=>{
+          const total=ctx.dataset.data.reduce((a,b)=>a+b,0);
+          const pct=Math.round(ctx.parsed/total*100);
+          return ' '+ctx.label+': R$'+ctx.parsed+'k ('+pct+'%)';
+        }}}
+      },
+      animation:{onComplete:()=>{
+        const ds=p2Charts.resultado?.data;
+        if(!ds)return;
+        const total=ds.datasets[0].data.reduce((a,b)=>a+b,0);
+        const el=document.getElementById('resultado-legend');
+        if(!el)return;
+        el.innerHTML=ds.labels.map((lbl,i)=>{
+          const pct=Math.round(ds.datasets[0].data[i]/total*100);
+          const col=ds.datasets[0].backgroundColor[i];
+          return`<span style="display:flex;align-items:center;gap:5px;font-size:10px;color:#444;white-space:nowrap">
+            <span style="width:8px;height:8px;border-radius:50%;background:${col};flex-shrink:0;display:inline-block"></span>
+            ${lbl} <strong style="color:#1a1a1a">${pct}%</strong></span>`;
+        }).join('');
+      }}
     }
   });
 }
@@ -2280,7 +2502,7 @@ function updateP2Charts(data){
   const bankTotals={};
   data.forEach(c=>bankTotals[c.banco]=(bankTotals[c.banco]||0)+c.valor);
   const bKeys=Object.keys(bankTotals);
-  p2Charts.bank.data.labels=bKeys;
+  p2Charts.bank.data.labels=bKeys.map(k=>BANK_NAMES[k]||k);
   p2Charts.bank.data.datasets[0].data=bKeys.map(k=>bankTotals[k]);
   p2Charts.bank.data.datasets[0].backgroundColor=bKeys.map(k=>BANK_COLORS[k]||'#888');
   p2Charts.bank.update();
@@ -2296,7 +2518,7 @@ function updateCobTemplate(){
   const sel=[];
   if(document.getElementById('chk-sinijude')?.checked) sel.push({nome:'SINIJUDE',meses:4,total:4800});
   if(document.getElementById('chk-sintetel')?.checked) sel.push({nome:'SINTETEL',meses:2,total:2400});
-  if(document.getElementById('chk-sindpd-inad')?.checked) sel.push({nome:'SINDPD',meses:1,total:1200});
+  if(document.getElementById('chk-sindpd')?.checked) sel.push({nome:'SINDPD',meses:1,total:1200});
   const subEl=document.getElementById('cob-subject-names');
   const tmpl=document.getElementById('cob-template');
   if(!tmpl) return;
