@@ -46,5 +46,12 @@ Prossigo?
 
 Após aprovação, execute TODAS as etapas sem pedir confirmação intermediária.
 
+**Exceção — tarefas longas com múltiplas mudanças:**
+Se a tarefa envolver geração de conteúdo extenso (arquivo >400 linhas, reescrita completa, múltiplas seções a modificar) OU se a mensagem do usuário contiver múltiplos parágrafos descrevendo mudanças distintas:
+- Tratar cada parágrafo como uma entrega independente
+- Executar em fases numeradas (Fase 1, Fase 2...), usando Edit em vez de Write sempre que possível
+- Confirmar cada fase antes de avançar para a próxima
+- Se os tokens estiverem próximos do limite, entregar o que foi feito, reportar o que ficou pendente e aguardar novo turno
+
 **Precedência de escopo (resolve tensão com Regra 5):**
 Se seguir o padrão existente exigir modificar arquivos fora do escopo solicitado → mencionar antes de tocar esses arquivos e aguardar confirmação. Regra 5 prevalece sobre autonomia nesses casos.

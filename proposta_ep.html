@@ -222,6 +222,7 @@ p.body-text{color:#3a3a3a;line-height:1.7;margin-bottom:12px}
     <a class="demo-btn" href="https://yasloopes.github.io/MazyOS/demo_v2.html" target="_blank">
       ▶ Acessar demonstração interativa
     </a>
+    <div style="margin-top:12px;font-size:11px;color:rgba(255,255,255,.5);font-family:'DM Mono',monospace">demo atualizada · maio 2026</div>
     <div class="capa-meta">
       <div class="capa-meta-item">
         <div class="lbl">Cliente</div>
@@ -304,15 +305,16 @@ p.body-text{color:#3a3a3a;line-height:1.7;margin-bottom:12px}
       </div>
       <div class="ph-body">
         <div class="ph-desc">
-          <p style="font-size:13px;color:#3a3a3a">Formulário web para lançamento de cada RPV ou precatório. O sistema calcula automaticamente honorários, tributos e saldo líquido ao sindicato — com regras configuráveis por processo.</p>
+          <p style="font-size:13px;color:#3a3a3a">Formulário web para lançamento de RPVs, precatórios e despesas do escritório. O sistema calcula automaticamente honorários, tributos e saldo líquido — e aprende a reconhecer os lançamentos do extrato bancário a cada confirmação.</p>
           <ul>
-            <li>Lançamento de RPV/Precatório com todos os campos necessários</li>
-            <li>Cálculo automático em tempo real: honorários %, tributos %, saldo líquido</li>
+            <li>Lançamento de RPV / Precatório: cálculo automático de honorários (%), tributos (%) e saldo líquido ao sindicato</li>
+            <li>Controle de despesas com nota fiscal visual em tempo real (categoria, tipo, fornecedor, vencimento)</li>
+            <li>Importação de extrato bancário (OFX, CSV, PDF) com reconhecimento automático de padrões</li>
+            <li>Auto-categorização por aprendizado — o sistema aprende com cada confirmação e categoriza sozinho nas próximas ocorrências</li>
             <li>Acumulado de tributos por trimestre com alerta de prazo de recolhimento</li>
-            <li>Histórico de lançamentos com filtros e busca</li>
+            <li>Alerta de prazo vencido: processos não levantados após 60 dias da expedição são destacados automaticamente</li>
+            <li>Histórico completo com edição inline em qualquer campo da tabela</li>
             <li>Edição em massa: seleção múltipla e alteração de status de uma vez</li>
-            <li>Alertas automáticos para processos pendentes há mais de 30 dias</li>
-            <li>Geração do relatório consolidado no formato já usado pela diretoria</li>
             <li>Exportação para Excel / PDF</li>
           </ul>
         </div>
@@ -370,17 +372,17 @@ p.body-text{color:#3a3a3a;line-height:1.7;margin-bottom:12px}
       </div>
       <div class="ph-body">
         <div class="ph-desc">
-          <p style="font-size:13px;color:#3a3a3a">Dashboard financeiro consolidado com visão de todos os processos monitorados. Clique em qualquer gráfico ou card para filtrar toda a página instantaneamente.</p>
+          <p style="font-size:13px;color:#3a3a3a">Dashboard financeiro consolidado com visão de todos os processos monitorados. Cada elemento é clicável e filtra toda a página instantaneamente — sem abrir relatório, sem clicar em menu.</p>
           <ul>
+            <li>"O que fazer hoje" — lista de prioridades do dia com navegação direta: clique em "2 RPVs vencidos" e a tabela já filtra; clique em "Cobrar SINIJUDE" e a tela de cobrança abre com o sindicato já selecionado</li>
+            <li>Receitas e Custos consolidados: P&amp;L dos últimos 6 meses com composição visual (fixo vs. variável) — clique no gráfico para alternar a visualização dos custos</li>
             <li>4 KPIs clicáveis: total a receber, disponível, pendente e recebido no mês</li>
+            <li>Painel de mensalidades a receber: inadimplência por sindicato (SINIJUDE, SINTETEL, SINDPD) com botão de cobrança direta</li>
+            <li>Honorários por advogado e volume de causas por sindicato — clique para filtrar a tabela</li>
             <li>Distribuição por banco com valores absolutos e percentuais — clique para filtrar</li>
-            <li>Gráfico de recebimentos mensais históricos (últimos 8 meses)</li>
-            <li>Filtro por período: diário, semanal, mensal ou intervalo personalizado</li>
-            <li>Filtros combinados: banco, sindicato, tipo (RPV/Precatório), status</li>
-            <li>Alertas automáticos de processos com prazo vencido (+ 30 dias)</li>
-            <li>Edição de status diretamente na tabela (clique no badge)</li>
-            <li>Seleção múltipla e alteração de status em massa</li>
-            <li>Exportação para Excel com dados filtrados</li>
+            <li>Filtros combinados: banco, sindicato, tipo (RPV/Precatório), status, período</li>
+            <li>Edição de status e de qualquer campo diretamente na tabela</li>
+            <li>Exportação para Excel / PDF com dados filtrados</li>
           </ul>
         </div>
         <div class="ph-mockup">
@@ -432,16 +434,17 @@ p.body-text{color:#3a3a3a;line-height:1.7;margin-bottom:12px}
       </div>
       <div class="ph-body">
         <div class="ph-desc">
-          <p style="font-size:13px;color:#3a3a3a">A fase que elimina as últimas etapas manuais: o sistema envia relatórios automaticamente no período definido e gera recibos com assinatura digital válida juridicamente (ClickSign/ICP-Brasil).</p>
+          <p style="font-size:13px;color:#3a3a3a">A fase que elimina as últimas etapas manuais: relatórios disparados automaticamente, cobranças de mensalidades enviadas sem intervenção e recibos assinados digitalmente pelo celular. Cada seção já sinaliza onde a automação pode ser expandida — o escritório escolhe o ritmo.</p>
           <ul>
-            <li>Envio automático de relatórios por WhatsApp e e-mail — diário, semanal ou mensal</li>
-            <li>Relatório configurável por sindicato, período e advogado</li>
-            <li>Geração de recibo digital após confirmação de recebimento</li>
-            <li>Assinatura via ClickSign API: representante do sindicato assina no celular em 1 clique</li>
+            <li>Relatório de causas por período com preview em formato WhatsApp antes de enviar — diário, semanal ou mensal</li>
+            <li>Cobrança de mensalidades: seleção de inadimplentes e geração de e-mail de cobrança com um clique</li>
+            <li>Escalonamento automático: 1ª cobrança por e-mail, 2ª via WhatsApp após X dias sem retorno</li>
+            <li>Geração de recibo digital após confirmação de levantamento do RPV</li>
+            <li>Assinatura via ClickSign API: representante do sindicato recebe link e assina no celular em 1 clique — sem impressão, com validade jurídica (ICP-Brasil)</li>
             <li>Status do recibo atualizado automaticamente via webhook</li>
-            <li>Gestão de acessos: admin, editor, visualização (sócios)</li>
-            <li>Integração planejada com Alter Data (processos cadastrados)</li>
-            <li>Preparado para Open Banking BACEN (monitoramento automático de RPVs)</li>
+            <li>Cadastro de sindicatos: representante, e-mail e WhatsApp centralizados por perfil</li>
+            <li>Gestão de acessos por perfil: admin (Waldir), editor (Andrielly), visualização (sócios)</li>
+            <li>Preparado para integração com Alter Data e Open Banking BACEN</li>
           </ul>
         </div>
         <div class="ph-mockup">
@@ -524,11 +527,13 @@ p.body-text{color:#3a3a3a;line-height:1.7;margin-bottom:12px}
         <div class="pc-price">R$ 7.500 <small>à vista</small></div>
         <div class="pc-sub">ou 2× R$ 3.900</div>
         <ul class="pc-list">
-          <li>Formulário de lançamento de RPVs</li>
-          <li>Cálculo automático completo</li>
-          <li>Histórico e edição em massa</li>
-          <li>Geração de relatório em formato padrão</li>
-          <li>Exportação Excel</li>
+          <li>Lançamento de RPV/Precatório + Despesas</li>
+          <li>Cálculo automático (honorários, tributos, saldo líquido)</li>
+          <li>Importação OFX com auto-categorização por aprendizado</li>
+          <li>Nota fiscal visual em tempo real para despesas</li>
+          <li>Histórico completo com edição inline e em massa</li>
+          <li>Alertas de prazo (60 dias da expedição)</li>
+          <li>Exportação Excel / PDF</li>
         </ul>
         <div class="pc-note">Indicado para validar o sistema antes de expandir</div>
       </div>
@@ -540,11 +545,11 @@ p.body-text{color:#3a3a3a;line-height:1.7;margin-bottom:12px}
         <div class="pc-sub">ou 3× R$ 4.200</div>
         <ul class="pc-list">
           <li>Tudo do MVP Essencial</li>
-          <li>Painel financeiro com gráficos</li>
-          <li>Filtros interativos clicáveis</li>
-          <li>Alertas de prazo vencido</li>
-          <li>Visão por banco, sindicato e período</li>
-          <li>Acesso diferenciado por perfil</li>
+          <li>"O que fazer hoje" com navegação direta</li>
+          <li>P&amp;L consolidado (Receitas e Custos 6 meses)</li>
+          <li>Painel de inadimplência por sindicato</li>
+          <li>Gráficos interativos clicáveis</li>
+          <li>Filtros combinados + exportação filtrada</li>
         </ul>
         <div class="pc-note">Visibilidade total + controle operacional</div>
       </div>
@@ -556,11 +561,12 @@ p.body-text{color:#3a3a3a;line-height:1.7;margin-bottom:12px}
         <div class="pc-sub">ou 4× R$ 4.750</div>
         <ul class="pc-list">
           <li>Tudo dos planos anteriores</li>
-          <li>Relatórios automáticos por período</li>
+          <li>Relatórios automáticos (WhatsApp + e-mail)</li>
+          <li>Cobrança automática de mensalidades</li>
           <li>Assinatura digital de recibos (ClickSign)</li>
+          <li>Cadastro de sindicatos com contatos</li>
           <li>Gestão de acessos e permissões</li>
-          <li>Integração Alter Data</li>
-          <li>Webhook para futuro Open Banking</li>
+          <li>Preparado para Alter Data + Open Banking</li>
         </ul>
         <div class="pc-note">Automação máxima — zero trabalho manual</div>
       </div>
@@ -569,11 +575,11 @@ p.body-text{color:#3a3a3a;line-height:1.7;margin-bottom:12px}
     <div style="background:#fff;border:1px solid var(--bd);border-radius:10px;padding:16px 20px;margin-top:20px;display:grid;grid-template-columns:1fr 1fr;gap:20px">
       <div>
         <div style="font-weight:700;font-size:14px;margin-bottom:8px">Suporte mensal (opcional)</div>
-        <div style="font-family:'DM Serif Display',serif;font-size:26px;color:var(--bx)">R$ 900 <span style="font-family:'DM Sans',sans-serif;font-size:13px;color:var(--mu)">/mês</span></div>
+        <div style="font-family:'DM Serif Display',serif;font-size:26px;color:var(--bx)">R$ 1.200 <span style="font-family:'DM Sans',sans-serif;font-size:13px;color:var(--mu)">/mês</span></div>
         <div style="font-size:12px;color:var(--mu);margin-top:4px">12 horas mensais de suporte técnico</div>
       </div>
       <div style="font-size:13px;color:#3a3a3a;line-height:1.65">
-        Inclui: manutenção corretiva, pequenas evoluções funcionais, atualização de regras de cálculo, suporte a dúvidas de uso e monitoramento de estabilidade. Sem fidelidade mínima — cancelamento com 30 dias de aviso.
+        Inclui: manutenção corretiva, pequenas evoluções funcionais, atualização de regras de cálculo (percentuais de honorários e tributos), suporte a dúvidas de uso e monitoramento de estabilidade. Sem fidelidade mínima — cancelamento com 30 dias de aviso.
       </div>
     </div>
   </section>
@@ -584,19 +590,20 @@ p.body-text{color:#3a3a3a;line-height:1.7;margin-bottom:12px}
   <section id="alinhamentos">
     <div class="section-label">06 · Antes de avançar</div>
     <div class="section-title">Alinhamentos <span>pendentes</span></div>
-    <p class="body-text">As questões abaixo precisam ser respondidas para que o desenvolvimento comece com as regras de negócio corretas. Algumas impactam o prazo e o orçamento; todas impactam a qualidade da entrega.</p>
+    <p class="body-text">As questões abaixo precisam ser respondidas para que o desenvolvimento comece com as regras de negócio corretas. Itens marcados com ✓ foram respondidos no diagnóstico de 21/05/2026.</p>
 
     <table class="q-table" style="margin-top:16px">
       <thead><tr><th width="36">#</th><th>Questão</th><th>Impacto</th></tr></thead>
       <tbody>
         <tr><td class="q-num">1</td><td><strong>Os dados históricos (planilhas dos últimos meses) serão migrados para o sistema, ou o início será com dados novos?</strong></td><td class="q-impact">Define escopo e prazo da Fase 1</td></tr>
-        <tr><td class="q-num">2</td><td><strong>Quantos RPVs/precatórios são lançados por mês em média?</strong></td><td class="q-impact">Valida o banco de dados e a infraestrutura</td></tr>
-        <tr><td class="q-num">3</td><td><strong>Quem terá acesso ao sistema? (Waldir, Andrielly, sócios, outros?)</strong></td><td class="q-impact">Define a estrutura de permissões</td></tr>
-        <tr><td class="q-num">4</td><td><strong>Os relatórios serão enviados apenas por WhatsApp ou também por e-mail?</strong></td><td class="q-impact">Define as integrações da Fase 3</td></tr>
-        <tr><td class="q-num">5</td><td><strong>Existem fórmulas documentadas para cálculo do pró-labore e distribuição do fundo entre sócios?</strong></td><td class="q-impact">Essencial para automatizar a distribuição</td></tr>
+        <tr><td class="q-num">2</td><td><strong>Quantos RPVs/precatórios são lançados por mês em média? Quantos sindicatos ativos no momento?</strong></td><td class="q-impact">Valida banco de dados e infraestrutura</td></tr>
+        <tr style="opacity:.55"><td class="q-num" style="color:var(--gn)">3 ✓</td><td><strong>Quem terá acesso ao sistema?</strong><br><span style="font-size:12px;color:var(--gn)">Respondido: Waldir Rodrigues (admin), Andrielly Gutierrez (editor), Cláudio Estevão e Fred Pinheiro (visualização)</span></td><td class="q-impact">Implementado na demonstração</td></tr>
+        <tr><td class="q-num">4</td><td><strong>Os relatórios serão enviados por WhatsApp, e-mail, ou ambos? Quem são os destinatários fixos?</strong></td><td class="q-impact">Define integrações da Fase 3</td></tr>
+        <tr><td class="q-num">5</td><td><strong>Existem fórmulas documentadas para o pró-labore e distribuição do fundo entre sócios?</strong></td><td class="q-impact">Essencial para automatizar a distribuição de honorários</td></tr>
         <tr><td class="q-num">6</td><td><strong>Quais advogados têm distribuição diferenciada por processo? Como funciona a regra?</strong></td><td class="q-impact">Define o motor de cálculo</td></tr>
-        <tr><td class="q-num">7</td><td><strong>A assinatura digital dos recibos entra no escopo? (define se Fase 3 inclui ClickSign)</strong></td><td class="q-impact">Define orçamento da Fase 3</td></tr>
+        <tr style="opacity:.55"><td class="q-num" style="color:var(--gn)">7 ✓</td><td><strong>A assinatura digital dos recibos entra no escopo?</strong><br><span style="font-size:12px;color:var(--gn)">Respondido: sim — incluída na Fase 3, via ClickSign (ICP-Brasil)</span></td><td class="q-impact">Incluída no escopo do projeto completo</td></tr>
         <tr><td class="q-num">8</td><td><strong>Qual o prazo desejado para a Fase 1 estar operacional?</strong></td><td class="q-impact">Define priorização do desenvolvimento</td></tr>
+        <tr><td class="q-num">9</td><td><strong>O banco de dados do extrato OFX virá da CEF e do BB — há outros bancos no escopo inicial?</strong></td><td class="q-impact">Define escopo da importação OFX na Fase 1</td></tr>
       </tbody>
     </table>
   </section>

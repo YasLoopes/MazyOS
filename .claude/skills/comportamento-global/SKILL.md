@@ -12,3 +12,4 @@
 | [regra6-verbosidade-e-eficiencia.md](regra6-verbosidade-e-eficiencia.md) | Respostas diretas, sem introduções ou narrações |
 | [regra7-gestao-de-contexto.md](regra7-gestao-de-contexto.md) | Foco no projeto atual, sugerir /compact quando necessário |
 | [regra8-execucao-paralela.md](regra8-execucao-paralela.md) | Executar ações independentes em paralelo |
+| [regra9-diagnostico-de-erros.md](regra9-diagnostico-de-erros.md) | Raio-x sincero quando algo falha — causa, impacto, correção e retomada |

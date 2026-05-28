@@ -12,9 +12,10 @@ Manter foco no projeto atual e monitorar consumo de tokens ativamente.
 
 ## Quando agir
 
-- **Ao atingir ~60% no `/statusline`:** executar `/compact` automaticamente — não esperar chegar nos 90%+
+- **Ao atingir ~80% no `/statusline`:** executar `/compact` automaticamente — não esperar chegar nos 90%+
 - **Antes de tarefas longas:** verificar saldo com `/usage`
 - **Se o contexto parecer pesado:** rodar `/context` para identificar o que está consumindo
+- **Ao gerar output extenso (arquivo grande, múltiplas edições):** estimar se o output caberá no limite de 32k tokens antes de começar — se não couber, dividir em fases e avisar o usuário
 
 ## Regras de foco
 
