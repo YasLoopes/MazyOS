@@ -998,7 +998,7 @@ footer span{color:var(--bx);font-weight:600}
         <div style="display:flex;align-items:center;gap:10px">
           <span id="t1-count">14 registros</span>
           <button class="acc-toggle" onclick="toggleAcc('acc-t1','acc-icon-t1',this)" title="Expandir">
-            <span class="acc-icon" id="acc-icon-t1" style="transform:rotate(-90deg)">▾</span> Mostrar
+            <span class="acc-icon" id="acc-icon-t1" style="transform:rotate(-90deg)">▾</span> Expandir registros
           </button>
         </div>
       </div>
@@ -1554,7 +1554,7 @@ footer span{color:var(--bx);font-weight:600}
         <div class="tbl-actions" style="display:flex;align-items:center;gap:10px">
           <div style="font-size:12px;color:var(--mu)" id="p2-count-lbl">Exibindo 14 de 14 causas</div>
           <button class="acc-toggle" onclick="toggleAcc('acc-p2','acc-icon-p2',this)" title="Expandir">
-            <span class="acc-icon" id="acc-icon-p2" style="transform:rotate(-90deg)">▾</span> Mostrar
+            <span class="acc-icon" id="acc-icon-p2" style="transform:rotate(-90deg)">▾</span> Expandir registros
           </button>
         </div>
       </div>
@@ -2100,7 +2100,7 @@ function toggleAcc(bodyId, iconId, btn) {
   const icon = document.getElementById(iconId);
   const isCollapsed = body.classList.toggle('collapsed');
   icon.style.transform = isCollapsed ? 'rotate(-90deg)' : 'rotate(0deg)';
-  btn.innerHTML = (isCollapsed ? '<span class="acc-icon" id="'+iconId+'" style="transform:rotate(-90deg)">▾</span> Mostrar' : '<span class="acc-icon" id="'+iconId+'">▾</span> Ocultar');
+  btn.innerHTML = (isCollapsed ? '<span class="acc-icon" id="'+iconId+'" style="transform:rotate(-90deg)">▾</span> Expandir registros' : '<span class="acc-icon" id="'+iconId+'">▾</span> Recolher');
   btn.title = isCollapsed ? 'Expandir' : 'Recolher';
 }
 
