@@ -997,12 +997,12 @@ footer span{color:var(--bx);font-weight:600}
         <h3>Lançamentos cadastrados</h3>
         <div style="display:flex;align-items:center;gap:10px">
           <span id="t1-count">14 registros</span>
-          <button class="acc-toggle" onclick="toggleAcc('acc-t1','acc-icon-t1',this)" title="Recolher">
-            <span class="acc-icon" id="acc-icon-t1">▾</span> Ocultar
+          <button class="acc-toggle" onclick="toggleAcc('acc-t1','acc-icon-t1',this)" title="Expandir">
+            <span class="acc-icon" id="acc-icon-t1" style="transform:rotate(-90deg)">▾</span> Mostrar
           </button>
         </div>
       </div>
-      <div class="acc-body" id="acc-t1">
+      <div class="acc-body collapsed" id="acc-t1">
       <div class="bulk-bar" id="t1-bulk" style="display:none">
         <div class="bulk-info"><span id="t1-sel-n">0</span> selecionados</div>
         <div class="bulk-actions">
@@ -1553,12 +1553,12 @@ footer span{color:var(--bx);font-weight:600}
         </div>
         <div class="tbl-actions" style="display:flex;align-items:center;gap:10px">
           <div style="font-size:12px;color:var(--mu)" id="p2-count-lbl">Exibindo 14 de 14 causas</div>
-          <button class="acc-toggle" onclick="toggleAcc('acc-p2','acc-icon-p2',this)" title="Recolher">
-            <span class="acc-icon" id="acc-icon-p2">▾</span> Ocultar
+          <button class="acc-toggle" onclick="toggleAcc('acc-p2','acc-icon-p2',this)" title="Expandir">
+            <span class="acc-icon" id="acc-icon-p2" style="transform:rotate(-90deg)">▾</span> Mostrar
           </button>
         </div>
       </div>
-      <div class="acc-body" id="acc-p2">
+      <div class="acc-body collapsed" id="acc-p2">
       <div class="bulk-bar" id="p2-bulk" style="display:none">
         <div class="bulk-info"><span id="p2-sel-n">0</span> causas selecionadas</div>
         <div class="bulk-actions">
