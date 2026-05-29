@@ -512,9 +512,157 @@ footer span{color:var(--bx);font-weight:600}
 .acc-body{overflow:hidden;transition:max-height .32s ease, opacity .25s ease;max-height:4000px;opacity:1}
 .acc-body.collapsed{max-height:0;opacity:0;pointer-events:none}
 
-/* RESPONSIVE */
-@media(max-width:1050px){.t1-top,.t3-grid{grid-template-columns:1fr}.kpi-grid{grid-template-columns:repeat(2,1fr)}.charts-row,.charts-row-2,.charts-row-3,.charts-row-bottom,.recibo-inad-row{grid-template-columns:1fr}.bank-dist-layout{grid-template-columns:1fr}.contratos-kpis{grid-template-columns:repeat(2,1fr)}.rh-body{grid-template-columns:1fr;gap:14px}}
-@media(max-width:640px){header,.pbadge-bar{padding:10px 14px}.tab-nav{padding:0 6px}.t1-main,.t2-main,.t3-main,.t4-main{padding:12px 14px}.ttab{min-width:110px;padding:8px 10px}.frow.three{grid-template-columns:1fr 1fr}.kpi-grid{grid-template-columns:1fr 1fr}}
+/* ═══ RESPONSIVE ═══ */
+
+/* ─ Laptop/large tablet (≤1200px) ─ */
+@media(max-width:1200px){
+  .kpi-banco-row{grid-template-columns:1fr}
+  .rh-body{grid-template-columns:1fr 1fr;gap:16px}
+  .rh-kpis{min-width:unset}
+  .resultado-split{grid-template-columns:1fr}
+  .hoje-section{grid-template-columns:1fr}
+}
+
+/* ─ Tablet (≤1050px) ─ */
+@media(max-width:1050px){
+  .t1-main,.t2-main,.t3-main,.t4-main{padding:14px 20px}
+  .t1-top,.t3-grid{grid-template-columns:1fr}
+  .kpi-grid{grid-template-columns:repeat(2,1fr)}
+  .kpi-banco-row{grid-template-columns:1fr}
+  .charts-row,.charts-row-2,.charts-row-3,.charts-row-bottom,.recibo-inad-row{grid-template-columns:1fr}
+  .bank-dist-layout{flex-direction:row;align-items:flex-start;flex-wrap:wrap;width:100%}
+  .bank-legend{width:100%}
+  .contratos-kpis{grid-template-columns:repeat(2,1fr)}
+  .rh-body{grid-template-columns:1fr;gap:14px}
+  .rh-kpis{flex-direction:row;flex-wrap:wrap;min-width:unset;gap:8px}
+  .rh-kpi{flex:1;min-width:140px}
+  .resultado-split{grid-template-columns:1fr}
+  .hoje-section{grid-template-columns:1fr}
+  .filter-bar label{min-width:110px}
+}
+
+/* ─ Mobile landscape / small tablet (≤768px) ─ */
+@media(max-width:768px){
+  header{padding:10px 16px;flex-wrap:wrap;gap:8px}
+  .pbadge-bar{padding:8px 16px;flex-wrap:wrap;gap:6px}
+  .pbadge-desc{font-size:11px}
+  .t1-main,.t2-main,.t3-main,.t4-main{padding:12px 16px}
+  .ttab{min-width:110px;padding:8px 12px}
+  .ttab-l{font-size:13px}
+  .frow.three{grid-template-columns:1fr 1fr}
+  .resultado-highlight{padding:16px}
+  .resultado-kpis{grid-template-columns:1fr 1fr}
+  .kpi-grid{grid-template-columns:repeat(2,1fr)}
+  .t3-grid{grid-template-columns:1fr}
+  .table-card,.tcard{overflow-x:auto}
+  table{min-width:540px}
+  .ofx-autofill{grid-template-columns:1fr 1fr}
+  .form-card,.calc-panel{padding:16px}
+}
+
+/* ─ Mobile portrait (≤640px) ─ */
+@media(max-width:640px){
+  /* Header */
+  header{padding:9px 12px;flex-wrap:wrap;gap:6px}
+  .logo-ep{font-size:20px}
+  .logo-sub{font-size:9px;margin-top:3px}
+  .hdr-r{gap:6px}
+  .hdr-date{display:none}
+
+  /* Tab nav — abas dividem o espaço igualmente, subtítulo oculto */
+  .tab-nav{padding:0}
+  .ttab{min-width:0;flex:1;padding:7px 6px;text-align:center;border-right:none}
+  .ttab-l{font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .ttab-s{display:none}
+
+  /* Badge bar */
+  .pbadge-bar{padding:7px 12px;gap:6px}
+  .pbadge-desc{font-size:10px}
+
+  /* Conteúdo das tabs */
+  .t1-main,.t2-main,.t3-main,.t4-main{padding:10px 12px}
+
+  /* Layout grids */
+  .t1-top,.t3-grid{grid-template-columns:1fr}
+  .frow,.frow.three,.frow.four{grid-template-columns:1fr}
+  .frow.full{grid-template-columns:1fr}
+  .kpi-grid{grid-template-columns:1fr 1fr}
+  .contratos-kpis{grid-template-columns:1fr 1fr}
+  .charts-row,.charts-row-2,.charts-row-3,.charts-row-bottom{grid-template-columns:1fr}
+  .recibo-inad-row{grid-template-columns:1fr}
+  .kpi-banco-row{grid-template-columns:1fr}
+
+  /* Painel Financeiro */
+  .resultado-highlight{padding:12px}
+  .rh-body{grid-template-columns:1fr;gap:10px}
+  .rh-kpis{flex-direction:row;flex-wrap:wrap;min-width:unset;gap:8px}
+  .rh-kpi{flex:1 1 45%}
+  .resultado-kpis{grid-template-columns:1fr 1fr}
+  .resultado-split{grid-template-columns:1fr}
+  .cbr-label{flex:0 0 110px}
+
+  /* Tabelas — scroll horizontal */
+  .table-card,.tcard{overflow-x:auto}
+  table{min-width:580px;font-size:12px}
+
+  /* Cards e painéis */
+  .form-card,.calc-panel{padding:14px}
+  .ofx-section{padding:12px}
+  .ofx-drop{padding:18px}
+  .t3-card,.t3-card-full{padding:14px}
+  .t4-card{padding:14px}
+
+  /* OFX */
+  .ofx-adv-row,.ofx-proc-row,.ofx-cat-row{flex-wrap:wrap}
+  .ofx-adv-row>.field,.ofx-proc-row>.field{flex:1 1 100%}
+  .ofx-autofill{grid-template-columns:1fr}
+  .ofx-summary-bar{flex-direction:column;align-items:flex-start;gap:6px}
+  .ofx-row-hdr{flex-wrap:wrap}
+
+  /* Bulk bar */
+  .bulk-bar{padding:8px 12px;gap:8px}
+  .bulk-actions{flex-wrap:wrap;gap:6px}
+  .bulk-select{font-size:11px}
+
+  /* Form actions */
+  .form-actions{flex-direction:column}
+  .form-actions .btn-primary,.form-actions .btn-secondary,.form-actions .btn-gold{width:100%}
+  select{width:100%}
+
+  /* Filtros */
+  .filter-bar{flex-direction:column;align-items:stretch;gap:6px}
+  .filter-bar label{width:100%;min-width:unset;flex:unset}
+  .filter-bar select,.filter-bar input[type=date]{width:100%}
+  .btn-filter-act,.btn-clear-f,.btn-export{width:100%;text-align:center}
+
+  /* Tarefas */
+  .tarefas-row{flex-direction:column}
+  .tarefa-chip{width:100%}
+
+  /* Tab 3 */
+  .t3-btns{flex-direction:column;gap:6px}
+  .t3-btns>button,.t3-btns>a{width:100%;text-align:center}
+  .period-radio{flex-wrap:wrap}
+  .pipe-grid{grid-template-columns:1fr 1fr}
+
+  /* Tab 4 */
+  .t4-main{max-width:100%}
+}
+
+/* ─ Mobile pequeno (≤420px) ─ */
+@media(max-width:420px){
+  .logo-ep{font-size:17px}
+  .logo-sub{font-size:8px}
+  .badge-demo{display:none}
+  .ttab-l{font-size:10px}
+  .kpi-grid{grid-template-columns:1fr}
+  .contratos-kpis{grid-template-columns:1fr}
+  .resultado-kpis{grid-template-columns:1fr}
+  .rh-kpi{flex:1 1 100%}
+  .pipe-grid{grid-template-columns:1fr}
+  .ofx-filter-tabs{flex-wrap:wrap}
+  .ofx-filter-tabs button{flex:1}
+}
 </style>
 </head>
 <body>
