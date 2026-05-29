@@ -505,6 +505,13 @@ footer span{color:var(--bx);font-weight:600}
 /* ═══ CHARTS BOTTOM ROW ═══ */
 .charts-row-bottom{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
 
+/* ACCORDION */
+.acc-toggle{background:none;border:none;cursor:pointer;display:flex;align-items:center;gap:5px;color:var(--mu);font-size:11px;font-weight:600;padding:4px 10px;border-radius:6px;transition:background .15s;white-space:nowrap;flex-shrink:0}
+.acc-toggle:hover{background:var(--bg);color:var(--tx)}
+.acc-icon{font-size:13px;display:inline-block;transition:transform .28s ease;line-height:1}
+.acc-body{overflow:hidden;transition:max-height .32s ease, opacity .25s ease;max-height:4000px;opacity:1}
+.acc-body.collapsed{max-height:0;opacity:0;pointer-events:none}
+
 /* RESPONSIVE */
 @media(max-width:1050px){.t1-top,.t3-grid{grid-template-columns:1fr}.kpi-grid{grid-template-columns:repeat(2,1fr)}.charts-row,.charts-row-2,.charts-row-3,.charts-row-bottom,.recibo-inad-row{grid-template-columns:1fr}.bank-dist-layout{grid-template-columns:1fr}.contratos-kpis{grid-template-columns:repeat(2,1fr)}.rh-body{grid-template-columns:1fr;gap:14px}}
 @media(max-width:640px){header,.pbadge-bar{padding:10px 14px}.tab-nav{padding:0 6px}.t1-main,.t2-main,.t3-main,.t4-main{padding:12px 14px}.ttab{min-width:110px;padding:8px 10px}.frow.three{grid-template-columns:1fr 1fr}.kpi-grid{grid-template-columns:1fr 1fr}}
@@ -988,8 +995,14 @@ footer span{color:var(--bx);font-weight:600}
     <div class="tcard">
       <div class="tcard-hdr">
         <h3>Lançamentos cadastrados</h3>
-        <span id="t1-count">14 registros</span>
+        <div style="display:flex;align-items:center;gap:10px">
+          <span id="t1-count">14 registros</span>
+          <button class="acc-toggle" onclick="toggleAcc('acc-t1','acc-icon-t1',this)" title="Recolher">
+            <span class="acc-icon" id="acc-icon-t1">▾</span> Ocultar
+          </button>
+        </div>
       </div>
+      <div class="acc-body" id="acc-t1">
       <div class="bulk-bar" id="t1-bulk" style="display:none">
         <div class="bulk-info"><span id="t1-sel-n">0</span> selecionados</div>
         <div class="bulk-actions">
@@ -1220,6 +1233,7 @@ footer span{color:var(--bx);font-weight:600}
     </tr></tbody>
         </table>
       </div>
+      </div><!-- /acc-body acc-t1 -->
     </div>
   </div>
 </div>
@@ -1537,10 +1551,14 @@ footer span{color:var(--bx);font-weight:600}
           <h3>Causas monitoradas</h3>
           <p>Clique no status para editar · Vencidas (+ 60 dias da expedição) destacadas em laranja</p>
         </div>
-        <div class="tbl-actions">
+        <div class="tbl-actions" style="display:flex;align-items:center;gap:10px">
           <div style="font-size:12px;color:var(--mu)" id="p2-count-lbl">Exibindo 14 de 14 causas</div>
+          <button class="acc-toggle" onclick="toggleAcc('acc-p2','acc-icon-p2',this)" title="Recolher">
+            <span class="acc-icon" id="acc-icon-p2">▾</span> Ocultar
+          </button>
         </div>
       </div>
+      <div class="acc-body" id="acc-p2">
       <div class="bulk-bar" id="p2-bulk" style="display:none">
         <div class="bulk-info"><span id="p2-sel-n">0</span> causas selecionadas</div>
         <div class="bulk-actions">
@@ -1767,6 +1785,7 @@ footer span{color:var(--bx);font-weight:600}
     </tr></tbody>
         </table>
       </div>
+      </div><!-- /acc-body acc-p2 -->
     </div>
 
   </div>
@@ -2074,6 +2093,16 @@ const STATUS_CFG = {
 function fmt(v){return'R$ '+v.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2})}
 function fmtK(v){return'R$ '+(v/1000).toLocaleString('pt-BR',{minimumFractionDigits:0,maximumFractionDigits:0})+'k'}
 function fmtDate(iso){return iso?iso.split('-').reverse().join('/'):'—'}
+
+// ─── ACCORDION ───
+function toggleAcc(bodyId, iconId, btn) {
+  const body = document.getElementById(bodyId);
+  const icon = document.getElementById(iconId);
+  const isCollapsed = body.classList.toggle('collapsed');
+  icon.style.transform = isCollapsed ? 'rotate(-90deg)' : 'rotate(0deg)';
+  btn.innerHTML = (isCollapsed ? '<span class="acc-icon" id="'+iconId+'" style="transform:rotate(-90deg)">▾</span> Mostrar' : '<span class="acc-icon" id="'+iconId+'">▾</span> Ocultar');
+  btn.title = isCollapsed ? 'Expandir' : 'Recolher';
+}
 
 // ─── TAB SWITCH ───
 let t2Init = false;
