@@ -8,7 +8,7 @@
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2/dist/chartjs-plugin-datalabels.min.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{--bx:#6B1C2E;--bxd:#4a1220;--bxl:#8b2a40;--gold:#c9a84c;--bg:#f4f1ee;--wh:#fff;--tx:#1a1a1a;--mu:#6b6b6b;--bd:#e0d9d4;--gn:#2c5940;--gnb:#deeae3;--or:#b36a00;--orb:#f8eed6;--rd:#c0392b;--rdb:#fdecea;--bl:#1e4272;--blb:#dde8f4}
+:root{--bx:#6B1C2E;--bxd:#4a1220;--bxl:#8b2a40;--gold:#c9a84c;--bg:#e4dfd9;--wh:#fff;--tx:#1a1a1a;--mu:#6b6b6b;--bd:#e0d9d4;--gn:#2c5940;--gnb:#deeae3;--or:#b36a00;--orb:#f8eed6;--rd:#c0392b;--rdb:#fdecea;--bl:#1e4272;--blb:#dde8f4}
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--tx);min-height:100vh}
 
@@ -26,7 +26,7 @@ header{background:#fff;border-bottom:1px solid var(--bd);padding:12px 28px;displ
 .ttab{display:flex;flex-direction:column;padding:10px 22px;text-decoration:none;border-bottom:3px solid transparent;cursor:pointer;min-width:160px;border-right:1px solid rgba(255,255,255,.07);transition:background .15s}
 .ttab:hover{background:rgba(255,255,255,.05)}
 .ttab.active{border-bottom-color:var(--gold);background:rgba(255,255,255,.06)}
-.ttab-l{font-size:13px;font-weight:600;color:rgba(255,255,255,.72)}
+.ttab-l{font-size:15px;font-weight:600;color:rgba(255,255,255,.72)}
 .ttab.active .ttab-l{color:#fff}
 .ttab-s{font-size:9px;font-family:'DM Mono',monospace;color:rgba(255,255,255,.3);margin-top:2px;text-transform:uppercase;letter-spacing:.06em}
 .ttab.active .ttab-s{color:var(--gold)}
@@ -526,11 +526,11 @@ footer span{color:var(--bx);font-weight:600}
 </header>
 
 <nav class="tab-nav">
-  <a class="ttab" data-tab="1" onclick="switchTab(1);return false;" href="#">
+  <a class="ttab active" data-tab="1" onclick="switchTab(1);return false;" href="#">
     <div class="ttab-l">Lançamentos</div>
     <div class="ttab-s">Entrada de dados</div>
   </a>
-  <a class="ttab active" data-tab="2" onclick="switchTab(2);return false;" href="#">
+  <a class="ttab" data-tab="2" onclick="switchTab(2);return false;" href="#">
     <div class="ttab-l">Painel Financeiro</div>
     <div class="ttab-s">BI interativo</div>
   </a>
@@ -545,7 +545,7 @@ footer span{color:var(--bx);font-weight:600}
 </nav>
 
 <!-- ═══ TAB 1: LANÇAMENTOS ═══ -->
-<div id="tab-1" class="tab-content">
+<div id="tab-1" class="tab-content active">
   <div class="pbadge-bar">
     <div class="pbadge pb1">Fase 1</div>
     <div class="pbadge-desc">Entrada manual de RPVs e despesas · cálculo automático · importação via extrato bancário</div>
@@ -1225,7 +1225,7 @@ footer span{color:var(--bx);font-weight:600}
 </div>
 
 <!-- ═══ TAB 2: PAINEL FINANCEIRO ═══ -->
-<div id="tab-2" class="tab-content active">
+<div id="tab-2" class="tab-content">
   <div class="pbadge-bar">
     <div class="pbadge pb2">Fase 2</div>
     <div class="pbadge-desc">BI interativo · Clique em qualquer card, gráfico ou banco para filtrar toda a página</div>
@@ -2763,7 +2763,17 @@ function initT2(){
       onClick:(e,els)=>{if(els.length){bankFilter(bKeys[els[0].index]);}},
       plugins:{
         legend:{display:false},
-        datalabels:{display:false},
+        datalabels:{
+          display:true,
+          formatter:(val,ctx)=>{
+            const total=ctx.dataset.data.reduce((a,b)=>a+b,0);
+            return Math.round(val/total*100)+'%';
+          },
+          color:'#fff',
+          font:{size:13,weight:'700'},
+          textShadowColor:'rgba(0,0,0,.3)',
+          textShadowBlur:3
+        },
         tooltip:{callbacks:{label:ctx=>{
           const total=ctx.dataset.data.reduce((a,b)=>a+b,0);
           const pct=Math.round(ctx.parsed/total*100);
