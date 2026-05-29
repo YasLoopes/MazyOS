@@ -2100,8 +2100,8 @@ function toggleAcc(bodyId, iconId, btn) {
   const icon = document.getElementById(iconId);
   const isCollapsed = body.classList.toggle('collapsed');
   icon.style.transform = isCollapsed ? 'rotate(-90deg)' : 'rotate(0deg)';
-  btn.innerHTML = (isCollapsed ? '<span class="acc-icon" id="'+iconId+'" style="transform:rotate(-90deg)">▾</span> Expandir registros' : '<span class="acc-icon" id="'+iconId+'">▾</span> Recolher');
-  btn.title = isCollapsed ? 'Expandir' : 'Recolher';
+  btn.innerHTML = (isCollapsed ? '<span class="acc-icon" id="'+iconId+'" style="transform:rotate(-90deg)">▾</span> Expandir registros' : '<span class="acc-icon" id="'+iconId+'">▾</span> Recolher registros');
+  btn.title = isCollapsed ? 'Expandir registros' : 'Recolher registros';
 }
 
 // ─── TAB SWITCH ───
