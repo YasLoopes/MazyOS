@@ -2708,8 +2708,19 @@ function removeChip(key){
   if(key==='sindic') updateSindicChart();
   renderP2All();
 }
-function toggleP2(id,chk){if(chk.checked)p2Sel.add(id);else p2Sel.delete(id);updateP2Bulk();}
-function selAllP2(chk){const data=getFiltered();data.forEach(c=>{if(chk.checked)p2Sel.add(c.id);else p2Sel.delete(c.id);});renderP2Table(data);updateP2Bulk();}
+function toggleP2(id,chk){
+  if(chk.checked)p2Sel.add(id);else p2Sel.delete(id);
+  const tbl=document.getElementById('p2-tbody')?.closest('table');
+  if(tbl) tbl.classList.toggle('sel-active', p2Sel.size>0);
+  updateP2Bulk();
+}
+function selAllP2(chk){
+  const data=getFiltered();
+  data.forEach(c=>{if(chk.checked)p2Sel.add(c.id);else p2Sel.delete(c.id);});
+  const tbl=document.getElementById('p2-tbody')?.closest('table');
+  if(tbl) tbl.classList.toggle('sel-active', chk.checked);
+  renderP2Table(data);updateP2Bulk();
+}
 function updateP2Bulk(){
   const bar=document.getElementById('p2-bulk');
   if(p2Sel.size>0){bar.style.display='flex';document.getElementById('p2-sel-n').textContent=p2Sel.size;}
@@ -2720,7 +2731,12 @@ function applyP2Bulk(){
   causasData.forEach(c=>{if(p2Sel.has(c.id))c.status=ns;});
   p2Sel.clear();renderP2All();updateP2Bulk();
 }
-function clearP2Sel(){p2Sel.clear();renderP2All();updateP2Bulk();}
+function clearP2Sel(){
+  p2Sel.clear();
+  const tbl=document.getElementById('p2-tbody')?.closest('table');
+  if(tbl) tbl.classList.remove('sel-active');
+  renderP2All();updateP2Bulk();
+}
 function editP2Status(id,span){
   const c=causasData.find(x=>x.id===id);if(!c)return;
   const sel=document.createElement('select');sel.className='status-select';
