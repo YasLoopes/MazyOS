@@ -14,9 +14,9 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
 
 /* HEADER */
 header{background:#fff;border-bottom:1px solid var(--bd);padding:12px 28px;display:flex;align-items:center;justify-content:space-between}
-.logo-ep{font-family:'DM Serif Display',serif;font-size:19px;color:#1a1a1a;letter-spacing:-.3px;text-transform:uppercase}
+.logo-ep{font-family:'DM Serif Display',serif;font-size:26px;color:#1a1a1a;letter-spacing:-.3px;text-transform:uppercase}
 .logo-amp{color:#8B1C2C;font-style:italic}
-.logo-sub{font-family:'DM Sans',sans-serif;font-size:7.5px;letter-spacing:.22em;text-transform:uppercase;color:#5c5650;margin-top:3px}
+.logo-sub{font-family:'DM Sans',sans-serif;font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:#5c5650;margin-top:4px}
 .hdr-r{display:flex;align-items:center;gap:10px}
 .badge-demo{background:var(--bx);color:#fff;font-family:'DM Mono',monospace;font-size:10px;font-weight:600;padding:4px 10px;border-radius:4px;letter-spacing:.5px;text-transform:uppercase}
 .hdr-date{font-size:12px;color:var(--mu);font-family:'DM Mono',monospace}
@@ -1562,14 +1562,33 @@ footer span{color:var(--bx);font-weight:600}
       <div class="bulk-bar" id="p2-bulk" style="display:none">
         <div class="bulk-info"><span id="p2-sel-n">0</span> causas selecionadas</div>
         <div class="bulk-actions">
-          <label>Alterar status para:
+          <label>Status:
             <select class="bulk-select" id="p2-bulk-sel">
-              <option value="">Escolha...</option>
+              <option value="">—</option>
               <option value="disponivel">Disponível</option>
               <option value="pendente">Pendente</option>
               <option value="recebido">Recebido</option>
               <option value="arquivado">Arquivado</option>
               <option value="pago">Pago</option>
+            </select></label>
+          <label>Banco:
+            <select class="bulk-select" id="p2-bulk-banco">
+              <option value="">—</option>
+              <option value="CEF">CEF</option>
+              <option value="BB">BB</option>
+            </select></label>
+          <label>Sindicato:
+            <select class="bulk-select" id="p2-bulk-sindic">
+              <option value="">—</option>
+              <option>SINDSEP</option><option>SINDPD</option><option>SEEB</option>
+              <option>SINDIFISCO</option><option>SINTETEL</option><option>SINIJUDE</option>
+            </select></label>
+          <label>Advogado:
+            <select class="bulk-select" id="p2-bulk-adv">
+              <option value="">—</option>
+              <option>Cláudio Estevão</option><option>Fred Pinheiro</option>
+              <option>Dra. Beatriz Cavalcanti</option><option>Dr. Marco A. Lins</option>
+              <option>Andrielly Gutierrez</option>
             </select></label>
           <button class="btn-bulk-apply" onclick="applyP2Bulk()">Aplicar</button>
           <button class="btn-bulk-cancel" onclick="clearP2Sel()">Cancelar</button>
@@ -2727,9 +2746,28 @@ function updateP2Bulk(){
   else bar.style.display='none';
 }
 function applyP2Bulk(){
-  const ns=document.getElementById('p2-bulk-sel').value;if(!ns)return;
-  causasData.forEach(c=>{if(p2Sel.has(c.id))c.status=ns;});
-  p2Sel.clear();renderP2All();updateP2Bulk();
+  const ns  = document.getElementById('p2-bulk-sel')?.value;
+  const nb  = document.getElementById('p2-bulk-banco')?.value;
+  const nsi = document.getElementById('p2-bulk-sindic')?.value;
+  const na  = document.getElementById('p2-bulk-adv')?.value;
+  if(!ns && !nb && !nsi && !na) return;
+  causasData.forEach(c=>{
+    if(p2Sel.has(c.id)){
+      if(ns)  c.status = ns;
+      if(nb)  c.banco  = nb;
+      if(nsi) c.sindic = nsi;
+      if(na)  c.adv    = na;
+    }
+  });
+  p2Sel.clear();
+  const tbl=document.getElementById('p2-tbody')?.closest('table');
+  if(tbl) tbl.classList.remove('sel-active');
+  const chkAll=document.getElementById('p2-chk-all');
+  if(chkAll) chkAll.checked=false;
+  ['p2-bulk-sel','p2-bulk-banco','p2-bulk-sindic','p2-bulk-adv'].forEach(id=>{
+    const el=document.getElementById(id); if(el) el.value='';
+  });
+  renderP2All();updateP2Bulk();
 }
 function clearP2Sel(){
   p2Sel.clear();
